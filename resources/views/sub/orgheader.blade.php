@@ -24,6 +24,14 @@
 			</div>
 		</div>
 		<div style="margin: auto; margin-right: 20px; top: -2px; position:relative; text-align: right;">
+		  @if ($org['Type'] ?? null)
+			<div class="d-inline px-1">
+			  Type:
+			</div>
+			<div class="d-inline px-1">
+			  <span class="badge badge-info">{{ $org['Type'] }}</span>
+			</div>
+		  @endif
 		  @if ($org['tags'] ?? null)
 			<div class="d-inline px-1">
 			  Tags:

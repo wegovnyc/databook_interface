@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Custom\CartoModel;
 use App\Custom\Datasets;
+use App\Custom\Breadcrumbs;
+
 
 class Organizations extends Controller
 {
@@ -12,10 +14,39 @@ class Organizations extends Controller
      *
      * @return \Illuminate\View\View
      */
+    public function root()
+    {
+        return view('root', [
+					'breadcrumbs' => Breadcrumbs::root(),
+				]);
+    }
+
+
+    /**
+     * Show organizations list.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function about()
+    {
+        return view('about', [
+					'breadcrumbs' => Breadcrumbs::about(),
+				]);
+    }
+
+
+    /**
+     * Show organizations list.
+     *
+     * @return \Illuminate\View\View
+     */
     public function list()
     {
-		$model = new CartoModel(config('carto.entry'), config('carto.key'));
-        return view('organizations', ['url' => $model->url('SELECT * FROM wegov_orgs ORDER BY name')]);
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+        return view('organizations', [
+					'url' => $model->url('SELECT * FROM wegov_orgs ORDER BY name'),
+					'breadcrumbs' => Breadcrumbs::orgs(),
+				]);
     }
 
 
@@ -25,9 +56,9 @@ class Organizations extends Controller
      * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function about($id)
+    public function orgAbout($id)
     {
-		$model = new CartoModel(config('carto.entry'), config('carto.key'));
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
 		$org = $model->org($id);
 		$ds = new Datasets();
         return $org 
@@ -36,6 +67,7 @@ class Organizations extends Controller
 					'org' => $org,
 					'slist' => $ds->list,
 					'icons' => $ds->socicons, 
+					'breadcrumbs' => Breadcrumbs::org($org['name']),
 				])
 			: abort(404);
     }
@@ -48,9 +80,9 @@ class Organizations extends Controller
      * @param  string  	$section
      * @return \Illuminate\View\View
      */
-    public function section($id, $section)
+    public function orgSection($id, $section)
     {
-		$model = new CartoModel(config('carto.entry'), config('carto.key'));
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
 		$ds = new Datasets();
 		$org = $model->org($id);
 		$details = $ds->get($section);
@@ -63,7 +95,8 @@ class Organizations extends Controller
 					'icons' => $ds->socicons, 
 					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"={$id}"),
 					'dataset' => $model->dataset($details['fullname']),
-					'details' => $details
+					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $ds->list[$section]),
+					'details' => $details,
 				])
 			: abort(404);
     }

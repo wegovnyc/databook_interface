@@ -53,6 +53,7 @@
 							return (idx+1)+': '+(title ? title : 'details');
 						}
 					}],
+				deferRender: true,
 				dom: 'Blfrtip',
 				columns: [
 							@if ($details['detFlag'])
@@ -144,18 +145,13 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-12 py-3">
-				<!--
-				<div class="toggle-box">
-					Toggle column: 
-					@foreach ($details['hdrs'] as $i=>$name)
-					  @if ($i == 0)
-						<a class="toggle-vis" data-column="{{ $i + $details['detFlag'] }}">{{ $name }}</a> 
-					  @else	
-						- <a class="toggle-vis" data-column="{{ $i + $details['detFlag'] }}">{{ $name }}</a> 
-					  @endif
-				    @endforeach
+				<div style="padding: 0.75rem 0!important;">
+					@if ($details['description'] ?? null)
+						<p>{!! nl2br($details['description']) !!}</p>
+					@else
+						<p>{!! nl2br($dataset['Descripton']) !!}</p>
+					@endif
 				</div>
-				-->
 				<table id="myTable" class="display table-striped table-hover" style="width:100%;">
 					<thead>
 						<tr>
@@ -192,7 +188,7 @@
 			<p>{{ nl2br($dataset['Public Note']) }}</p>
 		</div>
 	@endif
-	<div class="jumbotron mb-5" style="padding: 0.75rem 1rem!important;">
+	<div class="jumbotron mb-1" style="padding: 0.75rem 1rem!important;">
 	  <p class="lead">This data comes from <strong><a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a></strong>. Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}.</p>
 	  <p>{!! nl2br($org['description']) !!}</p>
 	</div>

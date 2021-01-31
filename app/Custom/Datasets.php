@@ -190,6 +190,7 @@ class Datasets
 					'To Apply' => 'To Apply',
 					'Residency Requirement' => 'Residency Requirement'			
 				],
+			'description' => 'This dataset contains current job postings available on the City of New York’s <a href="http://www.nyc.gov/html/careers/html/search/search.shtml"> official jobs site</a>. Internal postings available to city employees and external postings available to the general public are included.',
 		],
 		'facilities' => [
 			'fullname' => 'NYC Facilities Database',
@@ -215,6 +216,7 @@ class Datasets
 					'Capital Type' => 'captype',
 					'Property Type' => 'proptype'			
 			],
+			'description' => 'The Facilities Database (FacDB) captures the locations and descriptions of public and private facilities ranging from the provision of social services, recreation, education, to solid waste management.',
 		],
 		'' => [
 			'fullname' => '',

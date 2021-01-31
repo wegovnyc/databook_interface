@@ -10,62 +10,45 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>
 
 	<script>
-		function details(d) {
-			console.log(d)
-			return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-				(d.description ? '<tr><td>Full description:</td><td>'+d.description+'</td></tr>' : '') +
-				(d.main_address ? '<tr><td>Address:</td><td>'+d.main_address+'</td></tr>' : '') +
-				(d.main_phone ? '<tr><td>Phone:</td><td>'+d.main_phone+'</td></tr>' : '') +
-				(d.Twitter ? '<tr><td>Twitter:</td><td>'+d.Twitter+'</td></tr>' : '') +
-				(d.Facebook ? '<tr><td>Facebook:</td><td>'+d.Facebook+'</td></tr>' : '') +
-			'</table>';
-		}		
-		
 		var table = null
 		$(document).ready(function() {
-			table = $('#myTable').DataTable( {
+			table = $('#orgsTable').DataTable( {
+				pageLength: 12,
+				deferRender: true,
+				order: [[2, 'asc']],
+				ordering: false,
+				dom: '<"toolbar">frtip',
 				ajax: {
 					url: '{!! $url !!}',	
 					dataSrc: 'rows'
 				},
-				buttons: [{
-						extend: 'colvis',
-						columnText: function ( dt, idx, title ) {
-							return (idx+1)+': '+(title ? title : 'details');
-						}
-					}],
-				dom: 'Blfrtip',
 				columns: [
-							{
-								"className": 'details-control',
-								"orderable": false,
-								"data":  null,
-								"defaultContent": ''
-							},
-							{data: function (r) { 
-													return `<a href="/organization/${r["id"]}">${r["name"]}</a>`
-												}}, 
-							{data: 'Type'},
+							{data: 'id'},
 							{data: function (r) {
-													var t = ''
-													if (!r['tags'])
-														return ''
-													JSON.parse(unescape(r['tags'])).forEach( function (d, j) {
-														t = t+'<span class="badge badge-info">'+d+'</span>'
-													})
-													return t
-												}}, 
+													return r['Logo']
+														? JSON.parse(unescape(r['Logo']))[0]['url']
+														: '';
+												}},
+							{data: 'name'},
+							{data: 'tags'}, 
+							{data: 'Type'},
 							{data: function (r) {
 													return r['description'].substr(0,100)+
 														   (r['description'].length > 100 ? '...' : '')
-												}}
+												}},
+							{
+								className: 'record',
+								data:  null,
+								defaultContent: null,
+								searchable: false
+							}
 						],
 				
 				initComplete: function () {
-					this.api().columns([2]).every(function () {
+					this.api().columns([4]).every(function () {						// Type
 						var column = this;
-						var select = $('<select class="filter" id="filter-' + column[0][0] + '"><option value=""></option></select>')
-							.appendTo( $(column.footer()).empty() )
+						var select = $('<select class="filter-top" id="filter-' + column[0][0] + '"><option value="">- Select organizations by type -</option></select>')
+							.appendTo($('div.toolbar'))
 							.on('change', function () {
 								var val = $.fn.dataTable.util.escapeRegex(
 									$(this).val()
@@ -86,15 +69,14 @@
 					});
 					
 					
-					this.api().columns([3]).every(function () {
+					this.api().columns([3]).every(function () {						// tags
 						var column = this;
-						var select = $('<select class="filter"><option value=""></option></select>')
-							.appendTo( $(column.footer()).empty() )
+						var select = $('<select class="filter-top"><option value="">- Select organizations by tag -</option></select>')
+							.appendTo($('div.toolbar'))
 							.on('change', function () {
 								var val = $.fn.dataTable.util.escapeRegex(
 									$(this).val()
 								);
-								console.log('>'+val+'<');
 								column
 									.search(val ? val : '', false, false)
 									.draw();
@@ -104,7 +86,7 @@
 						dd = column.data()
 						
 						column.data().each(function (d, j) {
-							pp = />([^<]+)</g.exec(d)
+							pp = /""([^"]+)""/g.exec(d)
 							if (pp)
 							{
 								pp.forEach(function (t, i) {
@@ -117,62 +99,73 @@
 						})
 						tt = [...new Set(tt)]
 						
-						console.log(tt)
 						tt.sort().forEach(function (d, j) {
 							select.append( '<option value="'+d+'">'+d+'</option>' )
-						} );
-					} );
+						});
+					});
 				}
-			});
-			$('a.toggle-vis').on( 'click', function (e) {
-				e.preventDefault();
-				var column = table.column( $(this).attr('data-column') );
-				column.visible( ! column.visible() );
 			});
 			
-			$('#myTable tbody').on('click', 'td.details-control', function () {
-				var tr = $(this).closest('tr');
-				var row = table.row( tr );
-		 
-				if ( row.child.isShown() ) {
-					row.child.hide();
-					tr.removeClass('shown');
-				}
-				else {
-					row.child( details(row.data()) ).show();
-					tr.addClass('shown');
-				}
-			});
+			table.on('preDraw', function () {
+					$('#orgsTable tbody').hide();
+					return true
+				});
+				
+			table.on('draw', function () {
+					var api = $('#orgsTable').dataTable().api();
+					var modifier = {
+						order:  'current',  // 'current', 'applied', 'index',  'original'
+						page:   'current',      // 'all',     'current'
+						search: 'applied',     // 'none',    'applied', 'removed'
+					}
+					var td = $('<td></td>')
+					var div = $('<div></div>')
+					
+					api.cells('.record', modifier).data().each(function (r, i) {
+						
+						div = $('<div class="card-body"></div>')
+						
+						if (r['Logo'])
+							div.append(`<img src="${JSON.parse(unescape(r['Logo']))[0]['url']}">`)
+						
+						if (r['name'] && (!r['Logo'] || !r['description']))
+							div.append(`<h6>${r['name']}</h6>`)
+						
+						var descr = r['description'].substr(0,100)+(r['description'].length > 100 ? '...' : '')
+						div.append(`<p class="card-text">${descr}</p>`)
+						
+						if (r['tags']) {
+							var tags = ''
+							JSON.parse(unescape(r['tags'])).forEach(function (d, j) {
+								tags = tags+'<span class="badge badge-info">'+d+'</span>'
+							})
+							div.append(`Tags: ${tags}`)
+						}
+						
+						td.append($(`<div class="col-4 p-1"><a href="/organization/${r['id']}"><div class="card text-center  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))
+					});
+					$('#orgsTable tbody').html('<tr><td colspan="7"><div class="row p-0">'+td.html()+'</div></td></tr>')
+					$('#orgsTable tbody').show();
+				});
+
 		});
 	</script>
 
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-12 py-3">
-				<!--
-				<div class="toggle-box">
-					Toggle column: <a class="toggle-vis" data-column="1">Name</a> - <a class="toggle-vis" data-column="2">Type</a> - <a class="toggle-vis" data-column="3">Tags</a> - <a class="toggle-vis" data-column="4">Description</a>
-				</div>
-				-->
-				<table id="myTable" class="display table-striped table-hover" style="width:100%">
+				<table id="orgsTable" class="display table-striped table-hover" style="width:100%">
 					<thead>
 						<tr>
 							<th></th>
-							<th>Name</th>
-							<th>Type</th>
-							<th>Tags</th>
-							<th>Description</th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
-					<tfoot>
-						<tr>
-							<th></th>
-							<th></th>
-							<th class="filter"></th>
-							<th class="filter"></th>
-							<th></th>
-						</tr>
-					</tfoot>
 				</table>
 			</div>
 		</div>
