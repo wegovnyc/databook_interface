@@ -29,7 +29,9 @@
 			  Type:
 			</div>
 			<div class="d-inline px-1">
-			  <span class="badge badge-info">{{ $org['Type'] }}</span>
+			  <a href="{{ route('orgs') }}?type={{ urlencode($org['Type']) }}">
+			    <span class="badge badge-info">{{ $org['Type'] }}</span>
+			  </a>
 			</div>
 		  @endif
 		  @if ($org['tags'] ?? null)
@@ -37,9 +39,11 @@
 			  Tags:
 			</div>
 			@foreach ((array)$org['tags'] as $tag)
-			  <div class="d-inline px-1">
-				<span class="badge badge-info">{{ $tag }}</span>
-			  </div>
+			  <a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}">
+			    <div class="d-inline px-1">
+				  <span class="badge badge-info">{{ $tag }}</span>
+			    </div>
+			  </a>
 			@endforeach
 		  @endif
 		</div>

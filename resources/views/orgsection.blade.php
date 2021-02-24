@@ -190,7 +190,7 @@
 	@endif
 	<div class="jumbotron mb-1" style="padding: 0.75rem 1rem!important;">
 	  <p class="lead">This data comes from <strong><a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a></strong>. Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}.</p>
-	  <p>{!! nl2br($org['description']) !!}</p>
+	  <!--<p>{!! nl2br($org['description']) !!}</p>-->
 	</div>
 
 @endsection

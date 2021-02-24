@@ -131,7 +131,7 @@ class Datasets
 		'requests' => [
 			'fullname' => 'Register of Community Board Budget Requests API',
 			'table' => 'budgetrequestsregister',
-			'hdrs' => ['Pub Date', 'Borough', 'CB', 'Priority', 'Tracking Code', 'Request'], 
+			'hdrs' => ['Publication Date', 'Borough', 'C Board', 'Priority', 'Tracking Code', 'Request'], 
 			'visible' => [true, true, true, true, true, true],
 			'flds' => [ //'"Publication"', 
 						'function (r) { return toDashDate(r["Publication"]) }', 
@@ -157,22 +157,21 @@ class Datasets
 		'jobs' => [
 			'fullname' => 'NYC Jobs',
 			'table' => 'nycjobs',
-			'hdrs' => ['Job ID', 'Title', 'Job Category', 'Posting Type', 'Salary From', 'Salary To', 'Last Updated', 'Posting Date'], 
+			'hdrs' => ['Job ID', 'Title', 'Job Category', 'Salary From', 'Salary To', 'Last Updated'],
 			'flds' => [
 					'function (r) { return `<a href="https://a127-jobs.nyc.gov/index_new.html?keyword=${r["Job ID"]}">${r["Job ID"]}</a>` }', 
 					//'"Job ID"', 
-					'"Business Title"', '"Job Category"', '"Posting Type"', 
+					'"Business Title"', 
+					'"Job Category"', 
 					//'"Salary Range From"', 
 					'function (r) { return toFin(r["Salary Range From"]) }',
 					//'"Salary Range To"', 
 					'function (r) { return toFin(r["Salary Range To"]) }',
 					//'"Posting Updated"', 
 					'function (r) { return usToDashDate(r["Posting Updated"]) }', 
-					//'"Posting Date"'
-					'function (r) { return usToDashDate(r["Posting Date"]) }', 
 				], 
-			'visible' => [true, true, false, false, true, true, true, false],
-			'filters' => [2 => null, 3 => null],
+			'visible' => [true, true, true, true, true, true],
+			'filters' => [2 => null],
 			'details' => [
 					'# Of Positions' => '# Of Positions',
 					'Civil Service Title' => 'Civil Service Title',

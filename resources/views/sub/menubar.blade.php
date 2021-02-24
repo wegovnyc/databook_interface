@@ -24,10 +24,18 @@
     </ul>
 	
 	<div class="input-group ml-2" style="max-width:16em;">
-	  <div class="input-group-prepend">
+	  <!--<div class="input-group-prepend">
 		<span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
 	  </div>
-	  <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+	  -->
+		<style>
+			.gsc-control-cse {
+				border-color: rgba(0,0,0,0)!important;
+				background-color: rgba(0,0,0,0)!important;
+			}
+		</style>
+		<div class="gcse-search"></div>
+		<!--<input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1" id="search-box">-->
 	</div>
 	  
   </div>

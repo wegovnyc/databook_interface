@@ -10,10 +10,17 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>
 
 	<script>
+		function tagFlt(e, tag) {
+			console.log(tag)
+			$('#filter-tags').val(tag)
+			$('#filter-tags').trigger('change')
+			e.preventDefault()
+		}
+		
 		var table = null
 		$(document).ready(function() {
 			table = $('#orgsTable').DataTable( {
-				pageLength: 12,
+				pageLength: 18,
 				deferRender: true,
 				order: [[2, 'asc']],
 				ordering: false,
@@ -58,20 +65,20 @@
 									.draw();
 							});
 						column.data().unique().sort().each(function (d, j) {
-							select.append('<option value="'+d+(d == 'City Agency' ? '" selected>' : '">')+d+'</option>')
+							//select.append('<option value="'+d+(d == 'City Agency' ? '" selected>' : '">')+d+'</option>')
+							select.append('<option value="'+d+'">'+d+'</option>')
 						});
-						
+
 						setTimeout(function(){
-							column
-								.search('^City Agency$', true, false)
-								.draw();
-						}, 1000);
+							select.val('{!! $defType !!}')
+							select.trigger('change')
+						}, 700);
 					});
 					
 					
 					this.api().columns([3]).every(function () {						// tags
 						var column = this;
-						var select = $('<select class="filter-top"><option value="">- Select organizations by tag -</option></select>')
+						var select = $('<select class="filter-top" id="filter-tags"><option value="">- Select organizations by tag -</option></select>')
 							.appendTo($('div.toolbar'))
 							.on('change', function () {
 								var val = $.fn.dataTable.util.escapeRegex(
@@ -83,18 +90,11 @@
 							});
 						
 						var tt = []
-						dd = column.data()
 						
+						rg = /""([^"]+)""/g;
 						column.data().each(function (d, j) {
-							pp = /""([^"]+)""/g.exec(d)
-							if (pp)
-							{
-								pp.forEach(function (t, i) {
-									if (i > 0)
-									{
-										tt.push(t)
-									}
-								});
+							while ((t = rg.exec(d)) !== null) {
+								tt.push(t[1])
 							}
 						})
 						tt = [...new Set(tt)]
@@ -102,6 +102,12 @@
 						tt.sort().forEach(function (d, j) {
 							select.append( '<option value="'+d+'">'+d+'</option>' )
 						});
+						@if ($defTag)
+						  setTimeout(function(){
+							select.val('{!! $defTag !!}')
+							select.trigger('change')
+						  }, 1000);
+						@endif
 					});
 				}
 			});
@@ -137,7 +143,7 @@
 						if (r['tags']) {
 							var tags = ''
 							JSON.parse(unescape(r['tags'])).forEach(function (d, j) {
-								tags = tags+'<span class="badge badge-info">'+d+'</span>'
+								tags = tags+'<span class="badge badge-info" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
 							})
 							div.append(`Tags: ${tags}`)
 						}
