@@ -4,7 +4,7 @@
 
 
 <script>
-	
+
 @if ($details['details'])
 	function details(d) {
 		// `d` is the original data object for the row
@@ -22,7 +22,7 @@
 				'<td>'+d.Facebook+'</td>'+
 			'</tr>'+
 		'</table>';
-	}		
+	}
 @endif
 
 
@@ -34,17 +34,17 @@
 				dataSrc: 'rows'
 			},
 			columns: [
-						{
-							"className": 'details-control',
-							"orderable": false,
-							"data":  null,
-							"defaultContent": ''
-						},
-						{data: function (r) { return `<a href="https://a127-jobs.nyc.gov/index_new.html?keyword=${r["id"]}">${r["id"]}</a>` }}, 
-						{data: 'name'}, 
-						{data: 'Type'}
-					],
-			
+                {
+                    "className": 'details-control',
+                    "orderable": false,
+                    "data":  null,
+                    "defaultContent": ''
+                },
+                {data: function (r) { return `<a href="https://a127-jobs.nyc.gov/index_new.html?keyword=${r["id"]}">${r["id"]}</a>` }},
+                {data: 'name'},
+                {data: 'Type'}
+            ],
+
 			initComplete: function () {
 				this.api().columns([1,2,3]).every( function () {
 					var column = this;
@@ -54,12 +54,12 @@
 							var val = $.fn.dataTable.util.escapeRegex(
 								$(this).val()
 							);
-	 
+
 							column
 								.search( val ? '^'+val+'$' : '', true, false )
 								.draw();
 						} );
-	 
+
 					column.data().unique().sort().each( function ( d, j ) {
 						select.append( '<option value="'+d+'">'+d+'</option>' )
 					} );
@@ -72,11 +72,11 @@
 			var column = table.column( $(this).attr('data-column') );
 			column.visible( ! column.visible() );
 		});
-		
+
 		$('#core-table tbody').on('click', 'td.details-control', function () {
 			var tr = $(this).closest('tr');
 			var row = table.row( tr );
-	 
+
 			if ( row.child.isShown() ) {
 				row.child.hide();
 				tr.removeClass('shown');
@@ -87,7 +87,7 @@
 			}
 		});
 	});
-	
+
 </script>
 
 

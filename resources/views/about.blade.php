@@ -18,5 +18,5 @@
 		<li class="lead">policy makers who want to use technology to improve the lives of the New Yorkers they serve.</li>
 	  </ul>
 	</div>
-	
+
 @endsection

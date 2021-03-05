@@ -1,0 +1,155 @@
+@media (max-width: 1366px)
+{
+
+}
+@media (max-width: 1300px)
+{
+    .container {padding: 0px;}
+
+}
+@media (max-width: 1200px)
+{
+    .navbar-nav {padding-top: 55px;padding-right: 20px;}
+    .right_menuarea {padding-right: 15px;}
+    .navbar-brand {padding: 25px 15px;}
+    .breadcrumb{padding: 18px 15px;}
+    .jumbotron{padding: 90px 30px;}
+    .home_bgcontent h1{font-size: 35px;}
+    .home_bgcontent p{font-size: 20px;line-height: 28px;}
+    .homeround_content .circle_img{margin-right: 20px;width: 100px;}
+    .homeround_content .circle_img img{width: 100%;}
+    .homeround_content .content_area h4{font-size: 20px;margin-bottom: 5px;}
+    .homeround_content .content_area p{font-size: 15px;line-height: 22px;}
+    .homeround_content .col-md-4 {margin-bottom: 50px;}
+    .bottom_text h3{font-size: 28px;line-height: 40px;}
+    #newsletter-subs{padding: 70px 30px;}
+    #newsletter-subs label{font-size: 25px;padding: 15px 0px 0px 0px;}
+    #footer-menu{padding: 30px 15px;}
+    #myTable_wrapper .toolbar {width: 52%;}
+    #myTable_wrapper .toolbar .drop_dowm_select {width: 30%;}
+}
+@media (max-width: 1152px)
+{
+    .dataTables_wrapper .dataTables_filter input{width: 77%;}
+    #myTable_wrapper .toolbar {width: 51%;}
+}
+@media (max-width: 1024px)
+{
+    .right_menuarea .navbar-nav .nav-item{padding: 0 6px;}
+    .navbar-nav .nav-item {padding: 0 10px;}
+    table.dataTable .col-md-3{flex: 0 0 33.33%;max-width: 33.33%;}
+    .container > .row {margin: 0px;}
+    .organization_data {padding: 30px 0px;}
+    #orgsTable .card {min-height: 400px;}
+    #myTable_wrapper .toolbar { width: 48%;}
+    #myTable_wrapper .toolbar .drop_dowm_select {width: 29%;}
+    .bottom_lastupdate{padding: 18px 15px; margin: 0px;margin-bottom: 60px;display: inline-block;}
+    .bottom_lastupdate p{font-size: 18px;}
+}
+@media (max-width: 980px)
+{
+    .navbar-light .navbar-toggler {color: rgb(0 0 0);border-color: rgb(22 46 81);background: #162e51;margin-right: 20px;padding: 12px 16px;}
+    .navbar .navbar-collapse{background: #162e51;padding: 20px 15px;margin-bottom: 10px;}
+    .navbar .navbar-collapse .navbar-nav{padding: 0px;}
+    .navbar-nav .nav-item , .right_menuarea .navbar-nav .nav-item{padding: 0px;margin: 0px;line-height: normal;border: none;}
+    .navbar-nav .nav-item .nav-link , .right_menuarea .navbar-nav .nav-item .nav-link{padding: 10px 0;font-weight: 400;font-size: 15px;color: #ffffff;border-bottom: none;}
+    .navbar-nav .nav-item.active .nav-link, .navbar-nav .nav-item:hover .nav-link {border-bottom:none;color:#fff}
+    .gsc-input-box{padding: 0px !important;border-radius: 0px !important;}
+    table.gsc-search-box td.gsib_a {border: 1px solid #ffffff !important;}
+    .org_detailtitle {padding: 16px 10px 0 15px;}
+    #myTable_wrapper .toolbar {width: 100%;}
+    #myTable_wrapper.dataTables_wrapper .dataTables_filter {width: 50%;}
+    .org_headermenu .navbar-toggler{width: 100%; text-align: center;background: #112f4e;color: #fff;padding: 15px 0;}
+    .submenu_org{display: block;}
+}
+@media (max-width: 800px)
+{
+    .home_bgcontent{flex: 0 0 80%;max-width: 80%;}
+    .homeround_content .col-md-4{flex: 0 0 50%;max-width: 50%;}
+    #newsletter-subs label {font-size: 24px;padding: 0;line-height: 35px;}
+    .dataTables_wrapper .dataTables_filter input {width: 70%;}
+    .submenu_org{padding: 0px;}
+    .submenu_org .nav-item .nav-link {font-size: 14px;padding: 12px 9px;}
+    #myTable_wrapper .toolbar .drop_dowm_select {width: 31%;}
+}
+@media (max-width: 767px)
+{
+    #newsletter-subs label {font-size: 24px;padding: 0 18px;line-height: 35px;text-align: center;}
+    .email_address {text-align: center;}
+    #footer-black{padding: 15px 20px;display: grid;justify-content: center;text-align: center;}
+    #return-to-top{text-align: center;}
+    .middle_text{margin: 20px 0;}
+    table.dataTable .col-md-3 {flex: 0 0 100%;max-width: 100%;}
+    #orgsTable .card {min-height: auto;}
+    .badge-info{line-height: 18px;margin-right: 6px;margin-bottom: 6px;}
+    .inside_orglogo{text-align: center;display: block;width: 100%;padding: 10px 0px 10px 0px;}
+    .org_detailtitle {padding: 0px 15px 15px 15px;}
+    .org_detailtitle h4{width: 100%; text-align: center;}
+    .icon_orgsocial{width: 100%;text-align: center;}
+    .icon_orgsocial .icon{display: inline-block;margin-bottom: 20px;float: none;}
+    .org_detailtitle .float-right{float: none !important;text-align: center;}
+    .org_detailtitle .float-left{float: none !important;display: inline-block;}
+    .bottom_lastupdate p{text-align: center;}
+    .bottom_lastupdate p span{float: none !important; display: inline-block;}
+}
+@media (max-width: 736px)
+{
+    .home_bgcontent{flex: 0 0 100%;max-width: 100%;}
+    .homeround_content .col-md-4{flex: 0 0 100%;max-width: 100%;}
+    #myTable_wrapper.dataTables_wrapper .dataTables_filter{margin-top: 0px;}
+}
+@media (max-width: 667px)
+{
+    #newsletter-subs label {font-size: 20px;}
+    .dataTables_wrapper .dataTables_filter{width: 100%;margin-right: 0%;}
+    .dataTables_wrapper .dataTables_filter input {width: 85%;}
+    .toolbar{width: 100%;margin-bottom: 13px;}
+    #myTable_wrapper .toolbar .drop_dowm_select{width: 100%;margin-bottom: 15px;margin-left: 0px !important;}
+}
+@media (max-width: 640px)
+{
+    .dataTables_wrapper div.dt-buttons, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter{float: left !important;}
+}
+@media (max-width: 568px)
+{
+    .dataTables_wrapper .dataTables_paginate .paginate_button {padding: 7px 10px;}
+}
+@media (max-width: 480px)
+{
+    .bottom_text h3 {font-size: 20px;line-height: 25px;}
+    #myTable_wrapper .toolbar .drop_dowm_select {width: 100%;margin-bottom: 10px;margin-left: 0px !important;}
+    #myTable_wrapper.dataTables_wrapper .dataTables_filter{width: 100%;}
+    #myTable_wrapper.dataTables_wrapper .dataTables_filter input {width: 75%;}
+}
+@media (max-width: 414px)
+{
+    .homeround_content .circle_img {margin-right: 15px; width: 80px;}
+    .homeround_content .col-md-4 {margin-bottom: 30px;}
+    #newsletter-subs {padding: 40px 30px;}
+    select.filter, select.filter-top{width: 100%;margin-right: 0;margin-bottom: 10px;}
+    .toolbar{margin-bottom: 0px;}
+    .dataTables_wrapper .dataTables_filter input {width: 77%;}
+    .dataTables_wrapper .dataTables_paginate .paginate_button {padding: 2px 7px;font-size: 14px;}
+    .org_detailtitle .float-left{margin-right: 0px !important;}
+    .org_detailtitle h4{font-size: 18px;line-height: normal;}
+}
+@media (max-width: 375px)
+{
+    .jumbotron {padding: 60px 15px;}
+    .home_bgcontent{padding: 30px 20px;}
+    .home_bgcontent h1 {font-size: 24px;}
+    .home_bgcontent p {font-size: 18px;line-height: 25px;}
+    .homeround_content {padding: 50px 15px;}
+    .bottom_text {padding: 0px;}
+    .bottom_text h3 {font-size: 18px;}
+    #newsletter-subs label {font-size: 18px;line-height: 27px;margin-bottom: 30px;}
+    #newsletter-subs {padding: 40px 15px;}
+    .badge-info{font-size: 14px;}
+    .inside_orglogo{height: 90px;}
+    .icon_orgsocial .icon{margin: 0 2px;margin-bottom: 5px;}
+    .bottom_lastupdate p span{display: block;}
+}
+@media (max-width: 320px)
+{
+
+}

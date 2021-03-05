@@ -16,7 +16,7 @@
 			$('#filter-tags').trigger('change')
 			e.preventDefault()
 		}
-		
+
 		var table = null
 		$(document).ready(function() {
 			table = $('#orgsTable').DataTable( {
@@ -26,31 +26,31 @@
 				ordering: false,
 				dom: '<"toolbar">frtip',
 				ajax: {
-					url: '{!! $url !!}',	
+					url: '{!! $url !!}',
 					dataSrc: 'rows'
 				},
 				columns: [
-							{data: 'id'},
-							{data: function (r) {
-													return r['Logo']
-														? JSON.parse(unescape(r['Logo']))[0]['url']
-														: '';
-												}},
-							{data: 'name'},
-							{data: 'tags'}, 
-							{data: 'Type'},
-							{data: function (r) {
-													return r['description'].substr(0,100)+
-														   (r['description'].length > 100 ? '...' : '')
-												}},
-							{
-								className: 'record',
-								data:  null,
-								defaultContent: null,
-								searchable: false
-							}
-						],
-				
+                    {data: 'id'},
+                    {data: function (r) {
+                        return r['Logo']
+                            ? JSON.parse(unescape(r['Logo']))[0]['url']
+                            : '';
+                    }},
+                    {data: 'name'},
+                    {data: 'tags'},
+                    {data: 'Type'},
+                    {data: function (r) {
+                        return r['description'].substr(0,100)+
+                        (r['description'].length > 100 ? '...' : '')
+                    }},
+                    {
+                        className: 'record',
+                        data:  null,
+                        defaultContent: null,
+                        searchable: false
+                    }
+                ],
+
 				initComplete: function () {
 					this.api().columns([4]).every(function () {						// Type
 						var column = this;
@@ -74,8 +74,8 @@
 							select.trigger('change')
 						}, 700);
 					});
-					
-					
+
+
 					this.api().columns([3]).every(function () {						// tags
 						var column = this;
 						var select = $('<select class="filter-top" id="filter-tags"><option value="">- Select organizations by tag -</option></select>')
@@ -88,9 +88,9 @@
 									.search(val ? val : '', false, false)
 									.draw();
 							});
-						
+
 						var tt = []
-						
+
 						rg = /""([^"]+)""/g;
 						column.data().each(function (d, j) {
 							while ((t = rg.exec(d)) !== null) {
@@ -98,7 +98,7 @@
 							}
 						})
 						tt = [...new Set(tt)]
-						
+
 						tt.sort().forEach(function (d, j) {
 							select.append( '<option value="'+d+'">'+d+'</option>' )
 						});
@@ -111,70 +111,78 @@
 					});
 				}
 			});
-			
+
 			table.on('preDraw', function () {
-					$('#orgsTable tbody').hide();
-					return true
-				});
-				
+                $('#orgsTable tbody').hide();
+                return true
+            });
+
 			table.on('draw', function () {
-					var api = $('#orgsTable').dataTable().api();
-					var modifier = {
-						order:  'current',  // 'current', 'applied', 'index',  'original'
-						page:   'current',      // 'all',     'current'
-						search: 'applied',     // 'none',    'applied', 'removed'
-					}
-					var td = $('<td></td>')
-					var div = $('<div></div>')
-					
-					api.cells('.record', modifier).data().each(function (r, i) {
-						
-						div = $('<div class="card-body"></div>')
-						
-						if (r['Logo'])
-							div.append(`<img src="${JSON.parse(unescape(r['Logo']))[0]['url']}">`)
-						
-						if (r['name'] && (!r['Logo'] || !r['description']))
-							div.append(`<h6>${r['name']}</h6>`)
-						
-						var descr = r['description'].substr(0,100)+(r['description'].length > 100 ? '...' : '')
-						div.append(`<p class="card-text">${descr}</p>`)
-						
-						if (r['tags']) {
-							var tags = ''
-							JSON.parse(unescape(r['tags'])).forEach(function (d, j) {
-								tags = tags+'<span class="badge badge-info" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
-							})
-							div.append(`Tags: ${tags}`)
-						}
-						
-						td.append($(`<div class="col-4 p-1"><a href="/organization/${r['id']}"><div class="card text-center  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))
-					});
-					$('#orgsTable tbody').html('<tr><td colspan="7"><div class="row p-0">'+td.html()+'</div></td></tr>')
-					$('#orgsTable tbody').show();
-				});
+                var api = $('#orgsTable').dataTable().api();
+                var modifier = {
+                    order:  'current',  // 'current', 'applied', 'index',  'original'
+                    page:   'current',      // 'all',     'current'
+                    search: 'applied',     // 'none',    'applied', 'removed'
+                }
+                var td = $('<td></td>')
+                var div = $('<div></div>')
+
+                api.cells('.record', modifier).data().each(function (r, i) {
+
+                    div = $('<div class="card-body"></div>')
+
+                    if (r['Logo'])
+                        div.append(`<div class="inner_logoimg"><div class="inside_org_logo"><img src="${JSON.parse(unescape(r['Logo']))[0]['url']}"></div></div>`)
+
+                    if (r['name'] && (!r['Logo'] || !r['description']))
+                        div.append(`<h6>${r['name']}</h6>`)
+
+                    var descr = r['description'].substr(0,100)+(r['description'].length > 100 ? '...' : '')
+                    div.append(`<p class="card-text">${descr}</p>`)
+
+                    if (r['tags']) {
+                        var tags = ''
+                        JSON.parse(unescape(r['tags'])).forEach(function (d, j) {
+                            tags = tags+'<span class="badge badge-info" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
+                        })
+                        div.append(`<p class="tag_org">Tags:</p> ${tags}`)
+                    }
+
+                    td.append($(`<div class="col-md-3"><a href="/organization/${r['id']}"><div class="card  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))
+                });
+                $('#orgsTable tbody').html('<tr><td colspan="7" class="p-0"><div class="row">'+td.html()+'</div></td></tr>')
+                $('#orgsTable tbody').show();
+            });
 
 		});
 	</script>
 
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-12 py-3">
-				<table id="orgsTable" class="display table-striped table-hover" style="width:100%">
-					<thead>
-						<tr>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-				</table>
+			<div class="col-md-12 organization_data">
+                <div class="col-md-12">
+                    <table id="orgsTable" class="display table" style="width:100%;padding-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
 			</div>
 		</div>
-	</div>
+        <div class="homeround_content">
+            <div class="text-center bottom_text col-md-12">
+                <h3>We’re adding data all the time.</h3>
+                <a href="#" class="learn_more">Learn More</a>
+            </div>
+        </div>
+    </div>
 
 @endsection
