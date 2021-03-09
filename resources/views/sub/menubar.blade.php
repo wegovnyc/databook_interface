@@ -35,7 +35,7 @@
             </li> --}}
         </ul>
         <div class="right_menuarea">
-            <ul class="navbar-nav">
+            {{-- <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Add About</a>
                 </li>
@@ -48,7 +48,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
-            </ul>
+            </ul> --}}
             <div class="input-group">
                 <!--<div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
@@ -63,7 +63,7 @@
 
 <div>
   <ol class="breadcrumb">
-	@foreach ($breadcrumbs as $n=>$br)
+    @foreach ($breadcrumbs as $n=>$br)
 		@if (!$br[0])
 			<li class="breadcrumb-item active" aria-current="page">{{ $br[1] }}</li>
 		@else
