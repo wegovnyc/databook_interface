@@ -145,7 +145,7 @@
                         JSON.parse(unescape(r['tags'])).forEach(function (d, j) {
                             tags = tags+'<span class="badge badge-info" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
                         })
-                        div.append(`<p class="tag_org">Tags:</p> ${tags}`)
+                        div.append(`<i class="bi bi-tag-fill tag_color"></i> ${tags}`)
                     }
 
                     td.append($(`<div class="col-md-3"><a href="/organization/${r['id']}"><div class="card  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))

@@ -63,12 +63,12 @@ class Organizations extends Controller
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
 		$org = $model->org($id);
 		$ds = new Datasets();
-        return $org 
+        return $org
 			? view('organization', [
-					'id' => $id, 
+					'id' => $id,
 					'org' => $org,
 					'slist' => $ds->list,
-					'icons' => $ds->socicons, 
+					'icons' => $ds->socicons,
 					'breadcrumbs' => Breadcrumbs::org($org['name']),
 				])
 			: abort(404);
@@ -90,11 +90,11 @@ class Organizations extends Controller
 		$details = $ds->get($section);
 		return $org && $details
 			? view('orgsection', [
-					'id' => $id, 
-					'org' => $org, 
+					'id' => $id,
+					'org' => $org,
 					'section' => $section,
-					'slist' => $ds->list, 
-					'icons' => $ds->socicons, 
+					'slist' => $ds->list,
+					'icons' => $ds->socicons,
 					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"={$id}"),
 					'dataset' => $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $ds->list[$section]),
