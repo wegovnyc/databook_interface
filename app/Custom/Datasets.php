@@ -72,6 +72,7 @@ class Datasets
 			'visible' => [true, true, true, true],
 			'flds' => ['"program_name"', '"program_category"', '"brief_excerpt"', '"population_served"'], 
 			'filters' => [1 => null, 3 => null],
+			'fltDelim' => [3 => ','],
 			'details' => [
 					'Description' => 'program_description',
 					'Eligibility' => 'plain_language_eligibility',
@@ -217,6 +218,112 @@ class Datasets
 			],
 			'description' => 'The Facilities Database (FacDB) captures the locations and descriptions of public and private facilities ranging from the provision of social services, recreation, education, to solid waste management.',
 		],
+
+
+		'onenyc-indicators' => [
+			'fullname' => 'OneNYC Indicators',
+			'table' => 'onenycindicators',
+			'hdrs' => ['Vision', 'Goal', 'Indicator', 'Report Year', 'Indicator Value', 'Measurement Type', 'Target Value', 'Target Year'],
+			'visible' => [false, true, true, true, true, true, true, true, true],
+			'flds' => ['"Vision"', '"Goal"', '"Indicator"', '"Report Year"', '"Indicator Value"', '"Measurement Type"', '"Target Value"', '"Target Year"'], 
+			'filters' => [],
+			//'fltDelim' => [3 => ','],
+			'details' => [],
+			'description' => 'Annual Agency Performance Metrics',
+		],
+		'assets' => [
+			'fullname' => 'Local Law 251 of 2017: Published Data Asset Inventory',
+			'table' => 'locallaw251',
+			'hdrs' => ['Name', 'Type', 'Category', 'Open Data Plan', 'Last Updated', 'Visits', 'Row Count', 'Column Count', 'URL'],
+			'visible' => [true, true, true, true, true, true, false, false, false],
+			'flds' => [
+					'function (r) { return `<a href="${r["URL"]}" target="_blank">${r["Name"]}</a>` }', 
+					'"Type"', '"Category"', '"Legislative Compliance: Dataset from the Open Data Plan?"', '"Last Data Updated Date (UTC)"', '"Visits"', '"Row Count"', '"Column Count"', '"URL"'
+			],
+			'filters' => [1 => null, 2 => null, 3 => null],
+			//'fltDelim' => [3 => ','],
+			'details' => [
+				'Description' => 'Description',
+				'Update: Date Made Public' => 'Update: Date Made Public',
+				'Update: Update Frequency' => 'Update: Update Frequency',
+				'Legislative Compliance: Can Dataset Feasibly Be Automated?' => 'Legislative Compliance: Can Dataset Feasibly Be Automated?',
+				'Update: Automation' => 'Update: Automation',
+				'Legislative Compliance: Has Data Dictionary?' => 'Legislative Compliance: Has Data Dictionary?',
+				'Legislative Compliance: Contains Address?' => 'Legislative Compliance: Contains Address?',
+				'Legislative Compliance: Geocoded?' => 'Legislative Compliance: Geocoded?',
+				'Legislative Compliance: Exists Externally? (LL 110/2015)' => 'Legislative Compliance: Exists Externally? (LL 110/2015)',
+				'Legislative Compliance: External Frequency (LL 110/2015)' => 'Legislative Compliance: External Frequency (LL 110/2015)',
+				'Legislative Compliance: Removed Records?' => 'Legislative Compliance: Removed Records?',
+				'UID' => 'UID',
+			],
+			'description' => 'As per Local Law 251 of 2017, the Open Data plan is required to include the following comprehensive information on each dataset on the Open Data Portal:
+- Most recent update date;
+- URL;
+- Whether it complies with data retention standard (which mandates that row-level data be maintained on the dataset);
+- Whether it has a data dictionary;
+- Whether it meets the geocoding standard, does not meet the geocoding, or is ineligible for the geospatial standard;
+- Whether updates to the dataset are automated;
+- Whether updates to the dataset “feasibly can be automated”.
+-----
+For a list of all datasets that were included on all the NYC Open Data plans (2013-2020) and their current release status, please refer to NYC Open Data Release Tracker.',
+		],
+		'nyccouncildiscretionaryfunding' => [
+			'fullname' => 'New York City Council Discretionary Funding',
+			'table' => 'nyccouncildiscretionaryfunding',
+			'hdrs' => ['Fiscal Year', 'Source', 'Council Member', 'Legal Name of Organization', 'Status', 'Amount ($)', 'Borough', 'Council District'],
+			'visible' => [true, true, true, true, true, true, true, true],
+			'flds' => [
+					'"Fiscal Year"', '"Source"', '"Council Member"', 
+					'function (r) { return `<a href="https://projects.propublica.org/nonprofits/organizations/${r["EIN"]}" target="_blank">${r["Legal Name of Organization"]}</a>` }',
+					'"Status"', '"Amount ($)"', '"Borough"', '"Council District"'
+				], 
+			'filters' => [0 => null, 1 => null, 2 => null, 6 => null, 7 => null],
+			//'fltDelim' => [3 => ','],
+			'details' => [
+				'EIN' => 'EIN',
+				'MOCS ID' => 'MOCS ID',
+				'Program Name' => 'Program Name',
+				'Address' => 'Address',
+				'Address 2 (optional)' => 'Address 2 (optional)',
+				'City' => 'City',
+				'State' => 'State',
+				'Postcode' => 'Postcode',
+				'Purpose of Funds' => 'Purpose of Funds',
+				'Fiscal Conduit Name' => 'Fiscal Conduit Name',
+				'FC EIN' => 'FC EIN',
+				'Latitude' => 'Latitude',
+				'Longitude' => 'Longitude',
+				'Community Board' => 'Community Board',
+				'Census Tract' => 'Census Tract',
+				'BIN' => 'BIN',
+				'BBL' => 'BBL',
+				'NTA' => 'NTA',
+			],
+			'description' => 'The dataset reflects applications for discretionary funding to be allocated by the New York City Council.',
+		],
+		'opendatareleasetracker' => [
+			'fullname' => 'NYC Open Data Release Tracker',
+			'table' => 'opendatareleasetracker',
+			'hdrs' => ['Name', 'Original Plan Date', 'Latest Plan Date', 'Release Status', 'Release Date', '2020 Open Data Plan', 'URL', 'Frequency'],
+			'visible' => [true, true, true, true, true, true, false, false],
+			'flds' => [
+					'function (r) { return `<a href="${r["URL"]}" target="_blank">${r["Dataset Name"]}</a>` }',
+					'function (r) { return usToDashDate(r["Original Plan Date"]) }', //'"Original Plan Date"', 
+					'function (r) { return usToDashDate(r["Latest Plan Date"]) }', //'"Latest Plan Date"', 
+					'"Release Status"', 
+					'function (r) { return usToDashDate(r["Release Date"]) }', //'"Release Date"',
+					'"From the 2020 Open Data Plan?"', '"URL"', '"Update Frequency"'
+			], 
+			'filters' => [3 => null, 5 => null],
+			//'fltDelim' => [3 => ','],
+			'details' => [
+				'Description' => 'Dataset Description',
+				'UID' => 'U ID',
+				'Agency Notes' => 'Agency Notes',
+			],
+			'description' => 'A list of all datasets that were included on all the NYC Open Data plans (2013-2019) and their current release status. For a comprehensive information on each dataset on the Open Data Portal, please refer to Local Law 251 of 2017: Published Data Asset Inventory.',
+		],
+
 		'' => [
 			'fullname' => '',
 			'table' => '',
@@ -237,7 +344,44 @@ class Datasets
 		'requests' => 'Requests',
 		'jobs' => 'Jobs',
 		'facilities' => 'Facilities',
+		'onenyc-indicators' => 'OneNYC',
+		'assets' => 'Assets',
+		'nyccouncildiscretionaryfunding' => 'City Council Discretionary',
+		'opendatareleasetracker' => 'Tracker',
 	];
+	
+	public $menu = [
+		'about',
+		'Finances' => 
+			[
+				'expense-budget',
+				'nyccouncildiscretionaryfunding',	//nyccouncildiscretionaryfunding
+			],
+		'capital-projects',
+		'services',
+		'people',
+		'Indicators' => 
+			[
+				'indicators-mmr',
+				'onenyc-indicators',		//onenycindicators
+			],
+		'requests',
+		'jobs',
+		'facilities',
+		'Data' => 
+			[
+				'opendatareleasetracker',		//Tracker	
+				'assets',		//Assets
+			],
+	];
+	
+	public function menuActiveDD($sect)
+	{
+		foreach ($this->menu as $h=>$items)
+			if (is_array($items) && (array_search($sect, $items) !== false))
+				return $h;
+		return '';
+	}
 	
 	public $socicons = [
 		'email' => ['envelope', 'mailto:'],
@@ -259,6 +403,12 @@ class Datasets
 		foreach ((array)$dd['filters'] as $i=>$v)
 			$flts[$i + $inc] = $v;
 		$dd['filters'] = $flts;
+		
+		$fltDel = [];
+		foreach ((array)($dd['fltDelim'] ?? []) as $i=>$v)
+			$fltDel[$i + $inc] = $v;
+		$dd['fltDelim'] = $fltDel;
+		
 		$dd['fltsCols'] = implode(',', array_keys($dd['filters']));
 		return $dd;
 	}

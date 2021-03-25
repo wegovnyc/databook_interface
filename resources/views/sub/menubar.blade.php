@@ -8,16 +8,16 @@
     <div class="collapse navbar-collapse" id="navbar-nav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">News</a>
+                <a class="nav-link" href="//wegov.nyc/news/">News</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Events</a>
+                <a class="nav-link" href="//wegov.nyc/events/">Events</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Resources</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Tools</a>
+                <a class="nav-link" href="//wegov.nyc/tools/">Tools</a>
             </li>
             {{-- @if ($active=='orgs')
             <li class="nav-item active">
@@ -35,20 +35,20 @@
             </li> --}}
         </ul>
         <div class="right_menuarea">
-            {{-- <ul class="navbar-nav">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add About</a>
+                    <a class="nav-link" href="//wegov.nyc/about/">Add About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Subscribe</a>
+                    <a class="nav-link" href="https://www.notion.so/News-51872d3b0ff34b109a0440c49bb6d4ad">Subscribe</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Write For Us</a>
+                    <a class="nav-link" href="https://www.notion.so/Contact-Us-54b075fa86ec47ebae48dae159s5afc2c">Write For Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="//wegov.nyc/contact/">Contact</a>
                 </li>
-            </ul> --}}
+            </ul>
             <div class="input-group">
                 <!--<div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
@@ -63,7 +63,7 @@
 
 <div>
   <ol class="breadcrumb">
-    @foreach ($breadcrumbs as $n=>$br)
+	@foreach ($breadcrumbs as $n=>$br)
 		@if (!$br[0])
 			<li class="breadcrumb-item active" aria-current="page">{{ $br[1] }}</li>
 		@else

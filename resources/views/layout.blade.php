@@ -26,6 +26,19 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 	<script async src="https://cse.google.com/cse.js?cx=2b80c98605cf9ab55"></script>
+	
+	<style>
+		.bi-tags, .bi-funnel {padding-right: .5rem;}
+		.tag-label, .tag-label a {color:#777777; font-weight:600; padding-left:.1em;margin-right:-2px;}
+		.tag-label:hover {color:#171717;cursor:pointer;text-decoration:none;}
+		.no-underline:hover {text-decoration:none;}
+		.tag-label+.tag-label::before {
+			padding-right: .2rem;
+			color: #6c757d;
+			content: ", ";
+		}
+	</style>
+
 </head>
 
 <body>
@@ -60,27 +73,27 @@
 			<div id="footer-menu" class="row">
 				<div class="col-md-3">
 					<h6>Documentation</h6>
-					<div><a href="#">News</a></div>
-					<div><a href="#">Events</a></div>
+					<div><a href="//wegov.nyc/news/">News</a></div>
+					<div><a href="//wegov.nyc/events/">Events</a></div>
 					<div><a href="#">Resources</a></div>
-					<div><a href="#">Tools</a></div>
+					<div><a href="//wegov.nyc/tools/">Tools</a></div>
 				</div>
 				<div class="col-md-3">
 					<h6>Contribute</h6>
-					<div><a href="#">Write for us</a></div>
+					<div><a href="https://www.notion.so/Contact-Us-54b075fa86ec47ebae48dae159s5afc2c">Write for us</a></div>
 					<div><a href="#">Host an event</a></div>
-					<div><a href="#">Edit on Github</a></div>
+					<div><a href="https://github.com/wegovnyc">Edit on Github</a></div>
 				</div>
 				<div class="col-md-3">
 					<h6>About</h6>
-					<div><a href="#">About us</a></div>
+					<div><a href="//wegov.nyc/about/">About us</a></div>
 					<div><a href="#">Site Policies</a></div>
 				</div>
 				<div class="col-md-3">
 					<h6>Social</h6>
 					<div><a href="#">Twitter</a></div>
 					<div><a href="#">Facebook</a></div>
-					<div><a href="#">Slack</a></div>
+					<div><a href="https://join.slack.com/t/wegovnyc/shared_invite/zt-jftnat8l-ahmZuhd73E0Hl8lEESY4JQ">Slack</a></div>
 					<div><a href="#">RSS</a></div>
 					<div><a href="#">Email us</a></div>
 				</div>

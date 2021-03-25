@@ -8,7 +8,7 @@
 	@include('sub.orgheader', ['active' => $section])
 
 	{{--
-		$id, $org, $section,$slist => $ds->list, $menu => $ds->menu, $icons => $ds->socicons,
+		$id, $org, $section,$slist => $ds->list, $icons => $ds->socicons,
 		$url => $model->url(.....),
 	--}}
 
@@ -25,7 +25,6 @@
 			'details' => ['Job ID' => 'Job ID'],
 			'detFlag' => 1,
 			'fltsCols' => '2,3',
-			'fltDelim' => [3 => ',']
 		]
 	--}}
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
@@ -84,11 +83,8 @@
 				@if ($details['filters'])
 					initComplete: function () {
 						this.api().columns([{{ $details['fltsCols'] }}]).every(function (c,a,i) {
-							var delim = {!! json_encode($details['fltDelim']) !!};
-							//console.log(c,a,i)
-							//console.log(delim)
 							var column = this;
-							var select = $('<select class="" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>Filter By ' + $(column.header()).text() + '</option></select>')
+							var select = $('<select class="" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" disabled selected>Filter By ' + $(column.header()).text() + '</option></select>')
 								//.appendTo($(column.footer()).empty())
 								.appendTo($("div.toolbar"))
 								.on('change', function () {
@@ -100,20 +96,13 @@
 										.search(val ? val : '', false, false)
 										.draw();
 								});
-							select.wrap('<div class="drop_dowm_select' + (i == 0 ? '' : ' ml-4') + '" style="width:{{ 100.00 / count($details["filters"]) - (count($details["filters"]) > 4 ? 3 : 2.5) }}%;"></div>');
-							
+							select.wrap('<div class="drop_dowm_select' + (i == 0 ? '' : ' ml-4') + '" style="width:{{ 100.00 / count($details["filters"]) - 2.5 }}%;"></div>');
 							var tt = []
 							dd = column.data()
 
 							column.data().each(function (d, j) {
 								d = typeof d == 'string' ? d.replace(/<[^>]+>/gi, '') : d
-								if (c in delim && typeof d == 'string') {
-									d.split(delim[c]).forEach(function (v, k) {
-										tt.push(v)
-									})
-								}	
-								else
-									tt.push(d)
+								tt.push(d)
 							})
 							tt = [...new Set(tt)]
 
@@ -132,6 +121,39 @@
 					}
 				@endif
 			});
+			/*
+            $("div.toolbar").html(`
+                <div class="drop_dowm_select" id="myTable_dropdown">
+                    <select name="myTable_dropdown" aria-controls="myTable" class="">
+                        <option value="" disabled selected>Filter By Tag</option>
+                        <option value="1">Option A</option>
+                        <option value="2">Option B</option>
+                        <option value="3">Option C</option>
+                        <option value="4">Option D</option>
+                    </select>
+                </div>
+
+                <div class="drop_dowm_select ml-4" id="myTable_dropdown2">
+                    <select name="myTable_dropdown2" aria-controls="myTable" class="">
+                        <option value="" disabled="" selected="">Filter By Tag</option>
+                        <option value="1">Option A</option>
+                        <option value="2">Option B</option>
+                        <option value="3">Option C</option>
+                        <option value="4">Option D</option>
+                    </select>
+                </div>
+
+                <div class="drop_dowm_select ml-4" id="myTable_dropdown2">
+                    <select name="myTable_dropdown2" aria-controls="myTable" class="">
+                        <option value="" disabled="" selected="">Filter By Tag</option>
+                        <option value="1">Option A</option>
+                        <option value="2">Option B</option>
+                        <option value="3">Option C</option>
+                        <option value="4">Option D</option>
+                    </select>
+                </div>
+            `);
+			*/
 			
 			$('#filter-1').find('[value*="20190619"]').prop('selected',true).trigger('change');
 

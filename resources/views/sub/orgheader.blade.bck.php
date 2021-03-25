@@ -61,41 +61,19 @@
     </button>
     <div class="collapse navbar-collapse" id="submenu_nav">
         <ul class="nav navbar navbar-expand-lg navbar-light submenu_org">
-			@foreach ($menu as $h=>$sect)
-				@if (is_string($sect))
-					@if ($active == $sect)
-						<li class="nav-item active">
-					@else
-						<li class="nav-item">
-					@endif
-					@if ($sect == 'about')
-						<a class="nav-link active" href="{{ route('orgProfile', ['id' => $id]) }}">{{ $slist[$sect] }}</a>
-					@else
-						<a class="nav-link active" href="{{ route('orgSection', ['id' => $id, 'section' => $sect]) }}">{{ $slist[$sect] }}</a>
-					@endif
-					</li>
-				@else
-					@if ($activeDropDown == $h)
-						<li class="nav-item dropdown active">
-					@else
-						<li class="nav-item dropdown">
-					@endif
-						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ $h }}</a>
-						<div class="dropdown-menu">
-							@foreach ($sect as $subsect)
-								@if ($subsect == 'about')
-									<a class="dropdown-item active" href="{{ route('orgProfile', ['id' => $id]) }}">{{ $slist[$subsect] }}</a>
-								@else
-									<a class="dropdown-item active" href="{{ route('orgSection', ['id' => $id, 'section' => $subsect]) }}">{{ $slist[$subsect] }}</a>
-								@endif
-							@endforeach
-						</div>
-					</li>
-				@endif
-			@endforeach
-		</ul>
+            @foreach ($slist as $sect=>$name)
+                @if ($active == $sect)
+                    <li class="nav-item active">
+                @else
+                    <li class="nav-item">
+                @endif
+                @if ($sect == 'about')
+                    <a class="nav-link active" href="{{ route('orgProfile', ['id' => $id]) }}">{{ $name }}</a>
+                @else
+                    <a class="nav-link active" href="{{ route('orgSection', ['id' => $id, 'section' => $sect]) }}">{{ $name }}</a>
+                @endif
+            </li>
+            @endforeach
+        </ul>
     </div>
 </div>
-
-
-

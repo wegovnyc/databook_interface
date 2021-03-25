@@ -12,13 +12,13 @@ a.toggle-vis {cursor: pointer;color: #3174c7;text-decoration: none;}
 
 /*============ start top header area =============*/
 .navbar {padding:0px;}
-.navbar-brand {padding: 20px 30px; margin: 0px;}
-.navbar-brand img{height: 40px;}
-.navbar-nav {padding-top: 20px;padding-right: 50px;}
+.navbar-brand {padding: 25px 30px; margin: 0px;}
+.navbar-brand img{height: 49px;}
+.navbar-nav {padding-top: 55px;padding-right: 80px;}
 .navbar-nav .nav-item {padding: 0 15px;}
-.navbar-nav .nav-item .nav-link{padding: 0 0 12px 0;font-weight: bold;font-size: 14px;color: #585C62;border-bottom: 7px solid transparent;}
-.navbar-nav .nav-item.active .nav-link, .navbar-nav .nav-item:hover .nav-link {border-bottom: 7px solid #005EA2;color: #005EA2;}
-.right_menuarea {padding-right: 30px;width: 270px;}
+.navbar-nav .nav-item .nav-link{padding: 0 0 18px 0;font-weight: bold;font-size: 14px;color: #585C62;border-bottom: 4px solid transparent;}
+.navbar-nav .nav-item.active .nav-link, .navbar-nav .nav-item:hover .nav-link {border-bottom: 4px solid #005EA2;color: #005EA2;}
+.right_menuarea {padding-right: 30px;}
 .right_menuarea .navbar-nav {padding-top:0px;padding-right:0px;}
 .right_menuarea .navbar-nav .nav-item {padding: 0 12px;border-left: 1px solid #828588;line-height: 18px;margin-bottom: 12px;margin-top: 12px;}
 .right_menuarea .navbar-nav .nav-item:first-child{border-left: none;}
@@ -51,7 +51,7 @@ table.gsc-search-box td.gsib_b{display: none !important;}
 .homeround_content .circle_img{float: left;margin-right: 25px;}
 .homeround_content a{text-decoration: none;}
 .homeround_content .content_area h4{font-weight: bold;font-size: 22px;color: #171717;margin-bottom: 15px;}
-/* .homeround_content .col-md-4:hover .content_area h4{color: #005EA2;} */
+/*.homeround_content .col-md-4:hover .content_area h4{color: #005EA2;}*/
 .homeround_content .content_area p{font-weight: normal;font-size: 16px;line-height: 26px;color: #171717;margin-bottom: 0px;}
 .homeround_content .col-md-4 {margin-bottom: 60px;}
 
@@ -98,7 +98,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active{color: #000 !important; border: 1px solid #f0f0f0;background: #f0f0f0;}
 
 #orgsTable .col-md-3 a{text-decoration: none;}
-#orgsTable .card {min-height: 350px;border: 1px solid #DFE1E2;border-radius: 0px;margin-bottom: 30px;}
+#orgsTable .card {min-height: 450px;border: 1px solid #DFE1E2;border-radius: 0px;margin-bottom: 30px;}
 #orgsTable .card img {max-width: 100%;max-height: 100%;margin:0 auto 25px;}
 #orgsTable .card .card-body {padding: 24px;}
 #orgsTable .card .inner_logoimg{width: 100%;overflow: hidden;vertical-align: middle;display: table;text-align: center;}
@@ -106,32 +106,19 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 #orgsTable .card .card-body h6{font-weight: bold;font-size: 22px;line-height: 26px;color: #171717;margin-bottom: 15px;}
 #orgsTable .card .card-body p {font-weight: normal;font-size: 16px;line-height: 26px;color: #171717;margin-bottom: 15px;}
 #orgsTable .card .card-body p.tag_org{color: #162E51;font-weight: 500;font-size: 16px;margin-bottom: 15px;width: 100%;}
-.tag_color {color: #767676;font-size: 18px;}
-.badge-info{
-    background: white;
-    border-radius: 0px;
-    color: #767676;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    padding: 0;
-    margin-bottom: 0px;
-}
-.badge-info::after{content: ',';margin-right: 5px;}
-.badge-info:last-child::after{display: none;}
+.badge-info{background: #162E51;border-radius: 4px;color:#fff;padding: 8px 9px;font-weight: normal;font-size: 16px;line-height: 19px;margin-right: 10px;margin-bottom: 10px;}
 
 
 /*================== start organization detail page ================*/
 .org-header {background: #fff;}
 .inside_orglogo {padding: 15px 0px 15px 15px;height: 120px;overflow: hidden;display: table-cell;}
 .inside_orglogo .org-logo{max-width: 100%; max-height: 100%;margin: 0 auto;}
-.org_detailtitle{padding: 30px 30px 0 5px;}
-.org_detailtitle h4 {font-weight: bold;font-size: 22px;line-height: 38px;color: #171717;float: left;margin-right: 20px;}
+.org_detailtitle{padding: 30px 30px 0 15px;}
+.org_detailtitle h4 {font-weight: bold;font-size: 22px;line-height: 38px;color: #171717;    float: left;margin-right: 25px;}
 .icon_orgsocial {float: left;padding-top: 6px;}
-.icon_orgsocial .icon{height: 32px;width: 32px;float: left;line-height: 30px;border-radius: 50px;font-size: 16px;padding: 0px !important;background: #959494;text-align: center;margin: 0 6px;margin-bottom: 5px;}
-.icon_orgsocial .icon i{color: #fff;}
-.icon_orgsocial .icon a{background: #005EA2;color: #fff;width: 100%;height: 100%;display: inherit;border-radius: 50px;}
-.text-types {float: left;padding-right: 10px;margin: 0px;font-weight: 500;color: #162E51;}
+.icon_orgsocial .icon{height: 32px;width: 32px;float: left;line-height: 30px;border-radius: 50px;background: #005EA2;color: #fff;font-size: 16px;padding: 0px !important;text-align: center;margin: 0 6px;margin-bottom: 5px;}
+.icon_orgsocial .icon a{color: #fff;}
+.text-types {float: left;padding-right: 20px;margin: 0px;line-height: 35px;font-weight: 500;color: #162E51;}
 
 .submenu_org {background: #F0F0F0;padding: 0px 30px;width: 100%;}
 .submenu_org .nav-item .nav-link{padding: 14px 16px;font-weight: bold;font-size: 16px;color: #585C62;}
@@ -162,7 +149,8 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 
 table.dataTable{margin-top: 20px;}
 table.dataTable thead th {border-top: 1px solid #171717;border-bottom: 1px solid #171717;}
-#myTable_wrapper .toolbar{width:54%;margin: 0px !important;}
+/*#myTable_wrapper .toolbar{width:54%;margin: 0px !important;}*/
+#myTable_wrapper .toolbar{width:58.5%;margin: 0px !important;}
 #myTable_wrapper.dataTables_wrapper .dataTables_filter {width: 25%;}
 #myTable_wrapper .toolbar .drop_dowm_select{width: 31%;float: left;}
 #myTable_wrapper .toolbar .drop_dowm_select select {width: 100%;padding: 8px 30px 8px 12px;border-left: none;border-right: none;}

@@ -8,7 +8,17 @@
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>
-
+	<style>
+		.bi-tags {padding-right: .5rem;}
+		.tag-label {color:#777777; font-weight:600; padding-left: .1em;}
+		.tag-label:hover {color:#171717;}
+		.tag-label+.tag-label::before {
+			/*float: left;*/
+			padding-right: .2rem;
+			color: #6c757d;
+			content: ", ";
+		}
+	</style>
 	<script>
 		function tagFlt(e, tag) {
 			console.log(tag)
@@ -20,7 +30,7 @@
 		var table = null
 		$(document).ready(function() {
 			table = $('#orgsTable').DataTable( {
-				pageLength: 18,
+				pageLength: 20,
 				deferRender: true,
 				order: [[2, 'asc']],
 				ordering: false,
@@ -143,9 +153,11 @@
                     if (r['tags']) {
                         var tags = ''
                         JSON.parse(unescape(r['tags'])).forEach(function (d, j) {
-                            tags = tags+'<span class="badge badge-info" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
+                            //tags = tags+'<span class="badge badge-info" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
+                            tags = tags+'<span class="tag-label" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
                         })
-                        div.append(`<i class="bi bi-tag-fill tag_color"></i> ${tags}`)
+                        //div.append(`<p class="tag_org">Tags:</p> ${tags}`)
+                        div.append(`<a title="Tags"><i class="bi-tags" style="color:black;"></i></a> ${tags}`)
                     }
 
                     td.append($(`<div class="col-md-3"><a href="/organization/${r['id']}"><div class="card  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))
