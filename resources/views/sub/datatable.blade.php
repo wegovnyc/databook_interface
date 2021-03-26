@@ -1,8 +1,4 @@
 <pre>{{ print_r($details, true) }}</pre>
-
-
-
-
 <script>
 
 @if ($details['details'])
