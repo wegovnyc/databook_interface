@@ -4,15 +4,15 @@ Namespace App\Custom;
 class Breadcrumbs
 {
 	static public $root = [
-			['https://wegov.nyc', 'Home'],
+			//['https://wegov.nyc', 'Home'],
 			['https://wegov.nyc/tools', 'Tools'],
-			['/organizations', 'DataBook']
+			['/', 'DataBook']
 		];
 
 	static function root()
 	{
 		$rr = self::$root;
-		$rr[2] = ['', 'DataBook'];
+		//$rr[2] = ['', 'DataBook'];
 		return $rr;
 	}
 
@@ -23,16 +23,16 @@ class Breadcrumbs
 
 	static function orgs()
 	{
-		return array_merge(self::$root, [['', 'Index']]);
+		return array_merge(self::$root, [['/organizations', 'Organizations']]);
 	}
 
-	static function org($name)
+	static function org($id, $name)
 	{
-		return array_merge(self::$root, [['', $name]]);
+		return array_merge(self::$root, [['/organizations', 'Organizations'], ["/organization/{$id}", $name]]);
 	}
 
-	static function orgSect($id, $name, $sect)
+	static function orgSect($id, $name, $sect, $sectN)
 	{
-		return array_merge(self::$root, [["/organization/{$id}", $name], ['', $sect]]);
+		return array_merge(self::$root, [['/organizations', 'Organizations'], ["/organization/{$id}", $name], [$sect, $sectN]]);
 	}
 }

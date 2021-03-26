@@ -71,7 +71,7 @@ class Organizations extends Controller
 					'menu' => $ds->menu,
 					'activeDropDown' => '',
 					'icons' => $ds->socicons,
-					'breadcrumbs' => Breadcrumbs::org($org['name']),
+					'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
 				])
 			: abort(404);
     }
@@ -101,7 +101,7 @@ class Organizations extends Controller
 					'icons' => $ds->socicons,
 					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"={$id}"),
 					'dataset' => $model->dataset($details['fullname']),
-					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $ds->list[$section]),
+					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $section, $ds->list[$section]),
 					'details' => $details,
 				])
 			: abort(404);
