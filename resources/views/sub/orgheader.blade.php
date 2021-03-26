@@ -11,25 +11,23 @@
             <h4>{{ $org['name'] }}</h4>
             <div class="icon_orgsocial">
                 @foreach ($icons as $f=>$pp)
-					@if ($org[$f] ?? null)
-						<div class="icon">
+                    <div class="icon">
+                        @if ($org[$f] ?? null)
                             <a href="{{ $pp[1] }}{{ $org[$f] }}" target="_blank">
                                 <i class="bi-{{ $pp[0] }}"></i>
                             </a>
-						</div>
-					@else
-						<div class="icon" style="background:#DEDEDE;">
-							<i class="bi-{{ $pp[0] }}"></i>
-						</div>
-					@endif
+                        @else
+                            <i class="bi-{{ $pp[0] }}"></i>
+                        @endif
+                    </div>
                 @endforeach
             </div>
             <div class="float-right">
                 @if ($org['Type'] ?? null)
                     <div class="float-left mr-4">
-                        <!--<p class="text-types">Type:</p>
-						<p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Type"><i class="bi-funnel" style="color:black;"></i></p>-->
-                        <a href="{{ route('orgs') }}?type={{ urlencode($org['Type']) }}" class="float-left no-underline">
+                        <p class="text-types">Type:</p>
+						{{-- <p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Type"><i class="bi-funnel" style="color:black;"></i></p> --}}
+                        <a href="{{ route('orgs') }}?type={{ urlencode($org['Type']) }}" class="float-left">
                             <span class="badge badge-info">{{ $org['Type'] }}</span>
                             <!--<span class="tag-label">{{ $org['Type'] }}</span>-->
                         </a>
@@ -37,16 +35,18 @@
                 @endif
                 @if ($org['tags'] ?? null)
                     <div class="float-left">
-                        <!--<p class="text-types">Tags:</p>-->
-						<p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Tags"><i class="bi-tags" style="color:black;"></i></a></p>
+                        <p class="text-types">Tags:</p>
+						{{-- <p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Tags"><i class="bi-tags" style="color:black;"></i></a></p> --}}
 						<!--<a title="Tags" style="display:block;"><i class="bi-tags" style="color:black;"></i>-->
                         @foreach ((array)$org['tags'] as $tag)
-							<!--<span class="badge badge-info">{{ $tag }}</span>-->
-							<span class="tag-label">
+                            <a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="float-left">
+                                <span class="badge badge-info">{{ $tag }}</span>
+                            </a>
+							{{-- <span class="tag-label">
 								<a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="no-underline">
 									{{ $tag }}
 								</a>
-							</span>
+							</span> --}}
                         @endforeach
                     </div>
                 @endif
@@ -55,7 +55,7 @@
     </div>
 </div>
 
-<div class="navbar-expand-lg org_headermenu">
+<div class="navbar-expand-lg org_headermenu mt-3">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#submenu_nav" aria-controls="submenu_nav" aria-expanded="true" aria-label="Toggle navigation">
         <p class="m-0">Organization Menu</p>
     </button>
@@ -84,9 +84,9 @@
 						<div class="dropdown-menu">
 							@foreach ($sect as $subsect)
 								@if ($subsect == 'about')
-									<a class="dropdown-item active" href="{{ route('orgProfile', ['id' => $id]) }}">{{ $slist[$subsect] }}</a>
+									<a class="dropdown-item" href="{{ route('orgProfile', ['id' => $id]) }}">{{ $slist[$subsect] }}</a>
 								@else
-									<a class="dropdown-item active" href="{{ route('orgSection', ['id' => $id, 'section' => $subsect]) }}">{{ $slist[$subsect] }}</a>
+									<a class="dropdown-item" href="{{ route('orgSection', ['id' => $id, 'section' => $subsect]) }}">{{ $slist[$subsect] }}</a>
 								@endif
 							@endforeach
 						</div>

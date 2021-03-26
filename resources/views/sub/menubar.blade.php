@@ -8,16 +8,22 @@
     <div class="collapse navbar-collapse" id="navbar-nav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="//wegov.nyc/news/">News</a>
+                <a class="nav-link" href="https://wegov.nyc/news-events/">News & Events</a>
+            </li>
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="https://wegov.nyc/events/">Events</a>
+            </li> --}}
+            <li class="nav-item">
+                <a class="nav-link" href="https://wegov.nyc/tools/">Tools</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="//wegov.nyc/events/">Events</a>
+                <a class="nav-link" href="https://wegov.nyc/about/">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Resources</a>
+                <a class="nav-link" href="https://www.notion.so/wegovnyc/Get-Involved-d31cee2e3ea04051b600e0a5b902daab">Get Involved</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="//wegov.nyc/tools/">Tools</a>
+                <a class="nav-link" href="https://opencollective.com/wegovnyc">Donate</a>
             </li>
             {{-- @if ($active=='orgs')
             <li class="nav-item active">
@@ -35,7 +41,7 @@
             </li> --}}
         </ul>
         <div class="right_menuarea">
-            <ul class="navbar-nav">
+            {{-- <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="//wegov.nyc/about/">Add About</a>
                 </li>
@@ -48,7 +54,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="//wegov.nyc/contact/">Contact</a>
                 </li>
-            </ul>
+            </ul> --}}
             <div class="input-group">
                 <!--<div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>

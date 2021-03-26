@@ -88,7 +88,7 @@
 							//console.log(c,a,i)
 							//console.log(delim)
 							var column = this;
-							var select = $('<select class="" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>Filter By ' + $(column.header()).text() + '</option></select>')
+							var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>Filter By ' + $(column.header()).text() + '</option></select>')
 								//.appendTo($(column.footer()).empty())
 								.appendTo($("div.toolbar"))
 								.on('change', function () {
@@ -101,7 +101,7 @@
 										.draw();
 								});
 							select.wrap('<div class="drop_dowm_select' + (i == 0 ? '' : ' ml-4') + '" style="width:{{ 100.00 / count($details["filters"]) - (count($details["filters"]) > 4 ? 3 : 2.5) }}%;"></div>');
-							
+
 							var tt = []
 							dd = column.data()
 
@@ -111,7 +111,7 @@
 									d.split(delim[c]).forEach(function (v, k) {
 										tt.push(v)
 									})
-								}	
+								}
 								else
 									tt.push(d)
 							})
@@ -132,7 +132,7 @@
 					}
 				@endif
 			});
-			
+
 			$('#filter-1').find('[value*="20190619"]').prop('selected',true).trigger('change');
 
 			$('a.toggle-vis').on('click', function (e) {
@@ -156,7 +156,7 @@
                     tr.next('tr').addClass('child-row');
 				}
 			});
-			
+
 			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
 		});
 	</script>
