@@ -8,29 +8,29 @@ class Breadcrumbs
 			['https://wegov.nyc/tools', 'Tools'],
 			['/organizations', 'DataBook']
 		];
-
+		
 	static function root()
 	{
 		$rr = self::$root;
 		$rr[2] = ['', 'DataBook'];
 		return $rr;
 	}
-
+	
 	static function about()
 	{
 		return array_merge(self::$root, [['', 'About']]);
 	}
-
+	
 	static function orgs()
 	{
 		return array_merge(self::$root, [['', 'Index']]);
 	}
-
+	
 	static function org($name)
 	{
 		return array_merge(self::$root, [['', $name]]);
 	}
-
+	
 	static function orgSect($id, $name, $sect)
 	{
 		return array_merge(self::$root, [["/organization/{$id}", $name], ['', $sect]]);

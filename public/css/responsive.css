@@ -9,7 +9,7 @@
 }
 @media (max-width: 1200px)
 {
-    .navbar-nav {padding-right: 20px;}
+    .navbar-nav {padding-top: 55px;padding-right: 20px;}
     .right_menuarea {padding-right: 15px;}
     .navbar-brand {padding: 25px 15px;}
     .breadcrumb{padding: 18px 15px;}
@@ -40,6 +40,7 @@
     table.dataTable .col-md-3{flex: 0 0 33.33%;max-width: 33.33%;}
     .container > .row {margin: 0px;}
     .organization_data {padding: 30px 0px;}
+    #orgsTable .card {min-height: 400px;}
     #myTable_wrapper .toolbar { width: 48%;}
     #myTable_wrapper .toolbar .drop_dowm_select {width: 29%;}
     .bottom_lastupdate{padding: 18px 15px; margin: 0px;margin-bottom: 60px;display: inline-block;}
@@ -60,27 +61,6 @@
     #myTable_wrapper.dataTables_wrapper .dataTables_filter {width: 50%;}
     .org_headermenu .navbar-toggler{width: 100%; text-align: center;background: #112f4e;color: #fff;padding: 15px 0;}
     .submenu_org{display: block;}
-    .submenu_org .nav-item.dropdown.show{border: none;}
-    .submenu_org .nav-item {
-        display: inline-block;
-        width: 100%;
-    }
-    .submenu_org .nav-item .dropdown-menu {
-        padding: 0 20px;
-        margin: 0px;
-        background: #f0f0f0;
-        border-radius: 0px;
-        position: relative;
-        width: 100%;
-        margin-bottom: 0;
-        border: none;
-    }
-    .submenu_org .nav-item .dropdown-menu .dropdown-item {
-        padding: 12px 14px;
-        font-weight: bold;
-        font-size: 16px;
-        color: #585C62;
-    }
 }
 @media (max-width: 800px)
 {
@@ -91,7 +71,6 @@
     .submenu_org{padding: 0px;}
     .submenu_org .nav-item .nav-link {font-size: 14px;padding: 12px 9px;}
     #myTable_wrapper .toolbar .drop_dowm_select {width: 31%;}
-    .submenu_org .nav-item .dropdown-menu .dropdown-item{font-weight: 700;font-size: 14px;}
 }
 @media (max-width: 767px)
 {
