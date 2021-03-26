@@ -26,6 +26,18 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 	<script async src="https://cse.google.com/cse.js?cx=2b80c98605cf9ab55"></script>
+	<style>
+		.bi-tags, .bi-funnel {padding-right: .5rem;}
+		.tag-label, .tag-label a {color:#777777; font-weight:600; padding-left:.1em;margin-right:-2px;}
+		.tag-label:hover {color:#171717;cursor:pointer;text-decoration:none;}
+		.no-underline:hover {text-decoration:none;}
+		.tag-label+.tag-label::before {
+			padding-right: .2rem;
+			color: #6c757d;
+			content: ", ";
+		}
+		.type-label{background: #162E51;border-radius: 4px;color:#fff;padding: 8px 9px;font-weight: normal;font-size: 16px;line-height: 19px;margin-right: 10px;margin-bottom: 10px;}
+	</style>	
 </head>
 
 <body>

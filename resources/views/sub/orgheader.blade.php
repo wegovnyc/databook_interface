@@ -25,28 +25,28 @@
             <div class="float-right">
                 @if ($org['Type'] ?? null)
                     <div class="float-left mr-4">
-                        <p class="text-types">Type:</p>
-						{{-- <p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Type"><i class="bi-funnel" style="color:black;"></i></p> --}}
-                        <a href="{{ route('orgs') }}?type={{ urlencode($org['Type']) }}" class="float-left">
-                            <span class="badge badge-info">{{ $org['Type'] }}</span>
+                        {{-- <p class="text-types">Type:</p>
+						<p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Type"><i class="bi-funnel" style="color:black;"></i></p> --}}
+                        <a href="{{ route('orgs') }}?type={{ urlencode($org['Type']) }}" class="float-left no-underline">
+                            <span class="type-label">{{ $org['Type'] }}</span>
                             <!--<span class="tag-label">{{ $org['Type'] }}</span>-->
                         </a>
                     </div>
                 @endif
                 @if ($org['tags'] ?? null)
                     <div class="float-left">
-                        <p class="text-types">Tags:</p>
-						{{-- <p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Tags"><i class="bi-tags" style="color:black;"></i></a></p> --}}
+                        {{-- <p class="text-types">Tags:</p> --}}
+						<p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Tags"><i class="bi-tags" style="color:black;"></i></a></p>
 						<!--<a title="Tags" style="display:block;"><i class="bi-tags" style="color:black;"></i>-->
                         @foreach ((array)$org['tags'] as $tag)
-                            <a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="float-left">
+                            {{-- <a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="float-left">
                                 <span class="badge badge-info">{{ $tag }}</span>
-                            </a>
-							{{-- <span class="tag-label">
+                            </a> --}}
+							<span class="tag-label">
 								<a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="no-underline">
 									{{ $tag }}
 								</a>
-							</span> --}}
+							</span>
                         @endforeach
                     </div>
                 @endif

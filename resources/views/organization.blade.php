@@ -7,7 +7,7 @@
 @section('content')
 	@include('sub.orgheader', ['active' => 'about'])
 
-	<div class="container py-4">
+	<div class="container py-2">
         <div class="col-md-12">
             @if ($org['description'] == '')
                 <h1 class="display-4">...</h1>
