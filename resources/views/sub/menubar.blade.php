@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light" id="top-menu">
-    <a class="navbar-brand" href="{{ route('root') }}">
+    <a class="navbar-brand" href="https://wegov.nyc">
         <img src="/img/we_gov_logo_blue 1.png" title="" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="true" aria-label="Toggle navigation">
