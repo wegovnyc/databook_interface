@@ -1,33 +1,12 @@
 @extends('layout')
 
 @section('menubar')
-	@include('sub.menubar', ['active' => 'orgs'])
+	@include('sub.menubar')
 @endsection
 
 @section('content')
 	@include('sub.orgheader', ['active' => $section])
 
-	{{--
-		$id, $org, $section,$slist => $ds->list, $menu => $ds->menu, $icons => $ds->socicons,
-		$url => $model->url(.....),
-	--}}
-
-	{{--
-		$details => [
-			'table' => 'nycjobs',
-			'hdrs' => ['Job ID', 'Title', 'Job Category', 'Salary From', 'Salary To', 'Last Updated'],
-			'visible' => [true, true, false, true, false, true],
-			'flds' => [
-					'function (r) { return `<a href="https://a127-jobs.nyc.gov/index_new.html?keyword=${r[\"Job ID\"]}">${r[\"Job ID\"]}</a>` }',
-					'"Business Title"', '"Job Category"', '"Salary Range From"', '"Salary Range To"', '"Posting Updated"'
-				],
-			'filters' => [2 => null, 3 => null],
-			'details' => ['Job ID' => 'Job ID'],
-			'detFlag' => 1,
-			'fltsCols' => '2,3',
-			'fltDelim' => [3 => ',']
-		]
-	--}}
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>
@@ -41,9 +20,30 @@
 			'</table>';
 		}
 
-		var table = null
+		function toggleMap() {
+			var isActive = $('#map_button').attr('class') == 'btn btn-sm btn-info'
+			if (isActive) {
+				$('#map_button').attr('class', 'btn btn-sm btn-outline-info')
+				$('#data_container').attr('class', 'col')
+				$('#map_container').hide()
+			} else {
+				$('#map_button').attr('class', 'btn btn-sm btn-info')
+				$('#data_container').attr('class', 'col col-6')
+				$('#map_container').show()
+				mapInit({!! json_encode($map) !!});
+			}
+		}
+		
+		function mapAction(filter, code, col) {
+			if (filter.length == 2)
+				datatable.columns([col]).search('').draw()
+			else
+				datatable.columns([col]).search(filter[2]).draw()
+		}
+		
+		var datatable = null
 		$(document).ready(function() {
-			table = $('#myTable').DataTable({
+			datatable = $('#myTable').DataTable({
 				ajax: {
 					url: '{!! $url !!}',
 					dataSrc: 'rows'
@@ -56,7 +56,7 @@
                     }
                 }],
 				deferRender: true,
-				dom: '<"toolbar ml-2">Blfrtip',
+				dom: '<"toolbar container-flex"<"row">>Blfrtip',
 				columns: [
                     @if ($details['detFlag'])
                         {
@@ -88,9 +88,9 @@
 							//console.log(c,a,i)
 							//console.log(delim)
 							var column = this;
-							var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>Filter By ' + $(column.header()).text() + '</option></select>')
+							var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
 								//.appendTo($(column.footer()).empty())
-								.appendTo($("div.toolbar"))
+								.appendTo($("div.toolbar .row"))
 								.on('change', function () {
 									//var val = $.fn.dataTable.util.escapeRegex(
 										//$(this).val()
@@ -100,7 +100,8 @@
 										.search(val ? val : '', false, false)
 										.draw();
 								});
-							select.wrap('<div class="drop_dowm_select' + (i == 0 ? '' : ' ml-4') + '" style="width:{{ 100.00 / count($details["filters"]) - (count($details["filters"]) > 4 ? 3 : 2.5) }}%;"></div>');
+							//select.wrap('<div class="drop_dowm_select' + (i == 0 ? '' : ' ml-4') + '" style="width:{{ 100.00 / count($details["filters"]) - (count($details["filters"]) >= 4 ? 3 : 2.5) }}%;"></div>');
+							select.wrap('<div class="drop_dowm_select col"></div>');
 
 							var tt = []
 							dd = column.data()
@@ -137,13 +138,13 @@
 
 			$('a.toggle-vis').on('click', function (e) {
 				e.preventDefault();
-				var column = table.column($(this).attr('data-column'));
+				var column = datatable.column($(this).attr('data-column'));
 				column.visible(!column.visible());
 			});
 
 			$('#myTable tbody').on('click', 'td.details-control', function () {
 				var tr = $(this).closest('tr');
-				var row = table.row(tr);
+				var row = datatable.row(tr);
 
 				if (row.child.isShown()) {
 					row.child.hide();
@@ -164,30 +165,125 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12 organization_data">
-				<div class="col-md-12">
-					@if ($details['description'] ?? null)
-						<p>{!! nl2br($details['description']) !!}</p>
-					@else
-						<p>{!! nl2br($dataset['Descripton']) !!}</p>
-					@endif
-                </div>
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table id="myTable" class="display table-striped table-hover" style="width:100%;">
-                            <thead>
-                                <tr>
-                                    @if ($details['detFlag'])
-                                        <th></th>
-                                    @endif
-                                    @foreach ($details['hdrs'] as $name)
-                                        <th>{{ $name }}</th>
-                                    @endforeach
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+				@if ($map ?? null)
+					<button id="map_button" class="btn btn-sm btn-outline-info" style="float:right; margin-left: 10px;" onclick="toggleMap();">Map</button>
+				@endif
+				@if(array_search($section, $menu) === false)
+					<h4>{{ $dataset['Name'] }}</h4>
+				@endif	
+				<p class="mb-0">{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div id="data_container" class="col">
+				<div class="table-responsive">
+					<table id="myTable" class="display table-striped table-hover" style="width:100%;">
+						<thead>
+							<tr>
+								@if ($details['detFlag'])
+									<th></th>
+								@endif
+								@foreach ($details['hdrs'] as $name)
+									<th>{{ $name }}</th>
+								@endforeach
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			@if ($map ?? null)
+				<div id="map_container" class="col-6" style="display:none;">
+					<!-- controls -->
+					<div id="map-controls">
+						<h3>Area filters</h3>
+						@foreach ($map as $code=>$col)
+							<div class="custom-control custom-switch">
+							  <input type="radio" class="custom-control-input" id="{{ $code }}-filter-switch" name="filter" param="{{ $col }}">
+							  <label class="custom-control-label" for="{{ $code }}-filter-switch">
+								{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
+							  </label>
+							</div>
+						@endforeach
+						{{--
+						<div class="custom-control custom-switch">
+						  <input type="radio" class="custom-control-input" id="cd-filter-switch" name="filter">
+						  <label class="custom-control-label" for="cd-filter-switch">Community Districts</label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="radio" class="custom-control-input" id="cc-filter-switch" name="filter">
+						  <label class="custom-control-label" for="cc-filter-switch">City Council Districts</label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="radio" class="custom-control-input" id="nta-filter-switch" name="filter">
+						  <label class="custom-control-label" for="nta-filter-switch">Neighborhood Tabulation Areas</label>
+						</div>
+						--}}
+					</div>
+					<!-- /controls -->
+					
+					<!-- toggles -->
+					<div id="toggles">
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="cd-switch">
+						  <label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="ed-switch">
+						  <label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="pp-switch">
+						  <label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="dsny-switch">
+						  <label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="fb-switch">
+						  <label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="sd-switch">
+						  <label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="hc-switch">
+						  <label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="cc-switch">
+						  <label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="nycongress-switch">
+						  <label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="sa-switch">
+						  <label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="ss-switch">
+						  <label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="bid-switch">
+						  <label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="nta-switch">
+						  <label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
+						</div>
+						<div class="custom-control custom-switch">
+						  <input type="checkbox" class="custom-control-input" id="zipcode-switch">
+						  <label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
+						</div>
+					</div>
+					<!-- /toggles -->
+					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:1px black dotted;"></div>
+				</div>
+			@endif
 		</div>
 	</div>
 

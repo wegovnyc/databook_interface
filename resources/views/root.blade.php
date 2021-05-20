@@ -11,7 +11,8 @@
         <div class="col-md-6 home_bgcontent">
             <h1>WeGovNYC DataBook</h1>
             <p>We collect and join datasets together to create a data-driven view of New York City government.</p>
-            <a class="btn_org_home" href="{{ route('orgs') }}" role="button">Organization Profiles</a>
+            <a class="btn_org_home mr-3" href="{{ route('orgs') }}" role="button">Agency Profiles</a>
+            <a class="btn_org_home" href="{{ route('districts') }}" role="button">District Profiles</a>
         </div>
     </div>
     <div class="homeround_content">

@@ -89,7 +89,7 @@ select{background: url(../img/arrow.png);background-position: 97% 16px; backgrou
 select.filter-top#filter-tags {margin-right: 0%;}
 [type=search] , :focus{outline: none;}
 .toolbar {display:inline-block;width:66%;}
-.organization_data {padding: 30px 15px;}
+.organization_data {padding: 20px 15px 30px;}
 table.dataTable thead th, table.dataTable thead td{ border-bottom: none;}
 table.dataTable.no-footer, .table td, .table th {border: none;}
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {background-color: #ffffff;}
@@ -139,7 +139,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 .submenu_org .nav-item.dropdown.show{
     background: #112F4E;
     color: #fff;
-    border: 3px solid#007bff;
+    /*border: 3px solid#007bff;*/
     border-bottom: none;
 }
 .submenu_org .nav-item.dropdown.show .nav-link{color: #fff;}
@@ -178,7 +178,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
     top: 10px !important;
 }
 .btn_eyeicon span{ display: none;}
-.bottom_lastupdate {background: #E7F6F8;margin: 0 15px;padding: 18px 30px;margin-bottom: 60px;}
+.bottom_lastupdate {background: #E7F6F8;margin: 20px 0;padding: 18px 30px;margin-bottom: 40px;}
 .bottom_lastupdate img{margin-right: 15px;}
 .bottom_lastupdate p{font-weight: bold;font-size: 22px;line-height: 36px;color: #171717;margin: 0px;}
 .bottom_lastupdate p a{color: #171717;text-decoration: underline;}
@@ -199,3 +199,74 @@ table.dataTable tbody tr.child-row td table tbody tr{background: #fff;}
 table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 0px;}
 #orgsTable thead{display: none;}
 #orgsTable.dataTable tbody tr {background-color: #fff!important;}
+
+#map-controls {
+    position: absolute;
+    padding: 10px 20px;
+    left: 5px;
+    top: 5px;
+    width: 300px;
+    height: 150px;
+    background: #eeeeeea1;
+    z-index: 1;
+}
+#toggles {
+    position: absolute;
+    padding: 10px 20px;
+    left: 5px;
+    bottom: 35px;
+    width: 300px;
+    height: 370px;
+    background: #eeeeeea1;
+    z-index: 1;
+}
+#map, #container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+#map_container {padding:0;min-height:600px;}
+.custom-control-label {
+    font-size: .9rem;
+}
+.custom-switch hr {
+    display: inline-block;
+}
+.border-sample {
+    border: none;
+    color: #000;
+    background-color: #000;
+    height: 4px;
+    min-width: 30px;
+    text-align: right;
+    margin: 10px 10px 5px;
+}
+.stats-table th, .stats-table td {padding:.55em;}
+
+.share_icon_container {
+    position:absolute; 
+	right: 20px;
+	cursor: pointer;
+	padding-left: 10px;
+}
+#details-permalink {
+    opacity: 0.01;
+    display: block;
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+/*================== organization About page ================*/
+#org_stats .card-text, #org_socials .card-text , #org_crol .card-text {height:740px;}
+#org_stats th, #org_stats td {padding: .35em .55em;}
+
+#tw_button, #fb_button {cursor: pointer; color:#585C62;}
+#tw_button.active, #fb_button.active {cursor: default; color:#005ea2;}
+
+
+#org_crol .card-text {overflow: auto;}

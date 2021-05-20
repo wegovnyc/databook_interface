@@ -17,7 +17,7 @@ class CartoModel
 
 	function org($id)
 	{
-		$dd = $this->carto->req("SELECT * FROM wegov_orgs WHERE id = {$id}");
+		$dd = $this->carto->req("SELECT * FROM wegov_orgs WHERE id = '{$id}'");
 		return $this->map($dd)[0] ?? [];
 	}
 	
@@ -25,6 +25,18 @@ class CartoModel
 	{
 		$dd = $this->carto->req("SELECT * FROM data_sources WHERE \"Name\" LIKE '{$name}'");
 		return $this->map($dd)[0] ?? [];
+	}
+	
+	function ccMember($id)
+	{
+		$dd = $this->carto->req("SELECT * FROM ccmembers WHERE \"wegov-cd-id\" = {$id}");
+		return $this->map($dd)[0] ?? [];
+	}
+	
+	function crol($id)
+	{
+		$dd = $this->carto->req("SELECT \"StartDate\", \"EndDate\", \"SectionName\", \"ShortTitle\" FROM crol WHERE \"wegov-org-id\" = '{$id}' order by date(\"StartDate\") DESC LIMIT 5");
+		return $this->map($dd) ?? [];
 	}
 	
 	function map($dd)

@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Custom\CartoModel;
-use App\Custom\Datasets;
+use App\Custom\OrgsDatasets;
 use App\Custom\Breadcrumbs;
 
 
@@ -62,7 +62,7 @@ class Organizations extends Controller
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
 		$org = $model->org($id);
-		$ds = new Datasets();
+		$ds = new OrgsDatasets();
         return $org
 			? view('organization', [
 					'id' => $id,
@@ -71,7 +71,15 @@ class Organizations extends Controller
 					'menu' => $ds->menu,
 					'activeDropDown' => '',
 					'icons' => $ds->socicons,
+					'allDS' => $ds->dd,
+					'tableStatUrl' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}'"),
+					'finStatUrls' => [
+						'headcount' => $model->url("SELECT sum(\"HEADCOUNT\") FROM headcountactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
+						'as' => $model->url("SELECT sum(\"AMOUNT\") FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
+						'ac' => $model->url("SELECT sum(\"TOTAL AMOUNT\") FROM additionalcostsallocation WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
+					],
 					'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
+					'crol' => $model->crol($id),
 				])
 			: abort(404);
     }
@@ -87,7 +95,7 @@ class Organizations extends Controller
     public function orgSection($id, $section)
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		$ds = new Datasets();
+		$ds = new OrgsDatasets();
 		$org = $model->org($id);
 		$details = $ds->get($section);
 		return $org && $details
@@ -99,10 +107,11 @@ class Organizations extends Controller
 					'menu' => $ds->menu,
 					'activeDropDown' => $ds->menuActiveDD($section),
 					'icons' => $ds->socicons,
-					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"={$id}"),
+					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'"),
 					'dataset' => $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $section, $ds->list[$section]),
 					'details' => $details,
+					'map' => $details['map'] ?? null, //['cc' => 8, 'nta' => 7],
 				])
 			: abort(404);
     }

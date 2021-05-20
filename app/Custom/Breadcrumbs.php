@@ -23,16 +23,22 @@ class Breadcrumbs
 
 	static function orgs()
 	{
-		return array_merge(self::$root, [['/organizations', 'Organizations']]);
+		return array_merge(self::$root, [['/agencies', 'Agencies']]);
 	}
 
 	static function org($id, $name)
 	{
-		return array_merge(self::$root, [['/organizations', 'Organizations'], ["/organization/{$id}", $name]]);
+		return array_merge(self::$root, [['/agencies', 'Agencies'], ["/agency/{$id}", $name]]);
 	}
 
 	static function orgSect($id, $name, $sect, $sectN)
 	{
-		return array_merge(self::$root, [['/organizations', 'Organizations'], ["/organization/{$id}", $name], [$sect, $sectN]]);
+		return array_merge(self::$root, [['/agencies', 'Agencies'], ["/agency/{$id}", $name], [$sect, $sectN]]);
 	}
+
+	static function districts()
+	{
+		return array_merge(self::$root, [['/districts', 'Districts']]);
+	}
+
 }

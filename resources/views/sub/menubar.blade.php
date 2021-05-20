@@ -10,9 +10,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="https://wegov.nyc/news-events/">News & Events</a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="https://wegov.nyc/events/">Events</a>
-            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="https://wegov.nyc/tools/">Tools</a>
             </li>
@@ -25,43 +22,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="https://opencollective.com/wegovnyc">Donate</a>
             </li>
-            {{-- @if ($active=='orgs')
-            <li class="nav-item active">
-            @else
-            <li class="nav-item">
-            @endif
-                <a class="nav-link" href="{{ route('orgs') }}">Organizations</a>
-            </li>
-            @if ($active=='about')
-            <li class="nav-item active">
-            @else
-            <li class="nav-item">
-            @endif
-                <a class="nav-link" href="{{ route('about') }}">About</a>
-            </li> --}}
         </ul>
         <div class="right_menuarea">
-            {{-- <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="//wegov.nyc/about/">Add About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.notion.so/News-51872d3b0ff34b109a0440c49bb6d4ad">Subscribe</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.notion.so/Contact-Us-54b075fa86ec47ebae48dae159s5afc2c">Write For Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="//wegov.nyc/contact/">Contact</a>
-                </li>
-            </ul> --}}
             <div class="input-group">
-                <!--<div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                </div>
-                -->
                 <div class="gcse-search"></div>
-                <!--<input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1" id="search-box">-->
             </div>
         </div>
     </div>

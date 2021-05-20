@@ -161,7 +161,7 @@
                         //div.append(`<i class="bi bi-tag-fill tag_color"></i> ${tags}`)
                     }
 
-                    td.append($(`<div class="col-md-3"><a href="/organization/${r['id']}"><div class="card  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))
+                    td.append($(`<div class="col-md-3"><a href="/agency/${r['id']}"><div class="card  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))
                 });
                 $('#orgsTable tbody').html('<tr><td colspan="7" class="p-0"><div class="row">'+td.html()+'</div></td></tr>')
                 $('#orgsTable tbody').show();
