@@ -18,8 +18,8 @@
 				@if ($org['description'] == '')
 					<h1 class="display-4">...</h1>
 				@else
-					<h1 class="display-4">About</h1>
-					<p class="lead">
+				{{--<h1 class="display-4">About</h1>--}}
+					<p class="lead mt-4">
 						{!! nl2br($org['description']) !!}
 					</p>
 				@endif
@@ -31,7 +31,7 @@
 							<table class="table-sm stats-table" width="100%">
 							  <thead>
 								<tr>
-								  <th scope="col" width="72%">Summary</th>
+								  <th scope="col" width="72%"><h5 class="card-title mb-0">Summary</h5></th>
 								  <th scope="col" width="28%">
 									<select style="width:100%;" class="filter" onchange="loadFinStat();" id="fin_stat_select">
 										<option value="{{ date('Y') - 1 }}" selected>{{ date('Y') - 1 }}</option>
@@ -73,8 +73,8 @@
 						<div class="card-text">
 							@foreach($crol as $notice)
 								<div class="crol_msg mb-4">
-									<h5>{{ $notice['StartDate'] }} - {{ $notice['SectionName'] }}</h5>
-									<p>{{ $notice['ShortTitle'] }}</p>
+									<p class="mb-1"><b>{{ $notice['StartDate'] }} - {{ $notice['SectionName'] }}</b></p>
+									<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
 								</div>
 							@endforeach
 							<p><b><a href="{{ route('orgSection', ['id' => $id, 'section' => 'crol']) }}">See More News</a></b></p>
@@ -89,13 +89,13 @@
 						<div class="card-body">
 							<h5 class="card-title mb-4">
 								@if($org['Twitter'] ?? null)
-									<span id="tw_button" onclick="tw_click();">Twitter (profile)</span>
+									<span id="tw_button" onclick="tw_click();">Twitter</span>
 								@endif
 								@if(($org['Twitter'] ?? null) && ($org['Facebook'] ?? null))
 									-
 								@endif
 								@if($org['Facebook'] ?? null)
-									<span id="fb_button" onclick="fb_click();">Facebook (page)</span>
+									<span id="fb_button" onclick="fb_click();">Facebook</span>
 								@endif
 							</h5>
 							
@@ -196,12 +196,12 @@
 			<div class="col-md-{{ $w }}" id="org_stats">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title mb-4">Stats</h5>
+						<h5 class="card-title mb-4">Datasets</h5>
 						<div class="card-text">
 							<table class="table-sm stats-table">
 							  <thead>
 								<tr>
-								  <th scope="col" width="75%">Dataset</th>
+								  <th scope="col" width="75%"></th>
 								  <th scope="col" width="25%">Records</th>
 								</tr>
 							  </thead>
@@ -240,7 +240,10 @@
 				$.get(uu[k].replace('fyear', year), function (resp) {
 					console.log(resp)
 					//jj = $.parseJSON(resp)
-					$('#summary_'+k).text(resp['rows'][0]['sum'] ?? '-')
+					var v = resp['rows'][0]['sum'] ?? '-'
+					currency = k == 'headcount' ? '' : '$'
+					v = v != '-' ? currency + intWithCommas(v) : v
+					$('#summary_'+k).text(v)
 				})
 			}
 		}

@@ -107,7 +107,7 @@ class Organizations extends Controller
 					'menu' => $ds->menu,
 					'activeDropDown' => $ds->menuActiveDD($section),
 					'icons' => $ds->socicons,
-					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'"),
+					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" . ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')),
 					'dataset' => $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $section, $ds->list[$section]),
 					'details' => $details,
