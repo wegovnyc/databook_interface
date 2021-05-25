@@ -35,7 +35,7 @@ class CartoModel
 	
 	function crol($id)
 	{
-		$dd = $this->carto->req("SELECT \"StartDate\", \"EndDate\", \"SectionName\", \"ShortTitle\", \"RequestID\" FROM crol WHERE \"wegov-org-id\" = '{$id}' order by date(\"StartDate\") DESC LIMIT 10");
+		$dd = $this->carto->req("SELECT \"StartDate\", \"EndDate\", \"SectionName\", \"ShortTitle\", \"RequestID\" FROM crol WHERE \"wegov-org-id\" = '{$id}' order by date(\"StartDate\") DESC LIMIT 9");
 		return $this->map($dd) ?? [];
 	}
 	
