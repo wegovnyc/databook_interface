@@ -3,7 +3,7 @@
 		<div class="col-md-12 mt-5 mb-1">
 			<h1></h1>
 			@if($member['NAME'] ?? null)
-				<h5>Memeber: <span style="color:#585C62;"><strong>{{ $member['NAME'] }}</strong>, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}</span></h5>
+				<h5>Memeber: <span style="color:#999999;"><strong style="color: #005EA2;font-weight: 500;">{{ $member['NAME'] }}</strong>, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}</span></h5>
 			@endif
 		</div>
 	</div>
@@ -142,9 +142,9 @@
 		});
 </script>
 
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-12 organization_data">
+<div class="container mb-5">
+	<div class="row">
+		<div class="col-md-9 organization_data">
 			<p class="mb-0">{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 		</div>
 	</div>
@@ -174,7 +174,8 @@
 		<h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
 	</div>
 @endif
-<div class="col-md-12">
+
+<div class="col-md-12" style="display:none">
 	<div class="bottom_lastupdate">
 		<p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
 	</div>

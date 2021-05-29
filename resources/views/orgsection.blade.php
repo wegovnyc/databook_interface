@@ -21,13 +21,14 @@
 		}
 
 		function toggleMap() {
-			var isActive = $('#map_button').attr('class') == 'btn btn-sm btn-info'
+			var isActive = $('#map_button').attr('class') == 'btn btn-outline map_btn'
 			if (isActive) {
-				$('#map_button').attr('class', 'btn btn-sm btn-outline-info')
+				$('#map_button').attr('class', 'btn map_btn')
 				$('#data_container').attr('class', 'col')
+				$('.toolbar ').css('display', 'inline-block')
 				$('#map_container').hide()
 			} else {
-				$('#map_button').attr('class', 'btn btn-sm btn-info')
+				$('#map_button').attr('class', 'btn btn-outline map_btn')
 				$('#data_container').attr('class', 'col col-6')
 				$('#map_container').show()
 				mapInit({!! json_encode($map) !!});
@@ -102,6 +103,7 @@
 								});
 							//select.wrap('<div class="drop_dowm_select' + (i == 0 ? '' : ' ml-4') + '" style="width:{{ 100.00 / count($details["filters"]) - (count($details["filters"]) >= 4 ? 3 : 2.5) }}%;"></div>');
 							select.wrap('<div class="drop_dowm_select col"></div>');
+							$('div.toolbar').insertAfter('#myTable_filter');
 
 							var tt = []
 							dd = column.data()
@@ -165,37 +167,39 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12 organization_data">
-				@if ($map ?? null)
-					<button id="map_button" class="btn btn-sm btn-outline-info" style="float:right; margin-left: 10px;" onclick="toggleMap();">Map</button>
-				@endif
+				<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 				@if(array_search($section, $menu) === false)
 					<h4>{{ $dataset['Name'] }}</h4>
 				@endif	
-				<p class="mb-0">{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
+				@if ($map ?? null)
+					<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
+				@endif
 			</div>
 		</div>
-		<div class="row justify-content-center">
-			<div id="data_container" class="col">
-				<div class="table-responsive">
-					<table id="myTable" class="display table-striped table-hover" style="width:100%;">
-						<thead>
-							<tr>
-								@if ($details['detFlag'])
-									<th></th>
-								@endif
-								@foreach ($details['hdrs'] as $name)
-									<th>{{ $name }}</th>
-								@endforeach
-							</tr>
-						</thead>
-					</table>
-				</div>
-			</div>
+		<div class="row justify-content-center map_right">
 			@if ($map ?? null)
 				<div id="map_container" class="col-6" style="display:none;">
 					<!-- controls -->
 					<div id="map-controls">
-						<h3>Area filters</h3>
+						<div class="select_district">
+							<img src="/img/map_icon.png" alt="" title="">
+							<ul class="inner_district">
+								<li class="dropdown">
+									<a id="change_district" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Select a District Type</a>
+									<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 0px;">
+										@foreach ($map as $code=>$col)
+											<div class="custom-control custom-switch dropdown-item pl-3">
+												<input type="radio" class="custom-control-input" id="{{ $code }}-filter-switch" name="filter" param="{{ $col }}" onchange="changeToggle(event)">
+												<label class="custom-control-label radio_toggle" for="{{ $code }}-filter-switch">
+													{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
+												</label>
+											</div>
+										@endforeach 
+									</div>
+								</li>
+							</ul>
+						</div>
+						{{-- <h3>Area filters</h3>
 						@foreach ($map as $code=>$col)
 							<div class="custom-control custom-switch">
 							  <input type="radio" class="custom-control-input" id="{{ $code }}-filter-switch" name="filter" param="{{ $col }}">
@@ -203,7 +207,7 @@
 								{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
 							  </label>
 							</div>
-						@endforeach
+						@endforeach --}}
 						{{--
 						<div class="custom-control custom-switch">
 						  <input type="radio" class="custom-control-input" id="cd-filter-switch" name="filter">
@@ -222,7 +226,73 @@
 					<!-- /controls -->
 					
 					<!-- toggles -->
-					<div id="toggles">
+					<div class="select_district" id="toggles">
+						<img src="/img/eyes.png" alt="" title="">
+						<ul class="inner_district">
+							<li class="dropdown">
+								<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
+								<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 10px;">
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="cd-switch">
+										<label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="ed-switch">
+										<label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="pp-switch">
+										<label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="dsny-switch">
+										<label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="fb-switch">
+										<label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="sd-switch">
+										<label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="hc-switch">
+										<label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="cc-switch">
+										<label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="nycongress-switch">
+										<label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="sa-switch">
+										<label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="ss-switch">
+										<label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="bid-switch">
+										<label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="nta-switch">
+										<label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="zipcode-switch">
+										<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
+									</div> 
+								</div>
+							</li>
+						</ul>
+					</div>
+					{{-- <div id="toggles">
 						<div class="custom-control custom-switch">
 						  <input type="checkbox" class="custom-control-input" id="cd-switch">
 						  <label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
@@ -279,11 +349,30 @@
 						  <input type="checkbox" class="custom-control-input" id="zipcode-switch">
 						  <label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
 						</div>
-					</div>
+					</div>--}}
 					<!-- /toggles -->
-					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:1px black dotted;"></div>
+					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E;"></div>
 				</div>
 			@endif
+			<div id="data_container" class="col float-left">
+				<div class="table-responsive">
+					<div class="filter_icon">
+						<i class="bi bi-funnel-fill"></i>
+					</div>
+					<table id="myTable" class="display table-striped table-hover" style="width:100%;">
+						<thead>
+							<tr>
+								@if ($details['detFlag'])
+									<th></th>
+								@endif
+								@foreach ($details['hdrs'] as $name)
+									<th>{{ $name }}</th>
+								@endforeach
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -299,5 +388,25 @@
             <!--<p>{!! nl2br($org['description']) !!}</p>-->
         </div>
 	</div>
+
+	<script>
+		function changeToggle (e) {
+			console.log($(e.target).next("label")[0].innerHTML)
+			$('#change_district').html($(e.target).next("label")[0].innerHTML);
+		}
+		$('#toggle_boundries').click( function (e) {
+			$(this).next('.dropdown-menu').toggleClass('show');
+		})
+
+		$(".filter_icon").click(function() {
+			console.log($('.toolbar').is(':visible'))
+			if(!$('.toolbar').is(':visible')) {
+				$('.filter_icon').addClass('position_change');
+			}else {
+				$('.filter_icon').removeClass('position_change');
+			}
+			$(".toolbar").toggle();
+		});
+	</script>
 
 @endsection

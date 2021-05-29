@@ -42,8 +42,8 @@
                             {{-- <a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="float-left">
                                 <span class="badge badge-info">{{ $tag }}</span>
                             </a> --}}
-							<span class="tag-label">
-								<a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="no-underline">
+							<span class="tag-label" style="padding-left:0px;margin:0px">
+								<a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="no-underline"  style="padding-left:0px;margin:0px">
 									{{ $tag }}
 								</a>
 							</span>

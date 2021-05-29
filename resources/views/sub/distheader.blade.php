@@ -29,13 +29,13 @@
 				@endif
 			@endforeach
 			
-			<li class="share_icon_container" data-toggle="popover" data-content="Link copied to clipboard" placement="left" trigger="manual">
+			<!-- <li class="share_icon_container" data-toggle="popover" data-content="Link copied to clipboard" placement="left" trigger="manual">
 				<textarea id="details-permalink" class="details">{!! route('districtsPreset', compact(['type', 'id', 'section'])) !!}</textarea>
 				<span id="details-addr"></span> 
 				<a title="Share direct link" onclick="copyLink();">
 					<i class="bi bi-share"></i>
 				</a>
-			</li>
+			</li> -->
 		</ul>
     </div>
 </div>
