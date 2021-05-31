@@ -99,6 +99,18 @@
 								<span id="tw_button" onclick="tw_click();">Twitter</span>
 							@endif
 						</h5> -->
+						@if(($org['Twitter'] ?? null) && ($org['Facebook'] ?? null))
+							<style>
+								#org_socials .card-text  {overflow: auto;height: 630px;}
+								#org_socials .card-text iframe  {overflow: auto;height: 620px !important;border: 1px solid #e1e0e0 !important;}
+							</style>
+						@else
+							<style>
+								#org_socials .card-text  {overflow: auto;height: 700px;}
+								#org_socials .card-text iframe  {overflow: auto;height: 690px !important;border: 1px solid #e1e0e0 !important;}
+							</style>
+						@endif
+
 
 						<div class="accordion social_media" id="accordionExample">
 						@if($org['Facebook'] ?? null)
@@ -119,9 +131,9 @@
 											.widget--facebook--container {
 												padding: 0px;
 											}
-											.widget-facebook {
+											/* .widget-facebook {
 												height: 600px;
-											}
+											} */
 											.widget-facebook .facebook_iframe {
 												border: none;
 											}
@@ -207,7 +219,7 @@
 								</div>
 							</div>
 							<style>
-								.twitter-timeline {height:600px !important}
+								/* .twitter-timeline {height:600px !important} */
 							</style>
 						@endif
 						</div>

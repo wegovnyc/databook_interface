@@ -291,7 +291,6 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 #tw_button, #fb_button {cursor: pointer; color:#212533;}
 #tw_button.active, #fb_button.active {cursor: default; color:#212533;}
 #org_crol .card-text {overflow: auto;height: 670px;}
-#org_socials .card-text  {overflow: auto;height: 620px;}
 .select_district img{float: left;background: #005EA2;padding: 8px;}
 .select_district .inner_district {width: 100%;padding:0px;border:1px solid #000;border-left: none;border-right: none;float: left;width: 270px; background: url(../img/arrow.png);background-color: #fff;background-position: 97% 16px; background-repeat: no-repeat;list-style: none;}
 .select_district .inner_district li a{color: #000;text-decoration: none;font-size: 14px;padding: 10px 30px 9px 12px;display: inline-block;width: 100%;}
