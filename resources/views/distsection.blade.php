@@ -6,7 +6,7 @@
 				<h5>Memeber: 
 					<span style="color:#999999;">
 						<a href="https://council.nyc.gov/district-{{ $id }}/" target="_blank">
-							<strong style="font-weight: 500;">{{ $member['NAME'] }}</strong>	<!-- color: #005EA2; -->
+							<strong style="font-weight: 500;">{{ $member['NAME'] }}</strong>
 						</a>
 						, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}
 					</span>
