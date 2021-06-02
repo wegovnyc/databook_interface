@@ -3,7 +3,14 @@
 		<div class="col-md-12 mt-5 mb-1">
 			<h1></h1>
 			@if($member['NAME'] ?? null)
-				<h5>Memeber: <span style="color:#999999;"><strong style="color: #005EA2;font-weight: 500;">{{ $member['NAME'] }}</strong>, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}</span></h5>
+				<h5>Memeber: 
+					<span style="color:#999999;">
+						<a href="https://council.nyc.gov/district-{{ $id }}/" target="_blank">
+							<strong style="font-weight: 500;">{{ $member['NAME'] }}</strong>	<!-- color: #005EA2; -->
+						</a>
+						, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}
+					</span>
+				</h5>
 			@endif
 		</div>
 	</div>
