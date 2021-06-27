@@ -41,7 +41,7 @@ class OrgsDatasets
 					'Financial Plan - Number of Contracts' => 'Financial Plan - Number of Contracts'
 			],
 		],
-		'capitalprojects' => [
+		/*'capitalprojects_depr' => [
 			'fullname' => 'NYC Capital Project Detail Data',
 			'table' => 'capitalprojects',
 			'hdrs' => ['Project ID', 'Name', 'Scope', 'Borough', 'Original Budget', 'Prior Spending', 'Planned Spending', 'Category'],
@@ -64,6 +64,38 @@ class OrgsDatasets
 					'Community Boards Served' => 'community_boards_served',
 					'Budget Lines' => 'budget_lines'			
 			],
+		],*/
+		'capitalprojects' => [
+			'fullname' => 'NYC Capital Project Detail Data',
+			'table' => 'capitalprojectsdollars',
+			'hdrs' => ['Publication Date', 'Project ID', 'Name', 'Scope', 'Category', 'Borough', 'Planned Cost', 'Budget Status'],
+			'visible' => [true, true, true, true, true, true, true, true],
+			'flds' => [
+					'function (r) { return toDashDate(r["PUB_DATE"]) }',
+					'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
+					'"PROJECT_DESCR"', '"SCOPE_TEXT"', '"TYP_CATEGORY_NAME"', '"BORO"', 
+					'function (r) { return toFin(r["CITY_PRIOR_ACTUAL"] + r["CITY_PLAN_TOTAL"]) }',
+					'function (r) { 
+						r = r["ORIG_BUD_AMT"] - r["CITY_PRIOR_ACTUAL"] - r["CITY_PLAN_TOTAL"]
+						return r >= 0 ? toFin(r) : `<span class="bad">${toFin(r)}</bad>`;
+					}'
+				],
+			'filters' => [0 => null, 4 => null],
+			'details' => [
+					'Original Budget' => 'ORIG_BUD_AMT', 
+					'Prior Spending' => 'CITY_PRIOR_ACTUAL', 
+					'Planned Spending' => 'CITY_PLAN_TOTAL',
+					'Explanation for Delay' => 'DELAY_DESC',
+					'Site Description' => 'SITE_DESCR',
+					'Community Boards Served' => 'COMMUNITY_BOARD',
+					'Budget Lines' => 'BUDGET_LINE'
+			],
+			'script' => <<<JS
+					setTimeout(function(){
+						$('#filter-1 option:last-child').prop('selected',true).trigger('change')
+					}, 500);
+JS
+,
 		],
 		'benefitsapi' => [
 			'fullname' => 'Benefits and Programs API on NYC Open Data',
@@ -475,6 +507,9 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		wegov_orgs
 		
 		ccmembers
+
+		capitalprojectsdollars
+		capitalprojectsmilestones
 		
 	*/
 	

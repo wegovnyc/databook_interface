@@ -132,6 +132,10 @@
 								}, 500 + 1000 * {{ $i }});
 							@endif
 						@endforeach
+						
+						@if ($details['script'] ?? null)
+							{!! $details['script'] !!}
+						@endif
 					}
 				@endif
 			});

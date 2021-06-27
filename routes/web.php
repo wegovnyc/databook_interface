@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Organizations;
 use App\Http\Controllers\Districts;
+use App\Http\Controllers\Projects;
 
 
 Route::get('/', [Organizations::class, 'root'])->name('root');
@@ -14,6 +15,8 @@ Route::get('/agency/{id}', [Organizations::class, 'orgAbout'])->name('orgProfile
 
 Route::get('/agency/{id}/{section}', [Organizations::class, 'orgSection'])->name('orgSection');
 
+Route::get('/agency/{id}/capitalprojects/{prjId}', [Organizations::class, 'orgProject'])->name('orgProject');
+
 
 
 Route::get('/districts', [Districts::class, 'main'])->name('districts');
@@ -21,3 +24,7 @@ Route::get('/districts', [Districts::class, 'main'])->name('districts');
 Route::get('/districts/{type}/{id}/{section}', [Districts::class, 'main'])->name('districtsPreset');
 
 Route::get('/districtXHR/{type}/{id}/{section}', [Districts::class, 'section'])->name('distSection');
+
+
+
+Route::get('/capitalprojects', [Projects::class, 'main'])->name('projects');

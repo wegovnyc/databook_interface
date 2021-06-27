@@ -388,3 +388,13 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 
 .custom-control-input~.custom-control-label.radio_toggle::before, 
 .custom-control-input~.custom-control-label.radio_toggle::after { display: none;}
+
+
+span.good {color: green;}
+span.bad {color: red;}
+
+#capproject_profile	th[scope="col"] {border-top: 1px solid #000; border-bottom: 1px solid #000; }
+#capproject_profile	th, #capproject_profile	td {padding: 10px 24px; border-bottom: 1px solid #E4E4E4;}
+#project_details th {width: 35%;}
+#project_details td, #capproject_profile .original, #capproject_profile .difference {background: #F1F1F1;}
+#capproject_profile .current {background: #E1E1E1;}

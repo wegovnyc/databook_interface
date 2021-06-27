@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Custom\CartoModel;
 use App\Custom\OrgsDatasets;
 use App\Custom\Breadcrumbs;
+use App\Custom\CapProjectsBuilder;
 
 
 class Organizations extends Controller
@@ -112,6 +113,40 @@ class Organizations extends Controller
 					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $section, $ds->list[$section]),
 					'details' => $details,
 					'map' => $details['map'] ?? null, //['cc' => 8, 'nta' => 7],
+				])
+			: abort(404);
+    }
+
+
+    /**
+     * Show organization capital project.
+     *
+     * @param  int  	$id
+     * @param  string  	$prjId
+     * @return \Illuminate\View\View
+     */
+    public function orgProject($id, $prjId)
+    {
+		$section = 'capitalprojects';
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+		$ds = new OrgsDatasets();
+		$org = $model->org($id);
+		$details = $ds->get($section);
+		$data = CapProjectsBuilder::build($model->capitalProjects($id, $prjId), $model->capitalProjectsMilestones($id, $prjId));
+		return $org && $details
+			? view('orgproject', [
+					'id' => $id,
+					'org' => $org,
+					'section' => $section,
+					'slist' => $ds->list,
+					'menu' => $ds->menu,
+					'activeDropDown' => $ds->menuActiveDD($section),
+					'icons' => $ds->socicons,
+					//'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" . ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')),
+					'dataset' => $model->dataset($details['fullname']),
+					'breadcrumbs' => Breadcrumbs::orgPrj($org['id'], $org['name'], $section, $ds->list[$section], $prjId, $data['name']),
+					//'details' => $details,
+					'data' => $data,
 				])
 			: abort(404);
     }
