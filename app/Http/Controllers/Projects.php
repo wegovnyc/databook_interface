@@ -24,6 +24,7 @@ class Projects extends Controller
 					//'slist' => $ds->list,
 					'url' => $model->url("SELECT * FROM {$details['table']} ORDER BY \"PROJECT_ID\", \"PUB_DATE\" DESC"),
 					'details' => $details,
+					'dataset' => $model->dataset($details['fullname']),					
 				]);
     }
 }

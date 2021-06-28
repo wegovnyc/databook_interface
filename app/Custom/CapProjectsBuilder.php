@@ -152,6 +152,11 @@ class CapProjectsBuilder
 	
 	static function budgetRound($b)
 	{
+		return '$' . number_format($b);
+	}
+	
+	static function budgetRound_depr($b)
+	{
 		switch (true)
 		{
 			case ($b > 10000000):

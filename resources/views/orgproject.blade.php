@@ -18,11 +18,10 @@
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-md-9 organization_data py-0">
-				<h6>NYC Capital Project</h6>
 				<h2>{{ $data['name'] }}</h2>
 			</div>
 			<div class="col-md-3 organization_data">
-				<select id="pub_date_filter" style="width:60%;" class="filter mt-1" onchange="showPrj();">
+				<select id="pub_date_filter" style="width:60%;" class="filter" onchange="showPrj();">
 					@foreach ($data['items'] as $date=>$row)
 						<option value="{{ $date }}" @if($date == array_keys($data['items'])[0]) selected @endif>{{ $row['PUB_DATE_F'] }}</option>
 					@endforeach

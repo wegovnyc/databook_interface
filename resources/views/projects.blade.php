@@ -102,10 +102,46 @@
 								}, 500 + 1000 * {{ $i }});
 							@endif
 						@endforeach
-						
-						@if ($details['script'] ?? null)
-							{!! $details['script'] !!}
-						@endif
+
+
+						/* custom pub_date filter on top-right */
+						this.api().columns([1]).every(function (c,a,i) {
+							var delim = {!! json_encode($details['fltDelim']) !!};
+							var column = this;
+							var select = $('<select class="filter mt-4" style="width:100%;" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
+								.appendTo($("#pub_date_filter"))
+								.on('change', function () {
+									var val = $(this).val()
+									column
+										.search(val ? val : '', false, false)
+										.draw();
+								});
+							select.wrap('<div class="drop_dowm_select col"></div>');
+							//$('div.toolbar').insertAfter('#myTable_filter');
+
+							var tt = []
+							dd = column.data()
+
+							column.data().each(function (d, j) {
+								d = typeof d == 'string' ? d.replace(/<[^>]+>/gi, '') : d
+								if (c in delim && typeof d == 'string') {
+									d.split(delim[c]).forEach(function (v, k) {
+										tt.push(v)
+									})
+								}
+								else
+									tt.push(d)
+							})
+							tt = [...new Set(tt)]
+
+							tt.sort().forEach(function (d, j) {
+								select.append('<option value="'+d+'">'+d+'</option>')
+							});
+						});
+
+						setTimeout(function(){
+							$('#filter-1 option:last-child').prop('selected',true).trigger('change')
+						}, 500);						
 					}
 				@endif
 			});
@@ -138,9 +174,12 @@
 
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-12 organization_data">
+			<div class="col-md-10 organization_data">
 				<h4>{{ $details['name'] }}</h4>
 				<p>{!! nl2br($details['description']) !!}</p>
+			</div>
+			<div class="col-md-2 organization_data" id="pub_date_filter">
+				
 			</div>
 		</div>
 		<div class="row justify-content-center map_right">
@@ -166,5 +205,10 @@
 		</div>
 	</div>
 
+    <div class="col-md-12">
+        <div class="bottom_lastupdate">
+            <p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+        </div>
+	</div>
 
 @endsection

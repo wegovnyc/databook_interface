@@ -28,7 +28,7 @@ function usToDashDate(d)
 
 function toFin(d)
 {
-	return '$' + parseFloat(d).toFixed(2)
+	return '$' + parseFloat(d).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 window.onscroll = function() {scrollFunction()}

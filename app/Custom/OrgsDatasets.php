@@ -66,8 +66,9 @@ class OrgsDatasets
 			],
 		],*/
 		'capitalprojects' => [
-			'fullname' => 'NYC Capital Project Detail Data',
+			'fullname' => 'Capital Project Detail Data - Dollars',
 			'table' => 'capitalprojectsdollars',
+			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
 			'hdrs' => ['Publication Date', 'Project ID', 'Name', 'Scope', 'Category', 'Borough', 'Planned Cost', 'Budget Status'],
 			'visible' => [true, true, true, true, true, true, true, true],
 			'flds' => [
@@ -76,6 +77,8 @@ class OrgsDatasets
 					'"PROJECT_DESCR"', '"SCOPE_TEXT"', '"TYP_CATEGORY_NAME"', '"BORO"', 
 					'function (r) { return toFin(r["CITY_PRIOR_ACTUAL"] + r["CITY_PLAN_TOTAL"]) }',
 					'function (r) { 
+						if (!r["ORIG_BUD_AMT"])
+							return "NA"
 						r = r["ORIG_BUD_AMT"] - r["CITY_PRIOR_ACTUAL"] - r["CITY_PLAN_TOTAL"]
 						return r >= 0 ? toFin(r) : `<span class="bad">${toFin(r)}</bad>`;
 					}'
