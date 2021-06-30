@@ -146,6 +146,7 @@ class Organizations extends Controller
 					'dataset' => $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgPrj($org['id'], $org['name'], $section, $ds->list[$section], $prjId, $data['name']),
 					//'details' => $details,
+					'map' => true,
 					'data' => $data,
 				])
 			: abort(404);

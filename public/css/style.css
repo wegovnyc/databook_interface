@@ -398,3 +398,12 @@ span.bad {color: red;}
 #project_details th {width: 35%;}
 #project_details td, #capproject_profile .original, #capproject_profile .difference {background: #F1F1F1;}
 #capproject_profile .current {background: #E1E1E1;}
+.marker {
+  background-image: url('/img/markerR.png');
+  background-size: cover;
+  width: 32px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.no-geo p {	font-size: 1.5rem; line-height: 1.5rem; color: #aaa; position:absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%); }

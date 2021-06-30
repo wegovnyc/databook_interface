@@ -75,13 +75,15 @@ var map = null
 var zones = {'cd': '#bc2b32', 'ed': '#a881c2', 'pp': '#be7957', 'dsny': '#d2ac6d', 'fb': '#77aa98', 'sd': '#3e7864', 'hc': '#085732', 'cc': '#9abe0c', 'nycongress': '#f3bd1c', 'sa': '#f5912f', 'ss': '#dc2118', 'bid': '#39a6a5', 'nta': '#185892', 'zipcode': '#7a7e5a'}
 var filtFields = {'cd': 'nameCol', 'cc': 'nameCol', 'nta': 'nameAlt'}
 
-function mapInit(filters, filterType) {
-	//console.log(filters, filterType)
+function newMap() {
 	mapboxgl.accessToken = 'pk.eyJ1Ijoic291bmRwcmVzcyIsImEiOiJjazY1OTF3cXIwbjZyM3BtcGt3Y3F2NjZwIn0.3hmCJsl0_oBUpoVsNJKZjQ';
 
+	console.log(center, zoom);
+	
 	var center = (typeof center == 'undefined') ? [-73.957, 40.727] : center;
 	var zoom = (typeof zoom == 'undefined') ? 11 : zoom;
-
+	
+	console.log(center, zoom);
 	// initial basemap
 	map = new mapboxgl.Map({
 		container: 'map',
@@ -92,7 +94,15 @@ function mapInit(filters, filterType) {
 	});
 
 	map.addControl(new mapboxgl.NavigationControl());
+	
+}
 
+
+
+function mapInit(filters, filterType) {
+	//console.log(filters, filterType)
+	newMap();
+	
 	$('select, option').click(function(e) {
 		e.stopPropagation();
 	});

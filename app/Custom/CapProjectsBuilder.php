@@ -27,7 +27,7 @@ class CapProjectsBuilder
 			];
 		}
 		
-		$rr = [];
+		$rr = $coords = [];
 		$name = '';
 		foreach ($dd as $i=>$d)
 		{
@@ -64,9 +64,10 @@ class CapProjectsBuilder
 				
 				'milestones' => ($d['milestones'] ?? null) ? array_values($d['milestones']) : [],
 			];
-			$name = $d['PROJECT_DESCR'];
+			$name = $name ? $name : $d['PROJECT_DESCR'];
+			$coords = $d['latitude'] ? [$d['latitude'], $d['longitude']] : $coords;
 		}
-		return ['name' => $name, 'items' => $rr];
+		return ['name' => $name, 'items' => $rr, 'geo' => $coords ? array_combine(['latitude', 'longitude'], $coords) : []];
 	}
 	
 	static function df($d)

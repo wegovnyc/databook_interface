@@ -182,7 +182,7 @@
 					</div>
 					<!-- /toggles -->
 				  --}}
-					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E;"></div>
+					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:2px solid #112F4E;"></div>
 				</div>
 			@endif
 			
@@ -285,13 +285,6 @@
 		</div>
 	</div>
 
-	{{--
-	@if ($dataset['Public Note'] ?? null)
-        <div class="col-md-12">
-            <h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
-		</div>
-	@endif
-	--}}
     <div class="col-md-12">
         <div class="bottom_lastupdate">
             <p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
@@ -343,6 +336,31 @@
 		
 		$(document).ready(function () {
 			showPrj();
+			@if ($data['geo'])
+				mapboxgl.accessToken = 'pk.eyJ1Ijoic291bmRwcmVzcyIsImEiOiJjazY1OTF3cXIwbjZyM3BtcGt3Y3F2NjZwIn0.3hmCJsl0_oBUpoVsNJKZjQ';
+				
+				var center = [{{ $data['geo']['longitude'] }}, {{ $data['geo']['latitude'] }}];
+				var zoom = 12;
+				
+				map = new mapboxgl.Map({
+					container: 'map',
+					style: 'mapbox://styles/mapbox/light-v10',
+					center: center,
+					zoom: zoom
+				});
+
+				map.addControl(new mapboxgl.NavigationControl());
+
+				var el = document.createElement('div');
+				el.className = 'marker';
+
+				new mapboxgl.Marker(el)
+				   .setLngLat(center)
+				   .addTo(map);
+			@else
+				$('#map').attr('class', 'no-geo');
+				$('#map').html('<p>Geocoordinates not available</p>');
+			@endif
 		})
 	</script>
 
