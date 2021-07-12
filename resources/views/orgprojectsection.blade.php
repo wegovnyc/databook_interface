@@ -5,11 +5,12 @@
 @endsection
 
 @section('content')
+	@include('sub.orgheader', ['active' => $section])
 
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>
-	
+
 	<script>
 		function details(d) {
 			return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
@@ -18,7 +19,7 @@
 			  @endforeach
 			'</table>';
 		}
-				
+
 		var datatable = null
 		$(document).ready(function() {
 			datatable = $('#myTable').DataTable({
@@ -70,7 +71,7 @@
                     }
                 ],
 				createdRow: function(row, data, dataIndex) {
-					if (data.GEO_JSON != '') {
+					if (data.GEO_JSON != '[]') {
 						$(row).addClass('have_coords');
 					}
 				},
@@ -169,7 +170,7 @@
 				var column = datatable.column($(this).attr('data-column'));
 				column.visible(!column.visible());
 			});
-			
+
 			$('#myTable tbody').on('click', 'td.details-control', function () {
 				var tr = $(this).closest('tr');
 				var row = datatable.row(tr);
@@ -187,7 +188,7 @@
 			});
 
 			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
-			
+
 			// if map is displayed updates and draws projects from GEO_JSON field
 			datatable.on('draw', function () {
 				var mapIsActive = !$('#map_container').attr('style')
@@ -204,14 +205,13 @@
                 api.cells('.record', modifier).data().each(function (r, i) {
 					if (r['GEO_JSON']) {
 						geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
-						console.log(geo_json)
 						geo_json.properties['AG_ID'] = r['wegov-org-id']
 						features.push(geo_json)
 					}
 				});
 				projectsMapDrawFeatures(features);
             });
-
+			
 			$('#myTable tbody').on('click', 'td:not(.details-control)', function () {
 				var mapIsActive = !$('#map_container').attr('style')
 				if (!mapIsActive) 
@@ -237,6 +237,7 @@
 			};
 		});
 
+
 		function toggleMap() {
 			var isActive = !$('#map_container').attr('style')
 			var cc = [0, 1, 5, 7, 9, 10];
@@ -247,7 +248,6 @@
 				$('.toolbar ').show()
 				$('#map_container').hide()
 				$('#myTable').dataTable().api().columns(cc).every(function () {
-					console.log(this);
 					this.visible(true);
 				});
 			} else {
@@ -271,6 +271,8 @@
 			var pubdate = $('#filter-1 option:selected').val().replaceAll('-', '');
 			for (let sel in uu) {
 				$.get(uu[sel].replace('pubdate', pubdate), function (resp) {
+					//console.log(resp)
+					//jj = $.parseJSON(resp)
 					var v = resp['rows'][0]['res'] ?? '-'
 					if ((sel == '#budget_totals') && (v != '-'))
 						$(sel).text(toFin(v))
@@ -286,8 +288,10 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-8 organization_data">
-				<h4>{{ $details['name'] }}</h4>
-				<p>{!! nl2br($details['description']) !!}</p>
+				<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
+				@if(array_search($section, $menu) === false)
+					<h4>{{ $dataset['Name'] }}</h4>
+				@endif	
 			</div>
 			<div class="col-md-4 my-3" id="org_summary">
 				<div class="card organization_summary">
@@ -323,11 +327,6 @@
 					</div>
 				</div>
 			</div>
-			{{--
-			<div class="col-md-3 organization_data" >
-				<button id="map_button" class="btn map_btn" style="margin:24px 16px 0 0; float:right; z-index: 100;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
-			</div>
-			--}}
 			
 		</div>
 		<div class="row justify-content-center map_right">
@@ -435,7 +434,6 @@
 					</div>
 				</div>
 			@endif
-			
 			<div id="data_container" class="col float-left">
 				<div class="table-responsive">
 					<div class="filter_icon">
@@ -459,9 +457,16 @@
 		</div>
 	</div>
 
+
+	@if ($dataset['Public Note'] ?? null)
+        <div class="col-md-12">
+            <h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
+		</div>
+	@endif
     <div class="col-md-12">
         <div class="bottom_lastupdate">
             <p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+            <!--<p>{!! nl2br($org['description']) !!}</p>-->
         </div>
 	</div>
 

@@ -13,6 +13,8 @@ Route::get('/agencies', [Organizations::class, 'list'])->name('orgs');
 
 Route::get('/agency/{id}', [Organizations::class, 'orgAbout'])->name('orgProfile');
 
+Route::get('/agency/{id}/capitalprojects', [Organizations::class, 'orgProjectSection'])->name('orgProjectSection');
+
 Route::get('/agency/{id}/{section}', [Organizations::class, 'orgSection'])->name('orgSection');
 
 Route::get('/agency/{id}/capitalprojects/{prjId}', [Organizations::class, 'orgProject'])->name('orgProject');

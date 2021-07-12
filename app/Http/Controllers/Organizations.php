@@ -119,6 +119,44 @@ class Organizations extends Controller
 
 
     /**
+     * Show organization capital projects section.
+     *
+     * @param  int  	$id
+     * @return \Illuminate\View\View
+     */
+    public function orgProjectSection($id)
+    {
+		$section = 'capitalprojects';
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+		$ds = new OrgsDatasets();
+		$org = $model->org($id);
+		$details = $ds->get($section);
+		return $org && $details
+			? view('orgprojectsection', [
+					'id' => $id,
+					'org' => $org,
+					'section' => $section,
+					'slist' => $ds->list,
+					'menu' => $ds->menu,
+					'activeDropDown' => $ds->menuActiveDD($section),
+					'icons' => $ds->socicons,
+					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" . ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')),
+					'dataset' => $model->dataset($details['fullname']),
+					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $section, $ds->list[$section]),
+					'details' => $details,
+					'map' => true,
+					'finStatUrls' => [
+						'#budget_totals' => $model->url("SELECT sum(cast(REPLACE(\"BUDG_CURR\", ',', '.') as decimal)) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
+						'#prj_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
+						'#over_budg_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"ORIG_BUD_AMT\" > 0 AND cast(REPLACE(\"BUDG_DIFF\", ',', '.') as decimal) < 0"),
+						'#delayed_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"END_DIFF\" <> '-' AND cast(REPLACE(\"END_DIFF\", ',', '.') as decimal) < 0"),
+					],
+				])
+			: abort(404);
+    }
+
+
+    /**
      * Show organization capital project.
      *
      * @param  int  	$id

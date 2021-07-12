@@ -18,7 +18,6 @@ function usToDashDate(d)
 {
 	if (!d)
 		return ''
-	console.log(d)
 	dd  = d.toString().substr(0, 2)
 	m  = d.toString().substr(3, 2)
 	y  = d.toString().substr(8, 4)
@@ -430,22 +429,24 @@ function projectsMapInit() {
 
 function projectsMapDrawFeatures(dd) {
 	// calculate bounds
-	console.log(dd);
 	var bounds = [[360, 180], [-360, -180]];
 	// https://javier.xyz/cohesive-colors/
 	var colors = ['#ecd078', '#d95b43', '#c02942', '#542437', '#53777a', '#f5ae33', '#99ac40', '#ff7c7c', '#78c0a8', '#7a6a53', '#6c5b7b', '#c06c84', '#d2ff0f', '#f2c45a', '#3b2d38', '#b8af03', '#d1e751', '#ff3a31', '#99b59a', '#676970', '#ecd078', '#618eff', '#7dffff', '#f07241', '#bcbcbc'];
 	dd.forEach(function (el, i) {
-		bounds[0][0] = Math.min(bounds[0][0], el.properties.W);
-		bounds[0][1] = Math.min(bounds[0][1], el.properties.S);
-		bounds[1][0] = Math.max(bounds[1][0], el.properties.E);
-		bounds[1][1] = Math.max(bounds[1][1], el.properties.N);
+		bounds[0][0] = Math.min(bounds[0][0], el.properties.W - 0.03);
+		bounds[0][1] = Math.min(bounds[0][1], el.properties.S - 0.03);
+		bounds[1][0] = Math.max(bounds[1][0], el.properties.E + 0.03);
+		bounds[1][1] = Math.max(bounds[1][1], el.properties.N + 0.03);
 		dd[i].properties.custom_color = colors[i]
 	});
 	if (bounds[0][0] == 360)
 		bounds = [[-74.05395, 40.68309], [-73.944433, 40.797808]]
 	var src = map.getSource('route')
 	src.setData({"type": "FeatureCollection", "features": dd});
-	console.log(bounds);
+	map.fitBounds(bounds);
+}
+
+function fitBounds(bounds) {
 	map.fitBounds(bounds);
 }
 

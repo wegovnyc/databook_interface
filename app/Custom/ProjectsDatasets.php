@@ -17,11 +17,11 @@ class ProjectsDatasets
 					'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects">${r["wegov-org-name"]}</a>` }', 
 					'"PROJECT_DESCR"', '"SCOPE_TEXT"', '"TYP_CATEGORY_NAME"', 
 					'"BORO"', 
-					'function (r) { return toFin(r["BUDG_CURR"]) }',
+					'function (r) { return toFin(r["BUDG_ORIG"]) }',
 					'function (r) { 
 						if (!r["ORIG_BUD_AMT"])
 							return "NA"
-						return r["BUDG_DIFF"] >= 0 ? toFin(r["BUDG_DIFF"]) : `<span class="bad">${toFin(-r["BUDG_DIFF"])}</bad>`;
+						return r["BUDG_DIFF"] >= 0 ? toFin(r["BUDG_DIFF"]) : `<span class="bad">${toFin(-r["BUDG_DIFF"])}</span>`;
 					}',
 					'function (r) { 
 						if ((r["END_DIFF"] == "-") || (r["END_DIFF"] == "12/31/1969"))
