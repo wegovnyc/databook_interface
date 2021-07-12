@@ -31,7 +31,7 @@
 				$('#map_button').attr('class', 'btn btn-outline map_btn')
 				$('#data_container').attr('class', 'col col-6')
 				$('#map_container').show()
-				mapInit({!! json_encode($map) !!});
+				orgSectionMapInit({!! json_encode($map) !!});
 			}
 		}
 		
@@ -203,29 +203,6 @@
 								</li>
 							</ul>
 						</div>
-						{{-- <h3>Area filters</h3>
-						@foreach ($map as $code=>$col)
-							<div class="custom-control custom-switch">
-							  <input type="radio" class="custom-control-input" id="{{ $code }}-filter-switch" name="filter" param="{{ $col }}">
-							  <label class="custom-control-label" for="{{ $code }}-filter-switch">
-								{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
-							  </label>
-							</div>
-						@endforeach --}}
-						{{--
-						<div class="custom-control custom-switch">
-						  <input type="radio" class="custom-control-input" id="cd-filter-switch" name="filter">
-						  <label class="custom-control-label" for="cd-filter-switch">Community Districts</label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="radio" class="custom-control-input" id="cc-filter-switch" name="filter">
-						  <label class="custom-control-label" for="cc-filter-switch">City Council Districts</label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="radio" class="custom-control-input" id="nta-filter-switch" name="filter">
-						  <label class="custom-control-label" for="nta-filter-switch">Neighborhood Tabulation Areas</label>
-						</div>
-						--}}
 					</div>
 					<!-- /controls -->
 					
@@ -296,64 +273,6 @@
 							</li>
 						</ul>
 					</div>
-					{{-- <div id="toggles">
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="cd-switch">
-						  <label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="ed-switch">
-						  <label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="pp-switch">
-						  <label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="dsny-switch">
-						  <label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="fb-switch">
-						  <label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="sd-switch">
-						  <label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="hc-switch">
-						  <label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="cc-switch">
-						  <label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="nycongress-switch">
-						  <label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="sa-switch">
-						  <label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="ss-switch">
-						  <label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="bid-switch">
-						  <label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="nta-switch">
-						  <label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
-						</div>
-						<div class="custom-control custom-switch">
-						  <input type="checkbox" class="custom-control-input" id="zipcode-switch">
-						  <label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
-						</div>
-					</div>--}}
 					<!-- /toggles -->
 					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E;"></div>
 				</div>

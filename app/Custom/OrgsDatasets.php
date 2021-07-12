@@ -41,33 +41,9 @@ class OrgsDatasets
 					'Financial Plan - Number of Contracts' => 'Financial Plan - Number of Contracts'
 			],
 		],
-		/*'capitalprojects_depr' => [
-			'fullname' => 'NYC Capital Project Detail Data',
-			'table' => 'capitalprojects',
-			'hdrs' => ['Project ID', 'Name', 'Scope', 'Borough', 'Original Budget', 'Prior Spending', 'Planned Spending', 'Category'],
-			'visible' => [true, true, true, true, true, true, true, true],
-			'flds' => [
-					'function (r) { return `<a href="https://amazing-ptolemy-08d008.netlify.app/project/${r.project_id}">${r.project_id}</a>` }', 
-					'"project_description"', '"scope_summary"', '"borough"', 
-					//'"original_budget"', 
-					'function (r) { return toFin(r["original_budget"]) }',
-					//'"combined_prior_actuals"', 
-					'function (r) { return toFin(r["combined_prior_actuals"]) }',
-					//'"city2021"', 
-					'function (r) { return toFin(r["city2021"]) }',
-					'"ten_year_plan_category"'
-				],
-			'filters' => [3 => null, 7 => null],
-			'details' => [
-					'Explanation for Delay' => 'explanation_for_delay',
-					'Project Location' => 'project_location',
-					'Community Boards Served' => 'community_boards_served',
-					'Budget Lines' => 'budget_lines'			
-			],
-		],*/
 		'capitalprojects' => [
 			'fullname' => 'Capital Project Detail Data - Dollars',
-			'table' => 'capitalprojectsdollars',
+			'table' => 'capitalprojectsdollarscomp',
 			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
 			'hdrs' => ['Publication Date', 'Project ID', 'Name', 'Scope', 'Category', 'Borough', 'Planned Cost', 'Budget Status'],
 			'visible' => [true, true, true, true, true, true, true, true],
@@ -362,10 +338,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'description' => 'A list of all datasets that were included on all the NYC Open Data plans (2013-2019) and their current release status. For a comprehensive information on each dataset on the Open Data Portal, please refer to Local Law 251 of 2017: Published Data Asset Inventory.',
 		],
 
-
-
-
-
 		'expenseplan' => [
 			'fullname' => 'Expense Financial Plan - Exec',
 			'table' => 'expenseplan',
@@ -511,7 +483,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		
 		ccmembers
 
-		capitalprojectsdollars
+		capitalprojectsdollarscomp
 		capitalprojectsmilestones
 		
 	*/

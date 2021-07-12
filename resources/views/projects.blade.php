@@ -57,6 +57,14 @@
                         @endif
                         }
                     @endforeach
+					,
+                    {
+                        className: 'record',
+                        data:  null,
+                        defaultContent: null,
+                        visible: false,
+                        searchable: false
+                    }
                 ],
 
 				@if ($details['filters'])
@@ -94,6 +102,7 @@
 								select.append('<option value="'+d+'">'+d+'</option>')
 							});
 						});
+						$("div.toolbar .row").append('<button id="map_button" class="btn map_btn col" style="margin:0 20px 0 10px; z-index: 10; max-width: 40px;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>');
 
 						@foreach ($details['filters'] as $i=>$v)
 							@if ($v)
@@ -108,15 +117,16 @@
 						this.api().columns([1]).every(function (c,a,i) {
 							var delim = {!! json_encode($details['fltDelim']) !!};
 							var column = this;
-							var select = $('<select class="filter mt-4" style="width:100%;" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
+							var select = $('<select class="filter mt-1" style="width:100%;" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
 								.appendTo($("#pub_date_filter"))
 								.on('change', function () {
 									var val = $(this).val()
 									column
 										.search(val ? val : '', false, false)
 										.draw();
+									loadFinStat();
 								});
-							select.wrap('<div class="drop_dowm_select col"></div>');
+							select.wrap('<div class="drop_dowm_select"></div>');
 							//$('div.toolbar').insertAfter('#myTable_filter');
 
 							var tt = []
@@ -169,20 +179,244 @@
 			});
 
 			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
+			
+			// if map is displayed updates and draws projects from GEO_JSON field
+			datatable.on('draw', function () {
+				var mapIsActive = $('#map_button').attr('class') == 'btn btn-outline map_btn'
+				if (!mapIsActive) 
+					return;
+				
+                var api = $('#myTable').dataTable().api();
+                var modifier = {
+                    order:  'current',  // 'current', 'applied', 'index',  'original'
+                    page:   'current',      // 'all',     'current'
+                    search: 'applied',     // 'none',    'applied', 'removed'
+                }
+				var features = [];
+                api.cells('.record', modifier).data().each(function (r, i) {
+					if (r['GEO_JSON']) {
+						geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
+						console.log(geo_json)
+						geo_json.properties['AG_ID'] = r['wegov-org-id']
+						features.push(geo_json)
+					}
+				});
+				projectsMapDrawFeatures(features);
+            });
+			
+			
 		});
+
+
+		function toggleMap() {
+			var isActive = $('#map_button').attr('class') == 'btn btn-outline map_btn'
+			var cc = [0, 1, 5, 7, 9, 10];
+			if (isActive) {
+				$('#map_button').attr('class', 'btn map_btn')
+				$('#data_container').attr('class', 'col')
+				$('.toolbar ').css('display', 'inline-block')
+				$('#map_container').hide()
+				$('#myTable').dataTable().api().columns(cc).every(function () {
+					console.log(this);
+					this.visible(true);
+				});
+			} else {
+				$('#map_button').attr('class', 'btn btn-outline map_btn')
+				$('#data_container').attr('class', 'col col-6')
+				$('#map_container').show()
+				projectsMapInit();
+				$('#myTable').dataTable().api().columns(cc).every(function () {
+					console.log(this);
+					this.visible(false);
+				});
+				setTimeout(function() {
+						datatable.draw();	// initiate projectsMapDrawFeatures
+					}, 3000
+				);
+			}
+		}
+		
+		function loadFinStat() {
+			var uu = {!! json_encode($finStatUrls) !!}
+			var pubdate = $('#filter-1 option:selected').val().replaceAll('-', '');
+			for (let sel in uu) {
+				$.get(uu[sel].replace('pubdate', pubdate), function (resp) {
+					//console.log(resp)
+					//jj = $.parseJSON(resp)
+					var v = resp['rows'][0]['res'] ?? '-'
+					if ((sel == '#budget_totals') && (v != '-'))
+						$(sel).text(toFin(v))
+					else 
+						$(sel).text(v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+				})
+			}
+		}
+		
+
 	</script>
 
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-10 organization_data">
+			<div class="col-md-8 organization_data">
 				<h4>{{ $details['name'] }}</h4>
 				<p>{!! nl2br($details['description']) !!}</p>
 			</div>
-			<div class="col-md-2 organization_data" id="pub_date_filter">
-				
+			<div class="col-md-4 my-3" id="org_summary">
+				<div class="card organization_summary">
+					<div class="card-body">
+						<div class="card-text">
+							<table class="table-sm stats-table" width="100%">
+							  <thead>
+								<tr>
+								  <th scope="col" width="50%">Summary</th>
+								  <th scope="col" width="50%" id="pub_date_filter">
+								  {{--
+									<select style="width:100%;" class="filter" onchange="loadFinStat();" id="fin_stat_select">
+										<option value="">Year</option>
+										<option value="{{ date('Y') - 1 }}" selected>{{ date('Y') - 1 }}</option>
+										@for($i=date('Y') - 2; $i>=date('Y') - 3; $i--)
+											<option value="{{ $i }}">{{ $i }}</option>
+										@endfor
+									</select>
+								  --}}
+								  </th>
+								</tr>
+							  </thead>
+							  <tbody>
+								  <tr>
+									  <td scope="row">Capital Budget</td>
+									  <td id="budget_totals" class="pl-3"></td>
+								  </tr>
+								  <tr>
+									  <td scope="row">Active Projects</td>
+									  <td id="prj_count" class="pl-3"></td>
+								  </tr>
+								  <tr>
+									  <td scope="row">Over Budget</td>
+									  <td id="over_budg_count" class="pl-3"></td>
+								  </tr>
+								  <tr>
+									  <td scope="row">Delayed</td>
+									  <td id="delayed_count" class="pl-3"></td>
+								  </tr>
+							  </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
+			{{--
+			<div class="col-md-3 organization_data" >
+				<button id="map_button" class="btn map_btn" style="margin:24px 16px 0 0; float:right; z-index: 100;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
+			</div>
+			--}}
+			
 		</div>
 		<div class="row justify-content-center map_right">
+			@if ($map ?? null)
+				<div id="map_container" class="col-6" style="display:none;">
+					{{--
+					<!-- controls -->
+					<div id="map-controls">
+						<div class="select_district">
+							<img src="/img/map_icon.png" alt="" title="">
+							<ul class="inner_district">
+								<li class="dropdown">
+									<a id="change_district" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Select a District Type</a>
+									<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 0px;">
+										@foreach ($map as $code=>$col)
+											<div class="custom-control custom-switch dropdown-item pl-3">
+												<input type="radio" class="custom-control-input" id="{{ $code }}-filter-switch" name="filter" param="{{ $col }}" onchange="changeToggle(event)">
+												<label class="custom-control-label radio_toggle" for="{{ $code }}-filter-switch">
+													{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
+												</label>
+											</div>
+										@endforeach 
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- /controls -->
+					
+					<!-- toggles -->
+					<div class="select_district" id="toggles">
+						<img src="/img/eyes.png" alt="" title="">
+						<ul class="inner_district">
+							<li class="dropdown">
+								<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
+								<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 10px;">
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="cd-switch">
+										<label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="ed-switch">
+										<label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="pp-switch">
+										<label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="dsny-switch">
+										<label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="fb-switch">
+										<label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="sd-switch">
+										<label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="hc-switch">
+										<label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="cc-switch">
+										<label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="nycongress-switch">
+										<label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="sa-switch">
+										<label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="ss-switch">
+										<label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="bid-switch">
+										<label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="nta-switch">
+										<label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="zipcode-switch">
+										<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
+									</div> 
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- /toggles -->
+					--}}
+					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E; position:relative; min-height:800px;"></div>
+					<div id="help_us" class="" style="width:100%;min-height:300px;border:1px solid #112F4E; margin-top:24px; padding: 32px;">
+						<h4>Help us locate projects</h4>
+						<p>NYC’s government doesn’t publish the locations of capital projects (!?), so volunteers are using the information they do publish to determine where the projects are actually located.</p>
+						<p><a href="#">Join Us</a></p>
+					</div>
+				</div>
+			@endif
+			
 			<div id="data_container" class="col float-left">
 				<div class="table-responsive">
 					<div class="filter_icon">
@@ -197,6 +431,7 @@
 								@foreach ($details['hdrs'] as $name)
 									<th>{{ $name }}</th>
 								@endforeach
+								<th></th>
 							</tr>
 						</thead>
 					</table>
@@ -210,5 +445,25 @@
             <p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
         </div>
 	</div>
+
+	<script>
+		function changeToggle (e) {
+			console.log($(e.target).next("label")[0].innerHTML)
+			$('#change_district').html($(e.target).next("label")[0].innerHTML);
+		}
+		$('#toggle_boundries').click( function (e) {
+			$(this).next('.dropdown-menu').toggleClass('show');
+		})
+
+		$(".filter_icon").click(function() {
+			console.log($('.toolbar').is(':visible'))
+			if(!$('.toolbar').is(':visible')) {
+				$('.filter_icon').addClass('position_change');
+			}else {
+				$('.filter_icon').removeClass('position_change');
+			}
+			$(".toolbar").toggle();
+		});
+	</script>
 
 @endsection

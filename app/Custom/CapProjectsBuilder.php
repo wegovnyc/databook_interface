@@ -27,7 +27,8 @@ class CapProjectsBuilder
 			];
 		}
 		
-		$rr = $coords = [];
+		$rr = [];
+		$geo_json = null;
 		$name = '';
 		foreach ($dd as $i=>$d)
 		{
@@ -65,9 +66,9 @@ class CapProjectsBuilder
 				'milestones' => ($d['milestones'] ?? null) ? array_values($d['milestones']) : [],
 			];
 			$name = $name ? $name : $d['PROJECT_DESCR'];
-			$coords = $d['latitude'] ? [$d['latitude'], $d['longitude']] : $coords;
+			$geo_json = $d['GEO_JSON'] ? $d['GEO_JSON'] : $geo_json;
 		}
-		return ['name' => $name, 'items' => $rr, 'geo' => $coords ? array_combine(['latitude', 'longitude'], $coords) : []];
+		return ['name' => $name, 'items' => $rr, 'geo_feature' => str_replace('""', '"', $geo_json)];
 	}
 	
 	static function df($d)

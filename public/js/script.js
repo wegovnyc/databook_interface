@@ -77,13 +77,11 @@ var filtFields = {'cd': 'nameCol', 'cc': 'nameCol', 'nta': 'nameAlt'}
 
 function newMap() {
 	mapboxgl.accessToken = 'pk.eyJ1Ijoic291bmRwcmVzcyIsImEiOiJjazY1OTF3cXIwbjZyM3BtcGt3Y3F2NjZwIn0.3hmCJsl0_oBUpoVsNJKZjQ';
-
-	console.log(center, zoom);
 	
 	var center = (typeof center == 'undefined') ? [-73.957, 40.727] : center;
 	var zoom = (typeof zoom == 'undefined') ? 11 : zoom;
 	
-	console.log(center, zoom);
+	//console.log(center, zoom);
 	// initial basemap
 	map = new mapboxgl.Map({
 		container: 'map',
@@ -98,8 +96,9 @@ function newMap() {
 }
 
 
+/** org section map ******************************************/
 
-function mapInit(filters, filterType) {
+function orgSectionMapInit(filters, filterType) {
 	//console.log(filters, filterType)
 	newMap();
 	
@@ -347,6 +346,111 @@ function setFilter(code, col) {
 	});
 	
 }
+/** /org section map ******************************************/
+
+
+
+/** projects map ******************************************/
+
+function projectsMapPopup(e) {
+	var pr = e.features[0].properties;
+	var description = `
+<table><tbody>
+	<tr><th scope="row">Name</th><td><a href="/agency/${pr.AG_ID}/capitalprojects/${pr.PRJ_ID}">${pr.NAME}</a></td></tr>
+	<tr><th scope="row">Agency</th><td>${pr.AGENCY}</td></tr>
+	<tr><th scope="row">Category</th><td>${pr.CATEGORY}</td></tr>
+	<tr><th scope="row">Planned Cost</th><td>$${pr.PLANNEDCOST}</td></tr>
+	<tr><th scope="row">Start</th><td>${pr.START_CURR}</td></tr>
+	<tr><th scope="row">End</th><td>${pr.END_CURR}</td></tr>
+</tbody></table>`;
+			 
+	map.fitBounds([
+		[pr.W,pr.S], // southwestern corner of the bounds
+		[pr.E,pr.N] // northeastern corner of the bounds
+	]);
+	
+	new mapboxgl.Popup()
+		.setLngLat(e.lngLat)
+		.setHTML(description)
+		.addTo(map);
+}
+
+function projectsMapInit() {
+	//console.log(filters, filterType)
+	newMap();
+	
+	map.on('load', function() {
+        map.addSource('route', {
+				"type": "geojson",
+				"data": {
+					"type": "FeatureCollection",
+					"features": [{"type":"Feature","properties":{"custom_color":"#ccc"},"geometry":{"type":"Point","coordinates":["-73.95098200","40.82387280"]}}]
+				}
+			});
+		
+        map.addLayer({
+            'id': 'streets',
+            'type': 'line',
+            'source': 'route',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            'paint': {
+                'line-color': ['get', 'custom_color'],
+                'line-width': 6
+            },
+			'filter': ['==', '$type', 'LineString']
+        });
+		
+		map.addLayer({
+			'id': 'markers',
+			'type': 'circle',
+			'source': 'route',
+			'paint': {
+				'circle-radius': 6,
+				'circle-color': ['get', 'custom_color']
+			},
+			'filter': ['==', '$type', 'Point']
+		});		
+		
+		map.on('click', 'streets', function (e) { projectsMapPopup(e); });
+		map.on('click', 'markers', function (e) { projectsMapPopup(e); });
+		 
+		// Change the cursor to a pointer when the mouse is over the places layer.
+		map.on('mouseenter', 'streets', function () { map.getCanvas().style.cursor = 'pointer'; });
+		map.on('mouseenter', 'markers', function () { map.getCanvas().style.cursor = 'pointer'; });
+		 
+		// Change it back to a pointer when it leaves.
+		map.on('mouseleave', 'streets', function () { map.getCanvas().style.cursor = ''; });		
+		map.on('mouseleave', 'markers', function () { map.getCanvas().style.cursor = ''; });
+	});
+}
+
+
+function projectsMapDrawFeatures(dd) {
+	// calculate bounds
+	console.log(dd);
+	var bounds = [[360, 180], [-360, -180]];
+	// https://javier.xyz/cohesive-colors/
+	var colors = ['#ecd078', '#d95b43', '#c02942', '#542437', '#53777a', '#f5ae33', '#99ac40', '#ff7c7c', '#78c0a8', '#7a6a53', '#6c5b7b', '#c06c84', '#d2ff0f', '#f2c45a', '#3b2d38', '#b8af03', '#d1e751', '#ff3a31', '#99b59a', '#676970', '#ecd078', '#618eff', '#7dffff', '#f07241', '#bcbcbc'];
+	dd.forEach(function (el, i) {
+		bounds[0][0] = Math.min(bounds[0][0], el.properties.W);
+		bounds[0][1] = Math.min(bounds[0][1], el.properties.S);
+		bounds[1][0] = Math.max(bounds[1][0], el.properties.E);
+		bounds[1][1] = Math.max(bounds[1][1], el.properties.N);
+		dd[i].properties.custom_color = colors[i]
+	});
+	if (bounds[0][0] == 360)
+		bounds = [[-74.05395, 40.68309], [-73.944433, 40.797808]]
+	var src = map.getSource('route')
+	src.setData({"type": "FeatureCollection", "features": dd});
+	console.log(bounds);
+	map.fitBounds(bounds);
+}
+
+
+/** /projects map ******************************************/
 
 
 /** share button ******************************************/

@@ -42,7 +42,7 @@ class CartoModel
 	function capitalProjects($id=null, $pId=null)
 	{
 		$where = ($id && $pId) ? "WHERE \"wegov-org-id\" = '{$id}' AND \"PROJECT_ID\" = '{$pId}'" : '';
-		$dd = $this->carto->req("SELECT * FROM capitalprojectsdollars {$where} order by \"PUB_DATE\" DESC, \"PROJECT_ID\"");
+		$dd = $this->carto->req("SELECT * FROM capitalprojectsdollarscomp {$where} order by \"PUB_DATE\" DESC, \"PROJECT_ID\"");
 		return $dd;
 	}
 	
