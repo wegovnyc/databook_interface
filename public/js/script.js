@@ -350,7 +350,7 @@ function setFilter(code, col) {
 
 
 /** projects map ******************************************/
-
+var popup = null
 function projectsMapPopup(e) {
 	var pr = e.features[0].properties;
 	var description = `
@@ -368,7 +368,7 @@ function projectsMapPopup(e) {
 		[pr.E,pr.N] // northeastern corner of the bounds
 	]);
 	
-	new mapboxgl.Popup()
+	popup = new mapboxgl.Popup()
 		.setLngLat(e.lngLat)
 		.setHTML(description)
 		.addTo(map);
@@ -437,12 +437,14 @@ function projectsMapDrawFeatures(dd) {
 		bounds[0][1] = Math.min(bounds[0][1], el.properties.S - 0.03);
 		bounds[1][0] = Math.max(bounds[1][0], el.properties.E + 0.03);
 		bounds[1][1] = Math.max(bounds[1][1], el.properties.N + 0.03);
-		dd[i].properties.custom_color = colors[i]
+		dd[i].properties.custom_color = colors[i % 25]
 	});
 	if (bounds[0][0] == 360)
 		bounds = [[-74.05395, 40.68309], [-73.944433, 40.797808]]
 	var src = map.getSource('route')
 	src.setData({"type": "FeatureCollection", "features": dd});
+	if (popup)
+		popup.remove();
 	map.fitBounds(bounds);
 }
 

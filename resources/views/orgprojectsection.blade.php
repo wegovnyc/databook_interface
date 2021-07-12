@@ -71,7 +71,7 @@
                     }
                 ],
 				createdRow: function(row, data, dataIndex) {
-					if (data.GEO_JSON != '[]') {
+					if (data.GEO_JSON != '') {
 						$(row).addClass('have_coords');
 					}
 				},
@@ -191,25 +191,7 @@
 
 			// if map is displayed updates and draws projects from GEO_JSON field
 			datatable.on('draw', function () {
-				var mapIsActive = !$('#map_container').attr('style')
-				if (!mapIsActive) 
-					return;
-				
-                var api = $('#myTable').dataTable().api();
-                var modifier = {
-                    order:  'current',  // 'current', 'applied', 'index',  'original'
-                    page:   'current',      // 'all',     'current'
-                    search: 'applied',     // 'none',    'applied', 'removed'
-                }
-				var features = [];
-                api.cells('.record', modifier).data().each(function (r, i) {
-					if (r['GEO_JSON']) {
-						geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
-						geo_json.properties['AG_ID'] = r['wegov-org-id']
-						features.push(geo_json)
-					}
-				});
-				projectsMapDrawFeatures(features);
+				drawProjects('current');
             });
 			
 			$('#myTable tbody').on('click', 'td:not(.details-control)', function () {
@@ -230,8 +212,8 @@
 			$.fn.dataTable.ext.type.order['html-pre'] = function (data) {
 				var d = data.replace(/<span class="bad">/g, '-');
 				d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+/g, '');
-				d = d.replace(/NA|on time|^-$/g, '0');
-				d = d.match(/[-\d\.]+/g) ? parseFloat(d).toFixed(2) : d;
+				d = d.replace(/NA|NaN|on time|^-$/g, '0');
+				d = d.match(/[-\d\.]+/g) ? parseFloat(d) : d;
 				//console.log(data, d);
 				return d;
 			};
@@ -260,7 +242,8 @@
 					this.visible(false);
 				});
 				setTimeout(function() {
-						datatable.draw();	// initiate projectsMapDrawFeatures
+						//datatable.draw();	// initiate projectsMapDrawFeatures
+						drawProjects('all');
 					}, 3000
 				);
 			}
@@ -280,6 +263,34 @@
 						$(sel).text(v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 				})
 			}
+		}
+		
+		function drawProjects(pages) {	// 'all',     'current'
+			var mapIsActive = !$('#map_container').attr('style')
+			if (!mapIsActive) 
+				return;
+			
+			var api = $('#myTable').dataTable().api();
+			var modifier = {
+				order:  'current',  // 'current', 'applied', 'index',  'original'
+				page:   pages,      // 'all',     'current'
+				search: 'applied',     // 'none',    'applied', 'removed'
+			}
+			var features = [];
+			//api.cells('.record', modifier).data().each(function (r, i) {
+			api.rows('', modifier).data().each(function (r, i) {
+				if (r['GEO_JSON']) {
+					try {
+						geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
+						geo_json.properties['AG_ID'] = r['wegov-org-id']
+						features.push(geo_json)
+					} catch (error) {
+						console.error(error);
+					}
+				}
+			});
+			console.log(features.length)
+			projectsMapDrawFeatures(features);
 		}
 		
 	</script>
