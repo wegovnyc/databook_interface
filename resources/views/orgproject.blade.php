@@ -17,23 +17,23 @@
 			</div>
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-md-9 organization_data py-0">
+			<div class="col-md-8 organization_data py-0">
 				<h2>{{ $data['name'] }}</h2>
 			</div>
-			<div class="col-md-3 organization_data">
-				<select id="pub_date_filter" style="width:60%;" class="filter" onchange="showPrj();">
+			<div class="col-md-2 organization_data justify-content-center pl-5">
+				<h5 class="mt-2">Publication Date<h5>
+			</div>
+			<div class="col-md-2 organization_data">
+				<select id="pub_date_filter" style="width:100%;" class="filter" onchange="showPrj();">
 					@foreach ($data['items'] as $date=>$row)
 						<option value="{{ $date }}" @if($date == array_keys($data['items'])[0]) selected @endif>{{ $row['PUB_DATE_F'] }}</option>
 					@endforeach
 				</select>
 			</div>
 		</div>
-		<div class="row justify-content-center map_right">
-			<div id="map_container" class="col-4">
-				<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:2px solid #112F4E;"></div>
-			</div>
+		<div class="row justify-content-center">
 			
-			<div id="capproject_profile" class="col-8 float-left">
+			<div id="capproject_profile" class="col-8">
 			
 				<table width="100%" class="mb-5">
 					<thead>
@@ -127,8 +127,15 @@
 					<tbody>
 					</tbody>
 				</table>
-				
 			</div>
+				
+			<div class="col-4">
+				<div id="map_container" style="float:none;">
+					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:2px solid #112F4E;"></div>
+				</div>
+				<p class="suggest_button"><a href="https://airtable.com/shrWWa3rNJFGSFObd?prefill_project_id={{ $prjId }}" class="learn_more" target="_blank">Suggest a Change</a></p>
+			</div>
+			
 		</div>
 	</div>
 
@@ -232,6 +239,7 @@
 			@else
 				$('#map').attr('class', 'no-geo');
 				$('#map').html('<iframe class="airtable-embed" src="https://airtable.com/embed/shreZusmuYwJNl76Q?prefill_project_id={{ $prjId }}&backgroundColor=blue" frameborder="0" onmousewheel="" width="100%" height="100%" style="background: transparent;"></iframe>');
+				$('.suggest_button').remove();
 			@endif
 		})
 	</script>

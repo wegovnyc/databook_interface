@@ -148,8 +148,8 @@ class Organizations extends Controller
 					'finStatUrls' => [
 						'#budget_totals' => $model->url("SELECT sum(cast(REPLACE(\"BUDG_CURR\", ',', '.') as decimal)) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
 						'#prj_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
-						'#over_budg_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"ORIG_BUD_AMT\" > 0 AND cast(REPLACE(\"BUDG_DIFF\", ',', '.') as decimal) < 0"),
-						'#delayed_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"END_DIFF\" <> '-' AND cast(REPLACE(\"END_DIFF\", ',', '.') as decimal) < 0"),
+						//'#over_budg_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"ORIG_BUD_AMT\" > 0 AND cast(REPLACE(\"BUDG_DIFF\", ',', '.') as decimal) < 0"),
+						//'#delayed_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"END_DIFF\" <> '-' AND cast(REPLACE(\"END_DIFF\", ',', '.') as decimal) < 0"),
 					],
 				])
 			: abort(404);
@@ -157,6 +157,7 @@ class Organizations extends Controller
 
 
     /**
+		
      * Show organization capital project.
      *
      * @param  int  	$id

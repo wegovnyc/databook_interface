@@ -30,3 +30,5 @@ Route::get('/districtXHR/{type}/{id}/{section}', [Districts::class, 'section'])-
 
 
 Route::get('/capitalprojects', [Projects::class, 'main'])->name('projects');
+
+//Route::get('/capitalprojects/{prjId}', [Organizations::class, 'project'])->name('project');

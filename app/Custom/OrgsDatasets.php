@@ -45,12 +45,13 @@ class OrgsDatasets
 			'fullname' => 'Capital Project Detail Data - Dollars',
 			'table' => 'capitalprojectsdollarscomp',
 			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
-			'hdrs' => ['Publication Date', 'Project ID', 'Agency', 'Name', 'Scope', 'Category', 'Borough', 'Planned Cost', 'Budget Status', 'Timeline Status'],
-			'visible' => [false, true, true, true, true, true, true, true, true, true],
+			'hdrs' => ['Publication Date', 'Project ID', /*'Agency', */'Name', 'Scope', 'Category', 'Borough', 'Planned Cost', 'Budget Status', 'Timeline Status'],
+			'visible' => [false, true, /*true, */true, true, true, true, true, true, true],
+			'hide_on_map_open' => '0, 4, 6, 8, 9',		// +1 for details fld is already added
 			'flds' => [
 					'function (r) { return toDashDate(r["PUB_DATE"]) }',
 					'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
-					'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects">${r["wegov-org-name"]}</a>` }', 
+					//'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects">${r["wegov-org-name"]}</a>` }', 
 					'"PROJECT_DESCR"', '"SCOPE_TEXT"', '"TYP_CATEGORY_NAME"', 
 					'"BORO"', 
 					'function (r) { return toFin(r["BUDG_ORIG"]) }',
@@ -68,7 +69,7 @@ class OrgsDatasets
 						return v > 0 ? `<span class="good">${v} years earlier</span>` : `<span class="good">on time</span>`;
 					}'
 				],
-			'filters' => [2 => null, 5 => null],
+			'filters' => [/*2 => null, */4 => null],
 			'details' => [
 					'Original Budget' => 'ORIG_BUD_AMT', 
 					'Prior Spending' => 'CITY_PRIOR_ACTUAL', 
