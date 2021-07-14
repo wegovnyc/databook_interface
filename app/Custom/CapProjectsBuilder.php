@@ -29,7 +29,7 @@ class CapProjectsBuilder
 		
 		$rr = [];
 		$geo_json = null;
-		$name = '';
+		$name = $id = '';
 		foreach ($dd as $i=>$d)
 		{
 			if ($d['milestones'] ?? null)
@@ -66,9 +66,10 @@ class CapProjectsBuilder
 				'milestones' => ($d['milestones'] ?? null) ? array_values($d['milestones']) : [],
 			];
 			$name = $name ? $name : $d['PROJECT_DESCR'];
+			$id = $id ? $id : $d['wegov-org-id'];
 			$geo_json = $d['GEO_JSON'] ? $d['GEO_JSON'] : $geo_json;
 		}
-		return ['name' => $name, 'items' => $rr, 'geo_feature' => str_replace('""', '"', $geo_json)];
+		return ['name' => $name, 'items' => $rr, 'geo_feature' => str_replace('""', '"', $geo_json), 'id' => $id];
 	}
 	
 	static function df($d)

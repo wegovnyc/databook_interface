@@ -39,16 +39,16 @@ class CartoModel
 		return $this->map($dd) ?? [];
 	}
 	
-	function capitalProjects($id=null, $pId=null)
+	function capitalProjects($pId=null)
 	{
-		$where = ($id && $pId) ? "WHERE \"wegov-org-id\" = '{$id}' AND \"PROJECT_ID\" = '{$pId}'" : '';
+		$where = $pId ? "WHERE \"PROJECT_ID\" = '{$pId}'" : '';
 		$dd = $this->carto->req("SELECT * FROM capitalprojectsdollarscomp {$where} order by \"PUB_DATE\" DESC, \"PROJECT_ID\"");
 		return $dd;
 	}
 	
-	function capitalProjectsMilestones($id, $pId)
+	function capitalProjectsMilestones($pId)
 	{
-		$dd = $this->carto->req("SELECT * FROM capitalprojectsmilestones WHERE \"wegov-org-id\" = '{$id}' AND \"PROJECT_ID\" = '{$pId}' order by \"PUB_DATE\" DESC");
+		$dd = $this->carto->req("SELECT * FROM capitalprojectsmilestones WHERE \"PROJECT_ID\" = '{$pId}' order by \"PUB_DATE\" DESC");
 		return $this->map($dd) ?? [];
 	}
 	

@@ -17,7 +17,11 @@ Route::get('/agency/{id}/capitalprojects', [Organizations::class, 'orgProjectSec
 
 Route::get('/agency/{id}/{section}', [Organizations::class, 'orgSection'])->name('orgSection');
 
-Route::get('/agency/{id}/capitalprojects/{prjId}', [Organizations::class, 'orgProject'])->name('orgProject');
+//Route::get('/agency/{id}/capitalprojects/{prjId}', [Organizations::class, 'orgProject'])->name('orgProject');
+Route::get('/agency/{id}/capitalprojects/{prjId}', function ($id, $prjId) {
+    return redirect(route('project', ['prjId' => $prjId]));
+})->name('orgProject');
+Route::get('/capitalprojects/{prjId}', [Organizations::class, 'project'])->name('project');
 
 
 
@@ -31,4 +35,3 @@ Route::get('/districtXHR/{type}/{id}/{section}', [Districts::class, 'section'])-
 
 Route::get('/capitalprojects', [Projects::class, 'main'])->name('projects');
 
-//Route::get('/capitalprojects/{prjId}', [Organizations::class, 'project'])->name('project');

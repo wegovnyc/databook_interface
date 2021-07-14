@@ -50,7 +50,7 @@ class OrgsDatasets
 			'hide_on_map_open' => '0, 4, 6, 8, 9',		// +1 for details fld is already added
 			'flds' => [
 					'function (r) { return toDashDate(r["PUB_DATE"]) }',
-					'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
+					'function (r) { return `<a href="/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
 					//'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects">${r["wegov-org-name"]}</a>` }', 
 					'"PROJECT_DESCR"', '"SCOPE_TEXT"', '"TYP_CATEGORY_NAME"', 
 					'"BORO"', 

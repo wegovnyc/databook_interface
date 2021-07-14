@@ -157,7 +157,7 @@ class Organizations extends Controller
 
 
     /**
-		
+		----- deprecated
      * Show organization capital project.
      *
      * @param  int  	$id
@@ -191,4 +191,40 @@ class Organizations extends Controller
 				])
 			: abort(404);
     }
+	
+    /**
+     * Show capital project.
+     *
+     * @param  string  	$prjId
+     * @return \Illuminate\View\View
+     */
+    public function project($prjId)
+    {
+		$section = 'capitalprojects';
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+		$ds = new OrgsDatasets();
+		$data = CapProjectsBuilder::build($model->capitalProjects($prjId), $model->capitalProjectsMilestones($prjId));
+		$id = $data['id'];
+		$org = $model->org($id);
+		$details = $ds->get($section);
+		return $org && $details
+			? view('orgproject', [
+					'id' => $id,
+					'prjId' => $prjId,
+					'org' => $org,
+					'section' => $section,
+					'slist' => $ds->list,
+					'menu' => $ds->menu,
+					'activeDropDown' => $ds->menuActiveDD($section),
+					'icons' => $ds->socicons,
+					//'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" . ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')),
+					'dataset' => $model->dataset($details['fullname']),
+					'breadcrumbs' => Breadcrumbs::orgPrj($org['id'], $org['name'], $section, $ds->list[$section], $prjId, $data['name']),
+					//'details' => $details,
+					'data' => $data,
+					'map' => true,
+				])
+			: abort(404);
+    }
+	
 }

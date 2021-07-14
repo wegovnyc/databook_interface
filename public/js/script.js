@@ -355,7 +355,7 @@ function projectsMapPopup(e) {
 	var pr = e.features[0].properties;
 	var description = `
 <table><tbody>
-	<tr><th scope="row">Name</th><td><a href="/agency/${pr.AG_ID}/capitalprojects/${pr.PRJ_ID}">${pr.NAME}</a></td></tr>
+	<tr><th scope="row">Name</th><td><a href="/capitalprojects/${pr.PRJ_ID}">${pr.NAME}</a></td></tr>
 	<tr><th scope="row">Agency</th><td>${pr.AGENCY}</td></tr>
 	<tr><th scope="row">Category</th><td>${pr.CATEGORY}</td></tr>
 	<tr><th scope="row">Planned Cost</th><td>$${pr.PLANNEDCOST}</td></tr>
