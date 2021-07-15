@@ -28,20 +28,23 @@
 				$('.toolbar ').css('display', 'inline-block')
 				$('#map_container').hide()
 			} else {
-				$('#map_button').attr('class', 'btn btn-outline map_btn')
 				$('#data_container').attr('class', 'col col-6')
+                const divHeight = $('#data_container').height()
+                console.log(divHeight, '3' , $('#map_container').attr('style'));
+                $('#map_container').css("min-height", divHeight+'px')
+				$('#map_button').attr('class', 'btn btn-outline map_btn')
 				$('#map_container').show()
 				orgSectionMapInit({!! json_encode($map) !!});
 			}
 		}
-		
+
 		function mapAction(filter, code, col) {
 			if (filter.length == 2)
 				datatable.columns([col]).search('').draw()
 			else
 				datatable.columns([col]).search(filter[2]).draw()
 		}
-		
+
 		var datatable = null
 		$(document).ready(function() {
 			datatable = $('#myTable').DataTable({
@@ -132,7 +135,7 @@
 								}, 500 + 1000 * {{ $i }});
 							@endif
 						@endforeach
-						
+
 						@if ($details['script'] ?? null)
 							{!! $details['script'] !!}
 						@endif
@@ -174,7 +177,7 @@
 				<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 				@if(array_search($section, $menu) === false)
 					<h4>{{ $dataset['Name'] }}</h4>
-				@endif	
+				@endif
 				@if ($map ?? null)
 					<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
 				@endif
@@ -198,14 +201,14 @@
 													{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
 												</label>
 											</div>
-										@endforeach 
+										@endforeach
 									</div>
 								</li>
 							</ul>
 						</div>
 					</div>
 					<!-- /controls -->
-					
+
 					<!-- toggles -->
 					<div class="select_district" id="toggles">
 						<img src="/img/eyes.png" alt="" title="">
@@ -268,7 +271,7 @@
 									<div class="custom-control custom-switch">
 										<input type="checkbox" class="custom-control-input" id="zipcode-switch">
 										<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
-									</div> 
+									</div>
 								</div>
 							</li>
 						</ul>

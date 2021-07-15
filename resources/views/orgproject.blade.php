@@ -133,7 +133,7 @@
 				<div id="map_container" style="float:none;">
 					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:2px solid #112F4E;"></div>
 				</div>
-				<p class="suggest_button"><a href="https://airtable.com/shrWWa3rNJFGSFObd?prefill_project_id={{ $prjId }}" class="learn_more" target="_blank">Suggest a Change</a></p>
+				<p class="suggest_button mt-4"><a href="https://airtable.com/shrWWa3rNJFGSFObd?prefill_project_id={{ $prjId }}" class="learn_more" target="_blank">Suggest a Change</a></p>
 			</div>
 			
 		</div>
@@ -243,5 +243,9 @@
 			@endif
 		})
 	</script>
-
+<style>
+	#map_container #map {height: 800px !important;}
+</style>
 @endsection
+
+
