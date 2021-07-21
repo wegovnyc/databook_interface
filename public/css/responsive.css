@@ -27,6 +27,8 @@
     #footer-menu{padding: 30px 15px;}
     #myTable_wrapper .toolbar {width: 52%;}
     #myTable_wrapper .toolbar .drop_dowm_select {width: 30%;}
+    .organization_data p {width: calc(100% - 10px);padding-left: 10px;}
+    .organization_data h4 {padding-left: 10px;}
 }
 @media (max-width: 1152px)
 {
@@ -86,6 +88,8 @@
     .map_right .col-6{max-width: 100%;flex:0 0 100%;}
     #data_container.col-6 .filter_icon{position: relative; right: 0;float: right;top:30px}
     /* #data_container.col-6 .filter_icon.position_change {top: 90px; } */
+    /* #map_container #map {width: 96% !important;}
+    select.filter, select.filter-top {width: 98% !important; margin-right: 0%;} */
 }
 @media (max-width: 800px)
 {
@@ -97,6 +101,9 @@
     .submenu_org .nav-item .nav-link {font-size: 14px;padding: 12px 9px;}
     #myTable_wrapper .toolbar .drop_dowm_select {width: 31%;}
     .submenu_org .nav-item .dropdown-menu .dropdown-item{font-weight: 700;font-size: 14px;}
+    .organization_data {
+        padding-left: 0px !important;
+    }
 }
 @media (max-width: 767px)
 {
