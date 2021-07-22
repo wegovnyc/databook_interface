@@ -33,7 +33,7 @@
 		</div>
 		<div class="row justify-content-center">
 
-			<div id="capproject_profile" class="col-8 col-12">
+			<div id="capproject_profile" class="col-md-8 col-sm-12">
                 <div class="table-responsive">
                     <table width="100%" class="mb-5">
                         <thead>
