@@ -132,7 +132,7 @@
                 </div>
 			</div>
 
-			<div class="col-md-4 col-sm-12">
+			<div class="col-md-4 col-sm-12 p-0">
 				<div id="map_container" style="float:none;">
 					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:2px solid #112F4E;"></div>
 				</div>
