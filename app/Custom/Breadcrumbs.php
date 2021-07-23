@@ -5,7 +5,7 @@ class Breadcrumbs
 {
 	static public $root = [
 			//['https://wegov.nyc', 'Home'],
-			['https://wegov.nyc/tools', 'Tools'],
+			//['https://wegov.nyc/tools', 'Tools'],
 			['/', 'DataBook']
 		];
 
@@ -38,7 +38,8 @@ class Breadcrumbs
 
 	static function orgPrj($id, $name, $sect, $sectN, $prjId, $prjN)
 	{
-		return array_merge(self::orgSect($id, $name, $sect, $sectN), [["/agency/{$id}/{$sect}/{$prjId}", $prjN]]);
+		#return array_merge(self::orgSect($id, $name, $sect, $sectN), [["/agency/{$id}/{$sect}/{$prjId}", $prjN]]);
+		return array_merge(self::$root, [['/capitalprojects', 'Capital Projects'], ["/agency/{$id}", $name], ["/agency/{$id}/{$sect}/{$prjId}", $prjId]]);
 	}
 
 	static function districts()

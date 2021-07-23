@@ -22,7 +22,8 @@ class Projects extends Controller
         return view('projects', [
 					'breadcrumbs' => Breadcrumbs::projects(),
 					//'slist' => $ds->list,
-					'url' => $model->url("SELECT * FROM {$details['table']} ORDER BY \"PROJECT_ID\", \"PUB_DATE\" DESC"),
+					#'url' => $model->url("SELECT * FROM {$details['table']} ORDER BY \"PROJECT_ID\", \"PUB_DATE\" DESC"),
+					'url' => $model->url("SELECT * FROM {$details['table']}"),
 					'details' => $details,
 					'dataset' => $model->dataset($details['fullname']),
 					'finStatUrls' => [

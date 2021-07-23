@@ -43,6 +43,7 @@ class ProjectsDatasets
 					'Site Description' => 'SITE_DESCR',
 					'Explanation for Delay' => 'DELAY_DESC',
 			],
+			'order' => [[8, 'asc']],					#7 - wo details col inrement
 		],
 	];
 	

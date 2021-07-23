@@ -73,9 +73,10 @@
 					if (data.GEO_JSON != '') {
 						$(row).addClass('have_coords');
 					}
-				},
+				}
 
 				@if ($details['filters'])
+					,
 					initComplete: function () {
 						this.api().columns([{{ $details['fltsCols'] }}]).every(function (c,a,i) {
 							var delim = {!! json_encode($details['fltDelim']) !!};
@@ -161,6 +162,11 @@
 							$('#filter-1 option:last-child').prop('selected',true).trigger('change')
 						}, 500);						
 					}
+				@endif
+				
+				@if ($details['order'])
+					,
+					order: {!! json_encode($details['order']) !!}
 				@endif
 			});
 
