@@ -87,6 +87,7 @@
     #data_container.col.col-6 #myTable_wrapper .toolbar .drop_dowm_select{width: 24%;}
     .map_right .col-6{max-width: 100%;flex:0 0 100%;}
     #data_container.col-6 .filter_icon{position: relative; right: 0;float: right;top:30px}
+    #map_container {float: none;}
     /* #data_container.col-6 .filter_icon.position_change {top: 90px; } */
     /* #map_container #map {width: 96% !important;}
     select.filter, select.filter-top {width: 98% !important; margin-right: 0%;} */
@@ -104,6 +105,7 @@
     .organization_data {
         padding-left: 0px !important;
     }
+    #data_container.col-6 .filter_icon{top:40px}
 }
 @media (max-width: 767px)
 {
