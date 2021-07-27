@@ -41,7 +41,7 @@
                                 <th scope="col">Summary</th>
                                 <th scope="col">Original</th>
                                 <th scope="col">Current</th>
-                                <th scope="col">Difference</th>
+                                <th scope="col">Change</th>
                             </tr>
                         </thead>
                         <tbody>

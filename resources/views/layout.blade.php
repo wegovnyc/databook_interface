@@ -80,30 +80,25 @@
 
 			<div id="footer-menu" class="row">
 				<div class="col-md-3">
-					<h6>Documentation</h6>
-					<div><a href="//wegov.nyc/news/">News</a></div>
-					<div><a href="//wegov.nyc/events/">Events</a></div>
-					<div><a href="#">Resources</a></div>
+					<h6>Sections</h6>
+					<div><a href="//wegov.nyc/news-events/">News & Events</a></div>
 					<div><a href="//wegov.nyc/tools/">Tools</a></div>
 				</div>
 				<div class="col-md-3">
 					<h6>Contribute</h6>
-					<div><a href="https://www.notion.so/Contact-Us-54b075fa86ec47ebae48dae159s5afc2c">Write for us</a></div>
-					<div><a href="#">Host an event</a></div>
-					<div><a href="https://github.com/wegovnyc">Edit on Github</a></div>
+					<div><a href="https://www.notion.so/wegovnyc/Get-Involved-d31cee2e3ea04051b600e0a5b902daab">Get Involved</a></div>
+					<div><a href="https://opencollective.com/wegovnyc">Donate</a></div>
 				</div>
 				<div class="col-md-3">
 					<h6>About</h6>
-					<div><a href="//wegov.nyc/about/">About us</a></div>
-					<div><a href="#">Site Policies</a></div>
+					<div><a href="https://wegov.nyc/about/">WeGovNYC</a></div>
+					<div><a href="http://sarapis.org/about">Sarapis</a></div>
 				</div>
 				<div class="col-md-3">
 					<h6>Social</h6>
-					<div><a href="#">Twitter</a></div>
-					<div><a href="#">Facebook</a></div>
-					<div><a href="https://join.slack.com/t/wegovnyc/shared_invite/zt-jftnat8l-ahmZuhd73E0Hl8lEESY4JQ">Slack</a></div>
-					<div><a href="#">RSS</a></div>
-					<div><a href="#">Email us</a></div>
+					<div><a href="https://twitter.com/wegovnyc">Twitter</a></div>
+					<div><a href="https://www.facebook.com/wegovnyc">Facebook</a></div>
+					<div><a href="https://github.com/wegovnyc">GitHub</a></div>
 				</div>
 			</div>
 

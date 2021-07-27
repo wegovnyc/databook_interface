@@ -8,11 +8,11 @@
 
 @section('content')
 	<div class="jumbotron">
-        <div class="col-md-7 home_bgcontent">
+        <div class="col-md-6 home_bgcontent">
             <h1>WeGovNYC DataBook</h1>
             <p>We collect and join datasets together to create a data-driven view of New York City government.</p>
             <a class="btn_org_home mr-3" href="{{ route('orgs') }}" role="button">Agency Profiles</a>
-            <a class="btn_org_home mr-3" href="{{ route('districts') }}" role="button">District Profiles</a>
+				{{--<a class="btn_org_home mr-3" href="{{ route('districts') }}" role="button">District Profiles</a>--}}
             <a class="btn_org_home" href="{{ route('projects') }}" role="button">Capital Projects Profiles</a>
         </div>
     </div>
