@@ -1,4 +1,4 @@
-All env and config files are included in repo and safe
+All env and config files are included in repo and safe.
 
 
 
