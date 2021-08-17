@@ -392,9 +392,9 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'fullname' => 'City Record Online (CROL)',
 			'table' => 'crol',
 			'hdrs' => ['Request ID', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Section Name', ],
-			'visible' => [true, true, true, true, true, true, true],
+			'visible' => [true, true, true, true, true],
 			'flds' => ['"RequestID"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SectionName"'],
-			'filters' => [1 => null, 2 => null, 5 => null],
+			'filters' => [1 => null, 2 => null, 4 => null],
 			//'fltDelim' => [3 => ','],
 			'details' => [
 				'Start Date' => 'StartDate',
@@ -422,7 +422,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'Vendor Address' => 'VendorAddress',
 				'Document Links' => 'DocumentLinks',
 			],
-			'description' => 'Additional agency costs for Pension, Fringe Benefits and Debt Service that are included in the Pensions, Miscellaneous Budget and Debit Service agencies. Dollars are In thousands. This data set is updated annually.',
+			'description' => 'The City Record Online (CROL) is now a fully searchable database of notices published in the City Record newspaper which includes but is not limited to: public hearings and meetings, public auctions and sales, solicitations and awards and official rules proposed and adopted by city agencies.',
 		],
 		'govpublist' => [
 			'fullname' => 'Government Publications Listing',

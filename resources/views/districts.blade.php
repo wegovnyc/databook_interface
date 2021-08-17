@@ -234,7 +234,7 @@
 		}
 
 		$(document).ready(function() {
-			mapInit({!! json_encode($map) !!}, {!! $type ? "'{$type}'" : null !!});
+			orgSectionMapInit({!! json_encode($map) !!}, {!! $type ? "'{$type}'" : null !!});
 
 			map.on('load', function() {
 				window.setTimeout(function (){
