@@ -23,7 +23,8 @@ class Projects extends Controller
 					'breadcrumbs' => Breadcrumbs::projects(),
 					//'slist' => $ds->list,
 					#'url' => $model->url("SELECT * FROM {$details['table']} ORDER BY \"PROJECT_ID\", \"PUB_DATE\" DESC"),
-					'url' => $model->url("SELECT * FROM {$details['table']}"),
+					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"PUB_DATE\" = 'pubdate'"),
+					'dates_req_url' => $model->url("SELECT DISTINCT \"PUB_DATE\" FROM {$details['table']} ORDER BY \"PUB_DATE\" DESC"),
 					'details' => $details,
 					'dataset' => $model->dataset($details['fullname']),
 					'finStatUrls' => [

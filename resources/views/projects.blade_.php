@@ -20,192 +20,209 @@
 		}
 				
 		var datatable = null
-		var dataurl = '{!! $url !!}'
-		
 		$(document).ready(function() {
-			
-			/* custom pub_date filter on top-right */
-			$.get("{!! $dates_req_url !!}", function (resp) {
-				var select = $('<select class="filter mt-1" style="width:100%;" id="filter-1" name="filter-1" aria-controls="myTable"><option value="" selected>- Publication Date -</option></select>')
-					.appendTo($("#pub_date_filter"))
-					.on('change', function () {
-						var val = $(this).val()
-						$('.loading').show()
-						datatable.ajax.url(dataurl.replace('pubdate', val)).load(function () {
-							$('.loading').hide()
-							loadFinStat()
-						});
-					});
-				select.wrap('<div class="drop_dowm_select"></div>');
-				resp['rows'].forEach(function (d, j) {
-					select.append(`<option value="${d['PUB_DATE']}" ${ j == 0 ? 'selected' : ''}>${toDashDate(d['PUB_DATE'])}</option>`)
-				});
-
-				loadFinStat();
-				datatable = $('#myTable').DataTable({
-					ajax: {
-						url: dataurl.replace('pubdate', resp['rows'][0]['PUB_DATE']),
-						dataSrc: 'rows'
-					},
-					buttons: [{
-						extend: 'colvis',
-						"className": 'btn_eyeicon',
-						columnText: function ( dt, idx, title ) {
-							return (idx+1)+': '+(title ? title : 'details');
-						}
-					}],
-					deferRender: true,
-					dom: '<"toolbar container-flex"<"row">>Blfrtip',
-					columns: [
-						@if ($details['detFlag'])
-							{
-								"className": 'details-control',
-								"orderable": false,
-								"data":  null,
-								"defaultContent": ''
-							},
-						@endif
-						@foreach ($details['flds'] as $i=>$f)
-							@if ($i > 0)
-								,
-							@endif
-							{
-							data: {!! $f !!},
-							@if (preg_match('~^function ~i', $f))
-								type: 'html',
-							@endif
-							@if ($details['visible'][$i])
-								visible: true
-							@else
-								visible: false
-							@endif
-							}
-						@endforeach
-						,
-						{
-							className: 'record',
-							data:  null,
-							defaultContent: null,
-							visible: false,
-							searchable: false
-						}
-					],
-					createdRow: function(row, data, dataIndex) {
-						if (data.GEO_JSON != '') {
-							$(row).addClass('have_coords');
-						}
+			datatable = $('#myTable').DataTable({
+				ajax: {
+					url: '{!! $url !!}',
+					dataSrc: 'rows'
+				},
+				buttons: [{
+                    extend: 'colvis',
+                    "className": 'btn_eyeicon',
+                    columnText: function ( dt, idx, title ) {
+                        return (idx+1)+': '+(title ? title : 'details');
+                    }
+                }],
+				deferRender: true,
+				dom: '<"toolbar container-flex"<"row">>Blfrtip',
+				columns: [
+                    @if ($details['detFlag'])
+                        {
+                            "className": 'details-control',
+                            "orderable": false,
+                            "data":  null,
+                            "defaultContent": ''
+                        },
+                    @endif
+                    @foreach ($details['flds'] as $i=>$f)
+                        @if ($i > 0)
+                            ,
+                        @endif
+                        {
+                        data: {!! $f !!},
+						@if (preg_match('~^function ~i', $f))
+							type: 'html',
+                        @endif
+                        @if ($details['visible'][$i])
+                            visible: true
+                        @else
+                            visible: false
+                        @endif
+                        }
+                    @endforeach
+					,
+                    {
+                        className: 'record',
+                        data:  null,
+                        defaultContent: null,
+                        visible: false,
+                        searchable: false
+                    }
+                ],
+				createdRow: function(row, data, dataIndex) {
+					if (data.GEO_JSON != '') {
+						$(row).addClass('have_coords');
 					}
+				}
 
-					@if ($details['filters'])
-						,
-						initComplete: function () {
-							this.api().columns([{{ $details['fltsCols'] }}]).every(function (c,a,i) {
-								var delim = {!! json_encode($details['fltDelim']) !!};
-								var column = this;
-								var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
-									.appendTo($("div.toolbar .row"))
-									.on('change', function () {
-										var val = $(this).val()
-										column
-											.search(val ? val : '', false, false)
-											.draw();
-									});
-								select.wrap('<div class="drop_dowm_select col"></div>');
-								$('div.toolbar').insertAfter('#myTable_filter');
-
-								var tt = []
-								dd = column.data()
-
-								column.data().each(function (d, j) {
-									d = typeof d == 'string' ? d.replace(/<[^>]+>/gi, '') : d
-									if (c in delim && typeof d == 'string') {
-										d.split(delim[c]).forEach(function (v, k) {
-											tt.push(v)
-										})
-									}
-									else
-										tt.push(d)
-								})
-								tt = [...new Set(tt)]
-
-								tt.sort().forEach(function (d, j) {
-									select.append('<option value="'+d+'">'+d+'</option>')
+				@if ($details['filters'])
+					,
+					initComplete: function () {
+						this.api().columns([{{ $details['fltsCols'] }}]).every(function (c,a,i) {
+							var delim = {!! json_encode($details['fltDelim']) !!};
+							var column = this;
+							var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
+								.appendTo($("div.toolbar .row"))
+								.on('change', function () {
+									var val = $(this).val()
+									column
+										.search(val ? val : '', false, false)
+										.draw();
 								});
+							select.wrap('<div class="drop_dowm_select col"></div>');
+							$('div.toolbar').insertAfter('#myTable_filter');
+
+							var tt = []
+							dd = column.data()
+
+							column.data().each(function (d, j) {
+								d = typeof d == 'string' ? d.replace(/<[^>]+>/gi, '') : d
+								if (c in delim && typeof d == 'string') {
+									d.split(delim[c]).forEach(function (v, k) {
+										tt.push(v)
+									})
+								}
+								else
+									tt.push(d)
+							})
+							tt = [...new Set(tt)]
+
+							tt.sort().forEach(function (d, j) {
+								select.append('<option value="'+d+'">'+d+'</option>')
 							});
-							$("div.toolbar .row").append('<button id="map_button" class="btn map_btn col" style="margin:0 20px 0 10px; z-index: 10; max-width: 40px;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>');
+						});
+						$("div.toolbar .row").append('<button id="map_button" class="btn map_btn col" style="margin:0 20px 0 10px; z-index: 10; max-width: 40px;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>');
 
-							@foreach ($details['filters'] as $i=>$v)
-								@if ($v)
-									setTimeout(function(){
-										$('#filter-{{ $i }}').find('[value*="{!! $v !!}"]').prop('selected',true).trigger('change')
-									}, 500 + 1000 * {{ $i }});
-								@endif
-							@endforeach
-						}
-					@endif
-					
-					@if ($details['order'])
-						,
-						order: {!! json_encode($details['order']) !!}
-					@endif
-				});
+						@foreach ($details['filters'] as $i=>$v)
+							@if ($v)
+								setTimeout(function(){
+									$('#filter-{{ $i }}').find('[value*="{!! $v !!}"]').prop('selected',true).trigger('change')
+								}, 500 + 1000 * {{ $i }});
+							@endif
+						@endforeach
 
-				$('a.toggle-vis').on('click', function (e) {
-					e.preventDefault();
-					var column = datatable.column($(this).attr('data-column'));
-					column.visible(!column.visible());
-				});
-				
-				$('#myTable tbody').on('click', 'td.details-control', function () {
-					var tr = $(this).closest('tr');
-					var row = datatable.row(tr);
 
-					if (row.child.isShown()) {
-						row.child.hide();
-						tr.removeClass('shown');
-						tr.next('tr').removeClass('child-row');
+						/* custom pub_date filter on top-right */
+						this.api().columns([1]).every(function (c,a,i) {
+							var delim = {!! json_encode($details['fltDelim']) !!};
+							var column = this;
+							var select = $('<select class="filter mt-1" style="width:100%;" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
+								.appendTo($("#pub_date_filter"))
+								.on('change', function () {
+									var val = $(this).val()
+									column
+										.search(val ? val : '', false, false)
+										.draw();
+									loadFinStat();
+								});
+							select.wrap('<div class="drop_dowm_select"></div>');
+							//$('div.toolbar').insertAfter('#myTable_filter');
+
+							var tt = []
+							dd = column.data()
+
+							column.data().each(function (d, j) {
+								d = typeof d == 'string' ? d.replace(/<[^>]+>/gi, '') : d
+								if (c in delim && typeof d == 'string') {
+									d.split(delim[c]).forEach(function (v, k) {
+										tt.push(v)
+									})
+								}
+								else
+									tt.push(d)
+							})
+							tt = [...new Set(tt)]
+
+							tt.sort().forEach(function (d, j) {
+								select.append('<option value="'+d+'">'+d+'</option>')
+							});
+						});
+
+						setTimeout(function(){
+							$('#filter-1 option:last-child').prop('selected',true).trigger('change')
+						}, 500);						
 					}
-					else {
-						row.child(details(row.data())).show();
-						tr.addClass('shown');
-						tr.next('tr').addClass('child-row');
-					}
-				});
+				@endif
+				
+				@if ($details['order'])
+					,
+					order: {!! json_encode($details['order']) !!}
+				@endif
+			});
 
-				$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
-				
-				// if map is displayed updates and draws projects from GEO_JSON field
-				datatable.on('draw', function () {
-					drawProjects('current');
-				});
+			$('a.toggle-vis').on('click', function (e) {
+				e.preventDefault();
+				var column = datatable.column($(this).attr('data-column'));
+				column.visible(!column.visible());
+			});
+			
+			$('#myTable tbody').on('click', 'td.details-control', function () {
+				var tr = $(this).closest('tr');
+				var row = datatable.row(tr);
 
-				$('#myTable tbody').on('click', 'td:not(.details-control)', function () {
-					var mapIsActive = !$('#map_container').attr('style')
-					if (!mapIsActive) 
-						return;
-					var tr = $(this).closest('tr');
-					var row = datatable.row(tr);
-					r = row.data()
-					if (r['GEO_JSON']) {
-						var geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
-						var pr = geo_json.properties
-						fitBounds([[pr.W, pr.S], [pr.E, pr.N]])
-					}
-				})
-				
-				// makes sortable html fields like 9.4 years late, $25,764 over
-				$.fn.dataTable.ext.type.order['html-pre'] = function (data) {
-					var d = data.replace(/-/g, '');
-					d = d.replace(/<span class="(bad)">/g, '-');
-					d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+/g, '');
-					d = d.replace(/NA|NaN|on time|^-$/g, '0');
-					d = d.match(/[-\d\.]+/g) ? parseFloat(d) : d;
-					//console.log(data, d);
-					return d;
-				};
-				
+				if (row.child.isShown()) {
+					row.child.hide();
+					tr.removeClass('shown');
+                    tr.next('tr').removeClass('child-row');
+				}
+				else {
+					row.child(details(row.data())).show();
+					tr.addClass('shown');
+                    tr.next('tr').addClass('child-row');
+				}
+			});
+
+			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
+			
+			// if map is displayed updates and draws projects from GEO_JSON field
+			datatable.on('draw', function () {
+				drawProjects('current');
+            });
+
+			$('#myTable tbody').on('click', 'td:not(.details-control)', function () {
+				var mapIsActive = !$('#map_container').attr('style')
+				if (!mapIsActive) 
+					return;
+				var tr = $(this).closest('tr');
+				var row = datatable.row(tr);
+				r = row.data()
+				if (r['GEO_JSON']) {
+					var geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
+					var pr = geo_json.properties
+					fitBounds([[pr.W, pr.S], [pr.E, pr.N]])
+				}
 			})
-
+			
+			// makes sortable html fields like 9.4 years late, $25,764 over
+			$.fn.dataTable.ext.type.order['html-pre'] = function (data) {
+				var d = data.replace(/-/g, '');
+				d = d.replace(/<span class="(bad)">/g, '-');
+				d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+/g, '');
+				d = d.replace(/NA|NaN|on time|^-$/g, '0');
+				d = d.match(/[-\d\.]+/g) ? parseFloat(d) : d;
+				//console.log(data, d);
+				return d;
+			};
 		});
 
 
