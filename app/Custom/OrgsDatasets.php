@@ -459,6 +459,23 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'details' => [],
 			'description' => 'Metadata for documents submitted to the Department of Records and Information services which are required by legislation.',
 		],
+		'changeofpersonnel' => [
+			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
+			'hdrs' => ['Effective Date', 'Provisional Status', 'Title Code', 'Reason For Change', 'Salary', 'Employee Name'],
+			'flds' => [
+					'function (r) { return r["AdditionalDescription1"].split(";")[0].replace("Effective Date: ", ""); }', 
+					'function (r) { return r["AdditionalDescription1"].split(";")[1].replace("Provisional Status: ", ""); }', 
+					'function (r) { return r["AdditionalDescription1"].split(";")[2].replace("Title Code: ", ""); }', 
+					'function (r) { return r["AdditionalDescription1"].split(";")[3].replace("Reason For Change: ", ""); }', 
+					'function (r) { return toFin(r["AdditionalDescription1"].split(";")[4].replace("Salary: ", "")); }', 
+					'function (r) { return r["AdditionalDescription1"].split(";")[5].replace("Employee Name: ", ""); }', 
+				], 
+			'visible' => [true, true, true, true, true, true],
+			'filters' => [3 => null],
+			'details' => [],
+			'description' => '',
+		],
 	];
 
 	public $list = [
@@ -475,6 +492,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'capitalprojects' => 'Projects',
 		'benefitsapi' => 'Services',
 		'nycgreenbook' => 'People',
+		'changeofpersonnel' => 'Change of Personnel',
 		'agencypmi' => 'Indicators',
 		'onenycindicators' => 'OneNYC',
 		'budgetrequestsregister' => 'Requests',
@@ -513,7 +531,11 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			],
 		'capitalprojects',
 		'benefitsapi',
-		'nycgreenbook',
+		'People' => 
+			[		
+				'nycgreenbook',
+				'changeofpersonnel',
+			],
 		'Indicators' => 
 			[
 				'agencypmi',

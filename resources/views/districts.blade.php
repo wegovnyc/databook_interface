@@ -28,15 +28,6 @@
 							</li>
 						</ul>
  					</div>
-					<!-- <h3>Area filters</h3>
-					@foreach ($map as $code=>$col)
-						<div class="custom-control custom-switch">
-						  <input type="radio" class="custom-control-input" id="{{ $code }}-filter-switch" name="filter" param="{{ $col }}">
-						  <label class="custom-control-label" for="{{ $code }}-filter-switch">
-							{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
-						  </label>
-						</div>
-					@endforeach -->
 				</div>
 				<!-- /controls -->
 				<!-- toggles -->
@@ -179,6 +170,8 @@
 	<script>
 	
 		var globfilter = []
+		var defSection = '{{ $section }}'
+		var defId = '{{ $id }}'
 
 		function getBounds(coords, bounds) {		// recursively walks over multilevel object calculating leaves-points coords
 			if (typeof coords[0][0] == 'object')
@@ -201,7 +194,7 @@
 				if ($('li.nav-item.active .dsmenu').length) {
 					sect = $('li.nav-item.active .dsmenu').attr('id').replace('dsmenu-', '')
 				} else {
-					sect = {{ array_keys($slist)[0] }}
+					sect = '{{ array_keys($slist)[0] }}'
 				}
 			globfilter = filter
 			
@@ -213,12 +206,13 @@
 				var features = map.querySourceFeatures(type, {
 					filter: filter
 				});
-				console.log(features, features.length)
+				console.log(filter, features, features.length)
 				if (features.length) {
 					var title = features[0].properties['nameCol']
 					var center = getBounds(features[0].geometry.coordinates).getCenter()
 					console.log(title, center)
-					$('#section_content h1').html(type== 'cc' ? 'City Council District '+title : title)
+					tt = {'cc': 'City Council District ', 'cd': 'Community District ', 'nta': ''}
+					$('#section_content h1').html(tt[type]+title)
 					$('.loading').hide()
 					window.setTimeout(function (){
 						map.flyTo({
@@ -237,22 +231,33 @@
 			orgSectionMapInit({!! json_encode($map) !!}, {!! $type ? "'{$type}'" : null !!});
 
 			map.on('load', function() {
+				/*
 				window.setTimeout(function (){
 					//	enable filter by def
 					//if ($('#map-controls div:nth-child(2) input:checked').length)
-						//$('#map-controls div:nth-child(2) input').click();
-					var tmpfilter = ['in', filtFields['{{ $type }}'], '{{ $id }}']
-					console.log(tmpfilter)
-					mapAction(tmpfilter, '{{ $type }}', '{{ $section }}');
-					map.setFilter('{{ $type }}FH', tmpfilter);
+						$('#map-controls div:nth-child(2) input').click();
 					}, 3000
 				)
+				*/
 			})
 		})
 
 		function changeToggle (e) {
-			console.log($(e.target).next("label")[0].innerHTML)
+			//console.log($(e.target).next("label")[0].innerHTML)
 			$('#change_district').html($(e.target).next("label")[0].innerHTML);
+			//console.log($(e.target))
+			
+			var type = $(e.target).attr('id').replace('-filter-switch', '')
+			var id = defId ? defId : {!! json_encode(['cc' => '1', 'cd' => '101', 'nta' => 'BK09']) !!}[type]
+			defId = null
+			
+			var section = defSection ? defSection : 'inherit'
+			defSection = null
+
+			console.log(type, id, section)
+			var tmpfilter = ['in', filtFields[type], id]
+			mapAction(tmpfilter, type, section);
+			map.setFilter(type+'FH', tmpfilter);
 		}
 
 		$('#toggle_boundries').click( function (e) {

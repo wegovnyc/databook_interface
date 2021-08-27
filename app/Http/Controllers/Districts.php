@@ -23,7 +23,7 @@ class Districts extends Controller
 					'section' => $section ?? 'nyccouncildiscretionaryfunding',
 					'breadcrumbs' => Breadcrumbs::districts(),
 					'slist' => $ds->list,
-					'map' => ['cc' => 'inherit', 'nta' => 'inherit']
+					'map' => ['cc' => 'inherit', 'cd' => 'inherit', 'nta' => 'inherit']
 				]);
     }
 	

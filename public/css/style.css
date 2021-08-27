@@ -137,7 +137,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 }
 .badge-info::after{content: ',';margin-right: 5px;}
 .badge-info:last-child::after{display: none;}
-
+.prj_stat {color:#162E51;}
 
 /*================== start organization detail page ================*/
 .org-header {background: #fff;}

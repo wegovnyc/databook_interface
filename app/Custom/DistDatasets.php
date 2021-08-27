@@ -30,7 +30,7 @@ class DistDatasets
 						'BBL' => 'BBL',
 						'NTA' => 'NTA'			
 			],
-			'map' => ['cc' => 'wegov-cd-id', 'nta' => 'wegov-nta-code'],
+			'map' => ['cd' => 'wegov-comd-id', 'cc' => 'wegov-cd-id', 'nta' => 'wegov-nta-code'],
 		],
 		
 		'facilities' => [
@@ -59,7 +59,7 @@ class DistDatasets
 					'Property Type' => 'proptype'			
 			],
 			'description' => 'The Facilities Database (FacDB) captures the locations and descriptions of public and private facilities ranging from the provision of social services, recreation, education, to solid waste management.',
-			'map' => ['cc' => 'wegov-cd-id', 'nta' => 'wegov-nta-code'],	
+			'map' => ['cd' => 'wegov-comd-id', 'cc' => 'wegov-cd-id', 'nta' => 'wegov-nta-code'],	
 		],
 
 		'nyccouncildiscretionaryfunding' => [
@@ -96,15 +96,15 @@ class DistDatasets
 				'NTA' => 'NTA',
 			],
 			'description' => 'The dataset reflects applications for discretionary funding to be allocated by the New York City Council.',
-			'map' => ['cc' => 'Council District', 'nta' => 'wegov-nta-code'],
+			'map' => ['cd' => 'wegov-comd-id', 'cc' => 'Council District', 'nta' => 'wegov-nta-code'],
 		],
 	];
 
 	// single level list 'dataset name' => 'dataset title'
 	public $list = [
+		'nyccouncildiscretionaryfunding' => 'City Council Discretionary',
 		'requests' => 'Requests',
 		'facilities' => 'Facilities',
-		'nyccouncildiscretionaryfunding' => 'City Council Discretionary',
 	];
 	
 	// multi level list 'menu dropdown title (or zero if single level item)' => ['dataset name', ...]

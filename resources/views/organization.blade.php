@@ -392,7 +392,10 @@
 			
 			@foreach(array_keys($slist) as $i=>$dsName)	
 				@if($i > 0)
-					loadTableStat("{{ $dsName }}", "{!! str_replace('tablename', $allDS[$dsName]['table'], $tableStatUrl) !!}");
+					loadTableStat(
+						"{{ $dsName }}", 
+						"{!! str_replace('tablename', $allDS[$dsName]['table'], $dsName == 'changeofpersonnel' ? $tableStatUrlChangeOfPersonnel : $tableStatUrl) !!}"
+					);
 				@endif
 			@endforeach
 			@if($org['Twitter'] ?? null)

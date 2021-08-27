@@ -74,6 +74,7 @@ class Organizations extends Controller
 					'icons' => $ds->socicons,
 					'allDS' => $ds->dd,
 					'tableStatUrl' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}'"),
+					'tableStatUrlChangeOfPersonnel' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}' AND \"SectionName\"='Changes in Personnel'"),
 					'finStatUrls' => [
 						'headcount' => $model->url("SELECT sum(\"HEADCOUNT\") FROM headcountactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
 						'as' => $model->url("SELECT sum(\"AMOUNT\") FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
@@ -108,8 +109,11 @@ class Organizations extends Controller
 					'menu' => $ds->menu,
 					'activeDropDown' => $ds->menuActiveDD($section),
 					'icons' => $ds->socicons,
-					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" . ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')),
-					'dataset' => $model->dataset($details['fullname']),
+					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" 
+											. ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')
+											. ($section == 'changeofpersonnel' ? ' AND "SectionName"=\'Changes in Personnel\' ORDER BY date("StartDate")' : '')
+										),
+					'dataset' => ($section == 'changeofpersonnel' ? ['Name' => 'Change of Personnel'] : []) + $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $section, $ds->list[$section]),
 					'details' => $details,
 					'map' => $details['map'] ?? null, //['cc' => 8, 'nta' => 7],
@@ -146,10 +150,14 @@ class Organizations extends Controller
 					'details' => $details,
 					'map' => true,
 					'finStatUrls' => [
-						'#budget_totals' => $model->url("SELECT sum(cast(REPLACE(\"BUDG_CURR\", ',', '.') as decimal)) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
-						'#prj_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
-						//'#over_budg_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"ORIG_BUD_AMT\" > 0 AND cast(REPLACE(\"BUDG_DIFF\", ',', '.') as decimal) < 0"),
-						//'#delayed_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"END_DIFF\" <> '-' AND cast(REPLACE(\"END_DIFF\", ',', '.') as decimal) < 0"),
+						'#projects_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
+						'#orig_cost' => $model->url("SELECT sum(\"BUDG_ORIG\") RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
+						'#curr_cost' => $model->url("SELECT sum(cast(REPLACE(\"BUDG_CURR\", ',', '.') as decimal)) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate'"),
+						'#over_budg_am' => $model->url("SELECT sum(cast(\"BUDG_DIFF\" as decimal)) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND cast(\"BUDG_DIFF\" as decimal) < 0"),
+						'#long_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND cast(\"DURATION_DIFF\" as decimal) < 0"),
+						'#over_budg_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND cast(\"BUDG_DIFF\" as decimal) < 0"),
+						'#late_start_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"START_DIFF\" <> '-' AND cast(REPLACE(\"START_DIFF\", ',', '.') as decimal) < 0"),
+						'#late_end_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"wegov-org-id\" = {$id} AND \"PUB_DATE\"='pubdate' AND \"END_DIFF\" <> '-' AND cast(REPLACE(\"END_DIFF\", ',', '.') as decimal) < 0"),
 					],
 				])
 			: abort(404);

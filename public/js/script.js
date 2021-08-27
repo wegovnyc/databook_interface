@@ -121,7 +121,7 @@ function orgSectionMapInit(filters, filterType) {
 			window.setTimeout(function (){
 				//	enable 1st filter
 				if (!$('#map-controls div:nth-child(2) input:checked').length)
-						$('#map-controls div:nth-child(2) input').click();
+						$('#map-controls div:nth-child(2) input')[0].click();
 				}, 500
 			)
 		else
