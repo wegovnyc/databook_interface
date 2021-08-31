@@ -20,8 +20,9 @@
 			<div class="col-md-8 organization_data py-0">
 				<h2>{{ $data['name'] }}</h2>
 			</div>
+			
 			<div class="col-md-2 col-sm-4 organization_data justify-content-center pl-5">
-				<h5 class="mt-2">Publication Date<h5>
+				<h5 class="mt-2" data-toggle="tooltip" data-placement="bottom" title="Updated data about capital projects is usually published three times a year. You can see how the data between dates changes by selecting different dates.">Publication Date<h5>
 			</div>
 			<div class="col-md-2 col-sm-4 organization_data">
 				<select id="pub_date_filter" style="width:100%;" class="filter" onchange="showPrj();">
@@ -168,24 +169,7 @@
 	</div>
 
 	<script>
-		/*		// map basics
-		function changeToggle (e) {
-			console.log($(e.target).next("label")[0].innerHTML)
-			$('#change_district').html($(e.target).next("label")[0].innerHTML);
-		}
-		$('#toggle_boundries').click( function (e) {
-			$(this).next('.dropdown-menu').toggleClass('show');
-		})
-		$(".filter_icon").click(function() {
-			console.log($('.toolbar').is(':visible'))
-			if(!$('.toolbar').is(':visible')) {
-				$('.filter_icon').addClass('position_change');
-			}else {
-				$('.filter_icon').removeClass('position_change');
-			}
-			$(".toolbar").toggle();
-		});
-		*/
+
 		function showPrj() {
 			var data={!! json_encode($data['items']) !!}
 			var pub_date = $('#pub_date_filter option:selected').val()
@@ -202,6 +186,8 @@
 		}
 
 		$(document).ready(function () {
+			$('h5[data-toggle="tooltip"]').tooltip()
+			
 			showPrj();
 
 			@if ($data['geo_feature'])

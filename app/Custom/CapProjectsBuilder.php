@@ -101,10 +101,11 @@ class CapProjectsBuilder
 			] as $f=>$t)
 			if (($dd[$f] ?? null) <> ($pdd[$f] ?? null))
 			{
-				$b = strstr($f, 'BUDG_') ? number_format($dd[$f]) : $dd[$f];
+				$b = strstr($f, 'BUDG_') ? '$' . number_format((float)$dd[$f]) : $dd[$f];
 				if ($pdd[$f] ?? null)
 				{
-					$a = strstr($f, 'BUDG_') ? number_format($pdd[$f]) : $pdd[$f];
+					#echo $pdd[$f];
+					$a = strstr($f, 'BUDG_') ? '$' . number_format((float)$pdd[$f]) : $pdd[$f];
 					$rr[] = "{$t} changed from {$a} to {$b}";
 				} 
 				else
