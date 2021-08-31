@@ -464,7 +464,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'table' => 'crol',
 			'hdrs' => ['Effective Date', 'Provisional Status', 'Title Code', 'Reason For Change', 'Salary', 'Employee Name'],
 			'flds' => [
-					'function (r) { return r["AdditionalDescription1"].split(";")[0].replace("Effective Date: ", ""); }', 
+					'function (r) { return usToDashDate(r["AdditionalDescription1"].split(";")[0].replace("Effective Date: ", "")); }', 
 					'function (r) { return r["AdditionalDescription1"].split(";")[1].replace("Provisional Status: ", ""); }', 
 					'function (r) { return r["AdditionalDescription1"].split(";")[2].replace("Title Code: ", ""); }', 
 					'function (r) { return r["AdditionalDescription1"].split(";")[3].replace("Reason For Change: ", ""); }', 
@@ -475,6 +475,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'filters' => [3 => null],
 			'details' => [],
 			'description' => '',
+			'script' => 'datatable.order([0, "desc"]).draw();',
 		],
 	];
 
@@ -491,7 +492,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'govpubrequired' => 'Required Reports',
 		'capitalprojects' => 'Projects',
 		'benefitsapi' => 'Services',
-		'nycgreenbook' => 'People',
+		'nycgreenbook' => 'Greenbook',
 		'changeofpersonnel' => 'Change of Personnel',
 		'agencypmi' => 'Indicators',
 		'onenycindicators' => 'OneNYC',

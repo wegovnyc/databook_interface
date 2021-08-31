@@ -28,8 +28,10 @@ class CapProjectsBuilder
 		}
 		
 		$rr = [];
+		$cLog = [];
 		$geo_json = null;
 		$name = $id = '';
+		$inext = null;
 		foreach ($dd as $i=>$d)
 		{
 			if ($d['milestones'] ?? null)
@@ -68,8 +70,64 @@ class CapProjectsBuilder
 			$name = $name ? $name : $d['PROJECT_DESCR'];
 			$id = $id ? $id : $d['wegov-org-id'];
 			$geo_json = $d['GEO_JSON'] ? $d['GEO_JSON'] : $geo_json;
+			
+			if ($inext)
+			{
+				$logT = self::genLog($dd[$i], $dd[$inext]);
+				if ($logT)
+					$cLog[$i] = $logT;
+			}
+			$inext = $i;
 		}
-		return ['name' => $name, 'items' => $rr, 'geo_feature' => str_replace('""', '"', $geo_json), 'id' => $id];
+		/*
+		?><pre><?
+		print_r($cLog);
+		?></pre><?
+		*/
+		return ['name' => $name, 'items' => $rr, 'geo_feature' => str_replace('""', '"', $geo_json), 'id' => $id, 'cLog' => $cLog];
+	}
+	
+	static function genLog($pdd, $dd)
+	{
+		$mm = $dd['milestones'];
+		$rr = [];
+		foreach ([
+				'BUDG_ORIG' => 'Original Budget',
+				'BUDG_CURR' => 'Current Budget',
+				'START_ORIG' => 'Original Start',
+				'START_CURR' => 'Current Start',
+				'END_ORIG' => 'Original End',
+				'END_CURR' => 'Current End',
+			] as $f=>$t)
+			if (($dd[$f] ?? null) <> ($pdd[$f] ?? null))
+			{
+				$b = strstr($f, 'BUDG_') ? number_format($dd[$f]) : $dd[$f];
+				if ($pdd[$f] ?? null)
+				{
+					$a = strstr($f, 'BUDG_') ? number_format($pdd[$f]) : $pdd[$f];
+					$rr[] = "{$t} changed from {$a} to {$b}";
+				} 
+				else
+					$rr[] = "{$t} stated to {$b}";
+			}
+		
+		$pmm = [];
+		foreach ($pdd['milestones'] as $m)
+			$pmm[$m['TASK_DESCRIPTION']] = $m;
+		
+		foreach ($mm as $m)
+		{
+			if (!($pmm[$m['TASK_DESCRIPTION']] ?? null))
+				$rr[] = "New milestone '{$m['TASK_DESCRIPTION']}'";
+			else 
+				foreach ([
+						'ORIG_DATE_F' => 'Original',
+						'CURR_DATE_F' => 'Current',
+					] as $f=>$t)
+					if (($m[$f] ?? null) <> ($pmm[$m['TASK_DESCRIPTION']][$f] ?? null))
+						$rr[] = ($pmm[$m['TASK_DESCRIPTION']][$f] ?? null) ? "{$m['TASK_DESCRIPTION']} {$t} changed from {$pmm[$m['TASK_DESCRIPTION']][$f]} to {$m[$f]}" : "{$t} stated to {$m[$f]}";
+		}
+		return $rr;
 	}
 	
 	static function df($d)

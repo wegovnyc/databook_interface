@@ -28,10 +28,14 @@ class Projects extends Controller
 					'details' => $details,
 					'dataset' => $model->dataset($details['fullname']),
 					'finStatUrls' => [
-						'#budget_totals' => $model->url("SELECT sum(cast(REPLACE(\"BUDG_CURR\", ',', '.') as decimal)) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate'"),
-						'#prj_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate'"),
-						//'#over_budg_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate' AND cast(REPLACE(\"BUDG_DIFF\", ',', '.') as decimal) < 0"),
-						//'#delayed_count' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate' AND \"END_DIFF\" <> '-' AND cast(REPLACE(\"END_DIFF\", ',', '.') as decimal) < 0"),
+						'#projects_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate'"),
+						'#orig_cost' => $model->url("SELECT sum(\"BUDG_ORIG\") RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate'"),
+						'#curr_cost' => $model->url("SELECT sum(cast(REPLACE(\"BUDG_CURR\", ',', '.') as decimal)) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate'"),
+						'#over_budg_am' => $model->url("SELECT sum(cast(\"BUDG_DIFF\" as decimal)) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate' AND cast(\"BUDG_DIFF\" as decimal) < 0"),
+						'#long_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate' AND \"DURATION_DIFF\" <> '-' AND cast(\"DURATION_DIFF\" as decimal) < 0"),
+						'#over_budg_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate' AND cast(\"BUDG_DIFF\" as decimal) < 0"),
+						'#late_start_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate' AND \"START_DIFF\" <> '-' AND cast(REPLACE(\"START_DIFF\", ',', '.') as decimal) < 0"),
+						'#late_end_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp WHERE \"PUB_DATE\"='pubdate' AND \"END_DIFF\" <> '-' AND cast(REPLACE(\"END_DIFF\", ',', '.') as decimal) < 0"),
 					],
 					'map' => true,
 				]);

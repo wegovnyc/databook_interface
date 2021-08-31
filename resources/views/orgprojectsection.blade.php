@@ -261,8 +261,6 @@
 			var pubdate = $('#filter-1 option:selected').val().replaceAll('-', '');
 			for (let sel in uu) {
 				$.get(uu[sel].replace('pubdate', pubdate), function (resp) {
-					//console.log(resp)
-					//jj = $.parseJSON(resp)
 					var v = resp['rows'][0]['res'] ?? '-'
 					console.log(['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel))
 					if ((['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel)) && (v != '-'))
@@ -306,123 +304,130 @@
 
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-6 organization_data">
+			<div class="col-md-9 organization_data">
 				<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 				@if(array_search($section, $menu) === false)
 					<h4>{{ $dataset['Name'] }}</h4>
 				@endif	
 			</div>
-			<div class="col-md-6 my-3" id="org_summary">
-							<table class="table-sm stats-table" width="100%">
-							  <thead>
-								<tr>
-								  <th scope="col" width="60%" class="text-center">Publication Date</th>
-								  <th scope="col" width="40%" id="pub_date_filter"></th>
-								</tr>
-							  </thead>
-							  <tbody>
-								  <tr>
-									  <td colspan=2>Updated data about capital projects is usually published three times a year. You can see how the data between dates changes by selecting different dates.</td>
-								  </tr>
-							  </tbody>
-							</table>
+			<div class="col-md-3 mt-2" id="org_summary">
+				<table class="table-sm stats-table" width="100%">
+				  <thead>
+					<tr>
+					  <th scope="col" width="50%" class="text-center">Publication Date</th>
+					  <th scope="col" width="50%" id="pub_date_filter"></th>
+					</tr>
+				  </thead>
+				  <tbody>
+					  <tr>
+						<td colspan=2>
+							<small>Updated data about capital projects is usually published three times a year. You can see how the data between dates changes by selecting different dates.
+							</small>
+							<br/>
+							<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="false" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
+						</td>
+					  </tr>
+				  </tbody>
+				</table>
 			</div>
 		</div>
-
-		<div class="row justify-content-center my-2">
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Number of Projects
-							<h2 id="projects_no" class="prj_stat">&nbsp;</h2>
+		
+		<div id="stats_collapse" class="collapse mt-2 mb-4">
+			<div class="row justify-content-center my-2">
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Number of Projects
+								<h2 id="projects_no" class="prj_stat">&nbsp;</h2>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Original Cost
-							<h2 id="orig_cost" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Current Cost
-							<h2 id="curr_cost" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Amount Over Budget
-							<h2 id="over_budg_am" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-		</div>
 			
-		<div class="row justify-content-center mt-3 mb-4">
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Running Long
-							<h2 id="long_no" class="prj_stat">&nbsp;</h2>
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Original Cost
+								<h2 id="orig_cost" class="prj_stat">&nbsp;</h2>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Over Budget
-							<h2 id="over_budg_no" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Starting Late
-							<h2 id="late_start_no" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Ending Late
-							<h2 id="late_end_no" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-		</div>
 			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Current Cost
+								<h2 id="curr_cost" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Amount Over Budget
+								<h2 id="over_budg_am" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+				
+			<div class="row justify-content-center mt-3 mb-4">
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Running Long
+								<h2 id="long_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Over Budget
+								<h2 id="over_budg_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Starting Late
+								<h2 id="late_start_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Ending Late
+								<h2 id="late_end_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+				
 			
 		<div class="row justify-content-center map_right">
 			@if ($map ?? null)

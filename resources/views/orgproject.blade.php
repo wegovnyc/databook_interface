@@ -137,6 +137,24 @@
 					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:2px solid #112F4E;"></div>
 				</div>
 				<p class="suggest_button mt-4"><a href="https://airtable.com/shrWWa3rNJFGSFObd?prefill_project_id={{ $prjId }}" class="learn_more" target="_blank">Suggest a Change</a></p>
+				@if ($data['cLog'])
+					<div class="my-3">
+						<h4>Change Log</h4>
+						<ul style="list-style-type: none; padding-inline-start: 20px;">
+							@foreach ($data['cLog'] as $d=>$ll)
+								<li>
+									<b>{{ implode('/', [substr($d, 4, 2), substr($d, 6, 2), substr($d, 0, 4)]) }}</b>
+									<ul>
+									@foreach ($ll as $l)
+										<li>
+										{{ $l }}
+										</li>
+									@endforeach
+								</ul></li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 			</div>
 
 		</div>
