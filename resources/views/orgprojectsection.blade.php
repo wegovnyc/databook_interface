@@ -22,6 +22,8 @@
 
 		var datatable = null
 		$(document).ready(function() {
+			$('th[data-toggle="tooltip"]').tooltip()
+			
 			datatable = $('#myTable').DataTable({
 				ajax: {
 					url: '{!! $url !!}',
@@ -314,7 +316,7 @@
 				<table class="table-sm stats-table" width="100%">
 				  <thead>
 					<tr>
-					  <th scope="col" width="50%" class="text-center">Publication Date</th>
+					  <th scope="col" width="50%" class="text-center" data-toggle="tooltip" data-placement="bottom" title="See the project info published on specific dates.">Publication Date</th>
 					  <th scope="col" width="50%" id="pub_date_filter"></th>
 					</tr>
 				  </thead>

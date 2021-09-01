@@ -391,10 +391,12 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'crol' => [
 			'fullname' => 'City Record Online (CROL)',
 			'table' => 'crol',
-			'hdrs' => ['Request ID', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Section Name', ],
-			'visible' => [true, true, true, true, true],
-			'flds' => ['"RequestID"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SectionName"'],
-			'filters' => [1 => null, 2 => null, 4 => null],
+			'hdrs' => ['Start Date', 'Request ID', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Section Name', ],
+			'visible' => [true, true, true, true, true, true],
+			'flds' => ['function (r) { return usToDashDate(r["StartDate"]); }', 
+					'"RequestID"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SectionName"'
+				],
+			'filters' => [2 => null, 3 => null, 5 => null],
 			//'fltDelim' => [3 => ','],
 			'details' => [
 				'Start Date' => 'StartDate',
@@ -423,6 +425,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'Document Links' => 'DocumentLinks',
 			],
 			'description' => 'The City Record Online (CROL) is now a fully searchable database of notices published in the City Record newspaper which includes but is not limited to: public hearings and meetings, public auctions and sales, solicitations and awards and official rules proposed and adopted by city agencies.',
+			'script' => 'datatable.order([1, "desc"]).draw();',
 		],
 		'govpublist' => [
 			'fullname' => 'Government Publications Listing',

@@ -22,7 +22,7 @@
 			</div>
 			
 			<div class="col-md-2 col-sm-4 organization_data justify-content-center pl-5">
-				<h5 class="mt-2" data-toggle="tooltip" data-placement="bottom" title="Updated data about capital projects is usually published three times a year. You can see how the data between dates changes by selecting different dates.">Publication Date<h5>
+				<h5 class="mt-2" data-toggle="tooltip" data-placement="bottom" title="See the project info published on specific dates.">Publication Date<h5>
 			</div>
 			<div class="col-md-2 col-sm-4 organization_data">
 				<select id="pub_date_filter" style="width:100%;" class="filter" onchange="showPrj();">
