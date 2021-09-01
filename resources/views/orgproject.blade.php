@@ -131,6 +131,20 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="my-3">
+					<div id="hashover"></div>
+					<script type="text/javascript">
+						var rows="2";        // Sets "Comments" field height
+						var name_on="yes";    // Disables "Name" field
+						var passwd_on="no";  // Disables "Password" field
+						var email_on="no";   // Disables "E-mail" field
+						var sites_on="no";   // Disables "Website" field
+						var icon_size=24;
+					</script>
+					<script type="text/javascript" src="/hashover/comments.php"></script>
+					<noscript>You must have JavaScript enabled to use the comments.</noscript>
+                </div>
 			</div>
 
 			<div class="col-md-4 col-sm-12 p-0">

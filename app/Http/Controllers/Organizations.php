@@ -219,6 +219,7 @@ class Organizations extends Controller
 			? view('orgproject', [
 					'id' => $id,
 					'prjId' => $prjId,
+					'pagetitle' => "{$data['name']} | {$prjId}",
 					'org' => $org,
 					'section' => $section,
 					'slist' => $ds->list,
