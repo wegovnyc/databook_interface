@@ -23,6 +23,14 @@
 						{!! nl2br($org['description']) !!}
 					</p>
 				@endif
+				@if ($org['url'])
+					<div class="float-left mr-4">
+                        <a href="{!! $org['url'] !!}" class="float-left no-underline" target="_blank">
+                            <span class="type-label">Website</span>
+                        </a>
+                    </div>					
+				@endif
+				
 			</div>
 			<div class="col-md-{{ $w }} mt-3" id="org_summary">
 				<div class="card organization_summary">

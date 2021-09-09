@@ -7,7 +7,7 @@
 @section('content')
 	<div class="container">
 		<div class="row justify-content-center">
-			<div id="map_container" class="col-12 mb-0">
+			<div id="map_container" class="col-12 mb-0" style="min-height:500px!important;">
 				<!-- controls -->
 				<div id="map-controls">
 					<div class="select_district">
@@ -97,7 +97,7 @@
 						</li>
 					</ul>
 				</div>
-				<!-- <div >
+				{{-- <div >
 					<div class="custom-control custom-switch">
 					  <input type="checkbox" class="custom-control-input" id="cd-switch">
 					  <label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
@@ -154,7 +154,7 @@
 					  <input type="checkbox" class="custom-control-input" id="zipcode-switch">
 					  <label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
 					</div>
-				</div> -->
+				</div> --}}
 				<!-- /toggles -->
 				<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;"></div>
 			</div>
@@ -163,6 +163,9 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div id="section_content" class="col-12 mb-4 p-0 district_section">
+				<div class="text-center bottom_text my-3">
+					<h3>Click a District to View Data.</h3>
+				</div>				
 			</div>
 		</div>
 	</div>
@@ -248,16 +251,19 @@
 			//console.log($(e.target))
 			
 			var type = $(e.target).attr('id').replace('-filter-switch', '')
-			var id = defId ? defId : {!! json_encode(['cc' => '1', 'cd' => '101', 'nta' => 'BK09']) !!}[type]
+			//var id = defId ? defId : {!! json_encode(['cc' => '1', 'cd' => '101', 'nta' => 'BK09']) !!}[type]
+			var id = defId
 			defId = null
 			
 			var section = defSection ? defSection : 'inherit'
 			defSection = null
 
-			console.log(type, id, section)
-			var tmpfilter = ['in', filtFields[type], id]
-			mapAction(tmpfilter, type, section);
-			map.setFilter(type+'FH', tmpfilter);
+			if (id) {
+				console.log(type, id, section)
+				var tmpfilter = ['in', filtFields[type], id]
+				mapAction(tmpfilter, type, section);
+				map.setFilter(type+'FH', tmpfilter);
+			}
 		}
 
 		$('#toggle_boundries').click( function (e) {

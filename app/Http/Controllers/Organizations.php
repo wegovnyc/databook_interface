@@ -77,8 +77,8 @@ class Organizations extends Controller
 					'tableStatUrlChangeOfPersonnel' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}' AND \"SectionName\"='Changes in Personnel'"),
 					'finStatUrls' => [
 						'headcount' => $model->url("SELECT sum(\"HEADCOUNT\") FROM headcountactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
-						'as' => $model->url("SELECT sum(\"AMOUNT\") FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
-						'ac' => $model->url("SELECT sum(\"TOTAL AMOUNT\") FROM additionalcostsallocation WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
+						'as' => $model->url("SELECT sum(\"AMOUNT\" * 1000) FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
+						'ac' => $model->url("SELECT sum(\"TOTAL AMOUNT\" * 1000) FROM additionalcostsallocation WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
 					],
 					'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
 					'crol' => $model->crol($id),

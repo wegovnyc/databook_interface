@@ -19,7 +19,7 @@ class Districts extends Controller
 		$ds = new DistDatasets();
         return view('districts', [
 					'type' => $type ?? 'cc',
-					'id' => $id ?? '1',
+					'id' => $id ?? null,
 					'section' => $section ?? 'nyccouncildiscretionaryfunding',
 					'breadcrumbs' => Breadcrumbs::districts(),
 					'slist' => $ds->list,
