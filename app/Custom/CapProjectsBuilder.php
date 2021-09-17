@@ -109,7 +109,7 @@ class CapProjectsBuilder
 		foreach ($mm as $m)
 		{
 			if (!($pmm[$m['TASK_DESCRIPTION']] ?? null))
-				$rr[] = "New milestone '{$m['TASK_DESCRIPTION']}'";
+				$rr[] = ["New milestone '{$m['TASK_DESCRIPTION']}'", ''];
 			else 
 				foreach ([
 						'ORIG_DATE_F' => 'Original',
