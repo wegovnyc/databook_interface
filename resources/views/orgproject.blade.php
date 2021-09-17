@@ -159,7 +159,7 @@
 				<div id="map_container" style="float:none;">
 					<!-- toggles -->
 					<div class="select_district" id="toggles" style="top:5px; left:0px; display:none;">
-						<img src="/img/eyes.png" alt="" title="">
+						<img src="/img/eyes.png" alt="">
 						<ul class="inner_district">
 							<li class="dropdown">
 								<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
@@ -253,7 +253,7 @@
 
     <div class="col-md-12">
         <div class="bottom_lastupdate">
-            <p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+            <p class="lead"><img src="/img/info.png" alt=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
             <!--<p>{!! nl2br($org['description']) !!}</p>-->
         </div>
 	</div>

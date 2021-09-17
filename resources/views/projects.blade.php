@@ -133,7 +133,7 @@
 									select.append('<option value="'+d+'">'+d+'</option>')
 								});
 							});
-							$("div.toolbar .row").append('<button id="map_button" class="btn map_btn col" style="margin:0 20px 0 10px; z-index: 10; max-width: 40px;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>');
+							$("div.toolbar .row").append('<button id="map_button" class="btn map_btn col" style="margin:0 20px 0 10px; z-index: 10; max-width: 40px;" onclick="toggleMap();"><img src="/img/map_location.png" alt=""></button>');
 
 							@foreach ($details['filters'] as $i=>$v)
 								@if ($v)
@@ -213,10 +213,6 @@
 					return d;
 				};
 				
-			})
-
-			$('#toggle_boundries').click( function (e) {
-				$(this).next('.dropdown-menu').toggleClass('show');
 			})
 
 		});
@@ -438,10 +434,10 @@
 		<div class="row justify-content-center map_right">
 			@if ($map ?? null)
 				<div id="map_container" class="col-6" style="display:none;">
-					<button id="map_button_alt" class="btn btn-outline map_btn" style="margin:0 20px 20px 10px; z-index: 10; max-width: 40px; float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
+					<button id="map_button_alt" class="btn btn-outline map_btn" style="margin:0 20px 20px 10px; z-index: 10; max-width: 40px; float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt=""></button>
 					<!-- toggles -->
 					<div class="select_district" id="toggles" style="left:0px;">
-						<img src="/img/eyes.png" alt="" title="">
+						<img src="/img/eyes.png" alt="">
 						<ul class="inner_district">
 							<li class="dropdown">
 								<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
@@ -541,7 +537,7 @@
 
     <div class="col-md-12">
         <div class="bottom_lastupdate">
-            <p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+            <p class="lead"><img src="/img/info.png" alt=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
         </div>
 	</div>
 
@@ -563,10 +559,6 @@
 			}
 			$(".toolbar").toggle();
 		});
-		
-		$('#toggle_boundries').click( function (e) {
-			$(this).next('.dropdown-menu').toggleClass('show');
-		})
 	</script>
 
 @endsection
