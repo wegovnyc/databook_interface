@@ -49,9 +49,9 @@ class CapProjectsBuilder
 				'#SCOPE_TEXT' => $d['SCOPE_TEXT'],
 				'PUB_DATE_F' => self::df($d['PUB_DATE']),
 				
-				'#budget .original' => self::budgetRound($d['ORIG_BUD_AMT']),
-				'#budget .current' => self::budgetRound($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']),
-				'#budget .difference' => self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']),
+				'#budget .original' => [self::toFinShort($d['ORIG_BUD_AMT']), self::budgetRound($d['ORIG_BUD_AMT'])],
+				'#budget .current' => [self::toFinShort($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']), self::budgetRound($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'])],
+				'#budget .difference' => [self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']), self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], false)],
 				
 				'#start .original' => ($d['ORIG_START'] ?? null) ? self::df($d['ORIG_START']) : '-',
 				'#start .current' => ($d['CURR_START'] ?? null) ? self::df($d['CURR_START']) : '-',
@@ -100,6 +100,68 @@ class CapProjectsBuilder
 				'END_CURR' => 'Current End',
 			] as $f=>$t)
 			if (($dd[$f] ?? null) <> ($pdd[$f] ?? null))
+				$rr[] = self::genLogItem($t, $dd[$f] ?? null, $pdd[$f] ?? null);
+		
+		$pmm = [];
+		foreach ($pdd['milestones'] as $m)
+			$pmm[$m['TASK_DESCRIPTION']] = $m;
+		
+		foreach ($mm as $m)
+		{
+			if (!($pmm[$m['TASK_DESCRIPTION']] ?? null))
+				$rr[] = "New milestone '{$m['TASK_DESCRIPTION']}'";
+			else 
+				foreach ([
+						'ORIG_DATE_F' => 'Original',
+						'CURR_DATE_F' => 'Current',
+					] as $f=>$t)
+					if (($m[$f] ?? null) <> ($pmm[$m['TASK_DESCRIPTION']][$f] ?? null))
+						#$rr[] = ($pmm[$m['TASK_DESCRIPTION']][$f] ?? null) ? "{$m['TASK_DESCRIPTION']} {$t} changed from {$pmm[$m['TASK_DESCRIPTION']][$f]} to {$m[$f]}" : "{$t} stated to {$m[$f]}";
+						$rr[] = self::genLogItem("{$m['TASK_DESCRIPTION']} {$t}", $pmm[$m['TASK_DESCRIPTION']][$f] ?? null, $m[$f] ?? null);
+		}
+		return $rr;
+	}
+	
+	static function genLogItem($t, $a, $b)
+	{
+		$is_budg = preg_match('~(Original|Current) Budget~si', $t);
+		if ($b)
+		{
+			if ($is_budg)
+			{
+				$d = (float)$a - (float)$b;
+				$a = self::budgetRound((float)$a);
+				$b = self::budgetRound((float)$b);
+				return [
+					"{$t} " . ($d > 0 ? 'increase &#9650; ' : 'decrease &#9660; ') . self::toFinShort(abs($d)),
+					"from {$a} to {$b}"
+				];
+			} else {
+				$d = self::date2float($a) - self::date2float($b);
+				return [
+					"{$t} " . ($d < 0 ? 'postponed &#9650; ' : 'anticipated &#9660; ') . self::timerangeShort(abs($d * 365)),
+					"from {$a} to {$b}"
+				];
+			}
+		}
+		else
+			["{$t} set to {$b}", ''];
+	}
+	
+/*	
+	static function genLog($pdd, $dd)
+	{
+		$mm = $dd['milestones'];
+		$rr = [];
+		foreach ([
+				'BUDG_ORIG' => 'Original Budget',
+				'BUDG_CURR' => 'Current Budget',
+				'START_ORIG' => 'Original Start',
+				'START_CURR' => 'Current Start',
+				'END_ORIG' => 'Original End',
+				'END_CURR' => 'Current End',
+			] as $f=>$t)
+			if (($dd[$f] ?? null) <> ($pdd[$f] ?? null))
 			{
 				$b = strstr($f, 'BUDG_') ? '$' . number_format((float)$dd[$f]) : $dd[$f];
 				if ($pdd[$f] ?? null)
@@ -130,7 +192,7 @@ class CapProjectsBuilder
 		}
 		return $rr;
 	}
-	
+*/	
 	static function df($d)
 	{
 		return preg_match('~^\d{8}$~', $d) 
@@ -197,6 +259,25 @@ class CapProjectsBuilder
 	{
 		$d = $b1 - $b2;
 		if (!$format)
+			return self::budgetRound($d);
+		$df = self::toFinShort(abs($d));
+		if (abs($d) < 250)
+			$d = 0;
+		switch ($d <=> 0)
+		{
+			case 0:
+				return "<span class='good'>Fit</span>";
+			case -1:
+				return "<span class='bad'>{$df} over</span>";
+			case 1:
+				return "<span class='good'>{$df} below</span>";
+		}
+	}
+
+/*	static function budgetDiff($b1, $b2, $format=true)
+	{
+		$d = $b1 - $b2;
+		if (!$format)
 			return $d;
 		$df = self::budgetRound(abs($d));
 		if (abs($d) < 250)
@@ -211,25 +292,39 @@ class CapProjectsBuilder
 				return "<span class='good'>{$df} below</span>";
 		}
 	}
-	
+*/	
 	static function budgetRound($b)
 	{
 		return '$' . number_format($b);
 	}
 	
-	static function budgetRound_depr($b)
+	static function toFinShort($b)
 	{
-		switch (true)
+		if ($b < 1000)
+			return '$' . number_format($b);
+		$units = [1 => 'K', 2 => 'M', 3 => 'B'];
+		for ($u = 1; $u <= 3; $u++) 
 		{
-			case ($b > 10000000):
-				return '$' . round(abs($b) / 1000000, 0) . 'm';
-			case ($b > 1000000):
-				return '$' . round($b / 1000000, 1) . 'm';
-			case ($b > 10000):
-				return '$' . round($b / 1000, 0) . 'k';
-			case ($b > 1000):
-				return '$' . round($b / 1000, 1) . 'k';
+			$b = $b / 1000;
+			if ($b < 1000) 
+			{
+				if ($b >= 100)
+					return '$' . number_format($b) . $units[$u];
+				elseif ($b >= 10)
+					return '$' . number_format($b, 1) . $units[$u];
+				else if ($b >= 1)
+					return '$' . number_format($b, 2) . $units[$u];
+			}
 		}
-		return '$' . $b;
+		return '$' . number_format($b) . $units[$u];
+	}
+	
+	static function timerangeShort($d)
+	{
+		if (abs($d) > 365)
+			return number_format($d / 365, 1) . ' years';
+		if (abs($d) > 30)
+			return number_format($d / 30, 1) . ' months';
+		return number_format($d, 0) . ' days';
 	}
 }

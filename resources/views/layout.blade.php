@@ -38,10 +38,14 @@
 			content: ", ";
 		}
 		.type-label{background: #162E51;border-radius: 4px;color:#fff;padding: 8px 9px;font-weight: normal;font-size: 16px;line-height: 19px;margin-right: 10px;margin-bottom: 10px;}
+		[title] {cursor: help;}
+
 	</style>	
 	@if ($map ?? null)
-	    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
-		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+	    <!--<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />-->
+		<link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
+		<script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
 	@endif
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->

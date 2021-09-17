@@ -395,74 +395,17 @@ function projectsMapPopup(e) {
 }
 
 function projectsMapInit() {
+	//console.log(filters, filterType)
 	newMap();
 	
 	map.on('load', function() {
         map.addSource('route', {
-				type: "geojson",
-				cluster: true,
-				clusterMaxZoom: 14,
-				clusterRadius: 50,
-				data: {
+				"type": "geojson",
+				"data": {
 					"type": "FeatureCollection",
 					"features": [{"type":"Feature","properties":{"custom_color":"#ccc"},"geometry":{"type":"Point","coordinates":["-73.95098200","40.82387280"]}}]
 				}
 			});
-		
-		map.addLayer({
-			id: 'clusters',
-			type: 'circle',
-			source: 'route',
-			filter: ['has', 'point_count'],
-			paint: {
-				// Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-				// with three steps to implement three types of circles:
-				//   * Blue, 20px circles when point count is less than 100
-				//   * Yellow, 30px circles when point count is between 100 and 750
-				//   * Pink, 40px circles when point count is greater than or equal to 750
-				'circle-color': [
-					'step',
-					['get', 'point_count'],
-					'#53777a',
-					50,
-					'#99b59a',
-					100,
-					'#78c0a8'
-				],
-				'circle-radius': [
-					'step',
-					['get', 'point_count'],
-					18,
-					50,
-					25,
-					200,
-					35
-				]
-			}
-		});
-
-		map.addLayer({
-			id: 'cluster-count',
-			type: 'symbol',
-			source: 'route',
-			filter: ['has', 'point_count'],
-			layout: {
-				'text-field': '{point_count_abbreviated}',
-				'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-				'text-size': 12
-			}
-		});
-		
-		map.addLayer({
-			'id': 'markers',
-			'type': 'circle',
-			'source': 'route',
-			'paint': {
-				'circle-radius': 6,
-				'circle-color': ['get', 'custom_color']
-			},
-			'filter': ["all", ['==', '$type', 'Point'], ['!has', 'point_count']]
-		});		
 		
         map.addLayer({
             'id': 'streets',
@@ -476,28 +419,20 @@ function projectsMapInit() {
                 'line-color': ['get', 'custom_color'],
                 'line-width': 6
             },
-			'filter': ["all", ['==', '$type', 'LineString'], ['!has', 'point_count']]
-			//'filter': ['==', '$type', 'LineString']
+			'filter': ['==', '$type', 'LineString']
         });
 		
-		map.on('click', 'clusters', (e) => {
-			const features = map.queryRenderedFeatures(e.point, {
-				layers: ['clusters']
-			});
-			const clusterId = features[0].properties.cluster_id;
-			map.getSource('route').getClusterExpansionZoom(
-				clusterId,
-				(err, zoom) => {
-					if (err) return;
-					 
-					map.easeTo({
-						center: features[0].geometry.coordinates,
-						zoom: zoom
-					});
-				}
-			);
-		});
-
+		map.addLayer({
+			'id': 'markers',
+			'type': 'circle',
+			'source': 'route',
+			'paint': {
+				'circle-radius': 6,
+				'circle-color': ['get', 'custom_color']
+			},
+			'filter': ['==', '$type', 'Point']
+		});		
+		
 		map.on('click', 'streets', function (e) { projectsMapPopup(e); });
 		map.on('click', 'markers', function (e) { projectsMapPopup(e); });
 		 

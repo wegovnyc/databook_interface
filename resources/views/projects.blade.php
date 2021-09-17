@@ -142,6 +142,12 @@
 									}, 500 + 1000 * {{ $i }});
 								@endif
 							@endforeach
+							setTimeout(function() {
+									//datatable.draw();	// initiate projectsMapDrawFeatures
+									//drawProjects('all');
+									toggleMap();
+								}, 500
+							);
 						}
 					@endif
 					
@@ -150,7 +156,9 @@
 						order: {!! json_encode($details['order']) !!}
 					@endif
 				});
-
+				
+				$('.btn_eyeicon').hide();
+				
 				$('a.toggle-vis').on('click', function (e) {
 					e.preventDefault();
 					var column = datatable.column($(this).attr('data-column'));
@@ -207,6 +215,10 @@
 				
 			})
 
+			$('#toggle_boundries').click( function (e) {
+				$(this).next('.dropdown-menu').toggleClass('show');
+			})
+
 		});
 
 
@@ -234,7 +246,7 @@
 				setTimeout(function() {
 						//datatable.draw();	// initiate projectsMapDrawFeatures
 						drawProjects('all');
-					}, 3000
+					}, 2500
 				);
 			}
 		}
@@ -245,9 +257,11 @@
 			for (let sel in uu) {
 				$.get(uu[sel].replace('pubdate', pubdate), function (resp) {
 					var v = resp['rows'][0]['res'] ?? '-'
-					console.log(['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel))
-					if ((['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel)) && (v != '-'))
-						$(sel).text(toFin(v))
+					//console.log(['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel))
+					if ((['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel)) && (v != '-')) {
+						$(sel).text(toFinShort(v))
+						$(sel).attr('title', toFin(v))
+					}						
 					else 
 						$(sel).text(v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 				})
@@ -272,6 +286,15 @@
 					try {
 						geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
 						geo_json.properties['AG_ID'] = r['wegov-org-id']
+						if (geo_json['geometry']['type'] != 'Point') {
+							geo_json['geometry'] = {
+														"type": "Point",
+														"coordinates": [
+															(geo_json['properties']['W'] + geo_json['properties']['E']) / 2,
+															(geo_json['properties']['N'] + geo_json['properties']['S']) / 2
+														]
+													}
+						}
 						features.push(geo_json)
 					} catch (error) {
 						console.error(error);
@@ -279,6 +302,7 @@
 				}
 			});
 			console.log(features.length)
+			//console.log(features)
 			projectsMapDrawFeatures(features);
 		}
 		
@@ -295,7 +319,7 @@
 				<table class="table-sm stats-table" width="100%">
 				  <thead>
 					<tr>
-					  <th scope="col" width="50%" class="text-center" data-toggle="tooltip" data-placement="bottom" title="See the project info published on specific dates.">Publication Date</th>
+					  <th scope="col" width="50%" class="text-center px-0" data-toggle="tooltip" data-placement="bottom" title="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
 					  <th scope="col" width="50%" id="pub_date_filter"></th>
 					</tr>
 				  </thead>
@@ -415,6 +439,74 @@
 			@if ($map ?? null)
 				<div id="map_container" class="col-6" style="display:none;">
 					<button id="map_button_alt" class="btn btn-outline map_btn" style="margin:0 20px 20px 10px; z-index: 10; max-width: 40px; float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
+					<!-- toggles -->
+					<div class="select_district" id="toggles" style="left:0px;">
+						<img src="/img/eyes.png" alt="" title="">
+						<ul class="inner_district">
+							<li class="dropdown">
+								<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
+								<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 10px;">
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="cd-switch">
+										<label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="ed-switch">
+										<label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="pp-switch">
+										<label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="dsny-switch">
+										<label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="fb-switch">
+										<label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="sd-switch">
+										<label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="hc-switch">
+										<label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="cc-switch">
+										<label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="nycongress-switch">
+										<label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="sa-switch">
+										<label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="ss-switch">
+										<label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="bid-switch">
+										<label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="nta-switch">
+										<label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="zipcode-switch">
+										<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- /toggles -->
 					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E; position:relative; min-height:800px;"></div>
 					<div id="help_us" class="" style="width:100%;min-height:260px;border:1px solid #112F4E; margin-top:24px; padding: 32px;">
 						<h4>Help us locate projects</h4>
@@ -471,6 +563,10 @@
 			}
 			$(".toolbar").toggle();
 		});
+		
+		$('#toggle_boundries').click( function (e) {
+			$(this).next('.dropdown-menu').toggleClass('show');
+		})
 	</script>
 
 @endsection

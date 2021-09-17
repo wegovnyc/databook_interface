@@ -21,8 +21,8 @@
 				<h2>{{ $data['name'] }}</h2>
 			</div>
 			
-			<div class="col-md-2 col-sm-4 organization_data justify-content-center pl-5">
-				<h5 class="mt-2" data-toggle="tooltip" data-placement="bottom" title="See the project info published on specific dates.">Publication Date<h5>
+			<div class="col-md-2 col-sm-4 organization_data justify-content-center">
+				<h5 class="mt-2" data-toggle="tooltip" data-placement="bottom" title="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1 pb-1" style="top:-1px;position:relative;"></i></small></h5>
 			</div>
 			<div class="col-md-2 col-sm-4 organization_data">
 				<select id="pub_date_filter" style="width:100%;" class="filter" onchange="showPrj();">
@@ -157,6 +157,74 @@
 
 			<div class="col-md-4 col-sm-12 p-0">
 				<div id="map_container" style="float:none;">
+					<!-- toggles -->
+					<div class="select_district" id="toggles" style="top:5px; left:0px; display:none;">
+						<img src="/img/eyes.png" alt="" title="">
+						<ul class="inner_district">
+							<li class="dropdown">
+								<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
+								<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 10px;">
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="cd-switch">
+										<label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="ed-switch">
+										<label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="pp-switch">
+										<label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="dsny-switch">
+										<label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="fb-switch">
+										<label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="sd-switch">
+										<label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="hc-switch">
+										<label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="cc-switch">
+										<label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="nycongress-switch">
+										<label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="sa-switch">
+										<label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="ss-switch">
+										<label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="bid-switch">
+										<label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="nta-switch">
+										<label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
+									</div>
+									<div class="custom-control custom-switch">
+										<input type="checkbox" class="custom-control-input" id="zipcode-switch">
+										<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- /toggles -->
 					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:2px solid #112F4E;"></div>
 				</div>
 				<p class="suggest_button mt-4"><a href="https://airtable.com/shrWWa3rNJFGSFObd?prefill_project_id={{ $prjId }}" class="learn_more" target="_blank">Suggest a Change</a></p>
@@ -169,8 +237,8 @@
 									<b>{{ implode('/', [substr($d, 4, 2), substr($d, 6, 2), substr($d, 0, 4)]) }}</b>
 									<ul>
 									@foreach ($ll as $l)
-										<li>
-										{{ $l }}
+										<li title="{{ $l[1] }}">
+										{!! $l[0] !!}
 										</li>
 									@endforeach
 								</ul></li>
@@ -198,7 +266,12 @@
 			var dd = data[pub_date]
 			for (k in dd) {
 				if (dd.hasOwnProperty(k) && (k[0] == '#'))
-					$(k).html(dd[k])
+					if ((['#budget .original', '#budget .current', '#budget .difference'].includes(k)) && (dd[k] != '-')) {
+						$(k).html(dd[k][0])
+						$(k).attr('title', dd[k][1])
+					}						
+					else
+						$(k).html(dd[k])
 			}
 			var timeline = $('#project_timeline tbody')
 			timeline.html('')
@@ -245,7 +318,8 @@
 							'line-cap': 'round'
 						},
 						'paint': {
-							'line-color': '#ff7c7c',
+							//'line-color': '#ff7c7c',
+							'line-color': '#53777a',
 							'line-width': 8
 						},
 						'filter': ['==', '$type', 'LineString']
@@ -257,10 +331,16 @@
 						'source': 'route',
 						'paint': {
 							'circle-radius': 8,
-							'circle-color': '#ff7c7c'
+							//'circle-color': '#ff7c7c'
+							'circle-color': '#53777a'
 						},
 						'filter': ['==', '$type', 'Point']
 					});
+					
+					for (const [code, clr] of Object.entries(zones)) {
+						setBoundary(code, clr, clr);
+					}
+					$('#toggles').show();
 
 					var bounds = [[feature.properties.W, feature.properties.S], [feature.properties.E, feature.properties.N]];
 					map.fitBounds(bounds);
@@ -270,6 +350,11 @@
 				$('#map').html('<iframe class="airtable-embed" src="https://airtable.com/embed/shreZusmuYwJNl76Q?prefill_project_id={{ $prjId }}&backgroundColor=blue" frameborder="0" onmousewheel="" width="100%" height="100%" style="background: transparent;"></iframe>');
 				$('.suggest_button').remove();
 			@endif
+			
+			$('#toggle_boundries').click( function (e) {
+				$(this).next('.dropdown-menu').toggleClass('show');
+			})
+			
 		})
 	</script>
 <style>

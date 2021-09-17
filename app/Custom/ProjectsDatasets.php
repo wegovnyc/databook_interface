@@ -11,7 +11,7 @@ class ProjectsDatasets
 			'table' => 'capitalprojectsdollarscomp',					// Carto table
 			'hdrs' => ['Publication Date', 'Project ID', 'Agency', 'Name', /*'Scope', */'Category', 'Borough', 'Planned Cost', 'Budget Increase', 'Timeline Change'],
 			'visible' => [false, true, true, true, /*true, */true, true, true, true, true],
-			'hide_on_map_open' => '0, 1, 4, 5, 7, 8',
+			'hide_on_map_open' => '0, 1, 5, 6, 7, 8',
 			'flds' => [
 					'function (r) { return toDashDate(r["PUB_DATE"]) }',
 					'function (r) { return `<a href="/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
