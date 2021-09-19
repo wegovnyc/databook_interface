@@ -25,18 +25,18 @@ function usToDashDate(d)
 	return '<span class="text-nowrap">20'+y+'-'+m+'-'+dd+'</span>';
 }
 
-function toFin(d)
+function toFin(d, m=1)
 {
-	return '$' + parseFloat(d).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	return '$' + (parseFloat(d) * m).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
-function toFinShort(d)
+function toFinShortK(d, m=1)
 {
-	d = parseFloat(d)
+	d = parseFloat(d) * m
 	if (d < 1000)
 		return '$' + d.toFixed(0)
-	var units = {1: 'K', 2: 'M', 3: 'B'}
-	for (let u = 1; u <= 3; u++) {
+	var units = {0: 'K', 1: 'M', 2: 'B'}
+	for (let u = 0; u <= 2; u++) {
 		d = d / 1000
 		if (d < 1000) {
 			if (d >= 100) {
@@ -84,6 +84,19 @@ function subscribe_newsletter()
 
 function intWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function initPopovers() {
+	$('[data-content]').each(function () {
+		$(this).attr('data-container', 'body')
+		$(this).attr('data-toggle', 'popover')
+		$(this).attr('data-placement', 'bottom')
+		$(this).popover()
+		$(this).on('show.bs.popover', function () {
+			$('[data-content]').not(this).popover('hide')
+		})
+		
+	});
 }
 
 
@@ -378,11 +391,11 @@ function projectsMapPopup(e) {
 	<tr><th scope="row">Name</th><td><a href="/capitalprojects/${pr.PRJ_ID}">${pr.NAME}</a></td></tr>
 	<tr><th scope="row">Agency</th><td>${pr.AGENCY}</td></tr>
 	<tr><th scope="row">Category</th><td>${pr.CATEGORY}</td></tr>
-	<tr><th scope="row">Planned Cost</th><td>$${pr.PLANNEDCOST}</td></tr>
+	<tr><th scope="row" class="pr-2">Planned Cost</th><td title="${toFin(pr.PLANNEDCOST.replace(',', ''), 1000)}">${toFinShortK(pr.PLANNEDCOST.replace(',', ''), 1000)}</td></tr>
 	<tr><th scope="row">Start</th><td>${pr.START_CURR}</td></tr>
 	<tr><th scope="row">End</th><td>${pr.END_CURR}</td></tr>
 </tbody></table>`;
-			 
+	//console.log(pr.PLANNEDCOST, toFinShortK(pr.PLANNEDCOST.replace(',', ''), 1000));
 	map.fitBounds([
 		[pr.W,pr.S], // southwestern corner of the bounds
 		[pr.E,pr.N] // northeastern corner of the bounds
@@ -400,15 +413,15 @@ function projectsMapInit() {
 	map.on('load', function() {
         map.addSource('route', {
 				type: "geojson",
-				cluster: true,
-				clusterMaxZoom: 14,
-				clusterRadius: 50,
+				//cluster: true,
+				//clusterMaxZoom: 14,
+				//clusterRadius: 50,
 				data: {
 					"type": "FeatureCollection",
 					"features": [{"type":"Feature","properties":{"custom_color":"#ccc"},"geometry":{"type":"Point","coordinates":["-73.95098200","40.82387280"]}}]
 				}
 			});
-		
+		/*
 		map.addLayer({
 			id: 'clusters',
 			type: 'circle',
@@ -452,7 +465,7 @@ function projectsMapInit() {
 				'text-size': 12
 			}
 		});
-		
+		*/
 		map.addLayer({
 			'id': 'markers',
 			'type': 'circle',
@@ -461,7 +474,8 @@ function projectsMapInit() {
 				'circle-radius': 6,
 				'circle-color': ['get', 'custom_color']
 			},
-			'filter': ["all", ['==', '$type', 'Point'], ['!has', 'point_count']]
+			//'filter': ["all", ['==', '$type', 'Point'], ['!has', 'point_count']]
+			'filter': ['==', '$type', 'Point']
 		});		
 		
         map.addLayer({
@@ -476,10 +490,10 @@ function projectsMapInit() {
                 'line-color': ['get', 'custom_color'],
                 'line-width': 6
             },
-			'filter': ["all", ['==', '$type', 'LineString'], ['!has', 'point_count']]
-			//'filter': ['==', '$type', 'LineString']
+			//'filter': ["all", ['==', '$type', 'LineString'], ['!has', 'point_count']]
+			'filter': ['==', '$type', 'LineString']
         });
-		
+		/*
 		map.on('click', 'clusters', (e) => {
 			const features = map.queryRenderedFeatures(e.point, {
 				layers: ['clusters']
@@ -497,6 +511,30 @@ function projectsMapInit() {
 				}
 			);
 		});
+		*/
+		map.on('zoom', () => {
+			var z = map.getZoom();
+			const zz = {11:6, 10:5, 9:4, 8:3}
+			//console.log(z);
+			for (const [l, r] of Object.entries(zz)) {
+				if (z > l) {
+					map.setPaintProperty('markers', 'circle-radius', r);
+					map.setPaintProperty('streets', 'line-width', r);
+				}
+			}
+			/*
+			if (z > 10) {
+				map.setPaintProperty('markers', 'circle-radius', 5);
+				map.setPaintProperty('streets', 'line-width', 5);
+			} else if (z > 12) {
+				map.setPaintProperty('markers', 'circle-radius', 4);
+				map.setPaintProperty('streets', 'line-width', 4);
+			} else {
+				map.setPaintProperty('markers', 'circle-radius', 6);
+				map.setPaintProperty('streets', 'line-width', 6);
+			}
+			*/
+		});			
 
 		map.on('click', 'streets', function (e) { projectsMapPopup(e); });
 		map.on('click', 'markers', function (e) { projectsMapPopup(e); });

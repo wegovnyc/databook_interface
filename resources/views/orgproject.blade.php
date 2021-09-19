@@ -22,7 +22,7 @@
 			</div>
 			
 			<div class="col-md-2 col-sm-4 organization_data justify-content-center">
-				<h5 class="mt-2" data-toggle="tooltip" data-placement="bottom" title="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1 pb-1" style="top:-1px;position:relative;"></i></small></h5>
+				<h5 class="mt-2" title="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1 pb-1" style="top:-1px;position:relative;"></i></small></h5>
 			</div>
 			<div class="col-md-2 col-sm-4 organization_data">
 				<select id="pub_date_filter" style="width:100%;" class="filter" onchange="showPrj();">
@@ -237,7 +237,7 @@
 									<b>{{ implode('/', [substr($d, 4, 2), substr($d, 6, 2), substr($d, 0, 4)]) }}</b>
 									<ul>
 									@foreach ($ll as $l)
-										<li title="{{ $l[1] }}">
+										<li data-content="{{ $l[1] }}">
 										{!! $l[0] !!}
 										</li>
 									@endforeach
@@ -266,22 +266,18 @@
 			var dd = data[pub_date]
 			for (k in dd) {
 				if (dd.hasOwnProperty(k) && (k[0] == '#'))
-					if ((['#budget .original', '#budget .current', '#budget .difference'].includes(k)) && (dd[k] != '-')) {
-						$(k).html(dd[k][0])
-						$(k).attr('title', dd[k][1])
-					}						
-					else
-						$(k).html(dd[k])
+					$(k).html(dd[k])
 			}
 			var timeline = $('#project_timeline tbody')
 			timeline.html('')
 			dd['milestones'].forEach(function (m) {
 				timeline.append(`<tr><th scope="row">${m['TASK_DESCRIPTION']}</th><td class="original">${m['ORIG_DATE_F']}</td><td class="current">${m['CURR_DATE_F']}</td><td class="difference">${m['DATE_DIFF']}</td></tr>`)
 			})
+			initPopovers();
 		}
 
 		$(document).ready(function () {
-			$('h5[data-toggle="tooltip"]').tooltip()
+			//$('h5[data-toggle="tooltip"]').tooltip()
 			
 			showPrj();
 

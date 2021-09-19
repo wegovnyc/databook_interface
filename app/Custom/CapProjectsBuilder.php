@@ -49,9 +49,17 @@ class CapProjectsBuilder
 				'#SCOPE_TEXT' => $d['SCOPE_TEXT'],
 				'PUB_DATE_F' => self::df($d['PUB_DATE']),
 				
-				'#budget .original' => [self::toFinShort($d['ORIG_BUD_AMT']), self::budgetRound($d['ORIG_BUD_AMT'])],
-				'#budget .current' => [self::toFinShort($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']), self::budgetRound($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'])],
-				'#budget .difference' => [self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']), self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], false)],
+				'#budget .original' => sprintf('<span data-content="%s">%s</span>', 
+						self::budgetRound($d['ORIG_BUD_AMT'], 1000), 
+						self::toFinShortK($d['ORIG_BUD_AMT'], 1000)),
+				'#budget .current' => sprintf('<span data-content="%s">%s</span>', 
+						self::budgetRound($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], 1000), 
+						self::toFinShortK($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], 1000)),
+				//[self::toFinShortK($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']), self::budgetRound($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'])],
+				'#budget .difference' => sprintf('<span data-content="%s">%s</span>', 
+						self::budgetRound(($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']) - $d['ORIG_BUD_AMT'], 1000), 
+						self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], 1000)),
+				//[self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']), self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], false)],
 				
 				'#start .original' => ($d['ORIG_START'] ?? null) ? self::df($d['ORIG_START']) : '-',
 				'#start .current' => ($d['CURR_START'] ?? null) ? self::df($d['CURR_START']) : '-',
@@ -129,11 +137,11 @@ class CapProjectsBuilder
 		{
 			if ($is_budg)
 			{
-				$d = (float)$a - (float)$b;
-				$a = self::budgetRound((float)$a);
-				$b = self::budgetRound((float)$b);
+				$d = (float)$b - (float)$a;
+				$a = self::budgetRound((float)$a, 1000);
+				$b = self::budgetRound((float)$b, 1000);
 				return [
-					"{$t} " . ($d > 0 ? 'increase &#9650; ' : 'decrease &#9660; ') . self::toFinShort(abs($d)),
+					"{$t} " . ($d > 0 ? 'increase &#9650; ' : 'decrease &#9660; ') . self::toFinShortK(abs($d), 1000),
 					"from {$a} to {$b}"
 				];
 			} else {
@@ -255,12 +263,10 @@ class CapProjectsBuilder
 		}
 	}
 	
-	static function budgetDiff($b1, $b2, $format=true)
+	static function budgetDiff($b1, $b2, $m=1)
 	{
-		$d = $b1 - $b2;
-		if (!$format)
-			return self::budgetRound($d);
-		$df = self::toFinShort(abs($d));
+		$d = (int)$b1 - (int)$b2;
+		$df = self::toFinShortK(abs($d), $m);
 		if (abs($d) < 250)
 			$d = 0;
 		switch ($d <=> 0)
@@ -293,20 +299,21 @@ class CapProjectsBuilder
 		}
 	}
 */	
-	static function budgetRound($b)
+	static function budgetRound($b, $m=1)
 	{
-		return '$' . number_format($b);
+		return '$' . number_format((int)$b * $m);
 	}
 	
-	static function toFinShort($b)
+	static function toFinShortK($b, $m=1)
 	{
+		$b = (int)$b * $m;
 		if ($b < 1000)
 			return '$' . number_format($b);
-		$units = [1 => 'K', 2 => 'M', 3 => 'B'];
-		for ($u = 1; $u <= 3; $u++) 
+		$units = [0 => 'K', 1 => 'M', 2 => 'B'];
+		for ($u = 0; $u <= 2; $u++)
 		{
 			$b = $b / 1000;
-			if ($b < 1000) 
+			if ($b < 1000)
 			{
 				if ($b >= 100)
 					return '$' . number_format($b) . $units[$u];
@@ -316,7 +323,7 @@ class CapProjectsBuilder
 					return '$' . number_format($b, 2) . $units[$u];
 			}
 		}
-		return '$' . number_format($b) . $units[$u];
+		return '$' . number_format($b) . $units[$u - 1];
 	}
 	
 	static function timerangeShort($d)

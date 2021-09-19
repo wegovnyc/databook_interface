@@ -11,10 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>
 	
 	<script>
-		function details(d) {
+		function details(r) {
 			return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
 			  @foreach ((array)$details['details'] as $h=>$f)
-				(d["{{ $f }}"] ? '<tr><td>{{ $h }}:</td><td>'+d["{{ $f }}"]+'</td></tr>' : '') +
+				//(d["{{ $f }}"] ? '<tr><td>{{ $h }}:</td><td>'+d["{{ $f }}"]+'</td></tr>' : '') +
+				'<tr><td>{{ $h }}:</td><td>' + {!! $f !!} + '</td></tr>' +
 			  @endforeach
 			'</table>';
 		}
@@ -23,7 +24,7 @@
 		var dataurl = '{!! $url !!}'
 		
 		$(document).ready(function() {
-			$('th[data-toggle="tooltip"]').tooltip()
+			//$('th[data-toggle="tooltip"]').tooltip()
 			
 			/* custom pub_date filter on top-right */
 			$.get("{!! $dates_req_url !!}", function (resp) {
@@ -148,6 +149,9 @@
 									toggleMap();
 								}, 500
 							);
+							setTimeout(function(){
+								initPopovers();
+							}, 1000);
 						}
 					@endif
 					
@@ -178,6 +182,7 @@
 						row.child(details(row.data())).show();
 						tr.addClass('shown');
 						tr.next('tr').addClass('child-row');
+						initPopovers();
 					}
 				});
 
@@ -205,10 +210,17 @@
 				// makes sortable html fields like 9.4 years late, $25,764 over
 				$.fn.dataTable.ext.type.order['html-pre'] = function (data) {
 					var d = data.replace(/-/g, '');
-					d = d.replace(/<span class="(bad)">/g, '-');
+					d = d.replace(/<span class="(bad)"[^>]*>/g, '-');
 					d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+/g, '');
 					d = d.replace(/NA|NaN|on time|^-$/g, '0');
-					d = d.match(/[-\d\.]+/g) ? parseFloat(d) : d;
+					m = 1
+					for (const[rg, tmpM] of [[/K$/g, 1000], [/M$/g, 1000000], [/B$/g, 1000000000]]) {
+						if (d.match(rg)) {
+							m = tmpM;
+							d = d.replace(rg, '');
+						}
+					}
+					d = d.match(/[-\d\.]+/g) ? parseFloat(d) * m : d;
 					//console.log(data, d);
 					return d;
 				};
@@ -245,6 +257,7 @@
 					}, 2500
 				);
 			}
+			initPopovers();
 		}
 		
 		function loadFinStat() {
@@ -255,13 +268,16 @@
 					var v = resp['rows'][0]['res'] ?? '-'
 					//console.log(['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel))
 					if ((['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel)) && (v != '-')) {
-						$(sel).text(toFinShort(v))
-						$(sel).attr('title', toFin(v))
+						$(sel).text(toFinShortK(v, 1000))
+						$(sel).attr('data-content', toFin(v, 1000))
 					}						
 					else 
 						$(sel).text(v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 				})
 			}
+			setTimeout(function(){
+				initPopovers();
+			}, 1000);
 		}
 
 		function drawProjects(pages) {	// 'all',     'current'
@@ -282,6 +298,7 @@
 					try {
 						geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
 						geo_json.properties['AG_ID'] = r['wegov-org-id']
+						/*
 						if (geo_json['geometry']['type'] != 'Point') {
 							geo_json['geometry'] = {
 														"type": "Point",
@@ -291,6 +308,7 @@
 														]
 													}
 						}
+						*/
 						features.push(geo_json)
 					} catch (error) {
 						console.error(error);
@@ -315,7 +333,7 @@
 				<table class="table-sm stats-table" width="100%">
 				  <thead>
 					<tr>
-					  <th scope="col" width="50%" class="text-center px-0" data-toggle="tooltip" data-placement="bottom" title="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
+					  <th scope="col" width="50%" class="text-center px-0" title="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
 					  <th scope="col" width="50%" id="pub_date_filter"></th>
 					</tr>
 				  </thead>
