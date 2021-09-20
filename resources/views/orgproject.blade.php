@@ -22,7 +22,7 @@
 			</div>
 			
 			<div class="col-md-2 col-sm-4 organization_data justify-content-center">
-				<h5 class="mt-2" title="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1 pb-1" style="top:-1px;position:relative;"></i></small></h5>
+				<h5 class="mt-2" data-content="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1 pb-1" style="top:-1px;position:relative;"></i></small></h5>
 			</div>
 			<div class="col-md-2 col-sm-4 organization_data">
 				<select id="pub_date_filter" style="width:100%;" class="filter" onchange="showPrj();">

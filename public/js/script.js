@@ -391,7 +391,7 @@ function projectsMapPopup(e) {
 	<tr><th scope="row">Name</th><td><a href="/capitalprojects/${pr.PRJ_ID}">${pr.NAME}</a></td></tr>
 	<tr><th scope="row">Agency</th><td>${pr.AGENCY}</td></tr>
 	<tr><th scope="row">Category</th><td>${pr.CATEGORY}</td></tr>
-	<tr><th scope="row" class="pr-2">Planned Cost</th><td title="${toFin(pr.PLANNEDCOST.replace(',', ''), 1000)}">${toFinShortK(pr.PLANNEDCOST.replace(',', ''), 1000)}</td></tr>
+	<tr><th scope="row" class="pr-2">Planned Cost</th><td data-content="${toFin(pr.PLANNEDCOST.replace(',', ''), 1000)}">${toFinShortK(pr.PLANNEDCOST.replace(',', ''), 1000)}</td></tr>
 	<tr><th scope="row">Start</th><td>${pr.START_CURR}</td></tr>
 	<tr><th scope="row">End</th><td>${pr.END_CURR}</td></tr>
 </tbody></table>`;
@@ -405,6 +405,7 @@ function projectsMapPopup(e) {
 		.setLngLat(e.lngLat)
 		.setHTML(description)
 		.addTo(map);
+	initPopovers();
 }
 
 function projectsMapInit() {
