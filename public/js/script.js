@@ -94,6 +94,7 @@ function initPopovers() {
 		$(this).popover()
 		$(this).on('show.bs.popover', function () {
 			$('[data-content]').not(this).popover('hide')
+			$('.popover').hide()
 		})
 		
 	});
