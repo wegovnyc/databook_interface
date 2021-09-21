@@ -14,17 +14,20 @@ class CapProjectsBuilder
 		
 		foreach ($milestones as $i=>$m)
 		{
-			$dd[$m['PUB_DATE']]['ORIG_START'] = min($dd[$m['PUB_DATE']]['ORIG_START'] ?? '20500101', self::ds($m['ORIG_START_DATE']));
-			$dd[$m['PUB_DATE']]['ORIG_END'] = max($dd[$m['PUB_DATE']]['ORIG_END'] ?? '20000101', self::ds($m['ORIG_END_DATE']));
-			$dd[$m['PUB_DATE']]['CURR_START'] = min($dd[$m['PUB_DATE']]['CURR_START'] ?? '20500101', self::ds($m['TASK_START_DATE']));
-			$dd[$m['PUB_DATE']]['CURR_END'] = max($dd[$m['PUB_DATE']]['CURR_END'] ?? '20000101', self::ds($m['TASK_END_DATE']));
-			$dd[$m['PUB_DATE']]['milestones'][strtotime($m['ORIG_END_DATE']) + $i] = [
-				//'PUB_DATE_F' => self::df($m['PUB_DATE']),
-				'ORIG_DATE_F' => str_replace(' 12:00:00 AM', '', $m['ORIG_END_DATE']),
-				'CURR_DATE_F' => str_replace(' 12:00:00 AM', '', $m['TASK_END_DATE']),
-				'DATE_DIFF' => self::dateDiff(self::ds($m['ORIG_END_DATE']), self::ds($m['TASK_END_DATE'])),
-				'TASK_DESCRIPTION' => $m['TASK_DESCRIPTION'],
-			];
+			if ($dd[$m['PUB_DATE']] ?? null)
+			{
+				$dd[$m['PUB_DATE']]['ORIG_START'] = min($dd[$m['PUB_DATE']]['ORIG_START'] ?? '20500101', self::ds($m['ORIG_START_DATE']));
+				$dd[$m['PUB_DATE']]['ORIG_END'] = max($dd[$m['PUB_DATE']]['ORIG_END'] ?? '20000101', self::ds($m['ORIG_END_DATE']));
+				$dd[$m['PUB_DATE']]['CURR_START'] = min($dd[$m['PUB_DATE']]['CURR_START'] ?? '20500101', self::ds($m['TASK_START_DATE']));
+				$dd[$m['PUB_DATE']]['CURR_END'] = max($dd[$m['PUB_DATE']]['CURR_END'] ?? '20000101', self::ds($m['TASK_END_DATE']));
+				$dd[$m['PUB_DATE']]['milestones'][strtotime($m['ORIG_END_DATE']) + $i] = [
+					//'PUB_DATE_F' => self::df($m['PUB_DATE']),
+					'ORIG_DATE_F' => str_replace(' 12:00:00 AM', '', $m['ORIG_END_DATE']),
+					'CURR_DATE_F' => str_replace(' 12:00:00 AM', '', $m['TASK_END_DATE']),
+					'DATE_DIFF' => self::dateDiff(self::ds($m['ORIG_END_DATE']), self::ds($m['TASK_END_DATE'])),
+					'TASK_DESCRIPTION' => $m['TASK_DESCRIPTION'],
+				];
+			}
 		}
 		
 		$rr = [];
@@ -37,17 +40,17 @@ class CapProjectsBuilder
 			if ($d['milestones'] ?? null)
 				ksort($d['milestones']);
 			$rr[$i] = [
-				'#BORO' => $d['BORO'],
-				'#MANAGING_AGCY' => $d['MANAGING_AGCY'],
-				'#PROJECT_ID' => $d['PROJECT_ID'],
-				'#PROJECT_DESCR' => $d['PROJECT_DESCR'],
-				'#TYP_CATEGORY_NAME' => $d['TYP_CATEGORY_NAME'],
-				'#COMMUNITY_BOARD' => $d['COMMUNITY_BOARD'],
-				'#BUDGET_LINE' => $d['BUDGET_LINE'],
-				'#DELAY_DESC' => $d['DELAY_DESC'],
-				'#SITE_DESCR' => $d['SITE_DESCR'],
-				'#SCOPE_TEXT' => $d['SCOPE_TEXT'],
-				'PUB_DATE_F' => self::df($d['PUB_DATE']),
+				'#BORO' => $d['BORO'] ?? '',
+				'#MANAGING_AGCY' => $d['MANAGING_AGCY'] ?? '',
+				'#PROJECT_ID' => $d['PROJECT_ID'] ?? '',
+				'#PROJECT_DESCR' => $d['PROJECT_DESCR'] ?? '',
+				'#TYP_CATEGORY_NAME' => $d['TYP_CATEGORY_NAME'] ?? '',
+				'#COMMUNITY_BOARD' => $d['COMMUNITY_BOARD'] ?? '',
+				'#BUDGET_LINE' => $d['BUDGET_LINE'] ?? '',
+				'#DELAY_DESC' => $d['DELAY_DESC'] ?? '',
+				'#SITE_DESCR' => $d['SITE_DESCR'] ?? '',
+				'#SCOPE_TEXT' => $d['SCOPE_TEXT'] ?? '',
+				'PUB_DATE_F' => self::df($d['PUB_DATE'] ?? ''),
 				
 				'#budget .original' => sprintf('<span data-content="%s">%s</span>', 
 						self::budgetRound($d['ORIG_BUD_AMT'], 1000), 
