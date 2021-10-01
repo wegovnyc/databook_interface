@@ -29,6 +29,8 @@ Route::get('/districts', [Districts::class, 'main'])->name('districts');
 
 Route::get('/districts/{type}/{id}/{section}', [Districts::class, 'main'])->name('districtsPreset');
 
+Route::get('/districtXHR/{type}/{id}/capitalprojects', [Districts::class, 'projectSection'])->name('distProjectSection');
+
 Route::get('/districtXHR/{type}/{id}/{section}', [Districts::class, 'section'])->name('distSection');
 
 

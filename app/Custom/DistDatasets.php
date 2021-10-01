@@ -98,11 +98,57 @@ class DistDatasets
 			'description' => 'The dataset reflects applications for discretionary funding to be allocated by the New York City Council.',
 			'map' => ['cd' => 'wegov-comd-id', 'cc' => 'Council District', 'nta' => 'wegov-nta-code'],
 		],
+
+		'capitalprojects' => [
+			'fullname' => 'Capital Project Detail Data - Dollars',
+			'table' => 'capitalprojectsdollarscomp',
+			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
+			'hdrs' => ['Publication Date', 'Project ID', 'Name', 'Scope', 'Category', 'Borough', 'Planned Cost', 'Budget Increase', 'Timeline Change'],
+			'visible' => [false, true, true, true, true, true, true, true, true],
+			'hide_on_map_open' => '0, 4, 6, 7, 8',		// +1 for details fld is already added
+			'flds' => [
+					'function (r) { return toDashDate(r["PUB_DATE"]) }',
+					'function (r) { return `<a href="/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
+					'"PROJECT_DESCR"', '"SCOPE_TEXT"', '"TYP_CATEGORY_NAME"', 
+					'"BORO"', 
+					'function (r) { return `<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>` }',
+					'function (r) { 
+						if (!r["ORIG_BUD_AMT"])
+							return "NA"
+						return r["BUDG_DIFF"] == 0 ? "0" :
+							(r["BUDG_DIFF"] > 0 
+								? `<span class="good" data-content="-${toFin(r["BUDG_DIFF"], 1000)}">-${toFinShortK(r["BUDG_DIFF"], 1000)}</span>` 
+								: `<span class="bad" data-content="${toFin(-r["BUDG_DIFF"], 1000)}">${toFinShortK(-r["BUDG_DIFF"], 1000)}</span>`);
+					}',
+					'function (r) { 
+						if ((r["END_DIFF"] == "-") || (r["END_DIFF"] == "12/31/1969"))
+							return "NA"
+						var v = parseFloat(r["END_DIFF"]).toFixed(1).toString()
+						if (v < 0)
+							return `<span class="bad">${-v} years late</span>`
+						return v > 0 ? `<span class="good">${v} years early</span>` : `<span class="good">on time</span>`;
+					}'
+				],
+			'filters' => [/*2 => null, */4 => null],
+			'details' => [
+					'Original Budget' => '`<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>`',
+					'Prior Spending' =>  '`<span data-content="${toFin(r["CITY_PRIOR_ACTUAL"], 1000)}">${toFinShortK(r["CITY_PRIOR_ACTUAL"], 1000)}</span>`', 
+					'Planned Spending' => '`<span data-content="${toFin(r["CITY_PLAN_TOTAL"], 1000)}">${toFinShortK(r["CITY_PLAN_TOTAL"], 1000)}</span>`',
+					'Community Boards Served' => 'r["COMMUNITY_BOARD"]',
+					'Budget Lines' => 'r["BUDGET_LINE"]',
+					'Site Description' => 'r["SITE_DESCR"]',
+					'Explanation for Delay' => 'r["DELAY_DESC"]',
+			],
+			'order' => [[8, 'asc']],					#7 - wo details col inrement
+			'map' => ['cd' => 'wegov-comd-id', 'cc' => 'Council District', 'nta' => 'wegov-nta-code'],
+		],
+		
 	];
 
 	// single level list 'dataset name' => 'dataset title'
 	public $list = [
 		'nyccouncildiscretionaryfunding' => 'City Council Discretionary',
+		'capitalprojects' => 'Projects',
 		'requests' => 'Requests',
 		'facilities' => 'Facilities',
 	];
@@ -110,6 +156,7 @@ class DistDatasets
 	// multi level list 'menu dropdown title (or zero if single level item)' => ['dataset name', ...]
 	public $menu = [
 		'nyccouncildiscretionaryfunding',
+		'capitalprojects',
 		'requests',
 		'facilities',
 	];

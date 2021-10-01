@@ -340,9 +340,6 @@
 				  <tbody>
 					  <tr>
 						<td colspan=2 class="text-right px-0 pt-0 pb-3">
-						{{--<small>Updated data about capital projects is usually published three times a year. You can see how the data between dates changes by selecting different dates.
-							</small>
-						<br/>--}}
 							<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="true" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
 						</td>
 					  </tr>

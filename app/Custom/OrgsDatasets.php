@@ -507,14 +507,32 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'locallaw251' => 'Assets',
 	];
 	/*
-		data_sources
-		wegov_orgs
-		
-		ccmembers
-
+		additionalcostsallocation
+		agencypmi
+		benefitsapi
+		budgetrequestsregister
 		capitalprojectsdollarscomp
 		capitalprojectsmilestones
-		
+		capitalprojects_cc_idx		
+		capitalprojects_cd_idx		
+		capitalprojects_nta_idx		
+		ccmembers
+		crol
+		data_sources
+		expenseactualsfunding
+		expensebudgetonnycopendata
+		expenseplan
+		facilitydb
+		govpublist
+		govpubrequired
+		headcountactualsfunding
+		locallaw251
+		nyccouncildiscretionaryfunding
+		nycgreenbook
+		nycjobs
+		onenycindicators
+		opendatareleasetracker
+		wegov_orgs
 	*/
 	
 	public $menu = [
