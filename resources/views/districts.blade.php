@@ -232,16 +232,21 @@
 
 		$(document).ready(function() {
 			orgSectionMapInit({!! json_encode($map) !!}, {!! $type ? "'{$type}'" : null !!});
-
+			
 			map.on('load', function() {
-				/*
-				window.setTimeout(function (){
-					//	enable filter by def
-					//if ($('#map-controls div:nth-child(2) input:checked').length)
-						$('#map-controls div:nth-child(2) input').click();
-					}, 3000
-				)
-				*/
+				$.get('{!! $prjUrl !!}', function (jj) {
+					var features = []
+					jj.rows.forEach(function (j) {
+						try {
+							geo_json = JSON.parse(j['GEO_JSON'].replaceAll('""', '"'))
+							geo_json.properties['AG_ID'] = j['wegov-org-id']
+							features.push(geo_json)
+						} catch (error) {
+							console.error(error);
+						}
+					})
+					projectsMapDrawFeatures(features, false);
+				});
 			})
 		})
 

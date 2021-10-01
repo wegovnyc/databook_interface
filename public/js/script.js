@@ -131,6 +131,41 @@ function newMap() {
 
 /** org section map ******************************************/
 
+function applyFilterOnClick(e) {
+	var chckbox = $('#map-controls input:checked')
+	var code = chckbox.attr('id').replace('-filter-switch', '')
+	var col = chckbox.attr('param')
+	var filtField = filtFields[code]
+
+	console.log('script', code, col)
+	// set bbox as 5px reactangle area around clicked point
+	var bbox = [
+		//[e.point.x - 5, e.point.y - 5],
+		//[e.point.x + 5, e.point.y + 5]
+		[e.point.x, e.point.y],
+		[e.point.x, e.point.y]
+	];
+	var features = map.queryRenderedFeatures(bbox, {
+		layers: [code + 'FHH']
+	});
+	 
+	// Run through the selected features and set a filter
+	// to match features with unique FIPS codes to activate
+	// the `counties-highlighted` layer.
+	var filter = features.reduce(
+		function(memo, feature) {
+			memo.push(feature.properties[filtField]);
+			return memo;
+		},
+		['in', filtField]
+	);
+
+	mapAction(filter, code, col);		// maps are used in orgsection.blade and districts.blade, each map has its own mapAction
+	
+	map.setFilter(code + 'FH', filter);
+}
+
+
 function orgSectionMapInit(filters, filterType) {
 	//console.log(filters, filterType)
 	newMap();
@@ -140,7 +175,9 @@ function orgSectionMapInit(filters, filterType) {
 	});
 
 	var geojson = {'type': 'FeatureCollection', 'features': []};
-
+	
+	projectsMapInit(true);
+	
 	map.on('load', function() {
 
 		for (const [code, clr] of Object.entries(zones)) {
@@ -165,39 +202,10 @@ function orgSectionMapInit(filters, filterType) {
 				}, 500
 			)
 		
-		map.on('click', function(e) {
-			var chckbox = $('#map-controls input:checked')
-			var code = chckbox.attr('id').replace('-filter-switch', '')
-			var col = chckbox.attr('param')
-			var filtField = filtFields[code]
-
-			//console.log('script', code, col)
-			// set bbox as 5px reactangle area around clicked point
-			var bbox = [
-				//[e.point.x - 5, e.point.y - 5],
-				//[e.point.x + 5, e.point.y + 5]
-				[e.point.x, e.point.y],
-				[e.point.x, e.point.y]
-			];
-			var features = map.queryRenderedFeatures(bbox, {
-				layers: [code + 'FHH']
-			});
-			 
-			// Run through the selected features and set a filter
-			// to match features with unique FIPS codes to activate
-			// the `counties-highlighted` layer.
-			var filter = features.reduce(
-				function(memo, feature) {
-					memo.push(feature.properties[filtField]);
-					return memo;
-				},
-				['in', filtField]
-			);
-
-			mapAction(filter, code, col);		// maps are used in orgsection.blade and districts.blade, each map has its own mapAction
-			
-			map.setFilter(code + 'FH', filter);
-		});
+		//map.on('click', 'ccFHH', function(e) { applyFilterOnClick(e); })
+		//map.on('click', 'cdFHH', function(e) { applyFilterOnClick(e); })
+		//map.on('click', 'ntaFHH', function(e) { applyFilterOnClick(e); })
+		map.on('click', function(e) { applyFilterOnClick(e); })
 		
 	});
 	
@@ -402,78 +410,35 @@ function projectsMapPopup(e) {
 		[pr.E,pr.N] // northeastern corner of the bounds
 	]);
 	
+	if (popup)
+		popup.remove();
+
 	popup = new mapboxgl.Popup()
 		.setLngLat(e.lngLat)
 		.setHTML(description)
 		.addTo(map);
 	initPopovers();
+	e.stopPropagation();
 }
 
-function projectsMapInit() {
-	newMap();
+function projectsMapInit(as_addon=false) {
+	if (!as_addon)
+		newMap();
 	
 	map.on('load', function() {
         map.addSource('route', {
 				type: "geojson",
-				//cluster: true,
-				//clusterMaxZoom: 14,
-				//clusterRadius: 50,
 				data: {
 					"type": "FeatureCollection",
 					"features": [{"type":"Feature","properties":{"custom_color":"#ccc"},"geometry":{"type":"Point","coordinates":["-73.95098200","40.82387280"]}}]
 				}
 			});
-		/*
-		map.addLayer({
-			id: 'clusters',
-			type: 'circle',
-			source: 'route',
-			filter: ['has', 'point_count'],
-			paint: {
-				// Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-				// with three steps to implement three types of circles:
-				//   * Blue, 20px circles when point count is less than 100
-				//   * Yellow, 30px circles when point count is between 100 and 750
-				//   * Pink, 40px circles when point count is greater than or equal to 750
-				'circle-color': [
-					'step',
-					['get', 'point_count'],
-					'#53777a',
-					50,
-					'#99b59a',
-					100,
-					'#78c0a8'
-				],
-				'circle-radius': [
-					'step',
-					['get', 'point_count'],
-					18,
-					50,
-					25,
-					200,
-					35
-				]
-			}
-		});
-
-		map.addLayer({
-			id: 'cluster-count',
-			type: 'symbol',
-			source: 'route',
-			filter: ['has', 'point_count'],
-			layout: {
-				'text-field': '{point_count_abbreviated}',
-				'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-				'text-size': 12
-			}
-		});
-		*/
 		map.addLayer({
 			'id': 'markers',
 			'type': 'circle',
 			'source': 'route',
 			'paint': {
-				'circle-radius': 6,
+				'circle-radius': 5,
 				'circle-color': ['get', 'custom_color']
 			},
 			//'filter': ["all", ['==', '$type', 'Point'], ['!has', 'point_count']]
@@ -490,33 +455,14 @@ function projectsMapInit() {
             },
             'paint': {
                 'line-color': ['get', 'custom_color'],
-                'line-width': 6
+                'line-width': 5
             },
 			//'filter': ["all", ['==', '$type', 'LineString'], ['!has', 'point_count']]
 			'filter': ['==', '$type', 'LineString']
         });
-		/*
-		map.on('click', 'clusters', (e) => {
-			const features = map.queryRenderedFeatures(e.point, {
-				layers: ['clusters']
-			});
-			const clusterId = features[0].properties.cluster_id;
-			map.getSource('route').getClusterExpansionZoom(
-				clusterId,
-				(err, zoom) => {
-					if (err) return;
-					 
-					map.easeTo({
-						center: features[0].geometry.coordinates,
-						zoom: zoom
-					});
-				}
-			);
-		});
-		*/
 		map.on('zoom', () => {
 			var z = map.getZoom();
-			const zz = {11:6, 10:5, 9:4, 8:3}
+			const zz = {12:6, 11:5, 10:4, 9:3, 8:2}
 			//console.log(z);
 			for (const [l, r] of Object.entries(zz)) {
 				if (z > l) {
@@ -524,18 +470,6 @@ function projectsMapInit() {
 					map.setPaintProperty('streets', 'line-width', r);
 				}
 			}
-			/*
-			if (z > 10) {
-				map.setPaintProperty('markers', 'circle-radius', 5);
-				map.setPaintProperty('streets', 'line-width', 5);
-			} else if (z > 12) {
-				map.setPaintProperty('markers', 'circle-radius', 4);
-				map.setPaintProperty('streets', 'line-width', 4);
-			} else {
-				map.setPaintProperty('markers', 'circle-radius', 6);
-				map.setPaintProperty('streets', 'line-width', 6);
-			}
-			*/
 		});			
 
 		map.on('click', 'streets', function (e) { projectsMapPopup(e); });
@@ -549,15 +483,16 @@ function projectsMapInit() {
 		map.on('mouseleave', 'streets', function () { map.getCanvas().style.cursor = ''; });		
 		map.on('mouseleave', 'markers', function () { map.getCanvas().style.cursor = ''; });
 		
-		for (const [code, clr] of Object.entries(zones)) {
-			setBoundary(code, clr, clr);
-		}
-		
+		if (!as_addon) {
+			for (const [code, clr] of Object.entries(zones)) {
+				setBoundary(code, clr, clr);
+			}
+		}		
 	});
 }
 
 
-function projectsMapDrawFeatures(dd) {
+function projectsMapDrawFeatures(dd, do_fitbounds=true) {
 	// calculate bounds
 	var bounds = [[360, 180], [-360, -180]];
 	// https://javier.xyz/cohesive-colors/
@@ -576,7 +511,8 @@ function projectsMapDrawFeatures(dd) {
 	src.setData({"type": "FeatureCollection", "features": dd});
 	if (popup)
 		popup.remove();
-	map.fitBounds(bounds);
+	if (do_fitbounds)
+		map.fitBounds(bounds);
 }
 
 function fitBounds(bounds) {

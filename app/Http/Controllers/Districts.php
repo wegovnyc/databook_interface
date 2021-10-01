@@ -17,13 +17,15 @@ class Districts extends Controller
     public function main($type=null, $id=null, $section=null)
     {
 		$ds = new DistDatasets();
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
         return view('districts', [
 					'type' => $type ?? 'cc',
 					'id' => $id ?? null,
 					'section' => $section ?? 'nyccouncildiscretionaryfunding',
 					'breadcrumbs' => Breadcrumbs::districts(),
 					'slist' => $ds->list,
-					'map' => ['cc' => 'inherit', 'cd' => 'inherit', 'nta' => 'inherit']
+					'map' => ['cc' => 'inherit', 'cd' => 'inherit', 'nta' => 'inherit'],
+					'prjUrl' => $model->url('SELECT "GEO_JSON", "wegov-org-id" FROM capitalprojectsdollarscomp WHERE "PUB_DATE" = (SELECT DISTINCT "PUB_DATE" pd FROM capitalprojectsdollarscomp ORDER BY pd DESC LIMIT 1) AND "GEO_JSON" != \'\'')
 				]);
     }
 	
