@@ -585,11 +585,11 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 	public $socicons = [
 		'email' => ['envelope', 'mailto:'],
 		'url' => ['link-45deg', ''],
-		'Twitter' => ['twitter', ''],
-		'Facebook' => ['facebook', ''],
+		'twitter' => ['twitter', ''],
+		'facebook' => ['facebook', ''],
 		'main_phone' => ['telephone', 'tel:'],
 		'main_fax' => ['printer', 'fax:'],
-		'RSS' => ['rss', ''],
+		'rss' => ['rss', ''],
 	];
 	
 	public function get($section)

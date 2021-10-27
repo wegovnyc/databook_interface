@@ -8,7 +8,7 @@
 	@include('sub.orgheader', ['active' => 'about'])
 
 	@php
-		$w = $org['Twitter'] || $org['Facebook'] ? 4 : 6;
+		$w = $org['twitter'] || $org['facebook'] ? 4 : 6;
 		$dw = 12 - $w;
 	@endphp
 	
@@ -92,22 +92,11 @@
 				</div>
 			</div>
 
-			@if(($org['Twitter'] ?? null) || ($org['Facebook'] ?? null))
+			@if(($org['twitter'] ?? null) || ($org['facebook'] ?? null))
 				<div class="col-md-{{ $w }}" id="org_socials">
 					<div class="notice_org">
 						<h5 class="card-title mb-4">Social Media</h5>
-						<!-- <h5 class="card-title mb-4">
-							@if($org['Facebook'] ?? null)
-								<span id="fb_button" onclick="fb_click();">Facebook</span>
-							@endif
-							@if(($org['Twitter'] ?? null) && ($org['Facebook'] ?? null))
-							-
-							@endif
-							@if($org['Twitter'] ?? null)
-								<span id="tw_button" onclick="tw_click();">Twitter</span>
-							@endif
-						</h5> -->
-						@if(($org['Twitter'] ?? null) && ($org['Facebook'] ?? null))
+						@if(($org['twitter'] ?? null) && ($org['facebook'] ?? null))
 							<style>
 								#org_socials .card-text  {overflow: auto;height: 630px;}
 								#org_socials .card-text iframe  {overflow: auto;height: 620px !important;border: 1px solid #e1e0e0 !important;}
@@ -121,7 +110,7 @@
 
 
 						<div class="accordion social_media" id="accordionExample">
-						@if($org['Facebook'] ?? null)
+						@if($org['facebook'] ?? null)
 							<div>
 								<div id="headingOne">
 									<button class="social_btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -150,7 +139,7 @@
 											function setupFBframe(frame) {
 												var container = frame.parentNode;
 
-												var facebooklink = "{{ $org['Facebook'] }}";
+												var facebooklink = "{{ $org['facebook'] }}";
 
 												var containerWidth = container.offsetWidth;
 												var containerHeight = container.offsetHeight;
@@ -213,7 +202,7 @@
 								</div>
 							</div>
 						@endif
-						@if($org['Twitter'] ?? null)
+						@if($org['twitter'] ?? null)
 							<div>
 								<div id="headingTwo">
 									<button class="social_btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -222,7 +211,7 @@
 								</div>
 								<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 									<div class="card-text" id="tw_content">
-										<a class="twitter-timeline" data-height="740" href="{{ $org['Twitter'] }}">&nbsp;</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+										<a class="twitter-timeline" data-height="740" href="{{ $org['twitter'] }}">&nbsp;</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 									</div>
 								</div>
 							</div>
@@ -232,95 +221,6 @@
 						@endif
 						</div>
 						
-						<!-- @if($org['Twitter'] ?? null)
-							<div class="card-text" id="tw_content" style="display:none;">
-								<a class="twitter-timeline" data-height="740" href="{{ $org['Twitter'] }}">&nbsp;</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-							</div>
-						@endif
-						
-						@if($org['Facebook'] ?? null)
-							<div class="card-text" id="fb_content">
-								<aside class="widget--facebook--container">
-									<div class="widget-facebook">
-										<iframe id="facebook_iframe" class="facebook_iframe"></iframe>
-									</div>
-								</aside>
-								<style type="text/css">
-									.widget--facebook--container {
-										padding: 0px;
-									}
-									.widget-facebook {
-										height: 740px;
-									}
-									.widget-facebook .facebook_iframe {
-										border: none;
-									}
-								</style>
-								<script type="text/javascript">
-									function setupFBframe(frame) {
-										var container = frame.parentNode;
-
-										var facebooklink = "{{ $org['Facebook'] }}";
-
-										var containerWidth = container.offsetWidth;
-										var containerHeight = container.offsetHeight;
-
-										var src =
-										"https://www.facebook.com/plugins/page.php" +
-										"?href="+facebooklink+
-										"&tabs=timeline" +
-										"&width=" +
-										containerWidth +
-										"&height=" +
-										containerHeight +
-										"&small_header=true" +
-										"&adapt_container_width=true" +
-										"&hide_cover=false" +
-										"&hide_cta=true" +
-										"&show_facepile=true" +
-										"&appId";
-
-										frame.width = containerWidth;
-										frame.height = containerHeight;
-										frame.src = src;
-									}
-
-									/* begin Document Ready                                             
-									############################################ */
-
-									document.addEventListener('DOMContentLoaded', function() {
-										var facebookIframe = document.querySelector('#facebook_iframe');
-										setupFBframe(facebookIframe);
-										
-										/* begin Window Resize                                            
-										############################################ */
-										
-										// Why resizeThrottler? See more : https://developer.mozilla.org/ru/docs/Web/Events/resize
-										(function() {
-										window.addEventListener("resize", resizeThrottler, false);
-
-										var resizeTimeout;
-
-										function resizeThrottler() {
-											if (!resizeTimeout) {
-											resizeTimeout = setTimeout(function() {
-												resizeTimeout = null;
-												actualResizeHandler();
-											}, 66);
-											}
-										}
-
-										function actualResizeHandler() {
-											document.querySelector('#facebook_iframe').removeAttribute('src');
-											setupFBframe(facebookIframe);
-										}
-										})();
-										/* end Window Resize
-										############################################ */
-									});
-								</script>
-							</div>
-						@endif -->
 					</div>
 				</div>
 			@endif
@@ -406,9 +306,9 @@
 					);
 				@endif
 			@endforeach
-			@if($org['Twitter'] ?? null)
+			@if($org['twitter'] ?? null)
 				tw_click();
-			@else if ($org['Facebook'] ?? null)
+			@else if ($org['facebook'] ?? null)
 				fb_click();
 			@endif
 			

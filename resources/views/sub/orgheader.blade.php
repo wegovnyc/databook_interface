@@ -1,9 +1,9 @@
 <div id="org-header" class="org-header">
     <div class="row m-0">
-        @if ($org['Logo'][0]['url'] ?? null)
+        @if ($org['logo'][0]['url'] ?? null)
         <div class="col-md-2">
             <div class="inside_orglogo">
-                <img class="org-logo" src="{{ $org['Logo'][0]['url'] }}" />
+                <img class="org-logo" src="{{ $org['logo'][0]['url'] }}" />
             </div>
         </div>
         @endif
@@ -23,13 +23,12 @@
                 @endforeach
             </div>
             <div class="float-right">
-                @if ($org['Type'] ?? null)
+                @if ($org['type'] ?? null)
                     <div class="float-left mr-4">
                         {{-- <p class="text-types">Type:</p>
 						<p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Type"><i class="bi-funnel" style="color:black;"></i></p> --}}
-                        <a href="{{ route('orgs') }}?type={{ urlencode($org['Type']) }}" class="float-left no-underline">
-                            <span class="type-label">{{ $org['Type'] }}</span>
-                            <!--<span class="tag-label">{{ $org['Type'] }}</span>-->
+                        <a href="{{ route('orgs') }}?type={{ urlencode($org['type']) }}" class="float-left no-underline">
+                            <span class="type-label">{{ $org['type'] }}</span>
                         </a>
                     </div>
                 @endif

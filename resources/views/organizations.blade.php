@@ -42,13 +42,13 @@
 				columns: [
                     {data: 'id'},
                     {data: function (r) {
-                        return r['Logo']
-                            ? JSON.parse(unescape(r['Logo']))[0]['url']
+                        return r['logo']
+                            ? JSON.parse(unescape(r['logo']))[0]['url']
                             : '';
                     }},
                     {data: 'name'},
                     {data: 'tags'},
-                    {data: 'Type'},
+                    {data: 'type'},
                     {data: function (r) {
                         return r['description'].substr(0,100)+
                         (r['description'].length > 100 ? '...' : '')
@@ -141,10 +141,10 @@
 
                     div = $('<div class="card-body"></div>')
 
-                    if (r['Logo'])
-                        div.append(`<div class="inner_logoimg"><div class="inside_org_logo"><img src="${JSON.parse(unescape(r['Logo']))[0]['url']}"></div></div>`)
+                    if (r['logo'])
+                        div.append(`<div class="inner_logoimg"><div class="inside_org_logo"><img src="${JSON.parse(unescape(r['logo']))[0]['url']}"></div></div>`)
 
-                    if (r['name'] && (!r['Logo'] || !r['description']))
+                    if (r['name'])
                         div.append(`<h6>${r['name']}</h6>`)
 
                     var descr = r['description'].substr(0,100)+(r['description'].length > 100 ? '...' : '')

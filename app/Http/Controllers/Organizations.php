@@ -45,7 +45,7 @@ class Organizations extends Controller
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
         return view('organizations', [
-					'url' => $model->url('SELECT * FROM wegov_orgs WHERE "Type" IN (\'City Agency\', \'City Fund\', \'Community Board\', \'Economic Development Organization\', \'Elected Office\', \'State Agency\') ORDER BY name'),
+					'url' => $model->url('SELECT * FROM wegov_orgs WHERE "type" IN (\'City Agency\', \'City Fund\', \'Community Board\', \'Economic Development Organization\', \'Elected Office\', \'State Agency\') ORDER BY name'),
 					'breadcrumbs' => Breadcrumbs::orgs(),
 					'defType' => $_GET['type'] ?? null ? $_GET['type'] : 'City Agency',
 					'defTag' => $_GET['tag'] ?? null,
