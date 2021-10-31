@@ -45,7 +45,7 @@ class OrgsDatasets
 			'fullname' => 'Capital Project Detail Data - Dollars',
 			'table' => 'capitalprojectsdollarscomp',
 			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
-			'hdrs' => ['Publication Date', 'Project ID', 'Name', 'Scope', 'Category', 'Borough', 'Planned Cost', 'Budget Increase', 'Timeline Change'],
+			'hdrs' => ['Publication Date', 'Project ID', 'Name', 'Scope', 'Category', 'Borough', 'Current Budget', 'Budget Change (%)', 'Timeline Change'],
 			'visible' => [false, true, true, true, true, true, true, true, true],
 			'hide_on_map_open' => '0, 4, 6, 7, 8',		// +1 for details fld is already added
 			'flds' => [
@@ -53,15 +53,8 @@ class OrgsDatasets
 					'function (r) { return `<a href="/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
 					'"PROJECT_DESCR"', '"SCOPE_TEXT"', '"TYP_CATEGORY_NAME"', 
 					'"BORO"', 
-					'function (r) { return `<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>` }',
-					'function (r) { 
-						if (!r["ORIG_BUD_AMT"])
-							return "NA"
-						return r["BUDG_DIFF"] == 0 ? "0" :
-							(r["BUDG_DIFF"] > 0 
-								? `<span class="good" data-content="-${toFin(r["BUDG_DIFF"], 1000)}">-${toFinShortK(r["BUDG_DIFF"], 1000)}</span>` 
-								: `<span class="bad" data-content="${toFin(-r["BUDG_DIFF"], 1000)}">${toFinShortK(-r["BUDG_DIFF"], 1000)}</span>`);
-					}',
+					'function (r) { return `<span data-content="${toFin(r["BUDG_CURR"], 1000)}">${toFinShortK(r["BUDG_CURR"], 1000)}</span>` }',
+					'function (r) { return `<span>${toPerc(r["BUDG_ORIG"], r["BUDG_CURR"])}</span>` }',
 					'function (r) { 
 						if ((r["END_DIFF"] == "-") || (r["END_DIFF"] == "12/31/1969"))
 							return "NA"
@@ -73,6 +66,17 @@ class OrgsDatasets
 				],
 			'filters' => [/*2 => null, */4 => null],
 			'details' => [
+					'Planned Cost' => '`<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>`', 
+					'Budget Increase' => '(!r["ORIG_BUD_AMT"] 
+							? "NA" 
+							: (r["BUDG_DIFF"] == 0 
+								? "0" 
+								: (r["BUDG_DIFF"] > 0 
+									? "-" 
+									: `${toFinShortK(-r["BUDG_DIFF"], 1000)}`
+								)
+							)
+					)', 
 					'Original Budget' => '`<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>`',
 					'Prior Spending' =>  '`<span data-content="${toFin(r["CITY_PRIOR_ACTUAL"], 1000)}">${toFinShortK(r["CITY_PRIOR_ACTUAL"], 1000)}</span>`', 
 					'Planned Spending' => '`<span data-content="${toFin(r["CITY_PLAN_TOTAL"], 1000)}">${toFinShortK(r["CITY_PLAN_TOTAL"], 1000)}</span>`',
@@ -81,7 +85,7 @@ class OrgsDatasets
 					'Site Description' => 'r["SITE_DESCR"]',
 					'Explanation for Delay' => 'r["DELAY_DESC"]',
 			],
-			'order' => [[8, 'asc']],					#7 - wo details col inrement
+			'order' => [[8, 'desc']],					#7 - wo details col inrement
 		],
 		'benefitsapi' => [
 			'fullname' => 'Benefits and Programs API on NYC Open Data',
@@ -513,9 +517,9 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		budgetrequestsregister
 		capitalprojectsdollarscomp
 		capitalprojectsmilestones
-		capitalprojects_cc_idx		
-		capitalprojects_cd_idx		
-		capitalprojects_nta_idx		
+		capitalprojects_cc_idx
+		capitalprojects_cd_idx
+		capitalprojects_nta_idx
 		ccmembers
 		crol
 		data_sources
@@ -583,6 +587,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 	}
 	
 	public $socicons = [
+		'main_address' => ['geo-alt-fill', 'https://www.google.com/maps?q='],
 		'email' => ['envelope', 'mailto:'],
 		'url' => ['link-45deg', ''],
 		'twitter' => ['twitter', ''],
@@ -590,6 +595,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'main_phone' => ['telephone', 'tel:'],
 		'main_fax' => ['printer', 'fax:'],
 		'rss' => ['rss', ''],
+		'ical' => ['calendar-event-fill', ''],
 	];
 	
 	public function get($section)

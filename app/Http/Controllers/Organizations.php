@@ -49,6 +49,7 @@ class Organizations extends Controller
 					'breadcrumbs' => Breadcrumbs::orgs(),
 					'defType' => $_GET['type'] ?? null ? $_GET['type'] : 'City Agency',
 					'defTag' => $_GET['tag'] ?? null,
+					'defSearch' => $_GET['search'] ?? null,
 				]);
     }
 

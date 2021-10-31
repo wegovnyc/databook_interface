@@ -42,7 +42,7 @@
                                 <th scope="col">Summary</th>
                                 <th scope="col">Original</th>
                                 <th scope="col">Current</th>
-                                <th scope="col">Change</th>
+                                <th scope="col">Change (#)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -283,7 +283,7 @@
 
 			@if ($data['geo_feature'])
 				var feature = {!! $data['geo_feature'] !!}
-				console.log(feature)
+				//console.log(feature)
 
 				mapboxgl.accessToken = 'pk.eyJ1Ijoic291bmRwcmVzcyIsImEiOiJjazY1OTF3cXIwbjZyM3BtcGt3Y3F2NjZwIn0.3hmCJsl0_oBUpoVsNJKZjQ';
 

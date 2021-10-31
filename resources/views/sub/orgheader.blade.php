@@ -7,8 +7,30 @@
             </div>
         </div>
         @endif
-        <div class="col-md-10 org_detailtitle">
-            <h4>{{ $org['name'] }}</h4>
+        <div class="col-md-10 org_detailheader">
+			<div class="org_detailtitle">
+				<h4>{{ $org['name'] }}</h4>
+				@if ($org['communityDistrictName'])
+					<p>Representing <a href="{{ route('districtsPreset', [
+										'type' => 'cd',
+										'id' => $org['communityDistrictId'][0],
+										'section' => 'nyccouncildiscretionaryfunding',
+									])
+								}}">
+						{{ trim($org['communityDistrictName'][0]) }}
+					</a></p>
+				@endif
+				@if ($org['cityCouncilDistrictName'])
+					<p>Representing <a href="{{ route('districtsPreset', [
+										'type' => 'cc',
+										'id' => $org['cityCouncilDistrictId'][0],
+										'section' => 'nyccouncildiscretionaryfunding',
+									])
+								}}">
+						{{ trim($org['cityCouncilDistrictName'][0]) }}
+					</a></p>
+				@endif
+			</div>
             <div class="icon_orgsocial">
                 @foreach ($icons as $f=>$pp)
                     <div class="icon">
@@ -22,7 +44,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="float-right">
+            <div class="float-right mt-1">
                 @if ($org['type'] ?? null)
                     <div class="float-left mr-4">
                         {{-- <p class="text-types">Type:</p>

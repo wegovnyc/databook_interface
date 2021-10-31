@@ -58,11 +58,10 @@ class CapProjectsBuilder
 				'#budget .current' => sprintf('<span data-content="%s">%s</span>', 
 						self::budgetRound($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], 1000), 
 						self::toFinShortK($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], 1000)),
-				//[self::toFinShortK($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']), self::budgetRound($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'])],
 				'#budget .difference' => sprintf('<span data-content="%s">%s</span>', 
 						self::budgetRound(($d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']) - $d['ORIG_BUD_AMT'], 1000), 
-						self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], 1000)),
-				//[self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL']), self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], false)],
+						self::budgetDiff($d['ORIG_BUD_AMT'], $d['CITY_PRIOR_ACTUAL'] + $d['CITY_PLAN_TOTAL'], 1000)
+					),
 				
 				'#start .original' => ($d['ORIG_START'] ?? null) ? self::df($d['ORIG_START']) : '-',
 				'#start .current' => ($d['CURR_START'] ?? null) ? self::df($d['CURR_START']) : '-',
@@ -114,7 +113,7 @@ class CapProjectsBuilder
 				$rr[] = self::genLogItem($t, $dd[$f] ?? null, $pdd[$f] ?? null);
 		
 		$pmm = [];
-		foreach ($pdd['milestones'] as $m)
+		foreach ($dd['milestones'] as $m)
 			$pmm[$m['TASK_DESCRIPTION']] = $m;
 		
 		foreach ($mm as $m)
@@ -159,51 +158,6 @@ class CapProjectsBuilder
 			["{$t} set to {$b}", ''];
 	}
 	
-/*	
-	static function genLog($pdd, $dd)
-	{
-		$mm = $dd['milestones'];
-		$rr = [];
-		foreach ([
-				'BUDG_ORIG' => 'Original Budget',
-				'BUDG_CURR' => 'Current Budget',
-				'START_ORIG' => 'Original Start',
-				'START_CURR' => 'Current Start',
-				'END_ORIG' => 'Original End',
-				'END_CURR' => 'Current End',
-			] as $f=>$t)
-			if (($dd[$f] ?? null) <> ($pdd[$f] ?? null))
-			{
-				$b = strstr($f, 'BUDG_') ? '$' . number_format((float)$dd[$f]) : $dd[$f];
-				if ($pdd[$f] ?? null)
-				{
-					#echo $pdd[$f];
-					$a = strstr($f, 'BUDG_') ? '$' . number_format((float)$pdd[$f]) : $pdd[$f];
-					$rr[] = "{$t} changed from {$a} to {$b}";
-				} 
-				else
-					$rr[] = "{$t} stated to {$b}";
-			}
-		
-		$pmm = [];
-		foreach ($pdd['milestones'] as $m)
-			$pmm[$m['TASK_DESCRIPTION']] = $m;
-		
-		foreach ($mm as $m)
-		{
-			if (!($pmm[$m['TASK_DESCRIPTION']] ?? null))
-				$rr[] = "New milestone '{$m['TASK_DESCRIPTION']}'";
-			else 
-				foreach ([
-						'ORIG_DATE_F' => 'Original',
-						'CURR_DATE_F' => 'Current',
-					] as $f=>$t)
-					if (($m[$f] ?? null) <> ($pmm[$m['TASK_DESCRIPTION']][$f] ?? null))
-						$rr[] = ($pmm[$m['TASK_DESCRIPTION']][$f] ?? null) ? "{$m['TASK_DESCRIPTION']} {$t} changed from {$pmm[$m['TASK_DESCRIPTION']][$f]} to {$m[$f]}" : "{$t} stated to {$m[$f]}";
-		}
-		return $rr;
-	}
-*/	
 	static function df($d)
 	{
 		return preg_match('~^\d{8}$~', $d) 
@@ -251,6 +205,7 @@ class CapProjectsBuilder
 		$r = round($r, 1);
 		if (!$format)
 			return $r;
+		$p = $dP ? self::perc($dA, $dP) : '';
 		switch ($r <=> 0)
 		{
 			case 0:
@@ -258,10 +213,10 @@ class CapProjectsBuilder
 				break;
 			case -1:
 				$r = -$r;
-				return "<span class='bad'>{$r} years over</span>";
+				return "<span class='bad'>{$r} years over <small><i>({$p})</i></small></span>";
 				break;
 			case 1:
-				return "<span class='good'>{$r} years below</span>";
+				return "<span class='good'>{$r} years below <small><i>({$p})</i></small></span>";
 				break;
 		}
 	}
@@ -272,39 +227,26 @@ class CapProjectsBuilder
 		$df = self::toFinShortK(abs($d), $m);
 		if (abs($d) < 250)
 			$d = 0;
+		$p = $b1 ? self::perc($b2, $b1) : '';
 		switch ($d <=> 0)
 		{
 			case 0:
 				return "<span class='good'>Fit</span>";
 			case -1:
-				return "<span class='bad'>{$df} over</span>";
+				return "<span class='bad'>{$df} over <small><i>({$p})</i></small></span>";
 			case 1:
-				return "<span class='good'>{$df} below</span>";
+				return "<span class='good'>{$df} below <small><i>({$p})</i></small></span>";
 		}
 	}
 
-/*	static function budgetDiff($b1, $b2, $format=true)
-	{
-		$d = $b1 - $b2;
-		if (!$format)
-			return $d;
-		$df = self::budgetRound(abs($d));
-		if (abs($d) < 250)
-			$d = 0;
-		switch ($d <=> 0)
-		{
-			case 0:
-				return "<span class='good'>Fit</span>";
-			case -1:
-				return "<span class='bad'>{$df} over</span>";
-			case 1:
-				return "<span class='good'>{$df} below</span>";
-		}
-	}
-*/	
 	static function budgetRound($b, $m=1)
 	{
 		return '$' . number_format((int)$b * $m);
+	}
+	
+	static function perc($c, $p)
+	{
+		return number_format(abs($c/$p - 1) * 100) . '%';
 	}
 	
 	static function toFinShortK($b, $m=1)

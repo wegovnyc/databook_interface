@@ -20,6 +20,8 @@
 		}
 	</style>
 	<script>
+		var table = null
+		
 		function tagFlt(e, tag) {
 			console.log(tag)
 			$('#filter-tags').val(tag)
@@ -27,7 +29,40 @@
 			e.preventDefault()
 		}
 
-		var table = null
+		function copyShareLink()
+		{
+			const url = $('#details-permalink').text()
+			const params = new URLSearchParams({
+			  search: $('input[type="search"]').val(),
+			  type: $('#filter-4').val(),
+			  tag: $('#filter-tags').val()
+			});
+			$('#details-permalink').text(`${url}?${params.toString()}`)
+			copyLink()
+		}
+		
+		function loadShareLink()
+		{
+			const params = {!! $_GET ? json_encode($_GET) : '""' !!}
+			if (params) {
+				if (params['q']) {
+					table({
+					  'search': {
+						'search': params['q']
+					  }
+					})
+				}
+				if (params['type']) {
+					$('#filter-4').val(params['type'])
+					$('#filter-4').trigger('change')
+				}
+				if (params['tag']) {
+					$('#filter-tags').val(params['tag'])
+					$('#filter-tags').trigger('change')
+				}
+			}
+		}
+
 		$(document).ready(function() {
 			table = $('#orgsTable').DataTable( {
 				pageLength: 20,
@@ -60,6 +95,11 @@
                         searchable: false
                     }
                 ],
+				@if ($defSearch)
+					search: {
+						'search': '{{ $defSearch }}'
+				    },
+				@endif	
 
 				initComplete: function () {
 					this.api().columns([4]).every(function () {						// Type
@@ -119,6 +159,13 @@
 						  }, 1000);
 						@endif
 					});
+
+					
+					
+					// share button
+					$('<span class="share_icon_container" data-toggle="popover" data-content="Link copied to clipboard" placement="left" trigger="manual"><textarea id="details-permalink" class="details">{!! route("orgs") !!}</textarea><span id="details-addr"></span><a title="Share direct link" onclick="copyShareLink();"><i class="bi bi-share"></i></a></span>').appendTo($('div.toolbar'));
+					
+					loadShareLink()
 				}
 			});
 
@@ -153,12 +200,9 @@
                     if (r['tags']) {
                         var tags = ''
                         JSON.parse(unescape(r['tags'])).forEach(function (d, j) {
-                            //tags = tags+'<span class="badge badge-info" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
                             tags = tags+'<span class="tag-label" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
                         })
-                        //div.append(`<p class="tag_org">Tags:</p> ${tags}`)
                         div.append(`<a title="Tags"><i class="bi-tags" style="color:black;"></i></a> ${tags}`)
-                        //div.append(`<i class="bi bi-tag-fill tag_color"></i> ${tags}`)
                     }
 
                     td.append($(`<div class="col-md-3"><a href="/agency/${r['id']}"><div class="card  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))

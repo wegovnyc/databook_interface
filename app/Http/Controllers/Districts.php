@@ -51,6 +51,10 @@ class Districts extends Controller
 					'dataset' => $model->dataset($details['fullname']),
 					'member' => (($type == 'cc') and ($id <> 'undefined')) ? $model->ccMember($id) : [],
 					'details' => $details,
+					'linkedAgencyUrl' => 
+						$type == 'nta'
+							? ''
+							: $model->url('SELECT * FROM wegov_orgs WHERE ' . ['cc' => '"cityCouncilDistrictId"', 'cd' => '"communityDistrictId"'][$type] . " = '[\"\"{$id}\"\"]'"),
 				])
 			: abort(404);
     }
@@ -89,6 +93,10 @@ class Districts extends Controller
 						'#late_start_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp pp INNER JOIN capitalprojects_{$type}_idx i ON pp.\"PROJECT_ID\"=i.\"PROJECT_ID\" WHERE i.\"DIST\" = '{$id}' AND \"PUB_DATE\"='pubdate' AND \"START_DIFF\" <> '-' AND cast(REPLACE(\"START_DIFF\", ',', '.') as decimal) < 0"),
 						'#late_end_no' => $model->url("SELECT count(*) RES FROM capitalprojectsdollarscomp pp INNER JOIN capitalprojects_{$type}_idx i ON pp.\"PROJECT_ID\"=i.\"PROJECT_ID\" WHERE i.\"DIST\" = '{$id}' AND \"PUB_DATE\"='pubdate' AND \"END_DIFF\" <> '-' AND cast(REPLACE(\"END_DIFF\", ',', '.') as decimal) < 0"),
 					],
+					'linkedAgencyUrl' => 
+						$type == 'nta'
+							? ''
+							: $model->url('SELECT * FROM wegov_orgs WHERE ' . ['cc' => '"cityCouncilDistrictId"', 'cd' => '"communityDistrictId"'][$type] . " = '[\"\"{$id}\"\"]'"),
 				])
 			: abort(404);
     }

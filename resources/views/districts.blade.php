@@ -201,7 +201,7 @@
 				}
 			globfilter = filter
 			
-			console.log(filter, type, sect)
+			//console.log(filter, type, sect)
 			
 			$.get(`/districtXHR/${type}/${filter[2]}/${sect}`, function (html) {
 				$('#section_content').html(html)
@@ -209,11 +209,11 @@
 				var features = map.querySourceFeatures(type, {
 					filter: filter
 				});
-				console.log(filter, features, features.length)
+				//console.log(filter, features, features.length)
 				if (features.length) {
 					var title = features[0].properties['nameCol']
 					var center = getBounds(features[0].geometry.coordinates).getCenter()
-					console.log(title, center)
+					//console.log(title, center)
 					tt = {'cc': 'City Council District ', 'cd': 'Community District ', 'nta': ''}
 					$('#section_content h1').html(tt[type]+title)
 					$('.loading').hide()
@@ -264,7 +264,7 @@
 			defSection = null
 
 			if (id) {
-				console.log(type, id, section)
+				//console.log(type, id, section)
 				var tmpfilter = ['in', filtFields[type], id]
 				mapAction(tmpfilter, type, section);
 				map.setFilter(type+'FH', tmpfilter);

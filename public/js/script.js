@@ -50,6 +50,16 @@ function toFinShortK(d, m=1)
 	}
 }
 
+function toPerc(p, a)		//planned, actual
+{
+	//console.log(p, a)
+	if (!parseFloat(p))
+		return '-'
+	return ((parseFloat(a) / parseFloat(p) - 1) * 100).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '%'
+}
+
+
+
 window.onscroll = function() {scrollFunction()}
 
 function scrollFunction() {
@@ -137,7 +147,7 @@ function applyFilterOnClick(e) {
 	var col = chckbox.attr('param')
 	var filtField = filtFields[code]
 
-	console.log('script', code, col)
+	//console.log('script', code, col)
 	// set bbox as 5px reactangle area around clicked point
 	var bbox = [
 		//[e.point.x - 5, e.point.y - 5],
@@ -305,7 +315,7 @@ function setFilter(code, col) {
 				},
 				['in', filtField]
 			);
-			console.log(filter);
+			//console.log(filter);
 		});
 	}
 	
@@ -530,7 +540,7 @@ function copyLink() {
 	el.select();
 	el.setSelectionRange(0, 99999);
 	document.execCommand("copy");
-	console.log(el.value)
+	//console.log(el.value)
 	$('.share_icon_container').popover('show')
 	setTimeout(function(){
 		$('.share_icon_container').popover('hide')

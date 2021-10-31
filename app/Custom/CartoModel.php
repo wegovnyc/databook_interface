@@ -55,7 +55,7 @@ class CartoModel
 	function map($dd)
 	{
 		foreach ($dd as $i=>$d)
-			foreach (['Logo', 'tags'] as $f)
+			foreach (['logo', 'tags', 'communityDistrict', 'communityDistrictName', 'communityDistrictId', 'cityCouncilDistrict', 'cityCouncilDistrictName', 'cityCouncilDistrictId'] as $f)
 				if ($d[$f] ?? null)
 					$dd[$i][$f] = json_decode(str_replace(['""', '""'], ['"', "'"], $d[$f]), true);
 		return $dd;

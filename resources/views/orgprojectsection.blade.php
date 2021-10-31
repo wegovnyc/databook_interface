@@ -224,10 +224,11 @@
 			
 			// makes sortable html fields like 9.4 years late, $25,764 over, $64.2M over
 			$.fn.dataTable.ext.type.order['html-pre'] = function (data) {
-				var d = data.replace(/-/g, '');
+				var d = data.replace(/^-$/g, '0');
 				d = d.replace(/<span class="(bad)"[^>]*>/g, '-');
-				d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+/g, '');
-				d = d.replace(/NA|NaN|on time|^-$/g, '0');
+				d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+|%/g, '');
+				d = d.replace(/NA|NaN|on time/g, '0');
+				//console.log(d)
 				m = 1
 				for (const[rg, tmpM] of [[/K$/g, 1000], [/M$/g, 1000000], [/B$/g, 1000000000]]) {
 					if (d.match(rg)) {
@@ -317,7 +318,7 @@
 					}
 				}
 			});
-			console.log(features.length)
+			//console.log(features.length)
 			projectsMapDrawFeatures(features);
 		}
 		
@@ -566,7 +567,7 @@
 
 	<script>
 		function changeToggle (e) {
-			console.log($(e.target).next("label")[0].innerHTML)
+			//console.log($(e.target).next("label")[0].innerHTML)
 			$('#change_district').html($(e.target).next("label")[0].innerHTML);
 		}
 		$('#toggle_boundries').click( function (e) {
@@ -574,7 +575,7 @@
 		})
 
 		$(".filter_icon").click(function() {
-			console.log($('.toolbar').is(':visible'))
+			//console.log($('.toolbar').is(':visible'))
 			if(!$('.toolbar').is(':visible')) {
 				$('.filter_icon').addClass('position_change');
 			}else {

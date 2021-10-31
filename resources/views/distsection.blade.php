@@ -2,6 +2,7 @@
 	<div class="row justify-content-center">
 		<div class="col-md-12 mt-5 mb-1">
 			<h1></h1>
+			<h5 id="linked_agency"></h5>
 			@if($member['NAME'] ?? null)
 				<h5>Memeber: 
 					<span style="color:#999999;">
@@ -146,6 +147,13 @@
 			});
 
 			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
+			
+			@if($linkedAgencyUrl ?? null)
+				$.get('{!! $linkedAgencyUrl !!}', function (resp) {
+					if (resp['rows'][0])
+					$('#linked_agency').html(`Represented by <a href="/agency/${resp['rows'][0]['id']}">${resp['rows'][0]['name']}</a>`)
+				})
+			@endif
 		});
 </script>
 
