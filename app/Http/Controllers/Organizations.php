@@ -47,7 +47,7 @@ class Organizations extends Controller
         return view('organizations', [
 					'url' => $model->url('SELECT * FROM wegov_orgs WHERE "type" IN (\'City Agency\', \'City Fund\', \'Community Board\', \'Economic Development Organization\', \'Elected Office\', \'State Agency\') ORDER BY name'),
 					'breadcrumbs' => Breadcrumbs::orgs(),
-					'defType' => $_GET['type'] ?? null ? $_GET['type'] : 'City Agency',
+					'defType' => $_GET['type'] ?? 'City Agency',
 					'defTag' => $_GET['tag'] ?? null,
 					'defSearch' => $_GET['search'] ?? null,
 				]);
