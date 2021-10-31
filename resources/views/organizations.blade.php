@@ -39,6 +39,7 @@
 			});
 			$('#details-permalink').text(`${url}?${params.toString()}`)
 			copyLink()
+			$('#details-permalink').text(url)
 		}
 		
 		function loadShareLink()
