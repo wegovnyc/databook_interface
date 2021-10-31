@@ -205,28 +205,31 @@
 			
 			$.get(`/districtXHR/${type}/${filter[2]}/${sect}`, function (html) {
 				$('#section_content').html(html)
-				
-				var features = map.querySourceFeatures(type, {
-					filter: filter
-				});
-				//console.log(filter, features, features.length)
-				if (features.length) {
-					var title = features[0].properties['nameCol']
-					var center = getBounds(features[0].geometry.coordinates).getCenter()
-					//console.log(title, center)
-					tt = {'cc': 'City Council District ', 'cd': 'Community District ', 'nta': ''}
-					$('#section_content h1').html(tt[type]+title)
-					$('.loading').hide()
-					window.setTimeout(function (){
-						map.flyTo({
-							center: center,
-							speed: 0.4
-						});
-						}, 1000
-					)
-				} else {					
-					$('.loading').hide()
-				}
+
+				window.setTimeout(function (){
+					
+					var features = map.querySourceFeatures(type, {
+						filter: filter
+					});
+					//console.log(filter, features, features.length)
+					if (features.length) {
+						var title = features[0].properties['nameCol']
+						var center = getBounds(features[0].geometry.coordinates).getCenter()
+						//console.log(title, center)
+						tt = {'cc': 'City Council District ', 'cd': 'Community District ', 'nta': ''}
+						$('#section_content h1').html(tt[type]+title)
+						$('.loading').hide()
+						window.setTimeout(function (){
+							map.flyTo({
+								center: center,
+								speed: 0.4
+							});
+							}, 1000
+						)
+					} else {					
+						$('.loading').hide()
+					}
+				}, 1000);
 			})
 		}
 
