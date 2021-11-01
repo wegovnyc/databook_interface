@@ -115,7 +115,7 @@ function initPopovers() {
 
 
 var map = null
-var zones = {'cd': '#bc2b32', 'ed': '#a881c2', 'pp': '#be7957', 'dsny': '#d2ac6d', 'fb': '#77aa98', 'sd': '#3e7864', 'hc': '#085732', 'cc': '#9abe0c', 'nycongress': '#f3bd1c', 'sa': '#f5912f', 'ss': '#dc2118', 'bid': '#39a6a5', 'nta': '#185892', 'zipcode': '#7a7e5a'}
+var zones = {'cc': '#9abe0c', 'cd': '#bc2b32', 'nta': '#185892', 'ed': '#a881c2', 'pp': '#be7957', 'dsny': '#d2ac6d', 'fb': '#77aa98', 'sd': '#3e7864', 'hc': '#085732', 'nycongress': '#f3bd1c', 'sa': '#f5912f', 'ss': '#dc2118', 'bid': '#39a6a5', 'zipcode': '#7a7e5a'}
 var filtFields = {'cd': 'nameCol', 'cc': 'nameCol', 'nta': 'nameAlt'}
 
 function newMap() {

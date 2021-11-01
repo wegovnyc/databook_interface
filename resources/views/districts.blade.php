@@ -10,6 +10,14 @@
 			<div id="map_container" class="col-12 mb-0" style="min-height:500px!important;">
 				<!-- controls -->
 				<div id="map-controls">
+					
+					<div class="input-group search_input">
+						<input id="addrSearch" type="text" class="form-control" placeholder="Enter address to find districts" aria-label="Enter address to find districts" aria-describedby="searchBtn">
+						<div class="input-group-append">
+							<button class="input-group-text" id="searchBtn" onclick="addrSearch();" data-toggle="popover" data-content="" data-placement="right" data-trigger="manual"><i class="bi bi-search"></i></button>
+						</div>
+					</div>
+					
 					<div class="select_district">
 						<img src="/img/map_icon.png" alt="" title="">
 						<ul class="inner_district">
@@ -97,65 +105,6 @@
 						</li>
 					</ul>
 				</div>
-				{{-- <div >
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="cd-switch">
-					  <label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="ed-switch">
-					  <label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="pp-switch">
-					  <label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="dsny-switch">
-					  <label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="fb-switch">
-					  <label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="sd-switch">
-					  <label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="hc-switch">
-					  <label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="cc-switch">
-					  <label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="nycongress-switch">
-					  <label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="sa-switch">
-					  <label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="ss-switch">
-					  <label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="bid-switch">
-					  <label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="nta-switch">
-					  <label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
-					</div>
-					<div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input" id="zipcode-switch">
-					  <label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
-					</div>
-				</div> --}}
-				<!-- /toggles -->
 				<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;"></div>
 			</div>
 		</div>
@@ -163,13 +112,14 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div id="section_content" class="col-12 mb-4 p-0 district_section">
+				{{--
 				<div class="text-center bottom_text my-3">
 					<h3>Click a District to View Data.</h3>
 				</div>				
+				--}}
 			</div>
 		</div>
 	</div>
-	
 	<script>
 	
 		var globfilter = []
@@ -207,11 +157,10 @@
 				$('#section_content').html(html)
 
 				window.setTimeout(function (){
-					
 					var features = map.querySourceFeatures(type, {
 						filter: filter
 					});
-					//console.log(filter, features, features.length)
+					console.log(filter, features, features.length)
 					if (features.length) {
 						var title = features[0].properties['nameCol']
 						var center = getBounds(features[0].geometry.coordinates).getCenter()
@@ -233,8 +182,69 @@
 			})
 		}
 
+
+		function addrSearchPopover(msg) {
+			$('#searchBtn').attr('data-content', msg)
+			$('#searchBtn').popover('show')
+			setTimeout(function(){
+				$('#searchBtn').popover('hide')
+			}, 3000);
+		}
+
+
+		function addrSearch() {
+			var addr = $('#addrSearch').val()
+			if (!addr || (addr.length < 6)) {
+				addrSearchPopover('Please enter valid address')
+				return
+			}
+			
+			$.ajax({
+				url: 'https://api.nyc.gov/geo/geoclient/v1/search.json',
+				data: {input: addr},
+				headers: {'Ocp-Apim-Subscription-Key': '{{ config('apis.geoclient_key') }}'},
+				success: function (dd) {
+					if (dd.status != 'OK') {
+						addrSearchPopover('Not found, please try again')
+						return
+					}
+					r = dd.results[0].response
+					var description = `
+						<h4>${dd.input.toUpperCase()}</h4>
+						<table><tbody>
+							<tr><th scope="row">Community District</th><td><a href="/districts/cd/${r.communityDistrict}/nyccouncildiscretionaryfunding">${r.communityDistrict}</a></td></tr>
+							<tr><th scope="row">City Council District</th><td><a href="/districts/cc/${r.cityCouncilDistrict.replace(/^0+/g, '')}/nyccouncildiscretionaryfunding">${r.cityCouncilDistrict}</a></td></tr>
+							<tr><th scope="row">Neighborhood (NTA)</th><td><a href="/districts/nta/${r.nta}/nyccouncildiscretionaryfunding">${r.ntaName}</a></td></tr>
+							<tr><th scope="row">Election District</th><td>${r.electionDistrict}</td></tr>
+							<tr><th scope="row">Police Precinct</th><td>${r.policePrecinct}</td></tr>
+							<tr><th scope="row">Sanitation District</th><td>${r.sanitationDistrict}</td></tr>
+							<tr><th scope="row">Fire Battilion</th><td>${r.fireBattalion}</td></tr>
+							<tr><th scope="row">School District</th><td>${r.communitySchoolDistrict}</td></tr>
+							<tr><th scope="row">Health Center District</th><td>${r.healthCenterDistrict}</td></tr>
+							<tr><th scope="row">Congressional District</th><td>${r.congressionalDistrict}</td></tr>
+							<tr><th scope="row">State Assembly District</th><td>${r.assemblyDistrict}</td></tr>
+							<tr><th scope="row">State Senate District</th><td>${r.stateSenatorialDistrict}</td></tr>
+							<tr><th scope="row">Zip Code</th><td>${r.zipCode}</td></tr>
+						</tbody></table>`
+						
+					map.fitBounds([
+						[r.longitude - 0.002,r.latitude - 0.0005], // southwestern corner of the bounds
+						[r.longitude + 0.002,r.latitude + 0.0035] // northeastern corner of the bounds
+					])
+					
+					if (popup)
+						popup.remove()
+
+					popup = new mapboxgl.Popup()
+						.setLngLat([r.longitude,r.latitude])
+						.setHTML(description)
+						.addTo(map)
+				}
+			});
+		}
+
 		$(document).ready(function() {
-			orgSectionMapInit({!! json_encode($map) !!}, {!! $type ? "'{$type}'" : null !!});
+			orgSectionMapInit({!! json_encode($map) !!}, {!! $type ? "'{$type}'" : "''" !!});
 			
 			map.on('load', function() {
 				$.get('{!! $prjUrl !!}', function (jj) {

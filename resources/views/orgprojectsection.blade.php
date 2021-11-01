@@ -224,11 +224,11 @@
 			
 			// makes sortable html fields like 9.4 years late, $25,764 over, $64.2M over
 			$.fn.dataTable.ext.type.order['html-pre'] = function (data) {
-				var d = data.replace(/^-$/g, '0');
+				var d = data.replace(/>-</g, '>0<');
 				d = d.replace(/<span class="(bad)"[^>]*>/g, '-');
 				d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+|%/g, '');
 				d = d.replace(/NA|NaN|on time/g, '0');
-				//console.log(d)
+				console.log(data, d)
 				m = 1
 				for (const[rg, tmpM] of [[/K$/g, 1000], [/M$/g, 1000000], [/B$/g, 1000000000]]) {
 					if (d.match(rg)) {
@@ -237,7 +237,7 @@
 					}
 				}
 				d = d.match(/[-\d\.]+/g) ? parseFloat(d) * m : d;
-				//console.log(data, d);
+				console.log(data, d);
 				return d;
 			};
 			

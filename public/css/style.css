@@ -228,19 +228,19 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
     height: auto;
     z-index: 2;
 }
+#map-controls .select_district {
+	
+}
+#map-controls .search_input {
+	max-width: 355px;
+	z-index: 2;
+	margin-bottom: .5rem;
+}
 #toggles {
-    /* position: absolute;
-    padding: 10px 20px;
-    left: 5px;
-    bottom: 35px;
-    width: 300px;
-    height: 370px;
-    background: #eeeeeea1;
-    z-index: 1; */
     position: absolute;
     padding: 10px 20px;
     left: 5px;
-    top: 65px;
+    top: 100px;
     width: 360px;
     height: auto;
     z-index: 1;
