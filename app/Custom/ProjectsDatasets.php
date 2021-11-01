@@ -9,24 +9,17 @@ class ProjectsDatasets
 			'fullname' => 'Capital Project Detail Data - Dollars',
 			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
 			'table' => 'capitalprojectsdollarscomp',					// Carto table
-			'hdrs' => ['Publication Date', 'Project ID', 'Agency', 'Name', 'Category', 'Borough', 'Planned Cost', 'Budget Increase', 'Timeline Change'],
+			'hdrs' => ['Publication Date', 'Project ID', 'Agency', 'Name', 'Category', 'Borough', 'Current Budget', 'Budget Change (%)', 'Timeline Change'],
 			'visible' => [false, true, true, true, true, true, true, true, true],
-			'hide_on_map_open' => '0, 1, 5, 6, 7, 8',
+			'hide_on_map_open' => '0, 5, 6, 7, 8',
 			'flds' => [
 					'function (r) { return toDashDate(r["PUB_DATE"]) }',
 					'function (r) { return `<a href="/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
 					'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects">${r["wegov-org-name"]}</a>` }', 
 					'"PROJECT_DESCR"', '"TYP_CATEGORY_NAME"', 
 					'"BORO"', 
-					'function (r) { return `<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>` }',
-					'function (r) { 
-						if (!r["ORIG_BUD_AMT"])
-							return "NA"
-						return r["BUDG_DIFF"] == 0 ? "0" :
-							(r["BUDG_DIFF"] > 0 
-								? `<span class="good" data-content="-${toFin(r["BUDG_DIFF"], 1000)}">-${toFinShortK(r["BUDG_DIFF"], 1000)}</span>` 
-								: `<span class="bad" data-content="${toFin(-r["BUDG_DIFF"], 1000)}">${toFinShortK(-r["BUDG_DIFF"], 1000)}</span>`);
-					}',
+					'function (r) { return `<span data-content="${toFin(r["BUDG_CURR"], 1000)}">${toFinShortK(r["BUDG_CURR"], 1000)}</span>` }',
+					'function (r) { return `<span class="${r["BUDG_ORIG"] >= r["BUDG_CURR"] ? "good" : "bad "}">${toPerc(r["BUDG_ORIG"], r["BUDG_CURR"])}</span>` }',
 					'function (r) { 
 						if ((r["END_DIFF"] == "-") || (r["END_DIFF"] == "12/31/1969"))
 							return "NA"
@@ -38,6 +31,17 @@ class ProjectsDatasets
 				],
 			'filters' => [2 => null, 4 => null],
 			'details' => [
+					'Planned Cost' => '`<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>`', 
+					'Budget Increase' => '(!r["ORIG_BUD_AMT"] 
+							? "NA" 
+							: (r["BUDG_DIFF"] == 0 
+								? "0" 
+								: (r["BUDG_DIFF"] > 0 
+									? "-" 
+									: `${toFinShortK(-r["BUDG_DIFF"], 1000)}`
+								)
+							)
+					)', 
 					'Original Budget' => '`<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>`',
 					'Prior Spending' =>  '`<span data-content="${toFin(r["CITY_PRIOR_ACTUAL"], 1000)}">${toFinShortK(r["CITY_PRIOR_ACTUAL"], 1000)}</span>`', 
 					'Planned Spending' => '`<span data-content="${toFin(r["CITY_PLAN_TOTAL"], 1000)}">${toFinShortK(r["CITY_PLAN_TOTAL"], 1000)}</span>`',
@@ -46,7 +50,7 @@ class ProjectsDatasets
 					'Site Description' => 'r["SITE_DESCR"]',
 					'Explanation for Delay' => 'r["DELAY_DESC"]',
 			],
-			'order' => [[8, 'asc']],					#7 - wo details col inrement
+			'order' => [[8, 'desc']],					#7 - wo details col inrement
 		],
 	];
 	

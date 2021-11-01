@@ -47,14 +47,14 @@ class OrgsDatasets
 			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
 			'hdrs' => ['Publication Date', 'Project ID', 'Name', 'Scope', 'Category', 'Borough', 'Current Budget', 'Budget Change (%)', 'Timeline Change'],
 			'visible' => [false, true, true, true, true, true, true, true, true],
-			'hide_on_map_open' => '0, 4, 6, 7, 8',		// +1 for details fld is already added
+			'hide_on_map_open' => '0, 5, 6, 7, 8',		// +1 for details fld is already added
 			'flds' => [
 					'function (r) { return toDashDate(r["PUB_DATE"]) }',
 					'function (r) { return `<a href="/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
 					'"PROJECT_DESCR"', '"SCOPE_TEXT"', '"TYP_CATEGORY_NAME"', 
 					'"BORO"', 
 					'function (r) { return `<span data-content="${toFin(r["BUDG_CURR"], 1000)}">${toFinShortK(r["BUDG_CURR"], 1000)}</span>` }',
-					'function (r) { return `<span>${toPerc(r["BUDG_ORIG"], r["BUDG_CURR"])}</span>` }',
+					'function (r) { return `<span class="${r["BUDG_ORIG"] >= r["BUDG_CURR"] ? "good" : "bad "}">${toPerc(r["BUDG_ORIG"], r["BUDG_CURR"])}</span>` }',
 					'function (r) { 
 						if ((r["END_DIFF"] == "-") || (r["END_DIFF"] == "12/31/1969"))
 							return "NA"
@@ -613,7 +613,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		foreach ((array)($dd['fltDelim'] ?? []) as $i=>$v)
 			$fltDel[$i + $inc] = $v;
 		$dd['fltDelim'] = $fltDel;
-		
+
 		$dd['fltsCols'] = implode(',', array_keys($dd['filters']));
 		return $dd;
 	}

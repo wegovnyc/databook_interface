@@ -14,7 +14,6 @@
 		function details(r) {
 			return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
 			  @foreach ((array)$details['details'] as $h=>$f)
-				//(d["{{ $f }}"] ? '<tr><td>{{ $h }}:</td><td>'+d["{{ $f }}"]+'</td></tr>' : '') +
 				'<tr><td>{{ $h }}:</td><td>' + {!! $f !!} + '</td></tr>' +
 			  @endforeach
 			'</table>';
@@ -24,7 +23,6 @@
 		var dataurl = '{!! $url !!}'
 		
 		$(document).ready(function() {
-			//$('th[data-toggle="tooltip"]').tooltip()
 			
 			/* custom pub_date filter on top-right */
 			$.get("{!! $dates_req_url !!}", function (resp) {
@@ -209,10 +207,10 @@
 				
 				// makes sortable html fields like 9.4 years late, $25,764 over
 				$.fn.dataTable.ext.type.order['html-pre'] = function (data) {
-					var d = data.replace(/-/g, '');
+					var d = data.replace(/^-$/g, '0');
 					d = d.replace(/<span class="(bad)"[^>]*>/g, '-');
-					d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+/g, '');
-					d = d.replace(/NA|NaN|on time|^-$/g, '0');
+					d = d.replace(/[,$]|years|late|<[^>]+>|earl\S+|%/g, '');
+					d = d.replace(/NA|NaN|on time/g, '0');
 					m = 1
 					for (const[rg, tmpM] of [[/K$/g, 1000], [/M$/g, 1000000], [/B$/g, 1000000000]]) {
 						if (d.match(rg)) {
@@ -234,7 +232,6 @@
 			var isActive = !$('#map_container').attr('style')
 			var cc = [{{ $details['hide_on_map_open'] }}];
 			if (isActive) {
-				//$('#map_button').attr('class', 'btn map_btn')
 				$('#map_button').show()
 				$('#data_container').attr('class', 'col')
 				$('.toolbar ').show()
@@ -243,7 +240,6 @@
 					this.visible(true);
 				});
 			} else {
-				//$('#map_button').attr('class', 'btn btn-outline map_btn')
 				$('#map_button').hide()
 				$('#data_container').attr('class', 'col col-6')
 				$('#map_container').show()
@@ -252,7 +248,6 @@
 					this.visible(false);
 				});
 				setTimeout(function() {
-						//datatable.draw();	// initiate projectsMapDrawFeatures
 						drawProjects('all');
 					}, 2500
 				);
