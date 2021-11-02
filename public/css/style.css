@@ -12,20 +12,20 @@ a.toggle-vis {cursor: pointer;color: #3174c7;text-decoration: none;}
 ::-webkit-scrollbar {
     width: 10px;
   }
-  
+
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: #f1f1f1;
   }
-   
+
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: rgb(194, 194, 194); 
+    background: rgb(194, 194, 194);
   }
-  
+
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: rgb(141, 141, 141); 
+    background: rgb(141, 141, 141);
   }
 
 /*============ start top header area =============*/
@@ -229,7 +229,7 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
     z-index: 2;
 }
 #map-controls .select_district {
-	
+
 }
 #map-controls .search_input {
 	max-width: 355px;
@@ -270,8 +270,8 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 .stats-table th, .stats-table td {padding:.55em;}
 
 .share_icon_container {
-    position:absolute; 
-	right: 20px;
+    position:relative;
+	/* right: 20px; */
 	cursor: pointer;
 	padding-left: 10px;
 }
@@ -390,7 +390,7 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 #data_container.col #myTable_wrapper .toolbar{display: inline-block ;}
 /* #data_container.col-6 .filter_icon.position_change{top: 60px;} */
 
-.custom-control-input~.custom-control-label.radio_toggle::before, 
+.custom-control-input~.custom-control-label.radio_toggle::before,
 .custom-control-input~.custom-control-label.radio_toggle::after { display: none;}
 
 
