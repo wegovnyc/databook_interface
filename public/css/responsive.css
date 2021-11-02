@@ -107,6 +107,7 @@
         padding-left: 0px !important;
     }
     #data_container.col-6 .filter_icon{top:40px}
+    .share_icon_container {padding: 0;}
 }
 @media (max-width: 767px)
 {
@@ -180,6 +181,7 @@
     .org_detailtitle .float-left{margin-right: 0px !important;}
     .org_detailtitle h4{font-size: 18px;line-height: normal;}
     #myTable_wrapper .toolbar .drop_dowm_select select{margin-bottom: 0px;}
+    .share_icon_container {width: 100%;display: inline-block;text-align: right; right: 10px}
 }
 @media (max-width: 375px)
 {
