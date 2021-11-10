@@ -23,17 +23,17 @@ class Breadcrumbs
 
 	static function orgs()
 	{
-		return array_merge(self::$root, [['/agencies', 'Agencies']]);
+		return array_merge(self::$root, [['/agencies/chart', 'Agencies']]);
 	}
 
 	static function org($id, $name)
 	{
-		return array_merge(self::$root, [['/agencies', 'Agencies'], ["/agency/{$id}", $name]]);
+		return array_merge(self::$root, [['/agencies/chart', 'Agencies'], ["/agency/{$id}", $name]]);
 	}
 
 	static function orgSect($id, $name, $sect, $sectN)
 	{
-		return array_merge(self::$root, [['/agencies', 'Agencies'], ["/agency/{$id}", $name], ["/agency/{$id}/{$sect}", $sectN]]);
+		return array_merge(self::$root, [['/agencies/chart', 'Agencies'], ["/agency/{$id}", $name], ["/agency/{$id}/{$sect}", $sectN]]);
 	}
 
 	static function orgPrj($id, $name, $sect, $sectN, $prjId, $prjN)

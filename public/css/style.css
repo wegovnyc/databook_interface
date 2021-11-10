@@ -139,6 +139,41 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 .badge-info:last-child::after{display: none;}
 .prj_stat {color:#162E51;}
 
+
+#orgsTableAll .badge {font-weight: 400; font-size: 14px;margin: 2px 4px;}
+
+#chart-container {font-family: Arial; height: 600px; border: 1px solid #aaa; overflow: auto; text-align: center;}
+.orgchart {padding-bottom: 20px!important;}
+.orgchart {background: #fff!important;}
+.orgchart td.left, .orgchart td.right, .orgchart td.top {border-color: #aaa!important;}
+.orgchart td>.down {background-color: #aaa!important;}
+
+
+.orgchart .middle-level .title {
+  background-color: #006699!important;
+}
+.orgchart .middle-level .content {
+  border-color: #006699!important;
+}
+.orgchart .product-dept .title {
+  background-color: #009933!important;
+}
+.orgchart .product-dept .content {
+  border-color: #009933!important;
+}
+.orgchart .rd-dept .title {
+  background-color: #993366!important;
+}
+.orgchart .rd-dept .content {
+  border-color: #993366!important;
+}
+.orgchart .pipeline1 .title {
+  background-color: #996633!important;
+}
+.orgchart .pipeline1 .content {
+  border-color: #996633!important;
+}
+
 /*================== start organization detail page ================*/
 .org-header {background: #fff;}
 .inside_orglogo {padding: 15px 0px 15px 15px;height: 120px;overflow: hidden;display: table-cell;}

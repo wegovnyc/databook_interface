@@ -5,6 +5,27 @@
 @endsection
 
 @section('content')
+
+	<nav class="navbar navbar-expand-lg navbar-light" id="orgs-menu" style="background-color: #e3f2fd;">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-orgs" aria-controls="navbar-orgs" aria-expanded="true" aria-label="Toggle navigation">
+			<img src="/img/menu_icon.png" alt="" title="" style="height: 20px;">
+		</button>
+		<div class="collapse navbar-collapse" id="navbar-orgs">
+			<ul class="navbar-nav">
+				@foreach (['NYC Organizational Chart' => 'orgs', 'Government Directory' => 'orgsDirectory', 'All Organizations' => 'orgsAll'] as $t=>$route)
+					@if ($route == 'orgsDirectory')
+						<li class="nav-item active">
+					@else
+						<li class="nav-item">
+					@endif
+							<a class="nav-link" href="{!! route($route) !!}">{{ $t }}</a>
+						</li>
+				@endforeach
+			</ul>
+		</div>
+	</nav>
+
+
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>

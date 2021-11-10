@@ -41,10 +41,46 @@ class Organizations extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function list()
+    public function orgsChart()
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-        return view('organizations', [
+        return view('orgsChart', [
+					'url' => $model->url('SELECT * FROM wegov_orgs WHERE "type" IN (\'City Agency\', \'City Fund\', \'Community Board\', \'Economic Development Organization\', \'Elected Office\', \'State Agency\') ORDER BY name'),
+					'breadcrumbs' => Breadcrumbs::orgs(),
+					'defType' => $_GET['type'] ?? 'City Agency',
+					'defTag' => $_GET['tag'] ?? null,
+					'defSearch' => $_GET['search'] ?? null,
+				]);
+    }
+
+
+    /**
+     * Show organizations list.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function orgsDirectory()
+    {
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+        return view('orgsDirectory', [
+					'url' => $model->url('SELECT * FROM wegov_orgs WHERE "type" IN (\'City Agency\', \'City Fund\', \'Community Board\', \'Economic Development Organization\', \'Elected Office\', \'State Agency\') ORDER BY name'),
+					'breadcrumbs' => Breadcrumbs::orgs(),
+					'defType' => $_GET['type'] ?? 'City Agency',
+					'defTag' => $_GET['tag'] ?? null,
+					'defSearch' => $_GET['search'] ?? null,
+				]);
+    }
+
+
+    /**
+     * Show organizations list.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function orgsAll()
+    {
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+        return view('orgsAll', [
 					'url' => $model->url('SELECT * FROM wegov_orgs WHERE "type" IN (\'City Agency\', \'City Fund\', \'Community Board\', \'Economic Development Organization\', \'Elected Office\', \'State Agency\') ORDER BY name'),
 					'breadcrumbs' => Breadcrumbs::orgs(),
 					'defType' => $_GET['type'] ?? 'City Agency',

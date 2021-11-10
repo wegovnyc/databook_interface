@@ -9,7 +9,9 @@ Route::get('/', [Organizations::class, 'root'])->name('root');
 
 Route::get('/about', [Organizations::class, 'about'])->name('about');
 
-Route::get('/agencies', [Organizations::class, 'list'])->name('orgs');
+Route::get('/agencies/chart', [Organizations::class, 'orgsChart'])->name('orgs');
+Route::get('/agencies/directory', [Organizations::class, 'orgsDirectory'])->name('orgsDirectory');
+Route::get('/agencies/all', [Organizations::class, 'orgsAll'])->name('orgsAll');
 
 Route::get('/agency/{id}', [Organizations::class, 'orgAbout'])->name('orgProfile');
 
