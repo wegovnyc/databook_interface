@@ -71,10 +71,18 @@ class ChartUpdateJson extends Command
 		if ($dd[$key]['children'])
 		{
 			$children = [];
-			ksort($dd[$key]['children']);
+			uksort($dd[$key]['children'], function ($a, $b) {
+				if ($a == 'Mayor\'s Office')
+					return -1;
+				if ($b == 'Mayor\'s Office')
+					return 1;
+				return $a <=> $b;
+			});
 			foreach (array_values($dd[$key]['children']) as $childId)
 				$children[] = self::packnode($dd, $childId, $familyClass);
 			$rr['children'] = $children;
+			if ($children && !$familyClass && ($dd[$key]['id'] != '170000000') && ($dd[$key]['id'] != '170010002'))
+				$rr['collapsed'] = true;
 		} 
 		return $rr;
 	}

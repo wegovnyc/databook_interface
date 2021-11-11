@@ -118,7 +118,7 @@
                         return r['description'].substr(0,100)+
                         (r['description'].length > 100 ? '...' : '')
                     }},
-                    {data: 'type'}
+                    {data: 'datasets_count'}
                 ],
 				@if ($defSearch)
 					search: {
