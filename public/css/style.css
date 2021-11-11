@@ -142,37 +142,49 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 
 #orgsTableAll .badge {font-weight: 400; font-size: 14px;margin: 2px 4px;}
 
-#chart-container {font-family: Arial; height: 600px; border: 1px solid #aaa; overflow: auto; text-align: center;}
+#chart-container {font-family: Arial; height: 600px; overflow: auto; text-align: center;}
 .orgchart {padding-bottom: 20px!important;}
 .orgchart {background: #fff!important;}
 .orgchart td.left, .orgchart td.right, .orgchart td.top {border-color: #aaa!important;}
 .orgchart td>.down {background-color: #aaa!important;}
 
+.orgchart .node_170011039 .title {background-color: #88ca5e!important; width: 175px!important;}
+.orgchart .node_170011039 .content {border-color: #88ca5e!important;}
 
-.orgchart .middle-level .title {
-  background-color: #006699!important;
-}
-.orgchart .middle-level .content {
-  border-color: #006699!important;
-}
-.orgchart .product-dept .title {
-  background-color: #009933!important;
-}
-.orgchart .product-dept .content {
-  border-color: #009933!important;
-}
-.orgchart .rd-dept .title {
-  background-color: #993366!important;
-}
-.orgchart .rd-dept .content {
-  border-color: #993366!important;
-}
-.orgchart .pipeline1 .title {
-  background-color: #996633!important;
-}
-.orgchart .pipeline1 .content {
-  border-color: #996633!important;
-}
+.orgchart .node_170010056 .title {background-color: #ff5c4d!important; width: 175px!important;}
+.orgchart .node_170010056 .content {border-color: #ff5c4d!important;}
+
+.orgchart .node_170100000 .title {background-color: #0a7029!important; width: 175px!important;}
+.orgchart .node_170100000 .content {border-color: #0a7029!important;}
+
+.orgchart .node_170100001 .title {background-color: #ff9636!important; width: 175px!important;}
+.orgchart .node_170100001 .content {border-color: #ff9636!important;}
+
+.orgchart .node_170100007 .title {background-color: #2eb5e0!important; width: 175px!important;}
+.orgchart .node_170100007 .content {border-color: #2eb5e0!important;}
+
+.orgchart .node_170100012 .title {background-color: #68bbe3!important; width: 175px!important;}
+.orgchart .node_170100012 .content {border-color: #68bbe3!important;}
+
+.orgchart .node_170100016 .title {background-color: #f9d030!important; width: 175px!important;}
+.orgchart .node_170100016 .content {border-color: #f9d030!important;}
+
+.orgchart .node_170100017 .title {background-color: #5a6a6d!important; width: 175px!important;}
+.orgchart .node_170100017 .content {border-color: #5a6a6d!important;}
+
+.orgchart .node_170100030 .title {background-color: #bacc81!important; width: 175px!important;}
+.orgchart .node_170100030 .content {border-color: #bacc81!important;}
+
+.orgchart .node_170100035 .title {background-color: #de847b!important; width: 175px!important;}
+.orgchart .node_170100035 .content {border-color: #de847b!important;}
+
+.orgchart .node_170100036 .title {background-color: #647c90!important; width: 175px!important;}
+.orgchart .node_170100036 .content {border-color: #647c90!important;}
+
+.orgchart .node_def .title {background-color: #999!important; width: 175px!important;}
+.orgchart .node_def .content {border-color: #999!important;}
+
+
 
 /*================== start organization detail page ================*/
 .org-header {background: #fff;}

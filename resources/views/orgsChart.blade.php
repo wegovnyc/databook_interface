@@ -88,7 +88,8 @@
 			};
 
 			var oc = $('#chart-container').orgchart({
-			  'data' : dd,
+			  //'data' : dd,
+			  'data' : '/data/orgChart.json',
 			  'nodeContent': 'title',
 			  verticalLevel: 4,
 			  visibleLevel: 20

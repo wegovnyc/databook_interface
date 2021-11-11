@@ -9,9 +9,9 @@ class CartoModel
 		//print_r([$entry, $key]);
 	}
 
-	function orgs()
+	function orgs($where='ORDER BY name')
 	{
-		$dd = $this->carto->req('SELECT * FROM wegov_orgs ORDER BY name');
+		$dd = $this->carto->req("SELECT * FROM wegov_orgs {$where}");
 		return $this->map($dd);
 	}
 
