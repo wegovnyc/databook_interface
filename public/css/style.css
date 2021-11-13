@@ -165,9 +165,6 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 .orgchart .node .title .symbol {position:absolute; top: 2px; left: 2px;}
 .orgchart .node .content {display:none;}
 
-
-
-
 .orgchart .node_def .title {background-color: #999;}
 .orgchart .node_170000000 .title {background-color: #000;}
 .orgchart .node_170011039 .title {background-color: #88ca5e;}
@@ -190,6 +187,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 .orgchart .node_170020021 .title {background-color: #603f8b;}
 .orgchart .node_170011000 .title {background-color: #21b6a8;}
 
+i.edge {display:none;}
 
 /*================== start organization detail page ================*/
 .org-header {background: #fff;}
