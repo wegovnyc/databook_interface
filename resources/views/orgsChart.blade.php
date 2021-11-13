@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('styles')
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/css/jquery.orgchart.min.css" integrity="sha512-bCaZ8dJsDR+slK3QXmhjnPDREpFaClf3mihutFGH+RxkAcquLyd9iwewxWQuWuP5rumVRl7iGbSDuiTvjH1kLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
+
 @section('menubar')
 	@include('sub.menubar', ['active' => 'orgs'])
 @endsection
@@ -12,7 +16,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbar-orgs">
 			<ul class="navbar-nav">
-				@foreach (['NYC Organizational Chart' => 'orgs', 'Government Directory' => 'orgsDirectory', 'All Organizations' => 'orgsAll'] as $t=>$route)
+				@foreach (['NYC Organizational Chart' => 'orgs', 'Government Agencies' => 'orgsDirectory', 'All Organizations' => 'orgsAll'] as $t=>$route)
 					@if ($route == 'orgs')
 						<li class="nav-item active">
 					@else
@@ -25,17 +29,17 @@
 		</div>
 	</nav>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/js/jquery.orgchart.min.js" integrity="sha512-alnBKIRc2t6LkXj07dy2CLCByKoMYf2eQ5hLpDmjoqO44d3JF8LSM4PptrgvohTQT0LzKdRasI/wgLN0ONNgmA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/css/jquery.orgchart.min.css" integrity="sha512-bCaZ8dJsDR+slK3QXmhjnPDREpFaClf3mihutFGH+RxkAcquLyd9iwewxWQuWuP5rumVRl7iGbSDuiTvjH1kLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+	<div class="my-3 mx-2">
+		<h4>Citywide Organizational Chart</h4>
+		<p>This hierarchical chart shows the relationship between city officials and agencies.</p>
+	</div>
 	<div id="chart-container"></div>
 	<div class="container">
         <div class="homeround_content">
             <div class="text-center bottom_text col-md-12">
-                <h3>We’re adding data all the time.</h3>
-                <a href="#" class="learn_more">Learn More</a>
+				This chart was generated using the city’s official (but outdated) organizational chart <a href="https://www1.nyc.gov/office-of-the-mayor/org-chart.page">here</a>. We’ve made a few changes to improve legibility and keep it up to date. If you have ideas for further improvements or notice inaccuracies, please <a href="https://wegovnyc.notion.site/Contact-Us-54b075fa86ec47ebae48dae1595afc2c">let us know</a>.
             </div>
         </div>
     </div>

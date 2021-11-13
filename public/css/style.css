@@ -143,47 +143,52 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 #orgsTableAll .badge {font-weight: 400; font-size: 14px;margin: 2px 4px;}
 
 #chart-container {font-family: Arial; height: 600px; overflow: auto; text-align: center;}
-.orgchart {padding-bottom: 20px!important;}
-.orgchart {background: #fff!important;}
-.orgchart td.left, .orgchart td.right, .orgchart td.top {border-color: #aaa!important;}
-.orgchart td>.down {background-color: #aaa!important;}
+.orgchart {padding-bottom: 20px;}
+.orgchart {background: #fff;}
+.orgchart td.left, .orgchart td.right, .orgchart td.top {border-color: #aaa;}
+.orgchart td>.down {background-color: #aaa;}
 
-.orgchart .node_170011039 .title {background-color: #88ca5e!important; width: 175px!important;}
-.orgchart .node_170011039 .content {border-color: #88ca5e!important;}
+.orgchart .node .title {
+	width: 175px;
+	height:40px;
+	text-overflow:clip;
+	white-space:normal;
+	border-radius: 4px 4px 4px 4px; 
+	line-height: 40px;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	position: relative;
+	padding-left: 8px; padding-right: 6px;
+}
+.orgchart .node .title a {display: block; vertical-align: middle; line-height: normal;color:white; width:100%;}
+.orgchart .node .title .symbol {position:absolute; top: 2px; left: 2px;}
+.orgchart .node .content {display:none;}
 
-.orgchart .node_170010056 .title {background-color: #ff5c4d!important; width: 175px!important;}
-.orgchart .node_170010056 .content {border-color: #ff5c4d!important;}
 
-.orgchart .node_170100000 .title {background-color: #0a7029!important; width: 175px!important;}
-.orgchart .node_170100000 .content {border-color: #0a7029!important;}
 
-.orgchart .node_170100001 .title {background-color: #ff9636!important; width: 175px!important;}
-.orgchart .node_170100001 .content {border-color: #ff9636!important;}
 
-.orgchart .node_170100007 .title {background-color: #2eb5e0!important; width: 175px!important;}
-.orgchart .node_170100007 .content {border-color: #2eb5e0!important;}
-
-.orgchart .node_170100012 .title {background-color: #68bbe3!important; width: 175px!important;}
-.orgchart .node_170100012 .content {border-color: #68bbe3!important;}
-
-.orgchart .node_170100016 .title {background-color: #f9d030!important; width: 175px!important;}
-.orgchart .node_170100016 .content {border-color: #f9d030!important;}
-
-.orgchart .node_170100017 .title {background-color: #5a6a6d!important; width: 175px!important;}
-.orgchart .node_170100017 .content {border-color: #5a6a6d!important;}
-
-.orgchart .node_170100030 .title {background-color: #bacc81!important; width: 175px!important;}
-.orgchart .node_170100030 .content {border-color: #bacc81!important;}
-
-.orgchart .node_170100035 .title {background-color: #de847b!important; width: 175px!important;}
-.orgchart .node_170100035 .content {border-color: #de847b!important;}
-
-.orgchart .node_170100036 .title {background-color: #647c90!important; width: 175px!important;}
-.orgchart .node_170100036 .content {border-color: #647c90!important;}
-
-.orgchart .node_def .title {background-color: #999!important; width: 175px!important;}
-.orgchart .node_def .content {border-color: #999!important;}
-
+.orgchart .node_def .title {background-color: #999;}
+.orgchart .node_170000000 .title {background-color: #000;}
+.orgchart .node_170011039 .title {background-color: #88ca5e;}
+.orgchart .node_170010056 .title {background-color: #ff5c4d;}
+.orgchart .node_170100000 .title {background-color: #0a7029;}
+.orgchart .node_170100001 .title {background-color: #ff9636;}
+.orgchart .node_170100007 .title {background-color: #2eb5e0;}
+.orgchart .node_170100012 .title {background-color: #b99095;}
+.orgchart .node_170100016 .title {background-color: #f9d030;}
+.orgchart .node_170100017 .title {background-color: #5a6a6d;}
+.orgchart .node_170100030 .title {background-color: #bacc81;}
+.orgchart .node_170100035 .title {background-color: #de847b;}
+.orgchart .node_170100036 .title {background-color: #647c90;}
+.orgchart .node_170010010 .title {background-color: #274472;}
+.orgchart .node_170010011 .title {background-color: #41729f;}
+.orgchart .node_170010012 .title {background-color: #5885af;}
+.orgchart .node_170010013 .title {background-color: #189ab4;}
+.orgchart .node_170010014 .title {background-color: #75e6da;}
+.orgchart .node_170010103 .title {background-color: #a45c40;}
+.orgchart .node_170020021 .title {background-color: #603f8b;}
+.orgchart .node_170011000 .title {background-color: #21b6a8;}
 
 
 /*================== start organization detail page ================*/

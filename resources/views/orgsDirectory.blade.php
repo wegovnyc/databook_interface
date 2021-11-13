@@ -12,7 +12,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbar-orgs">
 			<ul class="navbar-nav">
-				@foreach (['NYC Organizational Chart' => 'orgs', 'Government Directory' => 'orgsDirectory', 'All Organizations' => 'orgsAll'] as $t=>$route)
+				@foreach (['NYC Organizational Chart' => 'orgs', 'Government Agencies' => 'orgsDirectory', 'All Organizations' => 'orgsAll'] as $t=>$route)
 					@if ($route == 'orgsDirectory')
 						<li class="nav-item active">
 					@else
