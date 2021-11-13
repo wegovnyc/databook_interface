@@ -328,10 +328,10 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-9 organization_data">
-				<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 				@if(array_search($section, $menu) === false)
 					<h4>{{ $dataset['Name'] }}</h4>
 				@endif	
+				<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 			</div>
 			<div class="col-md-3 mt-2" id="org_summary">
 				<table class="table-sm stats-table" width="100%">

@@ -49,6 +49,7 @@ class ChartUpdateJson extends Command
 		foreach ($orgs as $org)
 			$mm[$org['_id']] = $org + ['children' => []];
 		$rootId = '';
+		echo "\n===== " . date('Y-m-d H:i:s') . " =====================\n";
 		foreach ($orgs as $org)
 		{
 			#$parent_id = preg_replace('~[\[\]"]~si', '', $org['child_of']);
