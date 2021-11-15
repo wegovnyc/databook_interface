@@ -46,6 +46,7 @@
     #myTable_wrapper .toolbar .drop_dowm_select {width: 29%;}
     .bottom_lastupdate{padding: 18px 15px; margin: 0px;margin-bottom: 60px;display: inline-block;}
     .bottom_lastupdate p{font-size: 18px;}
+    #stats_collapse .row{margin: 0px;}
 }
 @media (max-width: 980px)
 {
@@ -92,6 +93,11 @@
     /* #data_container.col-6 .filter_icon.position_change {top: 90px; } */
     /* #map_container #map {width: 96% !important;}
     select.filter, select.filter-top {width: 98% !important; margin-right: 0%;} */
+
+    .navbar.chart_submenu .navbar-collapse{padding: 12px 15px;margin: 0px;}
+    .chart_submenu .navbar-nav .nav-item.active .nav-link, .chart_submenu .navbar-nav .nav-item:hover .nav-link{color: #005EA2;font-weight: 600;}
+    .chart_submenu .navbar-nav .nav-item .nav-link{color: #585C62;}
+    .home_bgcontent .btn_org_home{margin-bottom: 5px;}
 }
 @media (max-width: 800px)
 {
@@ -108,6 +114,7 @@
     }
     #data_container.col-6 .filter_icon{top:40px}
     .share_icon_container {padding: 0;}
+    #stats_collapse .col-md-3{flex: 0 0 50%;max-width: 50%;margin-bottom: 30px;}
 }
 @media (max-width: 767px)
 {
@@ -153,6 +160,7 @@
 {
     .dataTables_wrapper .dataTables_paginate .paginate_button {padding: 7px 10px;}
     #data_container.col.col-6 #myTable_wrapper .toolbar .drop_dowm_select {width: 46%;}
+    #stats_collapse .col-md-3{flex: 0 0 100%;max-width: 100%;margin-bottom: 10px;}
 }
 @media (max-width: 480px)
 {

@@ -170,151 +170,151 @@
 			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
 		});
 	</script>
-
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-12 organization_data">
-				<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
-				@if(array_search($section, $menu) === false)
-					<h4>{{ $dataset['Name'] }}</h4>
-				@endif
-				@if ($map ?? null)
-					<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
-				@endif
+	<div class="inner_container">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 organization_data">
+					<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
+					@if(array_search($section, $menu) === false)
+						<h4>{{ $dataset['Name'] }}</h4>
+					@endif
+					@if ($map ?? null)
+						<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
+					@endif
+				</div>
 			</div>
-		</div>
-		<div class="row justify-content-center map_right">
-			@if ($map ?? null)
-				<div id="map_container" class="col-6" style="display:none;">
-					<!-- controls -->
-					<div id="map-controls">
-						<div class="select_district">
-							<img src="/img/map_icon.png" alt="" title="">
+			<div class="row justify-content-center map_right">
+				@if ($map ?? null)
+					<div id="map_container" class="col-6" style="display:none;">
+						<!-- controls -->
+						<div id="map-controls">
+							<div class="select_district">
+								<img src="/img/map_icon.png" alt="" title="">
+								<ul class="inner_district">
+									<li class="dropdown">
+										<a id="change_district" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Select a District Type</a>
+										<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 0px;">
+											@foreach ($map as $code=>$col)
+												<div class="custom-control custom-switch dropdown-item pl-3">
+													<input type="radio" class="custom-control-input" id="{{ $code }}-filter-switch" name="filter" param="{{ $col }}" onchange="changeToggle(event)">
+													<label class="custom-control-label radio_toggle" for="{{ $code }}-filter-switch">
+														{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
+													</label>
+												</div>
+											@endforeach
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- /controls -->
+
+						<!-- toggles -->
+						<div class="select_district" id="toggles">
+							<img src="/img/eyes.png" alt="" title="">
 							<ul class="inner_district">
 								<li class="dropdown">
-									<a id="change_district" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Select a District Type</a>
-									<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 0px;">
-										@foreach ($map as $code=>$col)
-											<div class="custom-control custom-switch dropdown-item pl-3">
-												<input type="radio" class="custom-control-input" id="{{ $code }}-filter-switch" name="filter" param="{{ $col }}" onchange="changeToggle(event)">
-												<label class="custom-control-label radio_toggle" for="{{ $code }}-filter-switch">
-													{{ ['cd'=>'Community Districts', 'cc'=>'City Council Districts', 'nta'=>'Neighborhood Tabulation Areas'][$code] }}
-												</label>
-											</div>
-										@endforeach
+									<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
+									<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 10px;">
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="cd-switch">
+											<label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="ed-switch">
+											<label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="pp-switch">
+											<label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="dsny-switch">
+											<label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="fb-switch">
+											<label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="sd-switch">
+											<label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="hc-switch">
+											<label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="cc-switch">
+											<label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="nycongress-switch">
+											<label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="sa-switch">
+											<label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="ss-switch">
+											<label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="bid-switch">
+											<label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="nta-switch">
+											<label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="zipcode-switch">
+											<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
+										</div>
 									</div>
 								</li>
 							</ul>
 						</div>
+						<!-- /toggles -->
+						<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E;"></div>
 					</div>
-					<!-- /controls -->
-
-					<!-- toggles -->
-					<div class="select_district" id="toggles">
-						<img src="/img/eyes.png" alt="" title="">
-						<ul class="inner_district">
-							<li class="dropdown">
-								<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
-								<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 10px;">
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="cd-switch">
-										<label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="ed-switch">
-										<label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="pp-switch">
-										<label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="dsny-switch">
-										<label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="fb-switch">
-										<label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="sd-switch">
-										<label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="hc-switch">
-										<label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="cc-switch">
-										<label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="nycongress-switch">
-										<label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="sa-switch">
-										<label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="ss-switch">
-										<label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="bid-switch">
-										<label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="nta-switch">
-										<label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="zipcode-switch">
-										<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
-									</div>
-								</div>
-							</li>
-						</ul>
+				@endif
+				<div id="data_container" class="col float-left">
+					<div class="table-responsive">
+						<div class="filter_icon">
+							<i class="bi bi-funnel-fill"></i>
+						</div>
+						<table id="myTable" class="display table-striped table-hover" style="width:100%;">
+							<thead>
+								<tr>
+									@if ($details['detFlag'])
+										<th></th>
+									@endif
+									@foreach ($details['hdrs'] as $name)
+										<th>{{ $name }}</th>
+									@endforeach
+								</tr>
+							</thead>
+						</table>
 					</div>
-					<!-- /toggles -->
-					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E;"></div>
-				</div>
-			@endif
-			<div id="data_container" class="col float-left">
-				<div class="table-responsive">
-					<div class="filter_icon">
-						<i class="bi bi-funnel-fill"></i>
-					</div>
-					<table id="myTable" class="display table-striped table-hover" style="width:100%;">
-						<thead>
-							<tr>
-								@if ($details['detFlag'])
-									<th></th>
-								@endif
-								@foreach ($details['hdrs'] as $name)
-									<th>{{ $name }}</th>
-								@endforeach
-							</tr>
-						</thead>
-					</table>
 				</div>
 			</div>
 		</div>
-	</div>
 
-
-	@if ($dataset['Public Note'] ?? null)
-        <div class="col-md-12">
-            <h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
+		@if ($dataset['Public Note'] ?? null)
+			<div class="col-md-12">
+				<h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
+			</div>
+		@endif
+		<div class="col-md-12">
+			<div class="bottom_lastupdate">
+				<p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+				<!--<p>{!! nl2br($org['description']) !!}</p>-->
+			</div>
 		</div>
-	@endif
-    <div class="col-md-12">
-        <div class="bottom_lastupdate">
-            <p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
-            <!--<p>{!! nl2br($org['description']) !!}</p>-->
-        </div>
 	</div>
-
+	
 	<script>
 		function changeToggle (e) {
 			console.log($(e.target).next("label")[0].innerHTML)

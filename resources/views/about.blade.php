@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-
+<div class="inner_container">
 	<div class="jumbotron mb-1">
 	  <h1 class="display-4 mb-4">About</h1>
 	  <p class="lead">WeGovNYC is an organizing initiative bringing public interest and civic technologists together to make New York City the best run municipality in the world.</p>
@@ -18,5 +18,5 @@
 		<li class="lead">policy makers who want to use technology to improve the lives of the New Yorkers they serve.</li>
 	  </ul>
 	</div>
-
+</div>
 @endsection

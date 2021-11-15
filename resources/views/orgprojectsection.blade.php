@@ -324,247 +324,247 @@
 		
 	</script>
 
-
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-9 organization_data">
-				@if(array_search($section, $menu) === false)
-					<h4>{{ $dataset['Name'] }}</h4>
-				@endif	
-				<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
-			</div>
-			<div class="col-md-3 mt-2" id="org_summary">
-				<table class="table-sm stats-table" width="100%">
-				  <thead>
-					<tr>
-					  <th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
-					  <th scope="col" width="50%" id="pub_date_filter"></th>
-					</tr>
-				  </thead>
-				  <tbody>
-					  <tr>
-						<td colspan=2 class="text-right px-0 pt-0 pb-3">
-							<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="false" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
-						</td>
-					  </tr>
-				  </tbody>
-				</table>
-			</div>
-		</div>
-		
-		<div id="stats_collapse" class="collapse mt-2 mb-4">
-			<div class="row justify-content-center my-2">
-				<div class="col-md-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-text text-center">
-								Number of Projects
-								<h2 id="projects_no" class="prj_stat">&nbsp;</h2>
-							</div>
-						</div>
-					</div>
+	<div class="inner_container">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-9 organization_data">
+					@if(array_search($section, $menu) === false)
+						<h4>{{ $dataset['Name'] }}</h4>
+					@endif	
+					<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 				</div>
-			
-				<div class="col-md-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-text text-center">
-								Original Cost
-								<h2 id="orig_cost" class="prj_stat">&nbsp;</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			
-				<div class="col-md-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-text text-center">
-								Current Cost
-								<h2 id="curr_cost" class="prj_stat">&nbsp;</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			
-				<div class="col-md-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-text text-center">
-								Amount Over Budget
-								<h2 id="over_budg_am" class="prj_stat">&nbsp;</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			
-			</div>
-				
-			<div class="row justify-content-center mt-3 mb-4">
-				<div class="col-md-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-text text-center">
-								Running Long
-								<h2 id="long_no" class="prj_stat">&nbsp;</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			
-				<div class="col-md-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-text text-center">
-								Over Budget
-								<h2 id="over_budg_no" class="prj_stat">&nbsp;</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			
-				<div class="col-md-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-text text-center">
-								Starting Late
-								<h2 id="late_start_no" class="prj_stat">&nbsp;</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			
-				<div class="col-md-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-text text-center">
-								Ending Late
-								<h2 id="late_end_no" class="prj_stat">&nbsp;</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-		</div>
-				
-			
-		<div class="row justify-content-center map_right">
-			@if ($map ?? null)
-				<div id="map_container" class="col-6" style="display:none;">
-					<button id="map_button_alt" class="btn btn-outline map_btn" style="margin:0 20px 20px 10px; z-index: 10; max-width: 40px; float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt=""></button>
-					<!-- toggles -->
-					<div class="select_district" id="toggles" style="left:0px;">
-						<img src="/img/eyes.png" alt="">
-						<ul class="inner_district">
-							<li class="dropdown">
-								<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
-								<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 10px;">
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="cd-switch">
-										<label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="ed-switch">
-										<label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="pp-switch">
-										<label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="dsny-switch">
-										<label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="fb-switch">
-										<label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="sd-switch">
-										<label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="hc-switch">
-										<label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="cc-switch">
-										<label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="nycongress-switch">
-										<label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="sa-switch">
-										<label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="ss-switch">
-										<label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="bid-switch">
-										<label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="nta-switch">
-										<label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
-									</div>
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="zipcode-switch">
-										<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<!-- /toggles -->
-					<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E; position:relative; min-height:800px;"></div>
-					<div id="help_us" class="" style="width:100%;min-height:260px;border:1px solid #112F4E; margin-top:24px; padding: 32px;">
-						<h4>Help us locate projects</h4>
-						<p>NYC’s government doesn’t publish the locations of capital projects (!?), so volunteers are using the information they do publish to determine where the projects are actually located.</p>
-						<p><a href="https://www.notion.so/wegovnyc/Volunteer-d751814ef6374dd9b9d10c989bcfa141" class="learn_more" target="_blank">Join Us</a></p>
-					</div>
-				</div>
-			@endif
-			<div id="data_container" class="col float-left">
-				<div class="table-responsive">
-					<div class="filter_icon">
-						<i class="bi bi-funnel-fill"></i>
-					</div>
-					<table id="myTable" class="display table-striped table-hover" style="width:100%;">
-						<thead>
-							<tr>
-								@if ($details['detFlag'])
-									<th></th>
-								@endif
-								@foreach ($details['hdrs'] as $name)
-									<th>{{ $name }}</th>
-								@endforeach
-								<th></th>
-							</tr>
-						</thead>
+				<div class="col-md-3 mt-2" id="org_summary">
+					<table class="table-sm stats-table" width="100%">
+					<thead>
+						<tr>
+						<th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
+						<th scope="col" width="50%" id="pub_date_filter"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan=2 class="text-right px-0 pt-0 pb-3">
+								<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="false" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
+							</td>
+						</tr>
+					</tbody>
 					</table>
 				</div>
 			</div>
+			
+			<div id="stats_collapse" class="collapse mt-2 mb-4">
+				<div class="row justify-content-center my-2">
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-text text-center">
+									Number of Projects
+									<h2 id="projects_no" class="prj_stat">&nbsp;</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-text text-center">
+									Original Cost
+									<h2 id="orig_cost" class="prj_stat">&nbsp;</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-text text-center">
+									Current Cost
+									<h2 id="curr_cost" class="prj_stat">&nbsp;</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-text text-center">
+									Amount Over Budget
+									<h2 id="over_budg_am" class="prj_stat">&nbsp;</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+					
+				<div class="row justify-content-center mt-3 mb-4">
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-text text-center">
+									Running Long
+									<h2 id="long_no" class="prj_stat">&nbsp;</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-text text-center">
+									Over Budget
+									<h2 id="over_budg_no" class="prj_stat">&nbsp;</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-text text-center">
+									Starting Late
+									<h2 id="late_start_no" class="prj_stat">&nbsp;</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-text text-center">
+									Ending Late
+									<h2 id="late_end_no" class="prj_stat">&nbsp;</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+					
+				
+			<div class="row justify-content-center map_right">
+				@if ($map ?? null)
+					<div id="map_container" class="col-6" style="display:none;">
+						<button id="map_button_alt" class="btn btn-outline map_btn" style="margin:0 20px 20px 10px; z-index: 10; max-width: 40px; float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt=""></button>
+						<!-- toggles -->
+						<div class="select_district" id="toggles" style="left:0px;">
+							<img src="/img/eyes.png" alt="">
+							<ul class="inner_district">
+								<li class="dropdown">
+									<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
+									<div class="dropdown-menu" style="width:100%;padding:0px 0px 0px 10px;">
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="cd-switch">
+											<label class="custom-control-label" for="cd-switch">Community Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="ed-switch">
+											<label class="custom-control-label" for="ed-switch">Election Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="pp-switch">
+											<label class="custom-control-label" for="pp-switch">Police Precincts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="dsny-switch">
+											<label class="custom-control-label" for="dsny-switch">Sanitation Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="fb-switch">
+											<label class="custom-control-label" for="fb-switch">Fire Battilion<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="sd-switch">
+											<label class="custom-control-label" for="sd-switch">School Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="hc-switch">
+											<label class="custom-control-label" for="hc-switch">Health Center Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="cc-switch">
+											<label class="custom-control-label" for="cc-switch">City Council Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="nycongress-switch">
+											<label class="custom-control-label" for="nycongress-switch">Congressional Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="sa-switch">
+											<label class="custom-control-label" for="sa-switch">State Assembly Dist...<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="ss-switch">
+											<label class="custom-control-label" for="ss-switch">State Senate Districts<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="bid-switch">
+											<label class="custom-control-label" for="bid-switch">Business Improvem...<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="nta-switch">
+											<label class="custom-control-label" for="nta-switch">Neighborhood Tab...<hr class="border-sample"></label>
+										</div>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="zipcode-switch">
+											<label class="custom-control-label" for="zipcode-switch">Zip Code<hr class="border-sample"></label>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<!-- /toggles -->
+						<div id="map" class="map flex-fill d-flex" style="width:100%;height:100%;border:4px solid #112F4E; position:relative; min-height:800px;"></div>
+						<div id="help_us" class="" style="width:100%;min-height:260px;border:1px solid #112F4E; margin-top:24px; padding: 32px;">
+							<h4>Help us locate projects</h4>
+							<p>NYC’s government doesn’t publish the locations of capital projects (!?), so volunteers are using the information they do publish to determine where the projects are actually located.</p>
+							<p><a href="https://www.notion.so/wegovnyc/Volunteer-d751814ef6374dd9b9d10c989bcfa141" class="learn_more" target="_blank">Join Us</a></p>
+						</div>
+					</div>
+				@endif
+				<div id="data_container" class="col float-left">
+					<div class="table-responsive">
+						<div class="filter_icon">
+							<i class="bi bi-funnel-fill"></i>
+						</div>
+						<table id="myTable" class="display table-striped table-hover" style="width:100%;">
+							<thead>
+								<tr>
+									@if ($details['detFlag'])
+										<th></th>
+									@endif
+									@foreach ($details['hdrs'] as $name)
+										<th>{{ $name }}</th>
+									@endforeach
+									<th></th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		@if ($dataset['Public Note'] ?? null)
+			<div class="col-md-12">
+				<h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
+			</div>
+		@endif
+		<div class="col-md-12">
+			<div class="bottom_lastupdate">
+				<p class="lead"><img src="/img/info.png" alt=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+				<!--<p>{!! nl2br($org['description']) !!}</p>-->
+			</div>
 		</div>
 	</div>
-
-
-	@if ($dataset['Public Note'] ?? null)
-        <div class="col-md-12">
-            <h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
-		</div>
-	@endif
-    <div class="col-md-12">
-        <div class="bottom_lastupdate">
-            <p class="lead"><img src="/img/info.png" alt=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
-            <!--<p>{!! nl2br($org['description']) !!}</p>-->
-        </div>
-	</div>
-
+	
 	<script>
 		function changeToggle (e) {
 			//console.log($(e.target).next("label")[0].innerHTML)

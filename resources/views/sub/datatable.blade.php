@@ -86,27 +86,28 @@
 
 </script>
 
-
-<div class="datatable-outer">
-	<div class="toggle-box">
-        Toggle column: <a class="toggle-vis" data-column="0">Id</a> - <a class="toggle-vis" data-column="1">Name</a> - <a class="toggle-vis" data-column="2">Type</a>
-    </div>
-	<table id="core-table" class="display table-striped table-hover" style="width:100%">
-		<thead>
-			<tr>
-				<th></th>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Type</th>
-			</tr>
-		</thead>
-		<tfoot>
-            <tr>
-				<th></th>
-				<th class="filter"></th>
-				<th class="filter"></th>
-				<th class="filter"></th>
-            </tr>
-        </tfoot>
-	</table>
+<div class="inner_container">
+	<div class="datatable-outer">
+		<div class="toggle-box">
+			Toggle column: <a class="toggle-vis" data-column="0">Id</a> - <a class="toggle-vis" data-column="1">Name</a> - <a class="toggle-vis" data-column="2">Type</a>
+		</div>
+		<table id="core-table" class="display table-striped table-hover" style="width:100%">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th></th>
+					<th class="filter"></th>
+					<th class="filter"></th>
+					<th class="filter"></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 </div>

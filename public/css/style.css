@@ -1,6 +1,7 @@
 body{font-family: 'Public Sans', sans-serif;font-weight: normal;}
 a:hover {color: #005ea2;}
-.container{max-width: 1400px;}
+.container{max-width: 100%;}
+.inner_container{max-width: 1400px;margin-right: auto;margin-left: auto;}
 
 th.filter {padding: 10px 4px 6px 4px !important;}
 td.details-control {background: url('/img/details_open.png') no-repeat center center;cursor: pointer;width: 35px;background-color: #F9F9F9 !important;}
@@ -144,13 +145,14 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 
 #chart-container {font-family: Arial; height: 600px; overflow: auto; text-align: center;}
 .orgchart {padding-bottom: 20px;}
-.orgchart {background: #fff;}
+.orgchart {background: #fff;width: 100%; padding: 0px;}
 .orgchart td.left, .orgchart td.right, .orgchart td.top {border-color: #aaa;}
 .orgchart td>.down {background-color: #aaa;}
 
 .orgchart .node .title {
-	width: 175px;
-	height:40px;
+	width: 150px;
+    height: auto;
+	min-height:40px;
 	text-overflow:clip;
 	white-space:normal;
 	border-radius: 4px 4px 4px 4px; 
@@ -159,12 +161,14 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 	text-align: center;
 	align-items: center;
 	position: relative;
-	padding-left: 8px; padding-right: 6px;
+	padding-left: 15px; padding-right: 6px;
+    font-weight: 500;
 }
-.orgchart .node .title a {display: block; vertical-align: middle; line-height: normal;color:white; width:100%;}
-.orgchart .node .title .symbol {position:absolute; top: 2px; left: 2px;}
+.orgchart .nodes.vertical{padding-left: 12px;}
+.orgchart .node .title a {display: block; line-height: normal;color:white; width:100%;}
+.orgchart .node .title .symbol {position:absolute; top: 12px; left: 4px;}
 .orgchart .node .content {display:none;}
-
+.orgchart .node {border:none}
 .orgchart .node_def .title {background-color: #999;}
 .orgchart .node_170000000 .title {background-color: #000;}
 .orgchart .node_170011039 .title {background-color: #88ca5e;}
@@ -463,3 +467,8 @@ span.bad {color: red;}
 .no-geo p {	font-size: 1.5rem; line-height: 1.5rem; color: #aaa; position:absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%); }
 .mapboxgl-popup {min-width: 350px;}
 #data_container.col-6 .have_coords {cursor:pointer;}
+
+
+.chart_submenu, .navbar.chart_submenu .navbar-collapse{
+    background-color: #e3f2fd;
+}

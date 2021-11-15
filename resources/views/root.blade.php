@@ -7,6 +7,7 @@
 
 
 @section('content')
+<div class="inner_container">
 	<div class="jumbotron">
         <div class="col-md-7 home_bgcontent">
             <h1>WeGovNYC DataBook</h1>
@@ -105,5 +106,5 @@
             <a href="https://www.notion.so/wegovnyc/DataBook-c44e74c262a84b67b7aabb14885e1ec6" class="learn_more" target="_blank">Learn More</a>
         </div>
     </div>
-
+</div>
 @endsection

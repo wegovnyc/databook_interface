@@ -1,22 +1,23 @@
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-12 mt-5 mb-1">
-			<h1></h1>
-			<h5 id="linked_agency"></h5>
-			@if($member['NAME'] ?? null)
-				<h5>Memeber: 
-					<span style="color:#999999;">
-						<a href="https://council.nyc.gov/district-{{ $id }}/" target="_blank">
-							<strong style="font-weight: 500;">{{ $member['NAME'] }}</strong>
-						</a>
-						, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}
-					</span>
-				</h5>
-			@endif
+<div class="inner_container">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-12 mt-5 mb-1">
+				<h1></h1>
+				<h5 id="linked_agency"></h5>
+				@if($member['NAME'] ?? null)
+					<h5>Memeber: 
+						<span style="color:#999999;">
+							<a href="https://council.nyc.gov/district-{{ $id }}/" target="_blank">
+								<strong style="font-weight: 500;">{{ $member['NAME'] }}</strong>
+							</a>
+							, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}
+						</span>
+					</h5>
+				@endif
+			</div>
 		</div>
 	</div>
-</div>
-				
+</div>			
 
 @include('sub.distheader', ['active' => $section])
 
@@ -156,42 +157,41 @@
 			@endif
 		});
 </script>
-
-<div class="container mb-5">
-	<div class="row">
-		<div class="col-md-9 organization_data">
-			<p class="mb-0">{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
+<div class="inner_container">
+	<div class="container mb-5">
+		<div class="row">
+			<div class="col-md-9 organization_data">
+				<p class="mb-0">{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		<div id="data_container" class="col">
-			<div class="table-responsive">
-				<table id="myTable" class="display table-striped table-hover" style="width:100%;">
-					<thead>
-						<tr>
-							@if ($details['detFlag'])
-								<th></th>
-							@endif
-							@foreach ($details['hdrs'] as $name)
-								<th>{{ $name }}</th>
-							@endforeach
-						</tr>
-					</thead>
-				</table>
+		<div class="row justify-content-center">
+			<div id="data_container" class="col">
+				<div class="table-responsive">
+					<table id="myTable" class="display table-striped table-hover" style="width:100%;">
+						<thead>
+							<tr>
+								@if ($details['detFlag'])
+									<th></th>
+								@endif
+								@foreach ($details['hdrs'] as $name)
+									<th>{{ $name }}</th>
+								@endforeach
+							</tr>
+						</thead>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+	@if ($dataset['Public Note'] ?? null)
+		<div class="col-md-12">
+			<h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
+		</div>
+	@endif
 
-
-@if ($dataset['Public Note'] ?? null)
-	<div class="col-md-12">
-		<h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
-	</div>
-@endif
-
-<div class="col-md-12" style="display:none">
-	<div class="bottom_lastupdate">
-		<p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+	<div class="col-md-12" style="display:none">
+		<div class="bottom_lastupdate">
+			<p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+		</div>
 	</div>
 </div>

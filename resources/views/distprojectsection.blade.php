@@ -1,17 +1,19 @@
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-12 mt-5 mb-1">
-			<h1></h1>
-			@if($member['NAME'] ?? null)
-				<h5>Memeber: 
-					<span style="color:#999999;">
-						<a href="https://council.nyc.gov/district-{{ $id }}/" target="_blank">
-							<strong style="font-weight: 500;">{{ $member['NAME'] }}</strong>
-						</a>
-						, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}
-					</span>
-				</h5>
-			@endif
+<div class="inner_container">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-12 mt-5 mb-1">
+				<h1></h1>
+				@if($member['NAME'] ?? null)
+					<h5>Memeber: 
+						<span style="color:#999999;">
+							<a href="https://council.nyc.gov/district-{{ $id }}/" target="_blank">
+								<strong style="font-weight: 500;">{{ $member['NAME'] }}</strong>
+							</a>
+							, {{ $member['POLITICAL PARTY'] }}, {{ $member['BOROUGH'] }}
+						</span>
+					</h5>
+				@endif
+			</div>
 		</div>
 	</div>
 </div>
@@ -251,143 +253,143 @@
 		
 </script>
 
-<div class="container mb-5">
-	<div class="row">
-		<div class="col-md-9 organization_data">
-			<p class="mb-0">{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
-		</div>
-		<div class="col-md-3 mt-2" id="org_summary">
-			<table class="table-sm stats-table" width="100%">
-			  <thead>
-				<tr>
-				  <th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
-				  <th scope="col" width="50%" id="pub_date_filter"></th>
-				</tr>
-			  </thead>
-			  <tbody>
-				  <tr>
-					<td colspan=2 class="text-right px-0 pt-0 pb-3">
-						<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="true" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
-					</td>
-				  </tr>
-			  </tbody>
-			</table>
-		</div>
-	</div>
-	
-	<div id="stats_collapse" class="collapse show mt-2 mb-4">
-		<div class="row justify-content-center my-2">
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Number of Projects
-							<h2 id="projects_no" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
+<div class="inner_container">
+	<div class="container mb-5">
+		<div class="row">
+			<div class="col-md-9 organization_data">
+				<p class="mb-0">{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Original Cost
-							<h2 id="orig_cost" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Current Cost
-							<h2 id="curr_cost" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Amount Over Budget
-							<h2 id="over_budg_am" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-		</div>
-			
-		<div class="row justify-content-center mt-3 mb-4">
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Running Long
-							<h2 id="long_no" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Over Budget
-							<h2 id="over_budg_no" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Starting Late
-							<h2 id="late_start_no" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="card-text text-center">
-							Ending Late
-							<h2 id="late_end_no" class="prj_stat">&nbsp;</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</div>
-			
-	
-	
-	<div class="row justify-content-center">
-		<div id="data_container" class="col">
-			<div class="table-responsive">
-				<table id="myTable" class="display table-striped table-hover" style="width:100%;">
-					<thead>
-						<tr>
-							@if ($details['detFlag'])
-								<th></th>
-							@endif
-							@foreach ($details['hdrs'] as $name)
-								<th>{{ $name }}</th>
-							@endforeach
-						</tr>
-					</thead>
+			<div class="col-md-3 mt-2" id="org_summary">
+				<table class="table-sm stats-table" width="100%">
+				<thead>
+					<tr>
+					<th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
+					<th scope="col" width="50%" id="pub_date_filter"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan=2 class="text-right px-0 pt-0 pb-3">
+							<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="true" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
+						</td>
+					</tr>
+				</tbody>
 				</table>
+			</div>
+		</div>
+	
+		<div id="stats_collapse" class="collapse show mt-2 mb-4">
+			<div class="row justify-content-center my-2">
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Number of Projects
+								<h2 id="projects_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Original Cost
+								<h2 id="orig_cost" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Current Cost
+								<h2 id="curr_cost" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Amount Over Budget
+								<h2 id="over_budg_am" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+				
+			<div class="row justify-content-center mt-3 mb-4">
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Running Long
+								<h2 id="long_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Over Budget
+								<h2 id="over_budg_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Starting Late
+								<h2 id="late_start_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text text-center">
+								Ending Late
+								<h2 id="late_end_no" class="prj_stat">&nbsp;</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	
+		<div class="row justify-content-center">
+			<div id="data_container" class="col">
+				<div class="table-responsive">
+					<table id="myTable" class="display table-striped table-hover" style="width:100%;">
+						<thead>
+							<tr>
+								@if ($details['detFlag'])
+									<th></th>
+								@endif
+								@foreach ($details['hdrs'] as $name)
+									<th>{{ $name }}</th>
+								@endforeach
+							</tr>
+						</thead>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -399,9 +401,10 @@
 		<h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
 	</div>
 @endif
-
-<div class="col-md-12" style="display:none">
-	<div class="bottom_lastupdate">
-		<p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+<div class="inner_container">
+	<div class="col-md-12" style="display:none">
+		<div class="bottom_lastupdate">
+			<p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+		</div>
 	</div>
 </div>

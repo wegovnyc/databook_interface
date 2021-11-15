@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<div class="inner_container">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div id="map_container" class="col-12 mb-0" style="min-height:500px!important;">
@@ -120,6 +121,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<script>
 	
 		var globfilter = []
