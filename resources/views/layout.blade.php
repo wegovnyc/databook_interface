@@ -69,7 +69,9 @@
 	
     <div id="app" class="container">
         <header>
-            @yield('menubar')
+			<div class="inner_container">
+           		@yield('menubar')
+			</div>
         </header>
 
         <main>
@@ -77,59 +79,61 @@
         </main>
 
 		<footer>
-			<div id="newsletter-subs">
-                <div class="row">
-                    <label for="newsletter-email" class="col-md-8">Stay up date with our community-powered newsletter.</label>
-                    <div class="col-md-4 email_address">
-                        <small>Your email address</small>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="newsletter-email">
-                            <div class="input-group-append">
-                                <button class="btn btn-info" type="button" onclick="subscribe_newsletter()">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-			</div>
-			<div id="return-to-top" style="display:none;">
-				<a href="#" onclick="topFunction()"><span>Return to top</span> <i class="bi bi-arrow-up-circle-fill"></i></a>
-			</div>
+			<div class="inner_container">
+				<div id="newsletter-subs">
+					<div class="row">
+						<label for="newsletter-email" class="col-md-8">Stay up date with our community-powered newsletter.</label>
+						<div class="col-md-4 email_address">
+							<small>Your email address</small>
+							<div class="input-group">
+								<input type="text" class="form-control" id="newsletter-email">
+								<div class="input-group-append">
+									<button class="btn btn-info" type="button" onclick="subscribe_newsletter()">Submit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="return-to-top" style="display:none;">
+					<a href="#" onclick="topFunction()"><span>Return to top</span> <i class="bi bi-arrow-up-circle-fill"></i></a>
+				</div>
 
-			<div id="footer-menu" class="row">
-				<div class="col-md-3">
-					<h6>Sections</h6>
-					<div><a href="//wegov.nyc/news-events/">News & Events</a></div>
-					<div><a href="//wegov.nyc/tools/">Tools</a></div>
+				<div id="footer-menu" class="row">
+					<div class="col-md-3">
+						<h6>Sections</h6>
+						<div><a href="//wegov.nyc/news-events/">News & Events</a></div>
+						<div><a href="//wegov.nyc/tools/">Tools</a></div>
+					</div>
+					<div class="col-md-3">
+						<h6>Contribute</h6>
+						<div><a href="https://www.notion.so/wegovnyc/Get-Involved-d31cee2e3ea04051b600e0a5b902daab">Get Involved</a></div>
+						<div><a href="https://opencollective.com/wegovnyc">Donate</a></div>
+					</div>
+					<div class="col-md-3">
+						<h6>About</h6>
+						<div><a href="https://wegov.nyc/about/">WeGovNYC</a></div>
+						<div><a href="http://sarapis.org/about">Sarapis</a></div>
+					</div>
+					<div class="col-md-3">
+						<h6>Social</h6>
+						<div><a href="https://twitter.com/wegovnyc">Twitter</a></div>
+						<div><a href="https://www.facebook.com/wegovnyc">Facebook</a></div>
+						<div><a href="https://github.com/wegovnyc">GitHub</a></div>
+					</div>
 				</div>
-				<div class="col-md-3">
-					<h6>Contribute</h6>
-					<div><a href="https://www.notion.so/wegovnyc/Get-Involved-d31cee2e3ea04051b600e0a5b902daab">Get Involved</a></div>
-					<div><a href="https://opencollective.com/wegovnyc">Donate</a></div>
-				</div>
-				<div class="col-md-3">
-					<h6>About</h6>
-					<div><a href="https://wegov.nyc/about/">WeGovNYC</a></div>
-					<div><a href="http://sarapis.org/about">Sarapis</a></div>
-				</div>
-				<div class="col-md-3">
-					<h6>Social</h6>
-					<div><a href="https://twitter.com/wegovnyc">Twitter</a></div>
-					<div><a href="https://www.facebook.com/wegovnyc">Facebook</a></div>
-					<div><a href="https://github.com/wegovnyc">GitHub</a></div>
-				</div>
-			</div>
 
-			<div id="footer-black">
-				<a href="{{ route('root') }}">
-				    <img src="/img/we-gov-logo-white.png" alt="" style="max-height:60px; margin-top:2px;">
-			    </a>
-				<div class="d-inline middle_text">
-				    <a href="{{ route('root') }}">WeGovNYC</a> is a project of <a href="https://sarapis.org/">Sarapis</a>, a 501.c.3 nonprofit.
-				</div>
-				<div class="d-inline">
-                    <a href="#"><img src="/img/cc.xlarge.png" height="60" alt=""></a>
-                    <a href="#" style="margin: 0 10px;"><img src="/img/by.xlarge.png" height="60" alt=""></a>
-                    <a href="#"><img src="/img/sa.xlarge.png" height="60" alt=""></a>
+				<div id="footer-black">
+					<a href="{{ route('root') }}">
+						<img src="/img/we-gov-logo-white.png" alt="" style="max-height:60px; margin-top:2px;">
+					</a>
+					<div class="d-inline middle_text">
+						<a href="{{ route('root') }}">WeGovNYC</a> is a project of <a href="https://sarapis.org/">Sarapis</a>, a 501.c.3 nonprofit.
+					</div>
+					<div class="d-inline">
+						<a href="#"><img src="/img/cc.xlarge.png" height="60" alt=""></a>
+						<a href="#" style="margin: 0 10px;"><img src="/img/by.xlarge.png" height="60" alt=""></a>
+						<a href="#"><img src="/img/sa.xlarge.png" height="60" alt=""></a>
+					</div>
 				</div>
 			</div>
 		</footer>

@@ -5,12 +5,12 @@
 @endsection
 
 @section('content')
-
-	<nav class="navbar navbar-expand-lg navbar-light" id="orgs-menu" style="background-color: #e3f2fd;">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-orgs" aria-controls="navbar-orgs" aria-expanded="true" aria-label="Toggle navigation">
+<div class="inner_container">
+	<nav class="navbar navbar-expand-lg navbar-light chart_submenu">
+		<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-orgs" aria-controls="navbar-orgs" aria-expanded="true" aria-label="Toggle navigation">
 			<img src="/img/menu_icon.png" alt="" title="" style="height: 20px;">
-		</button>
-		<div class="collapse navbar-collapse" id="navbar-orgs">
+		</button> -->
+		<div class="navbar-collapse">
 			<ul class="navbar-nav">
 				@foreach (['NYC Organizational Chart' => 'orgs', 'Government Agencies' => 'orgsDirectory', 'All Organizations' => 'orgsAll'] as $t=>$route)
 					@if ($route == 'orgsDirectory')
@@ -24,7 +24,7 @@
 			</ul>
 		</div>
 	</nav>
-
+</div>
 
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
@@ -236,32 +236,34 @@
 		});
 	</script>
 
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-12 organization_data">
-                <div class="col-md-12">
-                    <table id="orgsTable" class="display table" style="width:100%;padding-top: 30px;">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+	<div class="inner_container">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 organization_data">
+					<div class="table-responsive">
+						<table id="orgsTable" class="display table" style="width:100%;padding-top: 30px;">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="homeround_content">
+				<div class="text-center bottom_text col-md-12">
+					<h3>We’re adding data all the time.</h3>
+					<a href="#" class="learn_more">Learn More</a>
+				</div>
 			</div>
 		</div>
-        <div class="homeround_content">
-            <div class="text-center bottom_text col-md-12">
-                <h3>We’re adding data all the time.</h3>
-                <a href="#" class="learn_more">Learn More</a>
-            </div>
-        </div>
     </div>
 
 @endsection
