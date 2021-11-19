@@ -143,7 +143,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 
 #orgsTableAll .badge {font-weight: 400; font-size: 14px;margin: 2px 4px;}
 
-#chart-container {font-family: Arial; height: 600px; overflow: auto; text-align: center;}
+#chart-container {font-family: Arial; height: 1720px; overflow: auto; text-align: center;}
 .orgchart {padding-bottom: 20px;}
 .orgchart {background: #fff;width: 100%; padding: 0px;}
 .orgchart td.left, .orgchart td.right, .orgchart td.top {border-color: #aaa;}
@@ -190,8 +190,13 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 .orgchart .node_170010103 .title {background-color: #a45c40;}
 .orgchart .node_170020021 .title {background-color: #603f8b;}
 .orgchart .node_170011000 .title {background-color: #21b6a8;}
+.orgchart .node_focused .title {background-color: #FFFFFF; box-shadow: 4px 4px 10px black; width: 175px;}
+.orgchart .node_focused .title a {color:black; font-weight:600;font-size:.82rem;}
+
 
 i.edge {display:none;}
+
+
 
 /*================== start organization detail page ================*/
 .org-header {background: #fff;}
@@ -199,7 +204,9 @@ i.edge {display:none;}
 .inside_orglogo .org-logo{max-width: 100%; max-height: 100%;margin: 0 auto;}
 .org_detailheader{padding: 30px 30px 0 5px;}
 .org_detailtitle {float: left; margin-right: 1.5rem;}
-.org_detailtitle h4 {font-weight: bold;font-size: 22px;line-height: 38px;color: #171717;float: left;margin-right: 20px;margin-bottom: 0;}
+.org_detailtitle h4 {font-weight: bold;font-size: 22px;line-height: 38px;color: #171717;float: left;margin-right: 20px;margin-bottom: 0;line-height:1.5rem;}
+.org_detailtitle p {white-space: nowrap;}
+.org_detailtitle a {text-overflow: ellipsis;white-space: nowrap;}
 .icon_orgsocial {float: left;padding-top: 6px;}
 .icon_orgsocial .icon{height: 32px;width: 32px;float: left;line-height: 30px;border-radius: 50px;font-size: 16px;padding: 0px !important;background: #959494;text-align: center;margin: 0 6px;margin-bottom: 5px;}
 .icon_orgsocial .icon i{color: #fff;}

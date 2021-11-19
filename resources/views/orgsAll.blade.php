@@ -248,6 +248,10 @@
 		});
 	</script>
 <div class="inner_container">
+	<div class="mt-4 mx-3">
+		<h4>All Organizations</h4>
+		<p>Click any organization to see its profile.</p>
+	</div>
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12 organization_data">
@@ -267,6 +271,9 @@
 			</div>
 		</div>
         <div class="homeround_content">
+			<div class="text-center bottom_text col-md-12 mb-5">
+				The organizations in this table have been documented as part of our research into New York City government. They include government agencies as well as organizations that contract with the city, engage in its political processes or simply seemed relevant.<br/>If you have ideas for further improvements or notice inaccuracies, please <a href="https://wegovnyc.notion.site/Contact-Us-54b075fa86ec47ebae48dae1595afc2c">let us know</a>.
+			</div>
             <div class="text-center bottom_text col-md-12">
                 <h3>We’re adding data all the time.</h3>
                 <a href="#" class="learn_more">Learn More</a>

@@ -13,6 +13,7 @@ Route::get('/agencies', function () {
     return redirect(route('orgs'));
 });
 Route::get('/agencies/chart', [Organizations::class, 'orgsChart'])->name('orgs');
+Route::get('/agencies/chart/{id}', [Organizations::class, 'orgsChart'])->name('orgsChartFocus');
 Route::get('/agencies/directory', [Organizations::class, 'orgsDirectory'])->name('orgsDirectory');
 Route::get('/agencies/all', [Organizations::class, 'orgsAll'])->name('orgsAll');
 

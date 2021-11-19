@@ -41,7 +41,7 @@ class Organizations extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function orgsChart()
+    public function orgsChart($id=null)
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
         return view('orgsChart', [
@@ -50,6 +50,7 @@ class Organizations extends Controller
 					'defType' => $_GET['type'] ?? 'City Agency',
 					'defTag' => $_GET['tag'] ?? null,
 					'defSearch' => $_GET['search'] ?? null,
+					'defId' => $id
 				]);
     }
 

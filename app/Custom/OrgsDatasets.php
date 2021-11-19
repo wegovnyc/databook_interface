@@ -520,6 +520,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		capitalprojects_cc_idx
 		capitalprojects_cd_idx
 		capitalprojects_nta_idx
+		ccmembers
 		crol
 		data_sources
 		expenseactualsfunding

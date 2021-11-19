@@ -237,6 +237,10 @@
 	</script>
 
 	<div class="inner_container">
+		<div class="mt-4 mx-3">
+			<h4>Government Agencies</h4>
+			<p>Click any of the city and state agencies below to see their profiles.</p>
+		</div>
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-12 organization_data">
@@ -258,6 +262,9 @@
 				</div>
 			</div>
 			<div class="homeround_content">
+				<div class="text-center bottom_text col-md-12 mb-5">
+					The agencies listed on this page have all appear in official New York City open data, and have been cross referenced with the city’s <a href="https://www1.nyc.gov/nyc-resources/agencies.page">official agency directory</a>.<br/>If you have ideas for further improvements or notice inaccuracies, please <a href="https://wegovnyc.notion.site/Contact-Us-54b075fa86ec47ebae48dae1595afc2c">let us know</a>.
+				</div>
 				<div class="text-center bottom_text col-md-12">
 					<h3>We’re adding data all the time.</h3>
 					<a href="#" class="learn_more">Learn More</a>

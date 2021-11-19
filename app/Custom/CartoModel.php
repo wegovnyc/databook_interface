@@ -17,7 +17,8 @@ class CartoModel
 
 	function org($id)
 	{
-		$dd = $this->carto->req("SELECT * FROM wegov_orgs WHERE id = '{$id}'");
+		#$dd = $this->carto->req("SELECT * FROM wegov_orgs WHERE id = '{$id}'");
+		$dd = $this->carto->req("SELECT org.*, p.id AS parent_id, p.name AS parent_name FROM wegov_orgs org INNER JOIN wegov_orgs p ON p.airtable_id = regexp_replace(org.child_of, '[\[\]\"]', '', 'g') WHERE org.id = '{$id}'");
 		return $this->map($dd)[0] ?? [];
 	}
 	
