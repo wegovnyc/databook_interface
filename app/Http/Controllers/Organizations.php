@@ -82,7 +82,7 @@ class Organizations extends Controller
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
         return view('orgsAll', [
-					'url' => $model->url('SELECT * FROM wegov_orgs WHERE "type" NOT IN (\'Classification\', \'Public Figure\') ORDER BY name'),
+					'url' => $model->url('SELECT * FROM wegov_orgs WHERE "type" NOT IN (\'Classification\', \'Official\', \'Public Figure\') ORDER BY name'),
 					'breadcrumbs' => Breadcrumbs::orgs(),
 					'defType' => $_GET['type'] ?? 'City Agency',
 					'defTag' => $_GET['tag'] ?? null,

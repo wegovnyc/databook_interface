@@ -31,10 +31,10 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/js/jquery.orgchart.min.js" integrity="sha512-alnBKIRc2t6LkXj07dy2CLCByKoMYf2eQ5hLpDmjoqO44d3JF8LSM4PptrgvohTQT0LzKdRasI/wgLN0ONNgmA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	</div>
-	<div class="mt-4 mx-2">
-		<h4>Citywide Organizational Chart</h4>
-		<p>This interactive hierarchical chart shows the relationship between city officials and agencies. Click on any entity to see its profile.</p>
+		<div class="mt-4 mx-2 text-center">
+			<h4>Citywide Organizational Chart</h4>
+			<p>This interactive hierarchical chart shows the relationship between city officials and agencies. Click on any entity to see its profile.</p>
+		</div>
 	</div>
 
 	<div id="chart-container"></div>

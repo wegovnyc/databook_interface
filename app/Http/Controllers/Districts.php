@@ -53,9 +53,10 @@ class Districts extends Controller
 					'member' => (($type == 'cc') and ($id <> 'undefined')) ? $model->ccMember($id) : [],
 					'details' => $details,
 					'linkedAgencyUrl' => 
-						$type == 'nta'
-							? ''
-							: $model->url('SELECT * FROM wegov_orgs WHERE ' . ['cc' => '"cityCouncilDistrictId"', 'cd' => '"communityDistrictId"'][$type] . " = '[\"\"{$id}\"\"]'"),
+						$type == 'cd'
+							? $model->url('SELECT * FROM wegov_orgs WHERE ' . ['cc' => '"cityCouncilDistrictId"', 'cd' => '"communityDistrictId"'][$type] . " = '[\"\"{$id}\"\"]'")
+							: '',
+					'altName' => $type == 'cd' ? $ds->cdAltName[$id] ?? null : null,
 				])
 			: abort(404);
     }

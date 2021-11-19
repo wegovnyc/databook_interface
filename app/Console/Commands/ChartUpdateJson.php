@@ -75,7 +75,7 @@ class ChartUpdateJson extends Command
 		];
 		
 		$familyClass = ($cc[$dd[$key]['id']] ?? null) ? "node_{$dd[$key]['id']}" : $familyClass ?? null;
-		$rr = ['name' => "<a href=\"/agency/{$dd[$key]['id']}\">{$dd[$key]['name']}</a>", 
+		$rr = ['name' => preg_match('~Classification|Official~si', $dd[$key]['type']) ? "<a>{$dd[$key]['name']}</a>" : "<a href=\"/agency/{$dd[$key]['id']}\">{$dd[$key]['name']}</a>", 
 			   'className' => $familyClass ?? ($dd[$key]['id'] == '170000000' ? "node_170000000" : 'node_def')
 			  ];
 		if ($dd[$key]['children'])
@@ -91,9 +91,6 @@ class ChartUpdateJson extends Command
 			foreach (array_values($dd[$key]['children']) as $childId)
 				$children[] = self::packnode($dd, $childId, $familyClass);
 			$rr['children'] = $children;
-			#if ($children && !$familyClass && ($dd[$key]['id'] != '170000000') && ($dd[$key]['id'] != '170010002'))
-			#if ($children && ($dd[$key]['id'] == '170010009'))
-			#	$rr['collapsed'] = true;
 		} 
 		return $rr;
 	}

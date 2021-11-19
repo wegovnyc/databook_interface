@@ -14,6 +14,13 @@
 						</span>
 					</h5>
 				@endif
+				@if($altName)
+					<h5 style="color:#999999;">
+						<a href="https://popfactfinder.planning.nyc.gov/explorer/cdtas/{{ $altName }}/" target="_blank">
+							<strong style="font-weight: 500;">View District Census Data</strong>
+						</a>
+					</h5>
+				@endif
 			</div>
 		</div>
 	</div>

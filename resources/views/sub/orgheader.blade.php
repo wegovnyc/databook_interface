@@ -32,7 +32,11 @@
 						</a></p>
 					@endif
 					@if ($org['parent_id'])
-						<br/><p>Reports to <a class="elipsis" href="{{ route('orgProfile', ['id' => $org['parent_id']]) }}">
+						@if (preg_match('~Classification|Official~si', $org['parent_type']))
+							<br/><p>Reports to <a>
+						@else
+							<br/><p>Reports to <a href="{{ route('orgProfile', ['id' => $org['parent_id']]) }}">
+						@endif
 								{{ trim($org['parent_name']) }}
 							</a>
 							<a href="{{ route('orgsChartFocus', ['id' => $org['id']]) }}" class="">
