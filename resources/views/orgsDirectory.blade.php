@@ -229,7 +229,7 @@
 
                     td.append($(`<div class="col-md-3"><a href="/agency/${r['id']}"><div class="card  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))
                 });
-                $('#orgsTable tbody').html('<tr><td colspan="7" class="p-0"><div class="row">'+td.html()+'</div></td></tr>')
+                $('#orgsTable tbody').html('<tr><td colspan="7"><div class="row">'+td.html()+'</div></td></tr>')
                 $('#orgsTable tbody').show();
             });
 
@@ -244,7 +244,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-12 organization_data">
-					<div class="table-responsive">
+					<div class="">
 						<table id="orgsTable" class="display table" style="width:100%;padding-top: 30px;">
 							<thead>
 								<tr>
