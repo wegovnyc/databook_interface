@@ -4,7 +4,7 @@
 }
 @media (max-width: 1300px)
 {
-    .container {padding: 0px;}
+    /* .container {padding: 0px;} */
 
 }
 @media (max-width: 1200px)
@@ -29,6 +29,7 @@
     #myTable_wrapper .toolbar .drop_dowm_select {width: 30%;}
     .organization_data p {width: calc(100% - 10px);padding-left: 10px;}
     .organization_data h4 {padding-left: 10px;}
+    .dataTables_wrapper .dataTables_filter input{width: 80%;}
 }
 @media (max-width: 1152px)
 {
@@ -47,6 +48,15 @@
     .bottom_lastupdate{padding: 18px 15px; margin: 0px;margin-bottom: 60px;display: inline-block;}
     .bottom_lastupdate p{font-size: 18px;}
     #stats_collapse .row{margin: 0px;}
+    .submenu_org .nav-item .nav-link {
+        padding: 15px 12px;
+        font-weight: 500;
+        font-size: 15px;
+        color: #585C62;
+    }
+    .org_detailtitle p {
+        white-space: normal;
+    }
 }
 @media (max-width: 980px)
 {
@@ -115,6 +125,10 @@
     #data_container.col-6 .filter_icon{top:40px}
     .share_icon_container {padding: 0;}
     #stats_collapse .col-md-3{flex: 0 0 50%;max-width: 50%;margin-bottom: 30px;}
+    .container {padding: 0px;}
+    .org_detailheader {
+        padding: 14px 15px 0 15px;
+    }
 }
 @media (max-width: 767px)
 {
@@ -127,7 +141,7 @@
     #orgsTable .card {min-height: auto;}
     .badge-info{line-height: 18px;margin-right: 6px;margin-bottom: 6px;}
     .inside_orglogo{text-align: center;display: block;width: 100%;padding: 10px 0px 10px 0px;}
-    .org_detailtitle {padding: 0px 15px 15px 15px;}
+    .org_detailtitle {padding: 0px 15px 15px 15px;width: 100%;text-align: center;}
     .org_detailtitle h4{width: 100%; text-align: center;}
     .icon_orgsocial{width: 100%;text-align: center;margin-bottom: 10px;}
     .icon_orgsocial .icon{display: inline-block;margin-bottom: 20px;float: none;}
@@ -135,6 +149,8 @@
     .org_detailtitle .float-left{float: none !important;display: inline-block;}
     .bottom_lastupdate p{text-align: center;}
     .bottom_lastupdate p span{float: none !important; display: inline-block;}
+    .org_detailtitle p {margin-bottom: 0px;}
+    .org_detailheader .col-md-4.text-right, .org_detailheader .col-md-4.text-right > div {text-align: center !important;}
 }
 @media (max-width: 736px)
 {
@@ -190,6 +206,14 @@
     .org_detailtitle h4{font-size: 18px;line-height: normal;}
     #myTable_wrapper .toolbar .drop_dowm_select select{margin-bottom: 0px;}
     .share_icon_container {width: 100%;display: inline-block;text-align: right; right: 10px}
+    .org_detailtitle a{white-space: normal;}
+    .icon_orgsocial .icon{
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        margin: 0 2px;
+    }
 }
 @media (max-width: 375px)
 {
@@ -210,6 +234,13 @@
 @media (max-width: 360px)
 {
     #map-controls, #toggles{padding: 10px 5px;width: 340px;}
+    .icon_orgsocial .icon{
+        height: 25px;
+        width: 25px;
+        line-height: 25px;
+        font-size: 12px;
+        margin: 0 2px;
+    }
 }
 @media (max-width: 320px)
 {

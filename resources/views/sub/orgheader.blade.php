@@ -9,75 +9,77 @@
 			</div>
 			@endif
 			<div class="col-md-10 org_detailheader">
-				<div class="org_detailtitle">
-					<h4>{{ $org['name'] }}</h4>
-					@if ($org['communityDistrictName'])
-						<br/><p>Representing <a href="{{ route('districtsPreset', [
-											'type' => 'cd',
-											'id' => $org['communityDistrictId'][0],
-											'section' => 'nyccouncildiscretionaryfunding',
-										])
-									}}">
-							{{ trim($org['communityDistrictName'][0]) }}
-						</a></p>
-					@endif
-					@if ($org['cityCouncilDistrictName'])
-						<br/><p>Representing <a href="{{ route('districtsPreset', [
-											'type' => 'cc',
-											'id' => $org['cityCouncilDistrictId'][0],
-											'section' => 'nyccouncildiscretionaryfunding',
-										])
-									}}">
-							{{ trim($org['cityCouncilDistrictName'][0]) }}
-						</a></p>
-					@endif
-					@if ($org['parent_id'])
-						@if (preg_match('~Classification|Official~si', $org['parent_type']))
-							<br/><p>Reports to <a>
-						@else
-							<br/><p>Reports to <a href="{{ route('orgProfile', ['id' => $org['parent_id']]) }}">
-						@endif
-								{{ trim($org['parent_name']) }}
-							</a>
-							<a href="{{ route('orgsChartFocus', ['id' => $org['id']]) }}" class="">
-								<i class="bi-diagram-3-fill" style="font-size: 1.2rem;margin-left: 10px;"></i>
-							</a>
-						</p>
-					@endif
-				</div>
-				<div class="icon_orgsocial">
-					@foreach ($icons as $f=>$pp)
-						<div class="icon">
-							@if ($org[$f] ?? null)
-								<a href="{{ $pp[1] }}{{ $org[$f] }}" target="_blank">
-									<i class="bi-{{ $pp[0] }}"></i>
-								</a>
-							@else
-								<i class="bi-{{ $pp[0] }}"></i>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="org_detailtitle m-0">
+							<h4>{{ $org['name'] }}</h4>
+							@if ($org['communityDistrictName'])
+								<br/><p>Representing <a href="{{ route('districtsPreset', [
+													'type' => 'cd',
+													'id' => $org['communityDistrictId'][0],
+													'section' => 'nyccouncildiscretionaryfunding',
+												])
+											}}">
+									{{ trim($org['communityDistrictName'][0]) }}
+								</a></p>
+							@endif
+							@if ($org['cityCouncilDistrictName'])
+								<br/><p>Representing <a href="{{ route('districtsPreset', [
+													'type' => 'cc',
+													'id' => $org['cityCouncilDistrictId'][0],
+													'section' => 'nyccouncildiscretionaryfunding',
+												])
+											}}">
+									{{ trim($org['cityCouncilDistrictName'][0]) }}
+								</a></p>
+							@endif
+							@if ($org['parent_id'])
+								@if (preg_match('~Classification|Official~si', $org['parent_type']))
+									<br/><p>Reports to <a>
+								@else
+									<br/><p>Reports to <a href="{{ route('orgProfile', ['id' => $org['parent_id']]) }}">
+								@endif
+										{{ trim($org['parent_name']) }}
+									</a>
+									<a href="{{ route('orgsChartFocus', ['id' => $org['id']]) }}" class="">
+										<i class="bi-diagram-3-fill" style="font-size: 1.2rem;margin-left: 10px;"></i>
+									</a>
+								</p>
 							@endif
 						</div>
-					@endforeach
-				</div>
-				<div class="float-right mt-1">
-					@if ($org['type'] ?? null)
-						<div class="float-left mr-4">
-							<a href="{{ route('orgs') }}?type={{ urlencode($org['type']) }}" class="float-left no-underline">
-								<span class="type-label">{{ $org['type'] }}</span>
-							</a>
-						</div>
-					@endif
-					@if ($org['tags'] ?? null)
-						<div class="float-left">
-							<p class="text-types" style="line-height:inherit;padding-right:inherit;"><a title="Tags"><i class="bi-tags" style="color:black;"></i></a></p>
-							@foreach ((array)$org['tags'] as $tag)
-								<span class="tag-label" style="padding-left:0px;margin:0px">
-									<a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="no-underline"  style="padding-left:0px;margin:0px">
-										{{ $tag }}
-									</a>
-								</span>
+						<div class="icon_orgsocial">
+							@foreach ($icons as $f=>$pp)
+								<div class="icon">
+									@if ($org[$f] ?? null)
+										<a href="{{ $pp[1] }}{{ $org[$f] }}" target="_blank">
+											<i class="bi-{{ $pp[0] }}"></i>
+										</a>
+									@else
+										<i class="bi-{{ $pp[0] }}"></i>
+									@endif
+								</div>
 							@endforeach
 						</div>
-					@endif
+					</div>
+					<div class="col-md-4 text-right">
+						@if ($org['type'] ?? null)
+							<a href="{{ route('orgs') }}?type={{ urlencode($org['type']) }}" class="no-underline" style="display: inline-block;">
+								<span class="type-label" style="display: inherit;">{{ $org['type'] }}</span>
+							</a>
+						@endif
+						@if ($org['tags'] ?? null)
+							<div style="display: inline-block;text-align: left;">
+								<p class="text-types" style="padding-right:0px;float:none;display: inherit;"><a title="Tags"><i class="bi-tags" style="color:black;"></i></a></p>
+								@foreach ((array)$org['tags'] as $tag)
+									<span class="tag-label" style="padding-left:0px;margin:0px">
+										<a href="{{ route('orgs') }}?tag={{ urlencode($tag) }}" class="no-underline"  style="padding-left:0px;margin:0px">
+											{{ $tag }}
+										</a>
+									</span>
+								@endforeach
+							</div>
+						@endif
+					</div>
 				</div>
 			</div>
 		</div>
