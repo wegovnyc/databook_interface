@@ -3,6 +3,7 @@
 		<div class="row justify-content-center">
 			<div class="col-md-12 mt-5 mb-1">
 				<h1></h1>
+				<h5 id="linked_agency"></h5>
 				@if($member['NAME'] ?? null)
 					<h5>Memeber: 
 						<span style="color:#999999;">
@@ -13,11 +14,17 @@
 						</span>
 					</h5>
 				@endif
+				@if($altName)
+					<h5 style="color:#999999;">
+						<a href="https://popfactfinder.planning.nyc.gov/explorer/cdtas/{{ $altName }}/" target="_blank">
+							<strong style="font-weight: 500;">View District Census Data</strong>
+						</a>
+					</h5>
+				@endif
 			</div>
 		</div>
 	</div>
-</div>
-				
+</div>				
 
 @include('sub.distheader', ['active' => $section])
 

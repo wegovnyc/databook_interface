@@ -33,7 +33,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<div class="mt-4 mx-2 text-center">
 			<h4>Citywide Organizational Chart</h4>
-			<p>This interactive hierarchical chart shows the relationship between city officials and agencies. Click on any entity to see its profile.</p>
+			<p>This interactive hierarchical chart shows the relationship between city officials and agencies. Click and drag to move the chart. Click on any entity to see is profile.</p>
 		</div>
 	</div>
 
@@ -71,6 +71,16 @@
 					}, 1000);
 				});
 			@endif
+			$(document).ready(function() {
+				$('.orgchart').mousedown(function(e) {
+					$(this).css('cursor', 'grabbing');
+				});
+				$('.orgchart').mouseup(function(e) {
+					setTimeout(() => {
+						$(this).css('cursor', 'grab');
+					},5);
+				});
+			});
 	</script>
 
 @endsection

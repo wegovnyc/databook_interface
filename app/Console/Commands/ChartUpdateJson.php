@@ -76,16 +76,21 @@ class ChartUpdateJson extends Command
 		
 		$familyClass = ($cc[$dd[$key]['id']] ?? null) ? "node_{$dd[$key]['id']}" : $familyClass ?? null;
 		$rr = ['name' => preg_match('~Classification|Official~si', $dd[$key]['type']) ? "<a>{$dd[$key]['name']}</a>" : "<a href=\"/agency/{$dd[$key]['id']}\">{$dd[$key]['name']}</a>", 
-			   'className' => $familyClass ?? ($dd[$key]['id'] == '170000000' ? "node_170000000" : 'node_def')
+			   'className' => $familyClass ?? (preg_match('~Classification|Official~si', $dd[$key]['type']) ? 'node_def' : 'node_black')
 			  ];
 		if ($dd[$key]['children'])
 		{
 			$children = [];
 			uksort($dd[$key]['children'], function ($a, $b) {
-			if (($a == 'Mayor\'s Office') || ($b == 'District Attorneys'))
-					return -1;
-				if (($b == 'Mayor\'s Office') || ($a == 'District Attorneys'))
-					return 1;
+				$idx = ['Elected County Officials', 'Mayor\'s Office', 'Office of the Comptroller', 'Public Advocate', 'Independent Budget Office', 'City Council'];
+				$idx = array_combine(array_values($idx), array_keys($idx));
+
+				$a = $idx[$a] ?? $a;
+				$a = preg_match('~\d~', $a) ? (int)preg_replace('~\D~si', '', $a) : $a;
+
+				$b = $idx[$b] ?? $b;
+				$b = preg_match('~\d~', $b) ? (int)preg_replace('~\D~si', '', $b) : $b;
+
 				return $a <=> $b;
 			});
 			foreach (array_values($dd[$key]['children']) as $childId)

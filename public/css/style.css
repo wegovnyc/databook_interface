@@ -144,11 +144,10 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 #orgsTableAll .badge {font-weight: 400; font-size: 14px;margin: 2px 4px;}
 
 #chart-container {font-family: Arial; height: 1720px; overflow: auto; text-align: center;}
-.orgchart {padding-bottom: 20px;}
-.orgchart {background: #fff;width: 100%; padding: 0px;}
+.orgchart {background: #FFFFFF; width: 100%; cursor:grab;padding: 0px;}
 .orgchart td.left, .orgchart td.right, .orgchart td.top {border-color: #aaa;}
 .orgchart td>.down {background-color: #aaa;}
-
+.orgchart>.nodes>.hierarchy {background: rgb(227, 242, 253, 0.5); padding: 10px;}
 .orgchart .node .title {
 	width: 150px;
     height: auto;
@@ -170,7 +169,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 .orgchart .node .content {display:none;}
 .orgchart .node {border:none}
 .orgchart .node_def .title {background-color: #999;}
-.orgchart .node_170000000 .title {background-color: #000;}
+.orgchart .node_black .title {background-color: #000;}
 .orgchart .node_170011039 .title {background-color: #88ca5e;}
 .orgchart .node_170010056 .title {background-color: #ff5c4d;}
 .orgchart .node_170100000 .title {background-color: #0a7029;}

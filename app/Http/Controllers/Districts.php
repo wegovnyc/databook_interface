@@ -99,6 +99,7 @@ class Districts extends Controller
 						$type == 'nta'
 							? ''
 							: $model->url('SELECT * FROM wegov_orgs WHERE ' . ['cc' => '"cityCouncilDistrictId"', 'cd' => '"communityDistrictId"'][$type] . " = '[\"\"{$id}\"\"]'"),
+					'altName' => $type == 'cd' ? $ds->cdAltName[$id] ?? null : null,
 				])
 			: abort(404);
     }
