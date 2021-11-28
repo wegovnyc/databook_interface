@@ -39,15 +39,24 @@ class ChartUpdateJson extends Command
      */
     public function handle()
     {
-		#$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		#$orgs = $model->orgs('WHERE "type" IN (\'City Agency\', \'Elected Office\', \'Boards and Comissions\', \'Classification\', \'Community Board\', \'Official\')');
-		$airtable = new Airtable(config('apis.orgs_doc_id'), config('apis.airtable_key'));
-		$orgs = $airtable->readTableFlat(config('apis.orgs_doc_tbl'), '', '&view=' . config('apis.orgs_doc_view'));
-		
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+		$orgs = $model->orgs('WHERE "type" IN (\'Boards and Comissions\', \'City Agency\', \'Classification\', \'Community Board\', \'Elected Office\', \'Official\')');
+		#$airtable = new Airtable(config('apis.orgs_doc_id'), config('apis.airtable_key'));
+		#$orgs = $airtable->readTableFlat(config('apis.orgs_doc_tbl'), '', '&view=' . config('apis.orgs_doc_view'));
+		#file_put_contents('orgs.json', json_encode($orgs));
 		$mm = [];
 		
-		foreach ($orgs as $org)
-			$mm[$org['_id']] = $org + ['children' => []];
+		foreach ($orgs as $i=>$org)
+		{
+			if (is_string($org['child_of']))
+			{
+				$org['child_of'] = json_decode(str_replace('""', '"', $org['child_of']), true);
+				$orgs[$i] = $org;
+			}	
+			#$mm[$org['_id']] = $org + ['children' => []];
+			$mm[$org['airtable_id']] = $org + ['children' => []];
+			
+		}
 		$rootId = '';
 		echo "\n===== " . date('Y-m-d H:i:s') . " =====================\n";
 		foreach ($orgs as $org)
@@ -55,10 +64,12 @@ class ChartUpdateJson extends Command
 			#$parent_id = preg_replace('~[\[\]"]~si', '', $org['child_of']);
 			$parent_id = ($org['child_of'] ?? null) ? $org['child_of'][0] : null;
 			if ($org['id'] == '170000000')
-				$rootId = $org['_id'];
+				#$rootId = $org['_id'];
+				$rootId = $org['airtable_id'];
 			if (!$parent_id)
 				continue;
-			$mm[$parent_id]['children'][$org['name']] = $org['_id'];
+			#$mm[$parent_id]['children'][$org['name']] = $org['_id'];
+			$mm[$parent_id]['children'][$org['name']] = $org['airtable_id'];
 			echo $org['id'] . '; ';
 		}
 		//file_put_contents(public_path('data/orgChart.test'), print_r($mm, true));
@@ -75,8 +86,9 @@ class ChartUpdateJson extends Command
 		];
 		
 		$familyClass = ($cc[$dd[$key]['id']] ?? null) ? "node_{$dd[$key]['id']}" : $familyClass ?? null;
-		$rr = ['name' => preg_match('~Classification|Official~si', $dd[$key]['type']) ? "<a>{$dd[$key]['name']}</a>" : "<a href=\"/agency/{$dd[$key]['id']}\">{$dd[$key]['name']}</a>", 
-			   'className' => $familyClass ?? (preg_match('~Classification|Official~si', $dd[$key]['type']) ? 'node_def' : 'node_black')
+		$forceGray = preg_match('~Classification|Official~si', $dd[$key]['type']) || !$dd[$key]['datasets_count'];
+		$rr = ['name' => $forceGray ? "<a>{$dd[$key]['name']}</a>" : "<a href=\"/agency/{$dd[$key]['id']}\">{$dd[$key]['name']}</a>", 
+			   'className' => $forceGray ? 'node_def' : ($familyClass ?? 'node_black')
 			  ];
 		if ($dd[$key]['children'])
 		{

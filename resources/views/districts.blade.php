@@ -214,19 +214,19 @@
 					var description = `
 						<h4>${dd.input.toUpperCase()}</h4>
 						<table><tbody>
-							<tr><th scope="row">Community District</th><td><a href="/districts/cd/${r.communityDistrict}/nyccouncildiscretionaryfunding">${r.communityDistrict}</a></td></tr>
-							<tr><th scope="row">City Council District</th><td><a href="/districts/cc/${r.cityCouncilDistrict.replace(/^0+/g, '')}/nyccouncildiscretionaryfunding">${r.cityCouncilDistrict}</a></td></tr>
+							<tr><th scope="row">Community District</th><td><a href="/districts/cd/${r.communityDistrict}/nyccouncildiscretionaryfunding">${r.communityDistrict}</a> <a id="cd-agency" style="display:none;" target="_blank"><i class="bi bi-link-45deg"></i></a></td></tr>
+							<tr><th scope="row">City Council District</th><td><a href="/districts/cc/${r.cityCouncilDistrict.replace(/^0+/g, '')}/nyccouncildiscretionaryfunding">${r.cityCouncilDistrict}</a> <a id="cc-agency" style="display:none;" target="_blank"><i class="bi bi-link-45deg"></i></a></td></tr>
 							<tr><th scope="row">Neighborhood (NTA)</th><td><a href="/districts/nta/${r.nta}/nyccouncildiscretionaryfunding">${r.ntaName}</a></td></tr>
+							<tr><th scope="row">Zip Code</th><td>${r.zipCode}</td></tr>
 							<tr><th scope="row">Election District</th><td>${r.electionDistrict}</td></tr>
+							<tr><th scope="row">State Assembly District</th><td>${r.assemblyDistrict}</td></tr>
+							<tr><th scope="row">State Senate District</th><td>${r.stateSenatorialDistrict}</td></tr>
+							<tr><th scope="row">Congressional District</th><td>${r.congressionalDistrict}</td></tr>
 							<tr><th scope="row">Police Precinct</th><td>${r.policePrecinct}</td></tr>
 							<tr><th scope="row">Sanitation District</th><td>${r.sanitationDistrict}</td></tr>
 							<tr><th scope="row">Fire Battilion</th><td>${r.fireBattalion}</td></tr>
 							<tr><th scope="row">School District</th><td>${r.communitySchoolDistrict}</td></tr>
 							<tr><th scope="row">Health Center District</th><td>${r.healthCenterDistrict}</td></tr>
-							<tr><th scope="row">Congressional District</th><td>${r.congressionalDistrict}</td></tr>
-							<tr><th scope="row">State Assembly District</th><td>${r.assemblyDistrict}</td></tr>
-							<tr><th scope="row">State Senate District</th><td>${r.stateSenatorialDistrict}</td></tr>
-							<tr><th scope="row">Zip Code</th><td>${r.zipCode}</td></tr>
 						</tbody></table>`
 						
 					map.fitBounds([
@@ -241,6 +241,15 @@
 						.setLngLat([r.longitude,r.latitude])
 						.setHTML(description)
 						.addTo(map)
+						
+					$.get('{!! $cdAgencyUrl !!}'.replace('%40%40%40', r.communityDistrict.replace(/^0+/g, '')), function (cd) {
+						$('#cd-agency').attr('href', '/agency/' + cd['rows'][0]['id'])
+						$('#cd-agency').show()
+					})
+					$.get('{!! $ccAgencyUrl !!}'.replace('%40%40%40', r.cityCouncilDistrict.replace(/^0+/g, '')), function (cc) {
+						$('#cc-agency').attr('href', '/agency/' + cc['rows'][0]['id'])
+						$('#cc-agency').show()
+					})
 				}
 			});
 		}

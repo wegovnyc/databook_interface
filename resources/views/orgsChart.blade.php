@@ -16,8 +16,8 @@
 			</button> -->
 			<div class="navbar-collapse">
 				<ul class="navbar-nav">
-					@foreach (['NYC Organizational Chart' => 'orgs', 'Government Agencies' => 'orgsDirectory', 'All Organizations' => 'orgsAll'] as $t=>$route)
-						@if ($route == 'orgs')
+					@foreach (['Government Agencies' => 'orgs', 'NYC Organizational Chart' => 'orgsChart', 'All Organizations' => 'orgsAll'] as $t=>$route)
+						@if ($route == 'orgsChart')
 							<li class="nav-item active">
 						@else
 							<li class="nav-item">
@@ -33,7 +33,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<div class="mt-4 mx-2 text-center">
 			<h4>Citywide Organizational Chart</h4>
-			<p>This interactive hierarchical chart shows the relationship between city officials and agencies. Click and drag to move the chart. Click on any entity to see is profile.</p>
+			<p>This interactive hierarchical chart shows the relationship between city officials and agencies. Click and drag to move the chart. Click on an entity to see its profile.</p>
 		</div>
 	</div>
 

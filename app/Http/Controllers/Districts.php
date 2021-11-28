@@ -26,7 +26,9 @@ class Districts extends Controller
 					'breadcrumbs' => Breadcrumbs::districts(),
 					'slist' => $ds->list,
 					'map' => ['cc' => 'inherit', 'cd' => 'inherit', 'nta' => 'inherit'],
-					'prjUrl' => $model->url('SELECT "GEO_JSON", "wegov-org-id" FROM capitalprojectsdollarscomp WHERE "PUB_DATE" = (SELECT DISTINCT "PUB_DATE" pd FROM capitalprojectsdollarscomp ORDER BY pd DESC LIMIT 1) AND "GEO_JSON" != \'\'')
+					'prjUrl' => $model->url('SELECT "GEO_JSON", "wegov-org-id" FROM capitalprojectsdollarscomp WHERE "PUB_DATE" = (SELECT DISTINCT "PUB_DATE" pd FROM capitalprojectsdollarscomp ORDER BY pd DESC LIMIT 1) AND "GEO_JSON" != \'\''),
+					'cdAgencyUrl' => $model->url('SELECT "id" FROM wegov_orgs WHERE "communityDistrictId" LIKE \'%"@@@"%\''),
+					'ccAgencyUrl' => $model->url('SELECT "id" FROM wegov_orgs WHERE "cityCouncilDistrictId" LIKE \'%"@@@"%\''),
 				]);
     }
 	

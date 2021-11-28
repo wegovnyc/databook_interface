@@ -472,6 +472,8 @@ span.bad {color: red;}
 }
 .no-geo p {	font-size: 1.5rem; line-height: 1.5rem; color: #aaa; position:absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%); }
 .mapboxgl-popup {min-width: 350px;}
+.mapboxgl-popup-content {font-size: 13px;}
+#cd-agency, #cc-agency {font-size: 15px; margin-left: 5px;}
 #data_container.col-6 .have_coords {cursor:pointer;}
 
 

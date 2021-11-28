@@ -12,7 +12,7 @@
 		</button> -->
 		<div class="navbar-collapse">
 			<ul class="navbar-nav">
-				@foreach (['NYC Organizational Chart' => 'orgs', 'Government Agencies' => 'orgsDirectory', 'All Organizations' => 'orgsAll'] as $t=>$route)
+				@foreach (['Government Agencies' => 'orgs', 'NYC Organizational Chart' => 'orgsChart', 'All Organizations' => 'orgsAll'] as $t=>$route)
 					@if ($route == 'orgsAll')
 						<li class="nav-item active">
 					@else
@@ -272,12 +272,12 @@
 		</div>
         <div class="homeround_content">
 			<div class="text-center bottom_text col-md-12 mb-5">
-				The organizations in this table have been documented as part of our research into New York City government. They include government agencies as well as organizations that contract with the city, engage in its political processes or simply seemed relevant.<br/>If you have ideas for further improvements or notice inaccuracies, please <a href="https://wegovnyc.notion.site/Contact-Us-54b075fa86ec47ebae48dae1595afc2c">let us know</a>.
+				The organizations in this table have been documented as part of our research into New York City government. They include government agencies as well as organizations that contract with the city, engage in its political processes or simply seemed relevant. If you have ideas for further improvements or notice inaccuracies, please <a href="https://wegovnyc.notion.site/Contact-Us-54b075fa86ec47ebae48dae1595afc2c">let us know</a>.
 			</div>
-            <div class="text-center bottom_text col-md-12">
+            {{--<div class="text-center bottom_text col-md-12">
                 <h3>We’re adding data all the time.</h3>
                 <a href="#" class="learn_more">Learn More</a>
-            </div>
+            </div>--}}
         </div>
     </div>
 </div>
