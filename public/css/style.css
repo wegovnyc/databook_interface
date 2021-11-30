@@ -154,7 +154,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {ba
 	min-height:40px;
 	text-overflow:clip;
 	white-space:normal;
-	border-radius: 4px 4px 4px 4px; 
+	border-radius: 4px 4px 4px 4px;
 	line-height: 40px;
 	display: flex;
 	text-align: center;

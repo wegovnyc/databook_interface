@@ -67,6 +67,7 @@
 						var t = $('.node_focused').offset().top;
 						var offX = (w - 160)/2 - l;
 						var offY = Math.min(t, h/2) - t;
+                        console.log(w,'w')
 						$('.orgchart').attr('style', 'cursor:default; transform: matrix(1, 0, 0, 1, '+offX+', '+offY+');')
 					}, 1000);
 				});
@@ -74,6 +75,35 @@
 			$(document).ready(function() {
 				$('.orgchart').mousedown(function(e) {
 					$(this).css('cursor', 'grabbing');
+                    setTimeout(function () {
+                        var element = document.querySelector('.orgchart');
+                        // var scaleX = element.getBoundingClientRect().width / element.offsetWidth;
+                        // console.log(scaleX,element,element.getBoundingClientRect().width,element.offsetWidth)
+
+                        // returns matrix(1,0,0,1,0,0)
+                        var matrix = window.getComputedStyle(element).transform;
+                        var matrixArray = matrix.replace("matrix(", "").split(",");
+                        var scaleX = parseFloat(matrixArray[0]); // convert from string to number
+                        var scaleY = parseFloat(matrixArray[3]);
+                        // bonus round - gets translate values
+                        var translateX = parseFloat(matrixArray[4]);
+                        var translateY = parseFloat(matrixArray[5])
+                        var node_width = $('ul .nodes').width();
+                        var boundary = element.getBoundingClientRect().width
+                        console.log($('ul .nodes').width(),element.getBoundingClientRect().width,boundary-node_width);
+                        if(translateY > 0){
+                            $('.orgchart').attr('style', 'cursor:default; transform: matrix(1, 0, 0, 1, '+translateX+', 0);')
+                        }
+                        if(translateX > 0){
+                            $('.orgchart').attr('style', 'cursor:default; transform: matrix(1, 0, 0, 1, 0, '+translateY+');')
+                        }
+                        if((boundary-node_width) > translateX){
+                            $('.orgchart').attr('style', 'cursor:default; transform: matrix(1, 0, 0, 1, '+(boundary-node_width - 20)+', 0);')
+                        }
+                        if(translateY > 0 && translateX > 0){
+                            $('.orgchart').attr('style', 'cursor:default; transform: matrix(1, 0, 0, 1, 0,0);')
+                        }
+                    }, 1000);
 				});
 				$('.orgchart').mouseup(function(e) {
 					setTimeout(() => {
