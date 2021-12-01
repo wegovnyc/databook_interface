@@ -122,6 +122,7 @@
 		</div>
 	</div>
 </div>
+	<script src="https://typeahead.js.org/releases/latest/typeahead.bundle.js"></script>
 	<script>
 	
 		var globfilter = []
@@ -214,8 +215,20 @@
 					var description = `
 						<h4>${dd.input.toUpperCase()}</h4>
 						<table><tbody>
-							<tr><th scope="row">Community District</th><td><a href="/districts/cd/${r.communityDistrict}/nyccouncildiscretionaryfunding">${r.communityDistrict}</a> <a id="cd-agency" style="display:none;" target="_blank"><i class="bi bi-link-45deg"></i></a></td></tr>
-							<tr><th scope="row">City Council District</th><td><a href="/districts/cc/${r.cityCouncilDistrict.replace(/^0+/g, '')}/nyccouncildiscretionaryfunding">${r.cityCouncilDistrict}</a> <a id="cc-agency" style="display:none;" target="_blank"><i class="bi bi-link-45deg"></i></a></td></tr>
+							<tr><th scope="row">Community District</th>
+								<td>
+									<a href="/districts/cd/${r.communityDistrict}/nyccouncildiscretionaryfunding">${r.communityDistrict}</a>
+									<a id="cd-agency" style="display:none;" target="_blank"><i class="bi bi-link-45deg"></i></a>
+									<a id="cd-url" style="display:none;" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a>
+								</td>
+							</tr>
+							<tr><th scope="row">City Council District</th>
+								<td>
+									<a href="/districts/cc/${r.cityCouncilDistrict.replace(/^0+/g, '')}/nyccouncildiscretionaryfunding">${r.cityCouncilDistrict}</a> 
+									<a id="cc-agency" style="display:none;" target="_blank"><i class="bi bi-link-45deg"></i></a>
+									<a id="cc-url" style="display:none;" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a>
+								</td>
+							</tr>
 							<tr><th scope="row">Neighborhood (NTA)</th><td><a href="/districts/nta/${r.nta}/nyccouncildiscretionaryfunding">${r.ntaName}</a></td></tr>
 							<tr><th scope="row">Zip Code</th><td>${r.zipCode}</td></tr>
 							<tr><th scope="row">Election District</th><td>${r.electionDistrict}</td></tr>
@@ -245,10 +258,14 @@
 					$.get('{!! $cdAgencyUrl !!}'.replace('%40%40%40', r.communityDistrict.replace(/^0+/g, '')), function (cd) {
 						$('#cd-agency').attr('href', '/agency/' + cd['rows'][0]['id'])
 						$('#cd-agency').show()
+						$('#cd-url').attr('href', cd['rows'][0]['url'])
+						$('#cd-url').show()
 					})
 					$.get('{!! $ccAgencyUrl !!}'.replace('%40%40%40', r.cityCouncilDistrict.replace(/^0+/g, '')), function (cc) {
 						$('#cc-agency').attr('href', '/agency/' + cc['rows'][0]['id'])
 						$('#cc-agency').show()
+						$('#cc-url').attr('href', cc['rows'][0]['url'])
+						$('#cc-url').show()
 					})
 				}
 			});
@@ -298,6 +315,34 @@
 		$('#toggle_boundries').click( function (e) {
 			$(this).next('.dropdown-menu').toggleClass('show');
 		})
+
+
+		var autocomplete = new Bloodhound({
+		  datumTokenizer: Bloodhound.tokenizers.whitespace,
+		  queryTokenizer: Bloodhound.tokenizers.whitespace,
+		  //prefetch: './resources/namesearchAutocomplete.json'
+		  remote: {
+			url: 'https://geosearch.planninglabs.nyc/v1/autocomplete?text=%QUERY',
+			wildcard: '%QUERY',
+			transform: function (resp) {
+			  var rr = []
+			  resp.features.forEach(function (f) {
+				  rr.push(f['properties']['label'])
+			  })
+			  return rr
+			}
+		  }
+		});
+		$('#addrSearch').typeahead(null, {
+		  name: 'autocomplete',
+		  limit: 16,
+		  source: autocomplete
+		});
+		
+		autocomplete.clearPrefetchCache();
+		autocomplete.initialize(true);
+
+
 	</script>
 	
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
