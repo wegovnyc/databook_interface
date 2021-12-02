@@ -257,7 +257,7 @@
 						
 					$.get('{!! $cdAgencyUrl !!}'.replace('%40%40%40', r.communityDistrict.replace(/^0+/g, '')), function (cd) {
 						$('#cd-agency').attr('href', '/agency/' + cd['rows'][0]['id'])
-						$('#cd-agency').show()
+						//$('#cd-agency').show()
 						if (cd['rows'][0]['url']) {
 							$('#cd-url').attr('href', cd['rows'][0]['url'])
 							$('#cd-url').show()
@@ -265,7 +265,7 @@
 					})
 					$.get('{!! $ccAgencyUrl !!}'.replace('%40%40%40', r.cityCouncilDistrict.replace(/^0+/g, '')), function (cc) {
 						$('#cc-agency').attr('href', '/agency/' + cc['rows'][0]['id'])
-						$('#cc-agency').show()
+						//$('#cc-agency').show()
 						if (cc['rows'][0]['url']) {
 							$('#cc-url').attr('href', cc['rows'][0]['url'])
 							$('#cc-url').show()
@@ -331,7 +331,7 @@
 			transform: function (resp) {
 			  var rr = []
 			  resp.features.forEach(function (f) {
-				  rr.push(f['properties']['label'])
+				  rr.push(f['properties']['name'])
 			  })
 			  return rr
 			}
