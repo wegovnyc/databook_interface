@@ -214,7 +214,7 @@
 						return
 					}
 					r = dd.results[0].response
-					var addr = `${r.houseNumber} ${r.firstStreetNameNormalized}, ${r.uspsPreferredCityName}, USA`.replace('  ', ' ').replace(' ,', '')
+					var addr = `${r.houseNumber} ${r.firstStreetNameNormalized}, ${r.uspsPreferredCityName}`.replace('  ', ' ').replace(' ,', '')
 					/*<h4 style="font-size:18px;">${dd.input.toUpperCase()}</h4>*/
 					var description = `
 						<h4 style="font-size:18px;">${addr}</h4>
