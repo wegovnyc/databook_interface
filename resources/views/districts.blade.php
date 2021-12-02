@@ -214,8 +214,10 @@
 						return
 					}
 					r = dd.results[0].response
+					var addr = `${r.houseNumber} ${r.firstStreetNameNormalized}, ${r.uspsPreferredCityName}, USA`.replace('  ', ' ').replace(' ,', '')
+					/*<h4 style="font-size:18px;">${dd.input.toUpperCase()}</h4>*/
 					var description = `
-						<h4>${dd.input.toUpperCase()}</h4>
+						<h4 style="font-size:18px;">${addr}</h4>
 						<table><tbody>
 							<tr><th scope="row">Community District</th>
 								<td>
@@ -333,7 +335,7 @@
 			transform: function (resp) {
 			  var rr = []
 			  resp.features.forEach(function (f) {
-				  rr.push(f['properties']['name'])
+				  rr.push(f['properties']['label'].replace('NY, ', ''))
 			  })
 			  return rr
 			}
