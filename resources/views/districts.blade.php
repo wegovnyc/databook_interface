@@ -11,11 +11,13 @@
 			<div id="map_container" class="col-12 mb-0" style="min-height:500px!important;">
 				<!-- controls -->
 				<div id="map-controls">
-					
-					<div class="input-group search_input">
-						<input id="addrSearch" type="text" class="form-control" placeholder="Enter address to find districts" aria-label="Enter address to find districts" aria-describedby="searchBtn">
-						<div class="input-group-append">
-							<button class="input-group-text" id="searchBtn" onclick="addrSearch();" data-toggle="popover" data-content="" data-placement="right" data-trigger="manual"><i class="bi bi-search"></i></button>
+
+					<div class="select_district">
+						<div class="input-group search_input search_twitter">
+							<input id="addrSearch" type="text" class="form-control" placeholder="Enter address to find districts" aria-label="Enter address to find districts" aria-describedby="searchBtn">
+							<div class="input-group-append">
+								<button class="input-group-text" id="searchBtn" onclick="addrSearch();" data-toggle="popover" data-content="" data-placement="right" data-trigger="manual"><i class="bi bi-search"></i></button>
+							</div>
 						</div>
 					</div>
 					

@@ -562,5 +562,7 @@ span.bad {color: red;}
 }
 
 .twitter-typeahead {width:100%;}
+.search_twitter .twitter-typeahead {width:84%; }
+.search_twitter .twitter-typeahead .tt-hint {width: 100%; height: 40px;}
 
 
