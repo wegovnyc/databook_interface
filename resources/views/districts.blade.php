@@ -261,7 +261,7 @@
 						
 					$.get('{!! $cdAgencyUrl !!}'.replace('%40%40%40', r.communityDistrict.replace(/^0+/g, '')), function (cd) {
 						$('#cd-agency').attr('href', '/agency/' + cd['rows'][0]['id'])
-						//$('#cd-agency').show()
+						$('#cd-agency').show()
 						if (cd['rows'][0]['url']) {
 							$('#cd-url').attr('href', cd['rows'][0]['url'])
 							$('#cd-url').show()
