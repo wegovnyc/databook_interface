@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Organizations;
 use App\Http\Controllers\Districts;
 use App\Http\Controllers\Projects;
+use App\Http\Controllers\Positions;
 
 
 Route::get('/', [Organizations::class, 'root'])->name('root');
@@ -43,3 +44,12 @@ Route::get('/districtXHR/{type}/{id}/{section}', [Districts::class, 'section'])-
 
 Route::get('/capitalprojects', [Projects::class, 'main'])->name('projects');
 
+
+
+Route::get('/positions', [Positions::class, 'main'])->name('positions');
+
+Route::get('/positions/{id}', function ($id) {
+    return redirect(route('posSection', ['id' => $id, 'section' => 'schedule']));
+})->name('position');
+
+Route::get('/positions/{id}/{section}', [Positions::class, 'section'])->name('posSection');

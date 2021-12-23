@@ -52,4 +52,15 @@ class Breadcrumbs
 		return array_merge(self::$root, [['/capitalprojects', 'Capital Projects']]);
 	}
 
+	static function positions()
+	{
+		return array_merge(self::$root, [['/positions', 'Positions']]);
+	}
+
+	static function posSect($id, $name, $sect, $sectN)
+	{
+		return array_merge(self::$root, [['/positions', 'Positions'], ["/positions/{$id}", $name], ["/positions/{$id}/{$sect}", $sectN]]);
+	}
+
+
 }

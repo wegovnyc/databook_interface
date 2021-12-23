@@ -22,6 +22,12 @@ class CartoModel
 		return $this->map($dd)[0] ?? [];
 	}
 	
+	function pos($id)
+	{
+		$dd = $this->carto->req("SELECT * FROM wegov_caploc_civil_titles WHERE \"Title Code\" = '{$id}'");
+		return $this->map($dd)[0] ?? [];
+	}
+	
 	function dataset($name)
 	{
 		$dd = $this->carto->req("SELECT * FROM data_sources WHERE \"Name\" LIKE '{$name}'");

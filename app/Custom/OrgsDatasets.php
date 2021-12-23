@@ -485,58 +485,141 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'description' => '',
 			'script' => 'datatable.order([0, "desc"]).draw();',
 		],
+
+		'fteheadcount' => [
+			'fullname' => 'Full-Time and FTE Headcount including Covered Organizations',
+			'table' => 'fteheadcount',
+			'hdrs' => ['Publication Date', 'Agency Code', 'Agency Name', 'Fiscal Year', 'Personnel Type', 'Agency Group', 'City Funds', 'Total Funds'],
+			'flds' => ['"Publication Date"', '"Agency Code"', '"Agency Name"', '"Fiscal Year"', '"Personnel Type"', '"Agency Group"', '"City Funds"', '"Total Funds"'],
+			'visible' => [true, false, false, true, true, true, true, true],
+			'filters' => [],
+			'details' => [],
+			'description' => 'This dataset contains estimated fiscal year-end headcount information for full-time and full-time equivalent employees (FTE) for Mayoral Agencies and Covered Organizations (updated twice a year). The information is summarized by agency, fiscal year, personnel type and funding. This dataset is updated biannually.',
+			'script' => '',
+		],
+		'positionschedule' => [
+			'fullname' => 'Position Schedule',
+			'table' => 'positionschedule',
+			'hdrs' => ['PUBLICATION DATE', 'AGENCY CODE', 'AGENCY NAME', 'UA CODE', 'UA NAME', 'TITLE CODE', 'TITLE CODE NAME', 'MINMUM SALARY', 'MAXMUM SALARY', 'POSITIONS', 'MEAN SALARY', 'ANNUAL RATE'],
+			'flds' => ['"PUBLICATION DATE"', '"AGENCY CODE"', '"AGENCY NAME"', '"UA CODE"', '"UA NAME"', '"TITLE CODE"', '"TITLE CODE NAME"', '"MINMUM SALARY"', '"MAXMUM SALARY"', '"POSITIONS"', '"MEAN SALARY"', '"ANNUAL RATE"'],
+			'visible' => [false, false, false, true, true, true, true, true, true, true, true, true],
+			'filters' => [0 => null],
+			'details' => [],
+			'description' => 'Sum of the full-time active positions in a title description published in alphabetical order. The Position Schedule is updated and included in the Departmental Estimates and the Supporting Schedule (updated twice a year). The minimum salary, maximum salary, mean salary and annual rate are to the dollar. This dataset is updated biannually.',
+			'script' => '',
+		],
+		'll18payanddemo' => [
+			'fullname' => 'Local Law 18 Pay and Demographics Report - Agency Report Table',
+			'table' => 'll18payanddemo',
+			'hdrs' => ['Agency Name', 'EEO-4 Job Category', 'Pay Band', 'Employee Status', 'Race', 'Ethnicity', 'Gender', 'Number of Employees'],
+			'flds' => ['"Agency Name"', '"EEO-4 Job Category"', '"Pay Band"', '"Employee Status"', '"Race"', '"Ethnicity"', '"Gender"', '"Number of Employees"'],
+			'visible' => [false, true, true, true, true, true, true, true],
+			'filters' => [],
+			'details' => [],
+			'description' => 'The Agency Report Table aggregates pay and employment characteristics in accordance with the requirements of Local Law 18 of 2019. The Table covers over 180,000 City employees and is a point-in-time snapshot of employees who were either active or on temporary leave (parental leave, military leave, illness, etc.) as of December 31st, 2018. To protect the privacy of employees, the sign “<5” is used instead of the actual number for groups of less than five (5) employees, in accordance with the Citywide Privacy Protection Policies and Protocols.<br/>The Pay and Demographics Report and the list of agencies included is available on the <a href="https://moda-nyc.github.io/Project-Library/projects/pay-and-demographics/">MODA Open Source Analytics Library</a>.',
+			'script' => '',
+		],
+		'civillist' => [
+			'fullname' => 'Civil List',
+			'table' => 'civillist',
+			'hdrs' => ['CALENDAR YEAR', 'AGENCY CODE', 'EMPLOYEE NAME', 'AGENCY NAME', 'TITLE CODE', 'PAY CLASS', 'SALARY RATE'],
+			'flds' => ['"CALENDAR YEAR"', '"AGENCY CODE"', '"EMPLOYEE NAME"', '"AGENCY NAME"', '"TITLE CODE"', '"PAY CLASS"', '"SALARY RATE"'],
+			'visible' => [true, false, true, false, true, true, true],
+			'filters' => [],
+			'details' => [],
+			'description' => 'The Civil List reports the agency code (DPT), first initial and last name (NAME), agency name (ADDRESS), title code (TTL #), pay class (PC), and salary (SAL-RATE) of individuals who were employed by the City of New York at any given time during the indicated year.',
+			'script' => '',
+		],
+		/*
+		'payrolldata' => [
+			'fullname' => 'Citywide Payroll Data (Fiscal Year)',
+			'table' => 'payrolldata',
+			'hdrs' => ['Fiscal Year', 'Name', 'Title Description', 'Leave Status as of June 30', 'Base Salary', 'Pay Basis', 'OT Hours', 'Total OT Paid', 'Total Other Pay'],
+			'flds' => ['"Fiscal Year"', 
+					'function (r) { 
+						return (r["First Name"] ? r["First Name"] : "") + 
+								(r["Mid Init"] ? " " + r["Mid Init"] : "") +  
+								(r["Last Name"] ? " " + r["Last Name"] : "");
+					}', 
+					'"Title Description"', '"Leave Status as of June 30"', '"Base Salary"', '"Pay Basis"', '"OT Hours"', '"Total OT Paid"', '"Total Other Pay"'],
+			
+			'visible' => [true, true, true, true, true, true, true, true, true, true, true],
+			'filters' => [],
+			'details' => [
+				'Payroll Number' => 'Payroll Number', 
+				'Agency Start Date' => 'Agency Start Date', 
+				'Work Location Borough' => 'Work Location Borough', 
+				'Regular Hours' => 'Regular Hours', 
+				'Regular Gross Paid' => 'Regular Gross Paid', 
+			],
+			'description' => 'Data is collected because of public interest in how the City’s budget is being spent on salary and overtime pay for all municipal employees. Data is input into the City’s Personnel Management System (“PMS”) by the respective user Agencies. Each record represents the following statistics for every city employee: Agency, Last Name, First Name, Middle Initial, Agency Start Date, Work Location Borough, Job Title Description, Leave Status as of the close of the FY (June 30th), Base Salary, Pay Basis, Regular Hours Paid, Regular Gross Paid, Overtime Hours worked, Total Overtime Paid, and Total Other Compensation (i.e. lump sum and/or retro payments). This data can be used to analyze how the City’s financial resources are allocated and how much of the City’s budget is being devoted to overtime. The reader of this data should be aware that increments of salary increases received over the course of any one fiscal year will not be reflected. All that is captured, is the employee’s final base and gross salary at the end of the fiscal year.',
+			'script' => '',
+		],
+		*/
 	];
 
 	public $list = [
 		'about' => 'About',
-		'expensebudgetonnycopendata' => 'Expense Budget',
-		'nyccouncildiscretionaryfunding' => 'City Council Discretionary Funding',
-		'expenseplan' => 'Expense Plan',
-		'headcountactualsfunding' => 'Headcount Actuals By Funding Source',
-		'expenseactualsfunding' => 'Expense Actuals By Funding Source',
 		'additionalcostsallocation' => 'Additional Costs Allocation',
-		'crol' => 'Notices',
-		'govpublist' => 'Publications',
-		'govpubrequired' => 'Required Reports',
-		'capitalprojects' => 'Projects',
-		'benefitsapi' => 'Services',
-		'nycgreenbook' => 'Greenbook',
-		'changeofpersonnel' => 'Change of Personnel',
-		'agencypmi' => 'Indicators',
-		'onenycindicators' => 'OneNYC',
-		'budgetrequestsregister' => 'Requests',
-		'nycjobs' => 'Jobs',
-		'facilitydb' => 'Facilities',
-		'opendatareleasetracker' => 'Tracker',
 		'locallaw251' => 'Assets',
+		'nyccouncildiscretionaryfunding' => 'City Council Discretionary Funding',
+		'changeofpersonnel' => 'Change of Personnel',
+		'civillist' => 'Civil List',
+		'nycgreenbook' => 'Contacts',
+		'll18payanddemo' => 'Demographics',
+		'expenseactualsfunding' => 'Expense Actuals By Funding Source',
+		'expensebudgetonnycopendata' => 'Expense Budget',
+		'expenseplan' => 'Expense Plan',
+		'facilitydb' => 'Facilities',
+		'fteheadcount' => 'Headcount',
+		'headcountactualsfunding' => 'Headcount Actuals By Funding Source',
+		'agencypmi' => 'Indicators',
+		'nycjobs' => 'Jobs',
+		'crol' => 'Notices',
+		'onenycindicators' => 'OneNYC',
+		#'payrolldata' => 'Payroll',
+		'positionschedule' => 'Positions',
+		'capitalprojects' => 'Projects',
+		'govpublist' => 'Publications',
+		'budgetrequestsregister' => 'Requests',
+		'govpubrequired' => 'Required Reports',
+		'benefitsapi' => 'Services',
+		'opendatareleasetracker' => 'Tracker',
+		
 	];
 	/*
 		additionalcostsallocation
 		agencypmi
 		benefitsapi
 		budgetrequestsregister
-		capitalprojectsdollarscomp
-		capitalprojectsmilestones
 		capitalprojects_cc_idx
 		capitalprojects_cd_idx
 		capitalprojects_nta_idx
+		capitalprojectsdollarscomp
+		capitalprojectsmilestones
 		ccmembers
+		civillist
 		crol
 		data_sources
 		expenseactualsfunding
 		expensebudgetonnycopendata
 		expenseplan
 		facilitydb
+		fteheadcount
 		govpublist
 		govpubrequired
 		headcountactualsfunding
+		ll18payanddemo
 		locallaw251
 		nyccouncildiscretionaryfunding
 		nycgreenbook
 		nycjobs
 		onenycindicators
 		opendatareleasetracker
+		positionschedule
+		wegov_caploc_civil_titles
 		wegov_orgs
+		#payrolldata
 	*/
 	
 	public $menu = [
@@ -561,7 +644,12 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'People' => 
 			[		
 				'nycgreenbook',
+				'fteheadcount',
+				'positionschedule',
+				'll18payanddemo',
+				#'payrolldata',
 				'changeofpersonnel',
+				'civillist',
 			],
 		'Indicators' => 
 			[
