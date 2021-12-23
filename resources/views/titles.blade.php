@@ -66,7 +66,7 @@
 		}
 
 		$(document).ready(function() {
-			table = $('#posTable').DataTable( {
+			table = $('#titlesTable').DataTable( {
 				pageLength: 20,
 				deferRender: true,
 				order: [[4, 'desc']],
@@ -77,7 +77,7 @@
 					dataSrc: 'rows'
 				},
 				columns: [
-					{data: function (r) { return `<a href="/positions/${r["Title Code"]}">${r["Title Code"]}</a>` }},
+					{data: function (r) { return `<a href="/titles/${r["Title Code"]}">${r["Title Code"]}</a>` }},
 					{data: 'Title Description'},
 					{data: 'Standard Hours'},
 					{data: 'Assignment Level'},
@@ -184,7 +184,7 @@
 		<div class="row justify-content-center">
 			<div class="col-md-12 organization_data">
                 <div class="table-responsive">
-                    <table id="posTable" class="display table" style="width:100%;padding-top: 30px;">
+                    <table id="titlesTable" class="display table" style="width:100%;padding-top: 30px;">
                         <thead>
                             <tr>
 								<th>Title Code</th>

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	@include('sub.posheader', ['active' => $section])
+	@include('sub.titleheader', ['active' => $section])
 
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>

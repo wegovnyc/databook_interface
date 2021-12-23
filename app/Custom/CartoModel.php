@@ -22,9 +22,9 @@ class CartoModel
 		return $this->map($dd)[0] ?? [];
 	}
 	
-	function pos($id)
+	function title($id)
 	{
-		$dd = $this->carto->req("SELECT * FROM wegov_caploc_civil_titles WHERE \"Title Code\" = '{$id}'");
+		$dd = $this->carto->req("SELECT * FROM nyccivilservicetitles WHERE \"Title Code\" = '{$id}'");
 		return $this->map($dd)[0] ?? [];
 	}
 	

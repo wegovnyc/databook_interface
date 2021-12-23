@@ -1,7 +1,7 @@
 <?php
 Namespace App\Custom;
 
-class PosDatasets
+class TitlesDatasets
 {
 	public $dd = [
 		'schedule' => [

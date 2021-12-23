@@ -611,13 +611,13 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		headcountactualsfunding
 		ll18payanddemo
 		locallaw251
+		nyccivilservicetitles
 		nyccouncildiscretionaryfunding
 		nycgreenbook
 		nycjobs
 		onenycindicators
 		opendatareleasetracker
 		positionschedule
-		wegov_caploc_civil_titles
 		wegov_orgs
 		#payrolldata
 	*/
