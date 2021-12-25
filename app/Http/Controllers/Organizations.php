@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Custom\CartoModel;
 use App\Custom\OrgsDatasets;
+use App\Custom\UnDatasets;
 use App\Custom\Breadcrumbs;
 use App\Custom\CapProjectsBuilder;
 
@@ -103,16 +104,10 @@ class Organizations extends Controller
 		$org = $model->org($id);
 		if (!$org)
 			return abort(404);
-		$ds = new OrgsDatasets();
-		return preg_match('~Union|Bargaining Unit~si', $org['type'])
-			? view('union', [
-						'id' => $id,
-						'org' => $org,
-						'icons' => $ds->socicons,
-						'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
-						'url' => $model->url("SELECT * FROM nyccivilservicetitles WHERE \"wegov-org-id\"='{$id}'"),
-					])
-			: view('organization', [
+		$ds = preg_match('~Union|Bargaining Unit~si', $org['type'])
+				? new UnDatasets()
+				: new OrgsDatasets();
+		return view('organization', [
 						'id' => $id,
 						'org' => $org,
 						'slist' => $ds->list,
@@ -143,8 +138,11 @@ class Organizations extends Controller
     public function orgSection($id, $section)
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		$ds = new OrgsDatasets();
 		$org = $model->org($id);
+		#$ds = new OrgsDatasets();
+		$ds = preg_match('~Union|Bargaining Unit~si', $org['type'])
+				? new UnDatasets()
+				: new OrgsDatasets();
 		$details = $ds->get($section);
 		return $org && $details
 			? view('orgsection', [
