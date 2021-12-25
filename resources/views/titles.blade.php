@@ -81,12 +81,15 @@
 					{data: 'Title Description'},
 					{data: 'Standard Hours'},
 					{data: 'Assignment Level'},
-					{data: 'Union Code'},
+					/*{data: 'Union Code'},*/
+					/*{data: 'Bargaining Unit Short Name'},*/
+					{data: function (r) { return r["wegov-org-id"] 
+									? `<a href="/organization/${r["wegov-org-id"]}">${r["wegov-org-name"]}</a>` 
+									: `<a disabled>${r["Bargaining Unit Description"]}</a>` 
+								}},
 					{data: 'Union Description'},
-					{data: 'Bargaining Unit Short Name'},
-					{data: 'Bargaining Unit Description'},
-					{data: 'Minimum Salary Rate'},
-					{data: 'Maximum Salary Rate'}
+					{data: function (r) { return toFin(r['Minimum Salary Rate']) }},
+					{data: function (r) { return toFin(r['Maximum Salary Rate']) }}
                 ],
 				@if ($defSearch)
 					search: {
@@ -95,9 +98,9 @@
 				@endif	
 
 				initComplete: function () {
-					this.api().columns([5]).every(function () {						// Union
+					this.api().columns([4]).every(function () {						// Bargaining Unit
 						var column = this;
-						var select = $('<select class="filter-top" id="filter-' + column[0][0] + '"><option value="">- Select positions by Union -</option></select>')
+						var select = $('<select class="filter-top" id="filter-' + column[0][0] + '"><option value="">- Select positions by Bargaining Unit -</option></select>')
 							.appendTo($('div.toolbar'))
 							.on('change', function () {
 								var val = $.fn.dataTable.util.escapeRegex(
@@ -111,12 +114,12 @@
 
 						rg = />([^<]+)</g;
 						column.data().each(function (d, j) {
-							/*
 							while ((t = rg.exec(d)) !== null) {
 								tt.push(t[1])
 							}
-							*/
+							/*
 							tt.push(d)
+							*/
 						})
 						tt = [...new Set(tt)]
 
@@ -191,12 +194,12 @@
 								<th>Title Description</th>
 								<th>Standard Hours</th>
 								<th>Assignment Level</th>
-								<th>Union Code</th>
+								{{--<th>Union Code</th>
+								<th>Bargaining Unit Short Name</th>--}}
+								<th>Bargaining Unit</th>
 								<th>Union Description</th>
-								<th>Bargaining Unit Short Name</th>
-								<th>Bargaining Unit Description</th>
-								<th>Minimum Salary Rate</th>
-								<th>Maximum Salary Rate</th>
+								<th>Minimum Salary</th>
+								<th>Maximum Salary</th>
                             </tr>
                         </thead>
                     </table>

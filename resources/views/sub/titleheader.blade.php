@@ -13,8 +13,8 @@
 			</div>
 			<div class="col-9">
 			  @if($title['wegov-org-name'])
-				<small class="text-muted">Union</small><br />
-				<h6>{{ $title['wegov-org-name'] }}</h6>
+				<small class="text-muted">Bargaining Unit</small><br />
+				<h6><a href="/organization/{{ $title['wegov-org-id'] }}">{{ $title['wegov-org-name'] }}</a></h6>
 			  @endif
 			</div>
 		</div>
@@ -22,11 +22,11 @@
 		<div class="row mx-0 my-1">
 			<div class="col-3">
 				<small class="text-muted">Minimum Salary Rate</small><br />
-				<h6>{{ $title['Minimum Salary Rate'] }}</h6>
+				<h6>${{ number_format($title['Minimum Salary Rate']) }}</h6>
 			</div>
 			<div class="col-3">
 				<small class="text-muted">Maximum Salary Rate</small><br />
-				<h6>{{ $title['Maximum Salary Rate'] }}</h6>
+				<h6>${{ number_format($title['Maximum Salary Rate']) }}</h6>
 			</div>
 			<div class="col-3">
 				<small class="text-muted">Standard Hours</small><br />

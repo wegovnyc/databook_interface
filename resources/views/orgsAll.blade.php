@@ -98,7 +98,7 @@
 				},
 				columns: [
                     {data: function (r) {
-						return '<a href="/agency/' + r['id'] + '">' + r['name'] + '</a>'
+						return '<a href="/organization/' + r['id'] + '">' + r['name'] + '</a>'
 					}},
                     {data: function (r) {
 						const cc = {'City Agency': '#9abe0c', 'City Fund': '#18a558', 'Community Board': '#74bdcb', 'Economic Development Organization': '#a881c2', 'Elected Office': '#3e7864', 'State Agency': '#b1d4e0'}

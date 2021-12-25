@@ -489,10 +489,10 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'fteheadcount' => [
 			'fullname' => 'Full-Time and FTE Headcount including Covered Organizations',
 			'table' => 'fteheadcount',
-			'hdrs' => ['Publication Date', 'Agency Code', 'Agency Name', 'Fiscal Year', 'Personnel Type', 'Agency Group', 'City Funds', 'Total Funds'],
+			'hdrs' => ['Publication Date', 'Agency Code', 'Agency Name', 'Fiscal Year', 'Personnel Type', 'Agency Group', 'City Funded Positions', 'Total Funded Positions'],
 			'flds' => ['"Publication Date"', '"Agency Code"', '"Agency Name"', '"Fiscal Year"', '"Personnel Type"', '"Agency Group"', '"City Funds"', '"Total Funds"'],
-			'visible' => [true, false, false, true, true, true, true, true],
-			'filters' => [],
+			'visible' => [false, false, false, true, true, true, true, true],
+			'filters' => [0 => null, 3 => null],
 			'details' => [],
 			'description' => 'This dataset contains estimated fiscal year-end headcount information for full-time and full-time equivalent employees (FTE) for Mayoral Agencies and Covered Organizations (updated twice a year). The information is summarized by agency, fiscal year, personnel type and funding. This dataset is updated biannually.',
 			'script' => '',
@@ -500,8 +500,16 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'positionschedule' => [
 			'fullname' => 'Position Schedule',
 			'table' => 'positionschedule',
-			'hdrs' => ['PUBLICATION DATE', 'AGENCY CODE', 'AGENCY NAME', 'UA CODE', 'UA NAME', 'TITLE CODE', 'TITLE CODE NAME', 'MINMUM SALARY', 'MAXMUM SALARY', 'POSITIONS', 'MEAN SALARY', 'ANNUAL RATE'],
-			'flds' => ['"PUBLICATION DATE"', '"AGENCY CODE"', '"AGENCY NAME"', '"UA CODE"', '"UA NAME"', '"TITLE CODE"', '"TITLE CODE NAME"', '"MINMUM SALARY"', '"MAXMUM SALARY"', '"POSITIONS"', '"MEAN SALARY"', '"ANNUAL RATE"'],
+			'hdrs' => ['Publication Date', 'Agency Code', 'Agency Name', 'UA code', 'UA name', 'Title Code Name', 'Scheduled Positions', 'Minimum Salary', 'Mean Salary', 'Maximum Salary', 'Total Spent Annually'],
+			'flds' => ['"PUBLICATION DATE"', '"AGENCY CODE"', '"AGENCY NAME"', '"UA CODE"', '"UA NAME"', 
+						'function (r) { return `<a href="/titles/${r["TITLE CODE"]}">${r["TITLE CODE NAME"]}</a>` }',
+						'"POSITIONS"', 
+						'function (r) { return toFin(r["MINMUM SALARY"]) }', 
+						'function (r) { return toFin(r["MEAN SALARY"]) }', 
+						'function (r) { return toFin(r["MAXMUM SALARY"]) }', 
+						'function (r) { return toFin(r["ANNUAL RATE"]) }', 
+						
+					   ],
 			'visible' => [false, false, false, true, true, true, true, true, true, true, true, true],
 			'filters' => [0 => null],
 			'details' => [],
@@ -512,7 +520,12 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'fullname' => 'Local Law 18 Pay and Demographics Report - Agency Report Table',
 			'table' => 'll18payanddemo',
 			'hdrs' => ['Agency Name', 'EEO-4 Job Category', 'Pay Band', 'Employee Status', 'Race', 'Ethnicity', 'Gender', 'Number of Employees'],
-			'flds' => ['"Agency Name"', '"EEO-4 Job Category"', '"Pay Band"', '"Employee Status"', '"Race"', '"Ethnicity"', '"Gender"', '"Number of Employees"'],
+			'flds' => ['"Agency Name"', '"EEO-4 Job Category"', 
+						'function (r) { 
+							var bb = r["Pay Band"].split("-")
+							return bb ? toFin(bb[0]) + "-" + toFin(bb[1]) : "";
+						}',
+					   '"Employee Status"', '"Race"', '"Ethnicity"', '"Gender"', '"Number of Employees"'],
 			'visible' => [false, true, true, true, true, true, true, true],
 			'filters' => [],
 			'details' => [],
@@ -522,10 +535,13 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'civillist' => [
 			'fullname' => 'Civil List',
 			'table' => 'civillist',
-			'hdrs' => ['CALENDAR YEAR', 'AGENCY CODE', 'EMPLOYEE NAME', 'AGENCY NAME', 'TITLE CODE', 'PAY CLASS', 'SALARY RATE'],
-			'flds' => ['"CALENDAR YEAR"', '"AGENCY CODE"', '"EMPLOYEE NAME"', '"AGENCY NAME"', '"TITLE CODE"', '"PAY CLASS"', '"SALARY RATE"'],
+			'hdrs' => ['Calendar Year', 'Agency Code', 'Employee Name', 'Agency Name', 'Title Code', 'Pay Class', 'Salary Rate'],
+			'flds' => ['"CALENDAR YEAR"', '"AGENCY CODE"', '"EMPLOYEE NAME"', '"AGENCY NAME"', 
+						'function (r) { return `<a href="/titles/${r["TITLE CODE"]}">${r["TITLE CODE"]}</a>` }',
+						'"PAY CLASS"', '"SALARY RATE"'
+					  ],
 			'visible' => [true, false, true, false, true, true, true],
-			'filters' => [],
+			'filters' => [0 => null, 4 => null, 5 => null],
 			'details' => [],
 			'description' => 'The Civil List reports the agency code (DPT), first initial and last name (NAME), agency name (ADDRESS), title code (TTL #), pay class (PC), and salary (SAL-RATE) of individuals who were employed by the City of New York at any given time during the indicated year.',
 			'script' => '',

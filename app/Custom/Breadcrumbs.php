@@ -23,23 +23,22 @@ class Breadcrumbs
 
 	static function orgs()
 	{
-		return array_merge(self::$root, [['/agencies/directory', 'Agencies']]);
+		return array_merge(self::$root, [['/organizations/directory', 'Organizations']]);
 	}
 
 	static function org($id, $name)
 	{
-		return array_merge(self::$root, [['/agencies/directory', 'Agencies'], ["/agency/{$id}", $name]]);
+		return array_merge(self::$root, [['/organizations/directory', 'Organizations'], ["/organization/{$id}", $name]]);
 	}
 
 	static function orgSect($id, $name, $sect, $sectN)
 	{
-		return array_merge(self::$root, [['/agencies/directory', 'Agencies'], ["/agency/{$id}", $name], ["/agency/{$id}/{$sect}", $sectN]]);
+		return array_merge(self::$root, [['/organizations/directory', 'Organizations'], ["/organization/{$id}", $name], ["/organization/{$id}/{$sect}", $sectN]]);
 	}
 
 	static function orgPrj($id, $name, $sect, $sectN, $prjId, $prjN)
 	{
-		#return array_merge(self::orgSect($id, $name, $sect, $sectN), [["/agency/{$id}/{$sect}/{$prjId}", $prjN]]);
-		return array_merge(self::$root, [['/capitalprojects', 'Capital Projects'], ["/agency/{$id}", $name], ["/agency/{$id}/{$sect}/{$prjId}", $prjId]]);
+		return array_merge(self::$root, [['/capitalprojects', 'Capital Projects'], ["/organization/{$id}", $name], ["/organization/{$id}/{$sect}/{$prjId}", $prjId]]);
 	}
 
 	static function districts()
@@ -61,6 +60,4 @@ class Breadcrumbs
 	{
 		return array_merge(self::$root, [['/titles', 'Titles'], ["/titles/{$id}", $name], ["/titles/{$id}/{$sect}", $sectN]]);
 	}
-
-
 }

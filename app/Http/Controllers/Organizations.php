@@ -101,27 +101,35 @@ class Organizations extends Controller
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
 		$org = $model->org($id);
+		if (!$org)
+			return abort(404);
 		$ds = new OrgsDatasets();
-        return $org
-			? view('organization', [
-					'id' => $id,
-					'org' => $org,
-					'slist' => $ds->list,
-					'menu' => $ds->menu,
-					'activeDropDown' => '',
-					'icons' => $ds->socicons,
-					'allDS' => $ds->dd,
-					'tableStatUrl' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}'"),
-					'tableStatUrlChangeOfPersonnel' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}' AND \"SectionName\"='Changes in Personnel'"),
-					'finStatUrls' => [
-						'headcount' => $model->url("SELECT sum(\"HEADCOUNT\") FROM headcountactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
-						'as' => $model->url("SELECT sum(\"AMOUNT\" * 1000) FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
-						'ac' => $model->url("SELECT sum(\"TOTAL AMOUNT\" * 1000) FROM additionalcostsallocation WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
-					],
-					'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
-					'crol' => $model->crol($id),
-				])
-			: abort(404);
+		return preg_match('~Union|Bargaining Unit~si', $org['type'])
+			? view('union', [
+						'id' => $id,
+						'org' => $org,
+						'icons' => $ds->socicons,
+						'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
+						'url' => $model->url("SELECT * FROM nyccivilservicetitles WHERE \"wegov-org-id\"='{$id}'"),
+					])
+			: view('organization', [
+						'id' => $id,
+						'org' => $org,
+						'slist' => $ds->list,
+						'menu' => $ds->menu,
+						'activeDropDown' => '',
+						'icons' => $ds->socicons,
+						'allDS' => $ds->dd,
+						'tableStatUrl' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}'"),
+						'tableStatUrlChangeOfPersonnel' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}' AND \"SectionName\"='Changes in Personnel'"),
+						'finStatUrls' => [
+							'headcount' => $model->url("SELECT sum(\"HEADCOUNT\") FROM headcountactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
+							'as' => $model->url("SELECT sum(\"AMOUNT\" * 1000) FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
+							'ac' => $model->url("SELECT sum(\"TOTAL AMOUNT\" * 1000) FROM additionalcostsallocation WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
+						],
+						'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
+						'crol' => $model->crol($id),
+					]);
     }
 
 
