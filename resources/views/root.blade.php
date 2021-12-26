@@ -10,8 +10,8 @@
 <div class="inner_container">
 	<div class="jumbotron">
         <div class="col-md-5 home_bgcontent">
-            <h1>WeGovNYC DataBook</h1>
-            <p>We collect and join datasets together to create a data-driven view of New York City government.</p>
+            <h1>WeGovNYC Databook</h1>
+            <p>We collect and join datasets together to create data-driven apps about New York City government.</p>
         </div>
     </div>
     <div class="homeround_content">
@@ -22,8 +22,8 @@
 				</div>
 				<div class="content_area">
 					<h4>Organizations</h4>
-					<p>City agencies and related group, integrating dozens of datasets.</p>
-					<a class="btn_org_home" href="{{ route('orgs') }}" role="button">Organizations Profiles</a>
+					<p>Profiles of city agencies and relevant groups.</p>
+					<a class="btn_org_home" href="{{ route('orgs') }}" role="button">View Profiles</a>
 
 				</div>
             </div>
@@ -32,9 +32,9 @@
 					<img src="/img/projects.png" title="" alt="">
 				</div>
 				<div class="content_area">
-					<h4>Projects</h4>
+					<h4>Capital Projects</h4>
 					<p>Profiles with budget and timelines for all city capital project.</p>
-					<a class="btn_org_home" href="{{ route('projects') }}" role="button">Capital Projects Profiles</a>
+					<a class="btn_org_home" href="{{ route('projects') }}" role="button">View Profiles</a>
 				</div>
             </div>
             <div class="col-md-6">
@@ -44,7 +44,7 @@
 				<div class="content_area">
 					<h4>Districts</h4>
 					<p>Neighborhood, city council & community district data.</p>
-					<a class="btn_org_home" href="{{ route('districts') }}" role="button">District Profiles</a>
+					<a class="btn_org_home" href="{{ route('districts') }}" role="button">View Profiles</a>
 				</div>
             </div>
             <div class="col-md-6">
@@ -52,9 +52,9 @@
 					<img src="/img/services.png" title="" alt="">
 				</div>
 				<div class="content_area">
-					<h4>Civil Service</h4>
+					<h4>Civil Service Titles</h4>
 					<p>Job titles, positions, people, contacts, salaries and more.</p>
-					<a class="btn_org_home" href="{{ route('titles') }}" role="button">Civil Service Titles</a>
+					<a class="btn_org_home" href="{{ route('titles') }}" role="button">View Profiles</a>
 				</div>
             </div>
 			
