@@ -15,7 +15,7 @@ class ProjectsDatasets
 			'flds' => [
 					'function (r) { return toDashDate(r["PUB_DATE"]) }',
 					'function (r) { return `<a href="/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
-					'function (r) { return `<a href="/agency/${r["wegov-org-id"]}/capitalprojects">${r["wegov-org-name"]}</a>` }', 
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/capitalprojects">${r["wegov-org-name"]}</a>` }', 
 					'"PROJECT_DESCR"', '"TYP_CATEGORY_NAME"', 
 					'"BORO"', 
 					'function (r) { return `<span data-content="${toFin(r["BUDG_CURR"], 1000)}">${toFinShortK(r["BUDG_CURR"], 1000)}</span>` }',

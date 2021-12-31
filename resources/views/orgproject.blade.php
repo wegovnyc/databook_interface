@@ -282,9 +282,20 @@
 			showPrj();
 
 			@if ($data['geo_feature'])
-				var feature = {!! $data['geo_feature'] !!}
-				//console.log(feature)
-
+				const feature = {!! $data['geo_feature'] !!}
+				var bounds = [[feature.properties.W, feature.properties.S], [feature.properties.E, feature.properties.N]]
+				var features = []
+				if (feature.geometry.type != 'MultiPolygon') 
+					features = [feature]
+				else {
+					feature.geometry.coordinates.forEach(function (c) {
+						var subgj = JSON.parse(JSON.stringify(feature))
+						subgj.geometry.type = 'Polygon'
+						subgj.geometry.coordinates = c
+						features.push(subgj)
+					})
+				}
+			
 				mapboxgl.accessToken = 'pk.eyJ1Ijoic291bmRwcmVzcyIsImEiOiJjazY1OTF3cXIwbjZyM3BtcGt3Y3F2NjZwIn0.3hmCJsl0_oBUpoVsNJKZjQ';
 
 				map = new mapboxgl.Map({
@@ -300,8 +311,7 @@
 							"type": "geojson",
 							"data": {
 								"type": "FeatureCollection",
-								"features": [feature]
-								//"features": [ {"type":"Feature","geometry":{"type":"Point","coordinates":[-73.934832,40.68313]}}]
+								"features": features
 							}
 						});
 
@@ -316,7 +326,7 @@
 						'paint': {
 							//'line-color': '#ff7c7c',
 							'line-color': '#53777a',
-							'line-width': 8
+							'line-width': 6
 						},
 						'filter': ['==', '$type', 'LineString']
 					});
@@ -326,11 +336,22 @@
 						'type': 'circle',
 						'source': 'route',
 						'paint': {
-							'circle-radius': 8,
+							'circle-radius': 6,
 							//'circle-color': '#ff7c7c'
 							'circle-color': '#53777a'
 						},
 						'filter': ['==', '$type', 'Point']
+					});
+
+					map.addLayer({
+						'id': 'areas',
+						'type': 'fill',
+						'source': 'route',
+						'paint': {
+							'fill-color': '#53777a',
+							'fill-opacity': 1
+						},
+						'filter': ['==', '$type', 'Polygon']
 					});
 					
 					for (const [code, clr] of Object.entries(zones)) {
@@ -338,7 +359,6 @@
 					}
 					$('#toggles').show();
 
-					var bounds = [[feature.properties.W, feature.properties.S], [feature.properties.E, feature.properties.N]];
 					map.fitBounds(bounds);
 				});
 			@else

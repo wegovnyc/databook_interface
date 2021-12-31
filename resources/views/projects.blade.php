@@ -287,31 +287,27 @@
 				search: 'applied',     // 'none',    'applied', 'removed'
 			}
 			var features = [];
-			//api.cells('.record', modifier).data().each(function (r, i) {
 			api.rows('', modifier).data().each(function (r, i) {
 				if (r['GEO_JSON']) {
 					try {
 						geo_json = JSON.parse(r['GEO_JSON'].replaceAll('""', '"'))
 						geo_json.properties['AG_ID'] = r['wegov-org-id']
-						/*
-						if (geo_json['geometry']['type'] != 'Point') {
-							geo_json['geometry'] = {
-														"type": "Point",
-														"coordinates": [
-															(geo_json['properties']['W'] + geo_json['properties']['E']) / 2,
-															(geo_json['properties']['N'] + geo_json['properties']['S']) / 2
-														]
-													}
+						if (geo_json.geometry.type != 'MultiPolygon') 
+							features.push(geo_json)
+						else {
+							geo_json.geometry.coordinates.forEach(function (c) {
+								var subgj = geo_json
+								subgj.geometry.type = 'Polygon'
+								subgj.geometry.coordinates = c
+								features.push(subgj)
+							})
 						}
-						*/
-						features.push(geo_json)
 					} catch (error) {
 						console.error(error);
 					}
 				}
 			});
 			console.log(features.length)
-			//console.log(features)
 			projectsMapDrawFeatures(features);
 		}
 		

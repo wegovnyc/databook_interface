@@ -440,7 +440,7 @@ function projectsMapInit(as_addon=false) {
 				type: "geojson",
 				data: {
 					"type": "FeatureCollection",
-					"features": [{"type":"Feature","properties":{"custom_color":"#ccc"},"geometry":{"type":"Point","coordinates":["-73.95098200","40.82387280"]}}]
+					"features": [{"type":"Feature","properties":{"custom_color":"#C0DDC0"},"geometry":{"type":"Point","coordinates":["-73.95098200","40.82387280"]}}]
 				}
 			});
 		map.addLayer({
@@ -470,6 +470,17 @@ function projectsMapInit(as_addon=false) {
 			//'filter': ["all", ['==', '$type', 'LineString'], ['!has', 'point_count']]
 			'filter': ['==', '$type', 'LineString']
         });
+		
+        map.addLayer({
+            'id': 'areas',
+            'type': 'fill',
+            'source': 'route',
+            'paint': {
+                'fill-color': ['get', 'custom_color'],
+                'fill-opacity': 0.75
+            },
+			'filter': ['==', '$type', 'Polygon']
+        });
 		map.on('zoom', () => {
 			var z = map.getZoom();
 			const zz = {12:6, 11:5, 10:4, 9:3, 8:2}
@@ -484,14 +495,17 @@ function projectsMapInit(as_addon=false) {
 
 		map.on('click', 'streets', function (e) { projectsMapPopup(e); });
 		map.on('click', 'markers', function (e) { projectsMapPopup(e); });
+		map.on('click', 'areas', function (e) { projectsMapPopup(e); });
 		 
 		// Change the cursor to a pointer when the mouse is over the places layer.
 		map.on('mouseenter', 'streets', function () { map.getCanvas().style.cursor = 'pointer'; });
 		map.on('mouseenter', 'markers', function () { map.getCanvas().style.cursor = 'pointer'; });
+		map.on('mouseenter', 'areas', function () { map.getCanvas().style.cursor = 'pointer'; });
 		 
 		// Change it back to a pointer when it leaves.
 		map.on('mouseleave', 'streets', function () { map.getCanvas().style.cursor = ''; });		
 		map.on('mouseleave', 'markers', function () { map.getCanvas().style.cursor = ''; });
+		map.on('mouseleave', 'areas', function () { map.getCanvas().style.cursor = ''; });
 		
 		if (!as_addon) {
 			for (const [code, clr] of Object.entries(zones)) {
@@ -517,6 +531,12 @@ function projectsMapDrawFeatures(dd, do_fitbounds=true) {
 	});
 	if (bounds[0][0] == 360)
 		bounds = [[-74.05395, 40.68309], [-73.944433, 40.797808]]
+	/*
+	bounds[0][0] = Math.max(bounds[0][0], -76.163);
+	bounds[0][1] = Math.max(bounds[0][1], 39.357);
+	bounds[1][0] = Math.min(bounds[1][0], -71.999);
+	bounds[1][1] = Math.min(bounds[1][1], 42.376);
+	*/
 	var src = map.getSource('route')
 	src.setData({"type": "FeatureCollection", "features": dd});
 	if (popup)

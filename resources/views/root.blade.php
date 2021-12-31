@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-6">
 				<div class="circle_img">
-					<img src="/img/profile.png" title="" alt="">
+					<img src="/img/people.png" title="" alt="">
 				</div>
 				<div class="content_area">
 					<h4>Organizations</h4>
@@ -102,6 +102,7 @@
             <div class="col-md-4">
 				<div class="circle_img">
 					<img src="/img/people.png" title="" alt="">
+					<img src="/img/profile.png" title="" alt="">
 				</div>
 				<div class="content_area">
 					<h4>People</h4>
