@@ -22,10 +22,10 @@ class CartoModel
 		return $this->map($dd)[0] ?? [];
 	}
 	
-	function title($id)
+	function titles($id)
 	{
-		$dd = $this->carto->req("SELECT * FROM nyccivilservicetitles WHERE \"Title Code\" = '{$id}'");
-		return $this->map($dd)[0] ?? [];
+		$dd = $this->carto->req("SELECT * FROM nyccivilservicetitles WHERE \"Title Code\" = '{$id}' ORDER BY \"Assignment Level\"");
+		return $dd ?? [];
 	}
 	
 	function dataset($name)

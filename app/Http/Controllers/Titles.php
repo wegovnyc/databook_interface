@@ -37,16 +37,16 @@ class Titles extends Controller
     {
 		$ds = new TitlesDatasets();
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		$title = $model->title($id);
+		$titles = $model->titles($id);
 		$details = $ds->get($section);
-		return $details && $title
+		return $details && $titles
 			? view('titlesection', [
 					'id' => $id,
 					'section' => $section,
-					'title' => $title,
+					'titles' => $titles,
 					'slist' => $ds->list,
 					'menu' => $ds->menu,
-					'breadcrumbs' => Breadcrumbs::titleSect($title['Title Code'], $title['Title Description'], $section, $ds->list[$section]),
+					'breadcrumbs' => Breadcrumbs::titleSect($titles[0]['Title Code'], $titles[0]['Title Description'], $section, $ds->list[$section]),
 					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-service-title-id\"='{$id}' ORDER BY {$details['sort'][0]}" ),
 					'dataset' => $model->dataset($details['fullname']),
 					'details' => $details,

@@ -2,39 +2,45 @@
 	<div id="pos-header" class="org-header">
 		<div class="row m-0">
 			<div class="col-md-12 org_detailheader org_detailtitle m-0">
-				<h4>{{ $title['Title Description'] }}</h4>
+				<h4>{{ $titles[0]['Title Description'] }}</h4>
 			</div>
 		</div>
 		
 		<div class="row mx-0 my-1">
 			<div class="col-3">
 				<small class="text-muted">Title Code</small><br />
-				<h6>{{ $title['Title Code'] }}</h6>
+				<h6>{{ $titles[0]['Title Code'] }}</h6>
 			</div>
 			<div class="col-9">
-			  @if($title['wegov-org-name'])
+			  @if($titles[0]['wegov-org-name'])
 				<small class="text-muted">Bargaining Unit</small><br />
-				<h6><a href="/organization/{{ $title['wegov-org-id'] }}">{{ $title['wegov-org-name'] }}</a></h6>
+				<h6><a href="/organization/{{ $titles[0]['wegov-org-id'] }}">{{ $titles[0]['wegov-org-name'] }}</a></h6>
 			  @endif
 			</div>
 		</div>
 		
 		<div class="row mx-0 my-1">
-			<div class="col-3">
-				<small class="text-muted">Minimum Salary Rate</small><br />
-				<h6>${{ number_format($title['Minimum Salary Rate']) }}</h6>
-			</div>
-			<div class="col-3">
-				<small class="text-muted">Maximum Salary Rate</small><br />
-				<h6>${{ number_format($title['Maximum Salary Rate']) }}</h6>
-			</div>
-			<div class="col-3">
-				<small class="text-muted">Standard Hours</small><br />
-				<h6>{{ $title['Standard Hours'] }}</h6>
-			</div>
-			<div class="col-3">
-				<small class="text-muted">Assignment Level</small><br />
-				<h6>{{ $title['Assignment Level'] }}</h6>
+			<div class="col-12 px-0">
+				<table class="table table-sm">
+				  <thead>
+					<tr>
+					  <th scope="col">Minimum Salary Rate</th>
+					  <th scope="col">Maximum Salary Rate</th>
+					  <th scope="col">Standard Hours</th>
+					  <th scope="col">Assignment Level</th>
+					</tr>
+				  </thead>
+				  <tbody>
+				    @foreach ($titles as $title)
+						<tr>
+						  <td>${{ number_format($title['Minimum Salary Rate']) }}</td>
+						  <td>${{ number_format($title['Maximum Salary Rate']) }}</td>
+						  <td>{{ $title['Standard Hours'] }}</td>
+						  <td>{{ $title['Assignment Level'] }}</td>
+						</tr>					
+				    @endforeach
+				  </tbody>
+				</table>
 			</div>
 		</div>
 
