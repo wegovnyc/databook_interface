@@ -104,9 +104,10 @@ class Organizations extends Controller
 		$org = $model->org($id);
 		if (!$org)
 			return abort(404);
-		$ds = preg_match('~Union|Bargaining Unit~si', $org['type'])
-				? new UnDatasets()
-				: new OrgsDatasets();
+		if (preg_match('~Union|Bargaining Unit~si', $org['type']))
+			return redirect(route('orgSection', ['id' => $id, 'section' => 'civil-service-titles']));
+		
+		$ds = new OrgsDatasets();
 		return view('organization', [
 						'id' => $id,
 						'org' => $org,

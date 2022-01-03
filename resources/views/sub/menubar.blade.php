@@ -1,10 +1,10 @@
 <div class="inner_container">
     <nav class="navbar navbar-expand-lg navbar-light" id="top-menu">
         <a class="navbar-brand" href="https://wegov.nyc">
-            <img src="/img/we_gov_logo_blue 1.png" title="" alt="">
+            <img src="/img/we_gov_logo_blue 1.png">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="true" aria-label="Toggle navigation">
-            <img src="/img/menu_icon.png" alt="" title="" style="height: 20px;">
+            <img src="/img/menu_icon.png" style="height: 20px;">
         </button>
         <div class="collapse navbar-collapse" id="navbar-nav">
             <ul class="navbar-nav ml-auto">

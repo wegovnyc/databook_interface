@@ -474,7 +474,10 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'flds' => [
 					'function (r) { return usToDashDate(r["AdditionalDescription1"].split(";")[0].replace("Effective Date: ", "")); }', 
 					'function (r) { return r["AdditionalDescription1"].split(";")[1].replace("Provisional Status: ", ""); }', 
-					'function (r) { return r["AdditionalDescription1"].split(";")[2].replace("Title Code: ", ""); }', 
+					'function (r) { 
+						var code = r["AdditionalDescription1"].split(";")[2].replace("Title Code: ", "").trim();
+						return `<a href="/titles/${code}">${code}</a>`;
+					}', 
 					'function (r) { return r["AdditionalDescription1"].split(";")[3].replace("Reason For Change: ", ""); }', 
 					'function (r) { return toFin(r["AdditionalDescription1"].split(";")[4].replace("Salary: ", "")); }', 
 					'function (r) { return r["AdditionalDescription1"].split(";")[5].replace("Employee Name: ", ""); }', 
@@ -545,6 +548,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'details' => [],
 			'description' => 'The Civil List reports the agency code (DPT), first initial and last name (NAME), agency name (ADDRESS), title code (TTL #), pay class (PC), and salary (SAL-RATE) of individuals who were employed by the City of New York at any given time during the indicated year.',
 			'script' => '',
+			'order' => [[0, 'desc']],
 		],
 		/*
 		'payrolldata' => [

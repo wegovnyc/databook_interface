@@ -22,7 +22,7 @@ class Titles extends Controller
         return view('titles', [
 					'breadcrumbs' => Breadcrumbs::titles(),
 					'slist' => $ds->list,
-					'url' => $model->url('SELECT * FROM nyccivilservicetitles ORDER BY "Title Description"'),
+					'url' => $model->url('SELECT * FROM nyccivilservicetitles ORDER BY "Title Code"'),
 					'defSearch' => $_GET['search'] ?? null,
 					'defUnion' => $_GET['union'] ?? '',
 				]);

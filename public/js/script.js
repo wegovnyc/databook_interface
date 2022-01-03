@@ -531,12 +531,12 @@ function projectsMapDrawFeatures(dd, do_fitbounds=true) {
 	});
 	if (bounds[0][0] == 360)
 		bounds = [[-74.05395, 40.68309], [-73.944433, 40.797808]]
-	/*
-	bounds[0][0] = Math.max(bounds[0][0], -76.163);
-	bounds[0][1] = Math.max(bounds[0][1], 39.357);
-	bounds[1][0] = Math.min(bounds[1][0], -71.999);
-	bounds[1][1] = Math.min(bounds[1][1], 42.376);
-	*/
+	
+	bounds[0][0] = Math.max(bounds[0][0], -74.538);
+	bounds[0][1] = Math.max(bounds[0][1], 40.297);
+	bounds[1][0] = Math.min(bounds[1][0], -73.202);
+	bounds[1][1] = Math.min(bounds[1][1], 41.239);
+	
 	var src = map.getSource('route')
 	src.setData({"type": "FeatureCollection", "features": dd});
 	if (popup)

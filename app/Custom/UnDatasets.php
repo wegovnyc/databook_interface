@@ -8,7 +8,7 @@ class UnDatasets
 			'fullname' => 'NYC Civil Service Titles',
 			'table' => 'nyccivilservicetitles',
 			'hdrs' => ['Title Code', 'Title Description', 'Standard Hours', 'Assignment Level', 'Bargaining Unit', 'Union Description', 'Minimum Salary', 'Maximum Salary'],
-			'visible' => [true, true, true, true, true, true, true, true],
+			'visible' => [true, true, true, true, false, true, true, true],
 			'flds' => [
 					'function (r) { return `<a href="/titles/${r["Title Code"]}">${r["Title Code"]}</a>` }',
 					'"Title Description"',
@@ -28,12 +28,12 @@ class UnDatasets
 	];
 
 	public $list = [
-		'about' => 'About',
+		#'about' => 'About',
 		'civil-service-titles' => 'Civil Service Titles',
 	];
 	
 	public $menu = [
-		'about',
+		#'about',
 		'civil-service-titles'
 	];
 	
