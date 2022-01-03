@@ -11,9 +11,6 @@
 @section('content')
 	<div class="inner_container">
 		<nav class="navbar navbar-expand-lg navbar-light chart_submenu">
-			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-orgs" aria-controls="navbar-orgs" aria-expanded="true" aria-label="Toggle navigation">
-				<img src="/img/menu_icon.png" alt="" title="" style="height: 20px;">
-			</button> -->
 			<div class="navbar-collapse">
 				<ul class="navbar-nav">
 					@foreach (['Government Agencies' => 'orgs', 'NYC Organizational Chart' => 'orgsChart', 'All Organizations' => 'orgsAll'] as $t=>$route)

@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-6">
 				<div class="circle_img">
-					<img src="/img/people.png" title="" alt="">
+					<img src="/img/people.png">
 				</div>
 				<div class="content_area">
 					<h4>Organizations</h4>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-6">
 				<div class="circle_img">
-					<img src="/img/projects.png" title="" alt="">
+					<img src="/img/projects.png">
 				</div>
 				<div class="content_area">
 					<h4>Capital Projects</h4>
@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-6">
 				<div class="circle_img">
-					<img src="/img/indicators.png" title="" alt="">
+					<img src="/img/indicators.png">
 				</div>
 				<div class="content_area">
 					<h4>Districts</h4>
@@ -49,7 +49,7 @@
             </div>
             <div class="col-md-6">
 				<div class="circle_img">
-					<img src="/img/services.png" title="" alt="">
+					<img src="/img/services.png">
 				</div>
 				<div class="content_area">
 					<h4>Civil Service Titles</h4>
@@ -74,7 +74,7 @@
 			{{--
             <div class="col-md-6">
 				<div class="circle_img">
-					<img src="/img/budget.png" title="" alt="">
+					<img src="/img/budget.png">
 				</div>
 				<div class="content_area">
 					<h4>Budgets</h4>
@@ -83,7 +83,7 @@
             </div>
             <div class="col-md-4">
 				<div class="circle_img">
-					<img src="/img/facilities.png" title="" alt="">
+					<img src="/img/facilities.png">
 				</div>
 				<div class="content_area">
 					<h4>Facilities</h4>
@@ -92,7 +92,7 @@
             </div>
             <div class="col-md-4">
 				<div class="circle_img">
-					<img src="/img/jobs.png" title="" alt="">
+					<img src="/img/jobs.png">
 				</div>
 				<div class="content_area">
 					<h4>Jobs</h4>
@@ -101,8 +101,8 @@
             </div>
             <div class="col-md-4">
 				<div class="circle_img">
-					<img src="/img/people.png" title="" alt="">
-					<img src="/img/profile.png" title="" alt="">
+					<img src="/img/people.png">
+					<img src="/img/profile.png">
 				</div>
 				<div class="content_area">
 					<h4>People</h4>
@@ -111,7 +111,7 @@
             </div>
             <div class="col-md-4">
 				<div class="circle_img">
-					<img src="/img/request.png" title="" alt="">
+					<img src="/img/request.png">
 				</div>
 				<div class="content_area">
 					<h4>Requests</h4>

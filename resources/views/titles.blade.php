@@ -208,7 +208,7 @@
 		</div>
 		<div class="col-md-12">
 			<div class="bottom_lastupdate">
-				<p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="https://data.cityofnewyork.us/City-Government/NYC-Civil-Service-Titles/nzjr-3966" target="_blank">NYC Civil Service Titles</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ date('m/d/Y', strtotime('-1 day')) }}</i></span></p>
+				<p class="lead"><img src="/img/info.png"> This data comes from <a href="https://data.cityofnewyork.us/City-Government/NYC-Civil-Service-Titles/nzjr-3966" target="_blank">NYC Civil Service Titles</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ date('m/d/Y', strtotime('-1 day')) }}</i></span></p>
 			</div>
 		</div>
     </div>

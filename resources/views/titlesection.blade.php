@@ -178,7 +178,7 @@
 						<h4>{{ $dataset['Name'] }}</h4>
 					@endif
 					@if ($map ?? null)
-						<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt="" title=""></button>
+						<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png"></button>
 					@endif
 				</div>
 			</div>
@@ -188,7 +188,7 @@
 						<!-- controls -->
 						<div id="map-controls">
 							<div class="select_district">
-								<img src="/img/map_icon.png" alt="" title="">
+								<img src="/img/map_icon.png">
 								<ul class="inner_district">
 									<li class="dropdown">
 										<a id="change_district" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Select a District Type</a>
@@ -210,7 +210,7 @@
 
 						<!-- toggles -->
 						<div class="select_district" id="toggles">
-							<img src="/img/eyes.png" alt="" title="">
+							<img src="/img/eyes.png">
 							<ul class="inner_district">
 								<li class="dropdown">
 									<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
@@ -308,7 +308,7 @@
 		@endif
 		<div class="col-md-12">
 			<div class="bottom_lastupdate">
-				<p class="lead"><img src="/img/info.png" alt="" title=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
+				<p class="lead"><img src="/img/info.png"> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
 			</div>
 		</div>
 	</div>

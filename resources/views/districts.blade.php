@@ -22,7 +22,7 @@
 					</div>
 					
 					<div class="select_district">
-						<img src="/img/map_icon.png" alt="" title="">
+						<img src="/img/map_icon.png">
 						<ul class="inner_district">
 							<li class="dropdown">
 								<a id="change_district" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Select a District Type</a>
@@ -43,7 +43,7 @@
 				<!-- /controls -->
 				<!-- toggles -->
 				<div class="select_district" id="toggles">
-					<img src="/img/eyes.png" alt="" title="">
+					<img src="/img/eyes.png">
 					<ul class="inner_district">
 						<li class="dropdown">
 							<a class="dropdown-toggle" id="toggle_boundries" role="button" aria-haspopup="true" aria-expanded="true">Show District Boundaries</a>
