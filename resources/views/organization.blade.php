@@ -43,9 +43,8 @@
 									<th scope="col">
 										<select style="width:100%;" class="filter" onchange="loadFinStat();" id="fin_stat_select">
 											<option value="">Year</option>
-											<option value="{{ date('Y') - 1 }}" selected>{{ date('Y') - 1 }}</option>
-											@for($i=date('Y') - 2; $i>=date('Y') - 3; $i--)
-												<option value="{{ $i }}">{{ $i }}</option>
+											@for($i=date('Y') - 1; $i>=date('Y') - 3; $i--)
+												<option value="{{ $i }}" @if($i == $finStatYear) selected @endif>{{ $i }}</option>
 											@endfor
 										</select>
 									</th>

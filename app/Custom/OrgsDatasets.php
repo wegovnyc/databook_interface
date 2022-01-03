@@ -547,8 +547,8 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'filters' => [0 => null, 4 => null, 5 => null],
 			'details' => [],
 			'description' => 'The Civil List reports the agency code (DPT), first initial and last name (NAME), agency name (ADDRESS), title code (TTL #), pay class (PC), and salary (SAL-RATE) of individuals who were employed by the City of New York at any given time during the indicated year.',
-			'script' => '',
-			'order' => [[0, 'desc']],
+			'script' => 'datatable.order([0, "desc"]).draw();',
+			
 		],
 		/*
 		'payrolldata' => [

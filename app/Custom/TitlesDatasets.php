@@ -70,7 +70,7 @@ class TitlesDatasets
 			'filters' => [0 => null],
 			'details' => [],
 			'description' => 'The Civil List reports the agency code (DPT), first initial and last name (NAME), agency name (ADDRESS), title code (TTL #), pay class (PC), and salary (SAL-RATE) of individuals who were employed by the City of New York at any given time during the indicated year.',
-			'script' => '',
+			'script' => 'datatable.order([0, "desc"]).draw();',
 			'sort' => ['"wegov-org-id"'],
 		],
 

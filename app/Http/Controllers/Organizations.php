@@ -123,6 +123,7 @@ class Organizations extends Controller
 							'as' => $model->url("SELECT sum(\"AMOUNT\" * 1000) FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
 							'ac' => $model->url("SELECT sum(\"TOTAL AMOUNT\" * 1000) FROM additionalcostsallocation WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
 						],
+						'finStatYear' => 2020,
 						'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
 						'crol' => $model->crol($id),
 					]);
