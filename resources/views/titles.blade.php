@@ -107,7 +107,7 @@
 									$(this).val()
 								);*/
 								var val = $(this).val()
-								console.log(val)
+								//console.log(val)
 								column
 									.search(val ? val : '', false, false)
 									.draw();
