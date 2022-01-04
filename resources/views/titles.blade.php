@@ -103,9 +103,11 @@
 						var select = $('<select class="filter-top" id="filter-' + column[0][0] + '"><option value="">- Select positions by Bargaining Unit -</option></select>')
 							.appendTo($('div.toolbar'))
 							.on('change', function () {
-								var val = $.fn.dataTable.util.escapeRegex(
+								/*var val = $.fn.dataTable.util.escapeRegex(
 									$(this).val()
-								);
+								);*/
+								var val = $(this).val()
+								console.log(val)
 								column
 									.search(val ? val : '', false, false)
 									.draw();

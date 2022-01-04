@@ -140,9 +140,9 @@
 								//.appendTo($(column.footer()).empty())
 								.appendTo($("div.toolbar .row"))
 								.on('change', function () {
-									//var val = $.fn.dataTable.util.escapeRegex(
-										//$(this).val()
-									//);
+									/*var val = $.fn.dataTable.util.escapeRegex(
+										$(this).val()
+									);*/
 									var val = $(this).val()
 									column
 										.search(val ? val : '', false, false)

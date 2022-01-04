@@ -150,9 +150,11 @@
 						var select = $('<select class="filter-top" id="filter-tags"><option value="">- Select organizations by tag -</option></select>')
 							.appendTo($('div.toolbar'))
 							.on('change', function () {
-								var val = $.fn.dataTable.util.escapeRegex(
+								/*var val = $.fn.dataTable.util.escapeRegex(
 									$(this).val()
-								);
+								);*/
+								var val = $(this).val()
+
 								column
 									.search(val ? val : '', false, false)
 									.draw();
