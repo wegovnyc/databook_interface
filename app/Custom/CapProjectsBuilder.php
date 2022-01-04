@@ -99,7 +99,7 @@ class CapProjectsBuilder
 	
 	static function genLog($pdd, $dd)
 	{
-		$mm = $dd['milestones'];
+		$mm = $dd['milestones'] ?? [];
 		$rr = [];
 		foreach ([
 				'BUDG_ORIG' => 'Original Budget',

@@ -60,4 +60,14 @@ class Breadcrumbs
 	{
 		return array_merge(self::$root, [['/titles', 'Titles'], ["/titles/{$id}", $name], ["/titles/{$id}/{$sect}", $sectN]]);
 	}
+
+	static function notices()
+	{
+		return array_merge(self::$root, [['/notices', 'Notices']]);
+	}
+
+	static function noticesSect($sect, $sectN)
+	{
+		return array_merge(self::$root, [['/notices', 'Notices'], ["/notices/{$sect}", $sectN]]);
+	}
 }
