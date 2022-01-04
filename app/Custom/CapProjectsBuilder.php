@@ -113,7 +113,7 @@ class CapProjectsBuilder
 				$rr[] = self::genLogItem($t, $dd[$f] ?? null, $pdd[$f] ?? null);
 		
 		$pmm = [];
-		foreach ($dd['milestones'] as $m)
+		foreach ($dd['milestones'] ?? [] as $m)
 			$pmm[$m['TASK_DESCRIPTION']] = $m;
 		
 		foreach ($mm as $m)
