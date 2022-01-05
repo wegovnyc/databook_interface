@@ -44,6 +44,7 @@ class Notices extends Controller
 					'menu' => $ds->menu,
 					'breadcrumbs' => Breadcrumbs::noticesSect($section, $ds->list[$section]),
 					'url' => $model->url($details['sql']),
+					'dates_req_url' => $model->url("SELECT DISTINCT(SUBSTRING(\"StartDate\" from 7 for 4)) yy FROM crol WHERE \"SectionName\" = '{$details['CROLsection']}' ORDER BY yy DESC"),
 					'dataset' => $model->dataset($details['fullname']),
 					'details' => $details,
 				])

@@ -56,9 +56,9 @@ Route::get('/titles/{id}', function ($id) {
 Route::get('/titles/{id}/{section}', [Titles::class, 'section'])->name('titleSection');
 
 
-/*
+
 Route::get('/notices', [Notices::class, 'main'])->name('notices');
 
 Route::get('/notices/{section}', [Notices::class, 'section'])->name('noticesSection');
-*/
+
 

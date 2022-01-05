@@ -6,11 +6,15 @@ class CROLDatasets
 	public $dd = [
 		'publichearings' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Public Hearings and Meetings\'',
+			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Public Hearings and Meetings\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'CROLsection' => 'Public Hearings and Meetings',
 			#'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Street Address 1', 'Street Address 2', 'City', 'State Code', 'Zip Code'],
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Address'],
 			#'flds' => ['"RequestID"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', '"EventDate"', '"EventStreetAddress1"', '"EventStreetAddress2"', '"EventCity"', '"EventStateCode"', '"EventZipCode"'],
-			'flds' => ['"RequestID"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', '"EventDate"', 
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
 						while (true) {
@@ -37,11 +41,15 @@ class CROLDatasets
 		],
 		'contractawards' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Contract Award Hearings\'',
+			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Contract Award Hearings\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'CROLsection' => 'Contract Award Hearings',
 			#'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Street Address 1', 'Street Address 2', 'City', 'State Code', 'Zip Code'],
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Address'],
 			#'flds' => ['"RequestID"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', '"EventDate"', '"EventStreetAddress1"', '"EventStreetAddress2"', '"EventCity"', '"EventStateCode"', '"EventZipCode"'],
-			'flds' => ['"RequestID"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', '"EventDate"', 
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
 				    'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
 						while (true) {
@@ -73,9 +81,13 @@ class CROLDatasets
 		],
 		'specialmaterials' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Special Materials\'',
+			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Special Materials\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'CROLsection' => 'Special Materials',
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Address'],
-			'flds' => ['"RequestID"', '"StartDate"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"',
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["StartDate"]) }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
 						while (true) {
@@ -105,11 +117,15 @@ class CROLDatasets
 		],
 		'agencyrules' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Agency Rules\'',
+			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Agency Rules\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'CROLsection' => 'Agency Rules',
 			#'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Street Address 1', 'Street Address 2', 'City', 'State Code', 'Zip Code'],
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Address'],
 			#'flds' => ['"RequestID"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', '"EventDate"', '"EventStreetAddress1"', '"EventStreetAddress2"', '"EventCity"', '"EventStateCode"', '"EventZipCode"'],
-			'flds' => ['"RequestID"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', '"EventDate"', 
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
 						while (true) {
@@ -136,11 +152,16 @@ class CROLDatasets
 		],
 		'propertydisposition' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Property Disposition\'',
+			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Property Disposition\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'CROLsection' => 'Property Disposition',
 			#'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Street Address 1', 'Street Address 2', 'City', 'State Code', 'Zip Code'],
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Address'],
 			#'flds' => ['"RequestID"', '"StartDate"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', '"EventDate"', '"EventStreetAddress1"', '"EventStreetAddress2"', '"EventCity"', '"EventStateCode"', '"EventZipCode"'],
-			'flds' => ['"RequestID"', '"StartDate"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', '"EventDate"', 
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["StartDate"]) }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
 						while (true) {
@@ -167,11 +188,16 @@ class CROLDatasets
 		],
 		'courtnotices' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Court Notices\'',
+			'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Court Notices\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'CROLsection' => 'Court Notices',
 			#'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Short Title', 'Date', 'Street Address 1', 'Street Address 2', 'City', 'State Code', 'Zip Code'],
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Short Title', 'Date', 'Address'],
 			#'flds' => ['"RequestID"', '"StartDate"', '"wegov-org-name"', '"ShortTitle"', '"EventDate"', '"EventStreetAddress1"', '"EventStreetAddress2"', '"EventCity"', '"EventStateCode"', '"EventZipCode"'],
-			'flds' => ['"RequestID"', '"StartDate"', '"wegov-org-name"', '"ShortTitle"', '"EventDate"', 
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["StartDate"]) }',
+					'"wegov-org-name"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
 						while (true) {
@@ -200,9 +226,14 @@ class CROLDatasets
 		'procurement' => [
 			'fullname' => 'City Record Online (CROL)',
 			#'sql' => 'SELECT * FROM crol WHERE "SectionName" = \'Procurement\'',
-			'sql' => 'SELECT "RequestID", "StartDate", "wegov-org-name", "TypeOfNoticeDescription", "CategoryDescription", "ShortTitle", "SelectionMethodDescription", "AdditionalDescription1", "SpecialCaseReasonDescription", "PIN", "DueDate", "EndDate", "AddressToRequest", "ContactName", "ContactPhone", "Email", "ContractAmount", "ContactFax", "OtherInfo1", "VendorName", "VendorAddress", "Printout1", "DocumentLinks", "EventBuildingName", "EventStreetAddress1" FROM crol WHERE "SectionName" = \'Procurement\'',
+			'sql' => 'SELECT "RequestID", "StartDate", "wegov-org-name", "TypeOfNoticeDescription", "CategoryDescription", "ShortTitle", "SelectionMethodDescription", "AdditionalDescription1", "SpecialCaseReasonDescription", "PIN", "DueDate", "EndDate", "AddressToRequest", "ContactName", "ContactPhone", "Email", "ContractAmount", "ContactFax", "OtherInfo1", "VendorName", "VendorAddress", "Printout1", "DocumentLinks", "EventBuildingName", "EventStreetAddress1" FROM crol WHERE "SectionName" = \'Procurement\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'CROLsection' => 'Procurement',
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Selection Method Description'],
-			'flds' => ['"RequestID"', '"StartDate"', '"wegov-org-name"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SelectionMethodDescription"'],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["StartDate"]) }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SelectionMethodDescription"'
+			],
 			'visible' => [true, true, true, true, true, true, true],
 			'filters' => [2 => null, 3 => null],
 			'details' => [
@@ -230,7 +261,8 @@ class CROLDatasets
 		],
 		'changeofpersonnel' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT "AdditionalDescription1", "StartDate" FROM crol WHERE "SectionName" = \'Changes in Personnel\' AND NOT "AdditionalDescription1" = \'\'',
+			'sql' => 'SELECT "AdditionalDescription1", "StartDate" FROM crol WHERE "SectionName" = \'Changes in Personnel\' AND NOT "AdditionalDescription1" = \'\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'CROLsection' => 'Changes in Personnel',
 			'hdrs' => ['Effective Date', 'Provisional Status', 'Title Code', 'Reason For Change', 'Salary', 'Employee Name'],
 			'flds' => [
 					'function (r) { return usToDashDate(r["AdditionalDescription1"].split(";")[0].replace("Effective Date: ", "")); }', 
