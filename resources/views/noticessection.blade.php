@@ -16,7 +16,7 @@
 					<table class="table-sm stats-table" width="100%">
 					<thead>
 						<tr>
-						<th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Start Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
+						<th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Year&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
 						<th scope="col" width="50%" id="pub_date_filter"></th>
 						</tr>
 					</thead>
