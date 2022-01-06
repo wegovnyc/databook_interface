@@ -93,7 +93,7 @@ class Notices extends Controller
     public function ical()
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' ORDER BY date("EventDate") DESC');
+		$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
 		return $data
 			? response()->view('icalevents', [
 					'data' => $data,
