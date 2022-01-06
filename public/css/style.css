@@ -569,3 +569,7 @@ span.bad {color: red;}
 .search_twitter .twitter-typeahead .tt-hint {width: 100%; height: 40px;}
 
 
+/* hoveronly */
+a.hoveronly {color: #005ea2;}
+a.hoveronly:hover {color: #005ea2; text-decoration: none; background-color: #E7F6F8;}
+

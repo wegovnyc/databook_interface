@@ -337,7 +337,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					'function (r) { return usToDashDate(r["Latest Plan Date"]) }', //'"Latest Plan Date"', 
 					'"Release Status"', 
 					'function (r) { return usToDashDate(r["Release Date"]) }', //'"Release Date"',
-					'"From the 2020 Open Data Plan?"', '"URL"', '"Update Frequency"'
+					'"From the 2021 Open Data Plan?"', '"URL"', '"Update Frequency"'
 			], 
 			'filters' => [3 => null, 5 => null],
 			//'fltDelim' => [3 => ','],
@@ -396,10 +396,12 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'crol' => [
 			'fullname' => 'City Record Online (CROL)',
 			'table' => 'crol',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' ORDER BY date("StartDate")',
 			'hdrs' => ['Start Date', 'Request ID', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Section Name', ],
 			'visible' => [true, true, true, true, true, true],
 			'flds' => ['function (r) { return usToDashDate(r["StartDate"]); }', 
-					'"RequestID"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SectionName"'
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SectionName"'
 				],
 			'filters' => [2 => null, 3 => null, 5 => null],
 			//'fltDelim' => [3 => ','],
@@ -467,28 +469,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'details' => [],
 			'description' => 'Metadata for documents submitted to the Department of Records and Information services which are required by legislation.',
 		],
-		'changeofpersonnel' => [
-			'fullname' => 'City Record Online (CROL)',
-			'table' => 'crol',
-			'hdrs' => ['Effective Date', 'Provisional Status', 'Title Code', 'Reason For Change', 'Salary', 'Employee Name'],
-			'flds' => [
-					'function (r) { return usToDashDate(r["AdditionalDescription1"].split(";")[0].replace("Effective Date: ", "")); }', 
-					'function (r) { return r["AdditionalDescription1"].split(";")[1].replace("Provisional Status: ", ""); }', 
-					'function (r) { 
-						var code = r["AdditionalDescription1"].split(";")[2].replace("Title Code: ", "").trim();
-						return `<a href="/titles/${code}">${code}</a>`;
-					}', 
-					'function (r) { return r["AdditionalDescription1"].split(";")[3].replace("Reason For Change: ", ""); }', 
-					'function (r) { return toFin(r["AdditionalDescription1"].split(";")[4].replace("Salary: ", "")); }', 
-					'function (r) { return r["AdditionalDescription1"].split(";")[5].replace("Employee Name: ", ""); }', 
-				], 
-			'visible' => [true, true, true, true, true, true],
-			'filters' => [3 => null],
-			'details' => [],
-			'description' => '',
-			'script' => 'datatable.order([0, "desc"]).draw();',
-		],
-
 		'fteheadcount' => [
 			'fullname' => 'Full-Time and FTE Headcount including Covered Organizations',
 			'table' => 'fteheadcount',
@@ -550,6 +530,271 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'script' => 'datatable.order([0, "desc"]).draw();',
 			
 		],
+
+
+		'changeofpersonnel' => [
+			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName"=\'Changes in Personnel\' ORDER BY date("StartDate")',
+			'sectionTitle' => 'Change of Personnel',
+			'hdrs' => ['Effective Date', 'Provisional Status', 'Title Code', 'Reason For Change', 'Salary', 'Employee Name'],
+			'flds' => [
+					'function (r) { return usToDashDate(r["AdditionalDescription1"].split(";")[0].replace("Effective Date: ", "")); }', 
+					'function (r) { return r["AdditionalDescription1"].split(";")[1].replace("Provisional Status: ", ""); }', 
+					'function (r) { 
+						var code = r["AdditionalDescription1"].split(";")[2].replace("Title Code: ", "").trim();
+						return `<a href="/titles/${code}">${code}</a>`;
+					}', 
+					'function (r) { return r["AdditionalDescription1"].split(";")[3].replace("Reason For Change: ", ""); }', 
+					'function (r) { return toFin(r["AdditionalDescription1"].split(";")[4].replace("Salary: ", "")); }', 
+					'function (r) { return r["AdditionalDescription1"].split(";")[5].replace("Employee Name: ", ""); }', 
+				], 
+			'visible' => [true, true, true, true, true, true],
+			'filters' => [3 => null],
+			'details' => [],
+			'description' => '',
+			'script' => 'datatable.order([0, "desc"]).draw();',
+		],
+		'publichearings' => [
+			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Public Hearings and Meetings\'',
+			'sectionTitle' => 'Public Hearings and Meetings',
+			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
+					'function (r) { 
+						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
+						while (true) {
+							var i = rr.indexOf("");
+							if (i == -1) {
+							  break;
+							} else {
+							  rr.splice(i, 1);
+							}
+						  }
+						return rr.join(", ")
+					}',
+				],
+			'visible' => [true, true, true, true, true, true, true, true, true, true],
+			'filters' => [1 => null, 2 => null],
+			'details' => [
+				'Additional Description' => 'AdditionalDescription1',
+				'Start Date' => 'StartDate',
+				'End Date' => 'EndDate',
+				'Event Building Name' => 'EventBuildingName',
+			],
+			'description' => '',
+			'script' => 'datatable.order([1, "asc"]).draw();',
+		],
+		'contractawards' => [
+			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Contract Award Hearings\'',
+			'sectionTitle' => 'Contract Award Hearings',
+			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
+				    'function (r) { 
+						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
+						while (true) {
+							var i = rr.indexOf("");
+							if (i == -1) {
+							  break;
+							} else {
+							  rr.splice(i, 1);
+							}
+						  }
+						return rr.join(", ")
+					}',
+				],
+			'visible' => [true, true, true, true, true, true, true, true, true, true],
+			'filters' => [1 => null, 2 => null],
+			'details' => [
+				'Additional Description' => 'AdditionalDescription1',
+				'Document Links' => 'DocumentLinks',
+				'Start Date' => 'StartDate',
+				'End Date' => 'EndDate',
+				'Event Building Name' => 'EventBuildingName',
+				'Additional Desctription 2' => 'AdditionalDesctription2',
+				'Contact Name' => 'ContactName',
+				'Contact Phone' => 'ContactPhone',
+				'Email' => 'Email',
+			],
+			'description' => '',
+			'script' => 'datatable.order([1, "asc"]).draw();',
+		],
+		'specialmaterials' => [
+			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Special Materials\'',
+			'sectionTitle' => 'Special Materials',
+			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Location'],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["StartDate"]) }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"',
+					'function (r) { 
+						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
+						while (true) {
+							var i = rr.indexOf("");
+							if (i == -1) {
+							  break;
+							} else {
+							  rr.splice(i, 1);
+							}
+						  }
+						return rr.join(", ")
+					}',
+			],
+			'visible' => [true, true, true, true, true, true],
+			'filters' => [2 => null, 3 => null],
+			'details' => [
+				'Additional Description' => 'AdditionalDescription1',
+				'End Date' => 'EndDate',
+			],
+			'description' => '',
+			'script' => 'datatable.order([1, "asc"]).draw();',
+		],
+		'agencyrules' => [
+			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Agency Rules\'',
+			'sectionTitle' => 'Agency Rules',
+			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
+					'function (r) { 
+						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
+						while (true) {
+							var i = rr.indexOf("");
+							if (i == -1) {
+							  break;
+							} else {
+							  rr.splice(i, 1);
+							}
+						  }
+						return rr.join(", ")
+					}',
+			],
+			'visible' => [true, true, true, true, true, true, true, true, true, true],
+			'filters' => [1 => null, 2 => null],
+			'details' => [
+				'Additional Description' => 'AdditionalDescription1',
+				'Start Date' => 'StartDate',
+				'End Date' => 'EndDate',
+				'Document Links' => 'DocumentLinks',
+			],
+			'description' => '',
+			'script' => 'datatable.order([1, "asc"]).draw();',
+		],
+		'propertydisposition' => [
+			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Property Disposition\'',
+			'sectionTitle' => 'Property Disposition',
+			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["StartDate"]) }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
+					'function (r) { 
+						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
+						while (true) {
+							var i = rr.indexOf("");
+							if (i == -1) {
+							  break;
+							} else {
+							  rr.splice(i, 1);
+							}
+						  }
+						return rr.join(", ")
+					}',
+			],
+			'visible' => [true, true, true, true, true, true, true, true, true, true, true],
+			'filters' => [2 => null, 3 => null],
+			'details' => [
+				'Additional Description' => 'AdditionalDescription1',
+				'Building Name' => 'EventBuildingName',
+				'Document Links' => 'DocumentLinks',
+				'End Date' => 'EndDate',
+			],
+			'description' => '',
+			'script' => 'datatable.order([1, "asc"]).draw();',
+		],
+		'courtnotices' => [
+			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Court Notices\'',
+			'sectionTitle' => 'Court Notices',
+			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Short Title', 'Date', 'Location'],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["StartDate"]) }',
+					'"wegov-org-name"', '"ShortTitle"', 
+					'function (r) { return usToDashDate(r["EventDate"]) }',
+					'function (r) { 
+						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
+						while (true) {
+							var i = rr.indexOf("");
+							if (i == -1) {
+							  break;
+							} else {
+							  rr.splice(i, 1);
+							}
+						  }
+						return rr.join(", ")
+					}',
+			],
+			'visible' => [true, true, true, true, true, true, true, true, true, true],
+			'filters' => [2 => null],
+			'details' => [
+				'Additional Description' => 'AdditionalDescription1',
+				'Additional Description 2' => 'AdditionalDescription2',
+				'Building Name' => 'EventBuildingName',
+				'Document Links' => 'DocumentLinks',
+				'End Date' => 'EndDate',
+			],
+			'description' => '',
+			'script' => 'datatable.order([1, "asc"]).draw();',
+		],
+		'procurement' => [
+			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT "RequestID", "StartDate", "wegov-org-name", "TypeOfNoticeDescription", "CategoryDescription", "ShortTitle", "SelectionMethodDescription", "AdditionalDescription1", "SpecialCaseReasonDescription", "PIN", "DueDate", "EndDate", "AddressToRequest", "ContactName", "ContactPhone", "Email", "ContractAmount", "ContactFax", "OtherInfo1", "VendorName", "VendorAddress", "Printout1", "DocumentLinks", "EventBuildingName", "EventStreetAddress1" FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Procurement\'',
+			'sectionTitle' => 'Procurement',
+			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Selection Method Description'],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["StartDate"]) }',
+					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SelectionMethodDescription"'
+			],
+			'visible' => [true, true, true, true, true, true, true],
+			'filters' => [2 => null, 3 => null],
+			'details' => [
+				'Additional Description' => 'AdditionalDescription1',
+				'Special Case Reason Description' => 'SpecialCaseReasonDescription',
+				'PIN' => 'PIN',
+				'Due Date' => 'DueDate',
+				'End Date' => 'EndDate',
+				'Address To Request' => 'AddressToRequest',
+				'Contact Name' => 'ContactName',
+				'Contact Phone' => 'ContactPhone',
+				'Email' => 'Email',
+				'Contract Amount' => 'ContractAmount',
+				'Contact Fax' => 'ContactFax',
+				'Other Info' => 'OtherInfo1',
+				'Vendor Name' => 'VendorName',
+				'Vendor Address' => 'VendorAddress',
+				'Printout' => 'Printout1',
+				'Document Links' => 'DocumentLinks',
+				'Building Name' => 'EventBuildingName',
+				'Street Address' => 'EventStreetAddress1',
+			],
+			'description' => '',
+			'script' => 'datatable.order([1, "asc"]).draw();',
+		],
+
 		/*
 		'payrolldata' => [
 			'fullname' => 'Citywide Payroll Data (Fiscal Year)',
@@ -583,7 +828,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'additionalcostsallocation' => 'Additional Costs Allocation',
 		'locallaw251' => 'Assets',
 		'nyccouncildiscretionaryfunding' => 'City Council Discretionary Funding',
-		'changeofpersonnel' => 'Change of Personnel',
 		'civillist' => 'Civil List',
 		'nycgreenbook' => 'Contacts',
 		'll18payanddemo' => 'Demographics',
@@ -605,7 +849,16 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'govpubrequired' => 'Required Reports',
 		'benefitsapi' => 'Services',
 		'opendatareleasetracker' => 'Tracker',
-		
+
+	/* crol */
+		'changeofpersonnel' => 'Change of Personnel',
+		'publichearings' => 'Public Hearings',
+		'contractawards' => 'Contract Awards',
+		'specialmaterials' => 'Special Materials',
+		'agencyrules' => 'Agency Rules',
+		'propertydisposition' => 'Property Disposition',
+		'courtnotices' => 'Court Notices',
+		'procurement' => 'Procurement',
 	];
 	/*
 		additionalcostsallocation
@@ -644,6 +897,25 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 	
 	public $menu = [
 		'about',
+		'Notices' => 
+			[
+				'publichearings',
+				'procurement',
+				'contractawards',
+				'agencyrules',
+				'propertydisposition',
+				'courtnotices',
+				'changeofpersonnel',
+				'specialmaterials',
+			],
+		'Records & Data' => 
+			[
+				'govpublist',
+				'govpubrequired',
+				'opendatareleasetracker',		//Tracker	
+				'locallaw251',		//Assets
+				//'crol',
+			],
 		'Finances' => 
 			[
 				'expensebudgetonnycopendata',
@@ -653,14 +925,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'expenseactualsfunding',
 				'additionalcostsallocation'
 			],
-		'Documents' => 
-			[
-				'crol',
-				'govpublist',
-				'govpubrequired',
-			],
-		'capitalprojects',
-		'benefitsapi',
 		'People' => 
 			[		
 				'nycgreenbook',
@@ -671,6 +935,8 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'changeofpersonnel',
 				'civillist',
 			],
+		'capitalprojects',
+		'benefitsapi',
 		'Indicators' => 
 			[
 				'agencypmi',
@@ -679,11 +945,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'budgetrequestsregister',
 		'nycjobs',
 		'facilitydb',
-		'Data' => 
-			[
-				'opendatareleasetracker',		//Tracker	
-				'locallaw251',		//Assets
-			],
 	];
 	
 	public function menuActiveDD($sect)

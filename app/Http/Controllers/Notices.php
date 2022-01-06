@@ -18,12 +18,46 @@ class Notices extends Controller
     {
 		$ds = new CROLDatasets();
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-        return view('titles', [
-					'breadcrumbs' => Breadcrumbs::titles(),
+		$details = $ds->get('events');
+        return view('notices', [
+					'breadcrumbs' => Breadcrumbs::notices(),
 					'slist' => $ds->list,
-					'url' => $model->url('SELECT * FROM nyccivilservicetitles ORDER BY "Title Code"'),
-					'defSearch' => $_GET['search'] ?? null,
-					'defUnion' => $_GET['union'] ?? '',
+					'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' ORDER BY date("EventDate") DESC'),
+					'details' => $details,
+					'dataset' => $model->dataset($details['fullname']),
+					'statUrls' => [
+						'#publichearings1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Public Hearings and Meetings\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
+						'#publichearings7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Public Hearings and Meetings\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
+						'#publichearings30' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Public Hearings and Meetings\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'30 days\')'),
+
+						'#contractawards1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Contract Award Hearings\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
+						'#contractawards7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Contract Award Hearings\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
+						'#contractawards30' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Contract Award Hearings\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'30 days\')'),
+						
+						'#specialmaterials1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Special Materials\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
+						'#specialmaterials7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Special Materials\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
+						'#specialmaterials30' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Special Materials\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'30 days\')'),
+
+						'#agencyrules1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Agency Rules\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
+						'#agencyrules7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Agency Rules\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
+						'#agencyrules30' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Agency Rules\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'30 days\')'),
+
+						'#propertydisposition1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Property Disposition\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
+						'#propertydisposition7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Property Disposition\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
+						'#propertydisposition30' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Property Disposition\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'30 days\')'),
+
+						'#courtnotices1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Court Notices\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
+						'#courtnotices7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Court Notices\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
+						'#courtnotices30' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Court Notices\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'30 days\')'),
+
+						'#procurement1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Procurement\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
+						'#procurement7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Procurement\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
+						'#procurement30' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Procurement\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'30 days\')'),
+
+						'#changeofpersonnel1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Changes in Personnel\' AND NOT "AdditionalDescription1" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
+						'#changeofpersonnel7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Changes in Personnel\' AND NOT "AdditionalDescription1" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
+						'#changeofpersonnel30' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Changes in Personnel\' AND NOT "AdditionalDescription1" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'30 days\')'),
+					]
 				]);
     }
 	

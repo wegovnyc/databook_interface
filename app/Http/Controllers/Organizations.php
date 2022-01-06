@@ -155,11 +155,10 @@ class Organizations extends Controller
 					'menu' => $ds->menu,
 					'activeDropDown' => $ds->menuActiveDD($section),
 					'icons' => $ds->socicons,
-					'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" 
-											. ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')
-											. ($section == 'changeofpersonnel' ? ' AND "SectionName"=\'Changes in Personnel\' ORDER BY date("StartDate")' : '')
-										),
-					'dataset' => ($section == 'changeofpersonnel' ? ['Name' => 'Change of Personnel'] : []) + $model->dataset($details['fullname']),
+					'url' => ($details['sql'] ?? null) 
+								? $model->url(sprintf($details['sql'], $id))
+								: $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'"),
+					'dataset' => $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $section, $ds->list[$section]),
 					'details' => $details,
 					'map' => $details['map'] ?? null, //['cc' => 8, 'nta' => 7],

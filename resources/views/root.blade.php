@@ -57,6 +57,26 @@
 					<a class="btn_org_home" href="{{ route('titles') }}" role="button">View Profiles</a>
 				</div>
             </div>
+            <div class="col-md-6">
+				<div class="circle_img">
+					<img src="/img/request.png">
+				</div>
+				<div class="content_area">
+					<h4>Notices</h4>
+					<p>Agency news from the City Record.</p>
+					<a class="btn_org_home" href="{{ route('notices') }}" role="button">View Notices</a>
+				</div>
+            </div>
+            <div class="col-md-6">
+				<div class="circle_img">
+					<img src="/img/jobs.png">
+				</div>
+				<div class="content_area">
+					<h4>Participate</h4>
+					<p>Tell us what you think on our engagement platform.</p>
+					<a class="btn_org_home" href="http://participate.wegov.nyc/" role="button" target="_blank">Go</a>
+				</div>
+            </div>
 			
             <div class="col-md-12 mb-3">
 				<div class="content_area">

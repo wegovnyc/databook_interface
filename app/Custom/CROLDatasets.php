@@ -34,7 +34,7 @@ class CROLDatasets
 				'End Date' => 'EndDate',
 				'Event Building Name' => 'EventBuildingName',
 			],
-			'description' => 'Description',
+			'description' => '',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'contractawards' => [
@@ -72,7 +72,7 @@ class CROLDatasets
 				'Contact Phone' => 'ContactPhone',
 				'Email' => 'Email',
 			],
-			'description' => 'Description',
+			'description' => '',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'specialmaterials' => [
@@ -103,7 +103,7 @@ class CROLDatasets
 				'Additional Description' => 'AdditionalDescription1',
 				'End Date' => 'EndDate',
 			],
-			'description' => 'Description',
+			'description' => '',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'agencyrules' => [
@@ -136,7 +136,7 @@ class CROLDatasets
 				'End Date' => 'EndDate',
 				'Document Links' => 'DocumentLinks',
 			],
-			'description' => 'Description',
+			'description' => '',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'propertydisposition' => [
@@ -170,7 +170,7 @@ class CROLDatasets
 				'Document Links' => 'DocumentLinks',
 				'End Date' => 'EndDate',
 			],
-			'description' => 'Description',
+			'description' => '',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'courtnotices' => [
@@ -205,7 +205,7 @@ class CROLDatasets
 				'Document Links' => 'DocumentLinks',
 				'End Date' => 'EndDate',
 			],
-			'description' => 'Description',
+			'description' => '',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'procurement' => [
@@ -240,7 +240,7 @@ class CROLDatasets
 				'Building Name' => 'EventBuildingName',
 				'Street Address' => 'EventStreetAddress1',
 			],
-			'description' => 'Description',
+			'description' => '',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'changeofpersonnel' => [
@@ -262,8 +262,35 @@ class CROLDatasets
 			'visible' => [true, true, true, true, true, true],
 			'filters' => [3 => null],
 			'details' => [],
-			'description' => 'Description',
+			'description' => '',
 			'script' => 'datatable.order([0, "desc"]).draw();',
+		],
+		'events' => [
+			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
+			'hdrs' => ['Request ID', 'Event Date', 'Section Name', 'Type Of Notice Description', 'Agency Name', 'Short Title', 'Location', ],
+			'visible' => [true, true, true, true, true, true, true],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["EventDate"]); }', 
+					'"SectionName"', '"TypeOfNoticeDescription"', '"wegov-org-name"', '"ShortTitle"',
+					'function (r) { 
+						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
+						while (true) {
+							var i = rr.indexOf("");
+							if (i == -1) {
+							  break;
+							} else {
+							  rr.splice(i, 1);
+							}
+						  }
+						return rr.join(", ")
+					}',
+				],
+			'filters' => [2 => null, 3 => null, 4 => null],
+			'details' => [],
+			'description' => 'The City Record Online (CROL) is now a fully searchable database of notices published in the City Record newspaper which includes but is not limited to: public hearings and meetings, public auctions and sales, solicitations and awards and official rules proposed and adopted by city agencies.',
+			'script' => 'datatable.order([1, "desc"]).draw();',
 		],
 	];
 
