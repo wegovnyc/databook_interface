@@ -26,12 +26,13 @@ END:STANDARD
 END:VTIMEZONE
 @foreach($data as $ev)
 BEGIN:VEVENT
+LAST-MODIFIED:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
 DTSTAMP:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
 DTSTART:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'])) }}
 DTEND:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'] . ' +1 hour')) }}
-SUMMARY:{!! html_entity_decode($ev['ShortTitle']) !!}@if($ev['wegov-org-name']) | {!! html_entity_decode($ev['wegov-org-name']) !!}@endif
+SUMMARY:{!! html_entity_decode($ev['ShortTitle']) !!}@if($ev['wegov-org-name']) : {!! html_entity_decode($ev['wegov-org-name']) !!}@endif
 
-UID:{{ $ev['RequestID'] }}
+UID:{{ $ev['RequestID'] }}-event@databook.wegov.nyc
 DESCRIPTION:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
 URL:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
 @if($ev['Email'])ORGANIZER;CN={{ $ev['ContactName'] }}:MAILTO:{{ $ev['Email'] }}
@@ -39,6 +40,7 @@ URL:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
 @endif
 @if($ev['EventStreetAddress1'] && ($ev['EventStreetAddress1'] <> 'Address Not Listed In The Dropdown'))@php $rr = [$ev["EventStreetAddress1"], $ev["EventStreetAddress2"], $ev["EventCity"], $ev["EventStateCode"], $ev["EventZipCode"]]; $rr = array_diff($rr, ['']); @endphpLOCATION:{{ implode(', ', $rr) }}
 @endif
+SEQUENCE:0
 END:VEVENT
 @endforeach
 END:VCALENDAR
