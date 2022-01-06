@@ -1,0 +1,889 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//University of California Berkeley//MCB Events Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:MCB Events
+X-WR-TIMEZONE:America/Los_Angeles
+X-WR-CALDESC:MCB Events
+BEGIN:VTIMEZONE
+TZID:America/Los_Angeles
+X-LIC-LOCATION:America/Los_Angeles
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART:20211011T160000Z
+DTEND:20211011T170000Z
+DTSTAMP:20220106T014505Z
+UID:141775-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Christine Brown: ImmunoX Seminar Series Seminar
+DESCRIPTION:Other Speaker Institution: City of Hope
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 75
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211013T180000Z
+DTEND:20211013T190000Z
+DTSTAMP:20220106T014505Z
+UID:141073-ucb-events-calendar@berkeley.edu
+LOCATION:245 Li Ka Shing Center
+ORGANIZER:
+SUMMARY:Uri Alon: Mathematical essence of aging
+DESCRIPTION:Divisions of BBS\, CDB and GGD Speaker Institution: Weizmann In
+ stitute of Science
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1410
+ 73
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211014T223000Z
+DTEND:20211014T233000Z
+DTSTAMP:20220106T014505Z
+UID:140953-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Jerry Chen: Cracking Cortical Circuits Underlying Behavior
+DESCRIPTION:Division of Neurobiology and H. Wills Neuroscience Inst (Neuro)
+  This seminar is partially sponsored by NIH Speaker Institution: Boston Un
+ iversity
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 53
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211018T160000Z
+DTEND:20211018T170000Z
+DTSTAMP:20220106T014505Z
+UID:141776-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Benjamin R. tenOever: ImmunoX Seminar Series Seminar
+DESCRIPTION:Other Speaker Institution: Icahn School of Medicine at Mount Si
+ nai
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 76
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211018T230000Z
+DTEND:20211019T000000Z
+DTSTAMP:20220106T014505Z
+UID:140108-ucb-events-calendar@berkeley.edu
+LOCATION:105 Stanley Hall
+ORGANIZER:
+SUMMARY:Alex Holehouse: MBTG Hosted SQB Seminar: 'Sequence- and chemical sp
+ ecificity define the functional landscape of intrinsically disordered regi
+ ons'
+DESCRIPTION:Intrinsically disordered protein regions (IDRs) pervasively eng
+ age in essential molecular functions\, yet they are often poorly conserved
+  as assessed by sequence alignment. To understand the seeming paradox of h
+ ow sequence variability is compatible with function\, we examined the func
+ tional determinants for a poorly conserved but essential IDR. We show that
+  IDR function depends on two orthogonal... Speaker Institution: Washington
+  University School of Medicine
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 08
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211020T223000Z
+DTEND:20211020T233000Z
+DTSTAMP:20220106T014505Z
+UID:140118-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Ry Young: Roger Y. Stanier Memorial Lecture: Phage lysis: do we hav
+ e the hole story?
+DESCRIPTION:Department of Molecular and Cell Biology Roger Y. Stanier Memor
+ ial Lecture Speaker Institution: Texas AandM University
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 18
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211021T223000Z
+DTEND:20211021T233000Z
+DTSTAMP:20220106T014505Z
+UID:140954-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Alex Fornito: Brain network hubs: maps\, models\, and mechanisms
+DESCRIPTION:Neuroscience Student Seminar Series Speaker Institution: Monash
+  University
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 54
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211025T160000Z
+DTEND:20211025T170000Z
+DTSTAMP:20220106T014505Z
+UID:141777-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Crystal L. Mackall: ImmunoX Seminar Series Seminar
+DESCRIPTION:Other Speaker Institution: Stanford University
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 77
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211025T230000Z
+DTEND:20211026T000000Z
+DTSTAMP:20220106T014505Z
+UID:140109-ucb-events-calendar@berkeley.edu
+LOCATION:105 Stanley Hall
+ORGANIZER:
+SUMMARY:Nikta Fakhri: MBTG Hosted SQB Seminar: 'Broken symmetries in living
+  matter'
+DESCRIPTION:Speaker Institution: MIT
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 09
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211027T180000Z
+DTEND:20211027T190000Z
+DTSTAMP:20220106T014505Z
+UID:140615-ucb-events-calendar@berkeley.edu
+LOCATION:245 Li Ka Shing Center
+ORGANIZER:
+SUMMARY:Rajat Rohatgi: Hedgehog signaling: new mechanisms reveal new biolog
+ y
+DESCRIPTION:Divisions of BBS\, CDB and GGD Speaker Institution: Stanford Un
+ iversity
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1406
+ 15
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211101T160000Z
+DTEND:20211101T170000Z
+DTSTAMP:20220106T014505Z
+UID:141778-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Lucas Carrie: Monogenic immune disorders: dissecting mechanisms and
+  illuminating immunology
+DESCRIPTION:Other Speaker Institution: Yale University
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 78
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211101T230000Z
+DTEND:20211102T000000Z
+DTSTAMP:20220106T014505Z
+UID:140110-ucb-events-calendar@berkeley.edu
+LOCATION:106 Stanley Hall
+ORGANIZER:
+SUMMARY:Michael Rape: Ubiquitin-dependent control of mitochondrial function
+ : the reductive stress response
+DESCRIPTION:Mitochondria are essential organelles that provide ATP and many
+  metabolic building blocks\, but also regulate crucial immune and cell sur
+ vival pathways. Safeguarding mitochondrial function is therefore essential
+  for development\, and dysregulation of these organelles causes severe met
+ abolic or neurodegenerative diseases. We recently discovered the reductive
+  stress response\, which detects... Speaker Institution: University of Cal
+ ifornia\, Berkeley
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 10
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211103T180000Z
+DTEND:20211103T190000Z
+DTSTAMP:20220106T014505Z
+UID:140119-ucb-events-calendar@berkeley.edu
+LOCATION:245 Li Ka Shing Center
+ORGANIZER:
+SUMMARY:Tim Stearns: Evolution and the cytoskeleton: fungi that still remem
+ ber how to crawl and swim
+DESCRIPTION:Divisions of BBS\, CDB and GGD Speaker Institution: Stanford Un
+ iversity
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 19
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211108T170000Z
+DTEND:20211108T180000Z
+DTSTAMP:20220106T014505Z
+UID:141779-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Gregory F. Sonnenberg: ImmunoX Seminar Series Seminar
+DESCRIPTION:Other Speaker Institution: Weill Cornell Medicine
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 79
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211109T000000Z
+DTEND:20211109T010000Z
+DTSTAMP:20220106T014505Z
+UID:140111-ucb-events-calendar@berkeley.edu
+LOCATION:105 Stanley Hall
+ORGANIZER:
+SUMMARY:Chris Fromme: GTPase regulation of cellular membrane dynamics
+DESCRIPTION:The overarching question my lab seeks to answer is: How does th
+ e Golgi complex work? To address this question we have been investigating 
+ the regulatory GTPases that serve as molecular switches controlling the fl
+ ow of materials into and out of the Golgi complex. We have focused our eff
+ orts on understanding how cells regulate the activation of these conserved
+  GTPase pathways at the right place and... Speaker Institution: Cornell Un
+ iversity
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 11
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211109T233000Z
+DTEND:20211110T003000Z
+DTSTAMP:20220106T014505Z
+UID:140120-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Jill Banfield: Allan C. Wilson Memorial Lecture: Borgs: megabase-le
+ ngth linear extrachromosomal elements of methane-oxidizing archaea
+DESCRIPTION:Department of Molecular and Cell Biology Allan C. Wilson Memori
+ al Lectures Speaker Institution: University of California\, Berkeley
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 20
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211110T233000Z
+DTEND:20211111T003000Z
+DTSTAMP:20220106T014505Z
+UID:140121-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Jill Banfield: Allan C. Wilson Memorial Lecture: Bacteriophages\, t
+ he viruses of bacteria\, have the propensity to adopt genetic codes that a
+ re distinct from those of their hosts
+DESCRIPTION:Department of Molecular and Cell Biology Allan C. Wilson Memori
+ al Lectures Speaker Institution: University of California\, Berkeley
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 21
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211115T170000Z
+DTEND:20211115T180000Z
+DTSTAMP:20220106T014505Z
+UID:141780-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Greg M. Delgoffe: ImmunoX Seminar Series Seminar
+DESCRIPTION:Other Speaker Institution: University of Pittsburgh
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 80
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211116T000000Z
+DTEND:20211116T010000Z
+DTSTAMP:20220106T014505Z
+UID:140112-ucb-events-calendar@berkeley.edu
+LOCATION:105 Stanley Hall
+ORGANIZER:
+SUMMARY:Suzanne Pfeffer: A kinase and a phosphatase: molecular basis of inh
+ erited Parkinson’s disease
+DESCRIPTION:Pathogenic mutations in the Parkinson’s disease-associated LR
+ RK2 kinase increase its activity and lead to phosphorylation of a subset o
+ f Rab GTPases that are master regulators of membrane traffic events. Rab p
+ hosphorylation flips a switch: Rabs bind new partners\, triggering dominan
+ t consequences for cell physiology that include blocking primary cilia for
+ mation. In this lecture\, I will present our... Speaker Institution: Stanf
+ ord University School of Medicine
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 12
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211117T190000Z
+DTEND:20211117T200000Z
+DTSTAMP:20220106T014505Z
+UID:140122-ucb-events-calendar@berkeley.edu
+LOCATION:245 Li Ka Shing Center
+ORGANIZER:
+SUMMARY:Stirling Churchman: The dynamics of gene expression\, from the nucl
+ eus to mitochondria
+DESCRIPTION:Divisions of BBS\, CDB and GGD Speaker Institution: Harvard Med
+ ical School
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 22
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211122T170000Z
+DTEND:20211122T180000Z
+DTSTAMP:20220106T014505Z
+UID:141781-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Regev Aviv: ImmunoX Seminar Series Seminar
+DESCRIPTION:Other Speaker Institution: Genentech
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 81
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211130T000000Z
+DTEND:20211130T010000Z
+DTSTAMP:20220106T014505Z
+UID:142951-ucb-events-calendar@berkeley.edu
+LOCATION:106 Stanley Hall
+ORGANIZER:
+SUMMARY:Julia Shifman: Evolution and design of protein-protein interactions
+DESCRIPTION:Protein-protein interactions (PPIs) have evolved to possess bin
+ ding affinities that best satisfy their functional role. PPIs with differe
+ nt affinities could be structurally very similar\, exhibiting similar numb
+ er and type of intermolecular interactions. To understand how slight struc
+ tural variations translate into substantial differences in binding affinit
+ ies\, we study binding landscapes\, i. e.... Speaker Institution: Hebrew U
+ niversity of Jerusalem
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1429
+ 51
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211201T190000Z
+DTEND:20211201T200000Z
+DTSTAMP:20220106T014505Z
+UID:140123-ucb-events-calendar@berkeley.edu
+LOCATION:245 Li Ka Shing Center
+ORGANIZER:
+SUMMARY:Eric Fischer: Molecular Principles of Small Molecule-mediated Ubiqu
+ itin Ligase Targeting
+DESCRIPTION:Divisions of BBS\, CDB and GGD Speaker Institution: Harvard Uni
+ versity
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 23
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211206T170000Z
+DTEND:20211206T180000Z
+DTSTAMP:20220106T014505Z
+UID:141782-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Jason Sello: ImmunoX Seminar Series Seminar
+DESCRIPTION:Other Speaker Institution: University of California\, San Franc
+ isco
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 82
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211207T000000Z
+DTEND:20211207T010000Z
+DTSTAMP:20220106T014505Z
+UID:140113-ucb-events-calendar@berkeley.edu
+LOCATION:105 Stanley Hall
+ORGANIZER:
+SUMMARY:Jose Rodriguez: Deciphering the prion code
+DESCRIPTION:Prions are proteinaceous infectious particles that allow the pr
+ opagation and inheritance of structural information by proteins. Prions po
+ pulate the tree of life\, propagating as fibrils both in laboratory strain
+ s and in the wild. Disease-causing prions are responsible for transmissibl
+ e spongiform encephalopathies\, a wide range of neurodegenerative disorder
+ s affecting a variety of species. In... Speaker Institution: University of
+  California\, Los Angeles
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 13
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211207T233000Z
+DTEND:20211208T003000Z
+DTSTAMP:20220106T014505Z
+UID:140115-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Anne Bertolotti: C. H. Li Memorial Lecture: Boosting protein qualit
+ y control: A strategy against neurodegenerative diseases
+DESCRIPTION:Department of Molecular and Cell Biology C. H. Li Memorial Lect
+ ures Speaker Institution: University of Cambridge
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 15
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211208T233000Z
+DTEND:20211209T003000Z
+DTSTAMP:20220106T014505Z
+UID:140116-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Anne Bertolotti: C. H. Li Memorial Lecture: Towards cracking the se
+ lectivity code of serine/threonine phosphatases
+DESCRIPTION:Department of Molecular and Cell Biology C. H. Li Memorial Lect
+ ures Speaker Institution: University of Cambridge
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 16
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211210T230000Z
+DTEND:20211211T000000Z
+DTSTAMP:20220106T014505Z
+UID:141428-ucb-events-calendar@berkeley.edu
+LOCATION:Sibley Auditorium Bechtel Engineering Center
+ORGANIZER:
+SUMMARY:Rebecca Heald: Department of Molecular and Cell Biology Annual Caps
+ tone Lecture: Fun experiments you can only do with frogs
+DESCRIPTION:Department of Molecular and Cell Biology Department of Molecula
+ r and Cell Biology Annual Capstone Lecture Speaker Institution: UCB
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1414
+ 28
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20211213T170000Z
+DTEND:20211213T180000Z
+DTSTAMP:20220106T014505Z
+UID:141783-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Shao-Cong Sun: ImmunoX Seminar Series Seminar
+DESCRIPTION:Other Speaker Institution: MD Anderson Cancer Center
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1417
+ 83
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220107T190000Z
+DTEND:20220107T200000Z
+DTSTAMP:20220106T014505Z
+UID:143938-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Robert Phillips: A Language Whose Characters are Triangles
+DESCRIPTION:Division of Genetics\, Genomics and Development (GGD) This semi
+ nar is partially sponsored by NIH Speaker Institution: Caltech
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1439
+ 38
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220112T190000Z
+DTEND:20220113T010000Z
+DTSTAMP:20220106T014505Z
+UID:143366-ucb-events-calendar@berkeley.edu
+LOCATION:245 Li Ka Shing Center
+ORGANIZER:
+SUMMARY:: *CANCELED* Siebel Stem Cell Institute Workshop
+DESCRIPTION:Other
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1433
+ 66
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220112T233000Z
+DTEND:20220113T000000Z
+DTSTAMP:20220106T014505Z
+UID:140075-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:**Hernan Garcia**: Department of Molecular and Cell Biology Seminar
+DESCRIPTION:Department of Molecular and Cell Biology Speaker Institution: U
+ niversity of California\, Berkeley
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1400
+ 75
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220208T000000Z
+DTEND:20220208T010000Z
+DTSTAMP:20220106T014505Z
+UID:141072-ucb-events-calendar@berkeley.edu
+LOCATION:106 Stanley Hall
+ORGANIZER:
+SUMMARY:Sam Sternberg: Structural and Quantitative Biology Seminar
+DESCRIPTION:Speaker Institution: Columbia University Irving Medical Center
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1410
+ 72
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220217T233000Z
+DTEND:20220218T003000Z
+DTSTAMP:20220106T014505Z
+UID:140955-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Anne Churchland: Division of Neurobiology and H. Wills Neuroscience
+  Institute
+DESCRIPTION:Division of Neurobiology and H. Wills Neuroscience Inst (Neuro)
+  This seminar is partially sponsored by NIH Speaker Institution: Universit
+ y of California\, Los Angeles
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 55
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220224T233000Z
+DTEND:20220225T003000Z
+DTSTAMP:20220106T014505Z
+UID:140956-ucb-events-calendar@berkeley.edu
+LOCATION: Remote
+ORGANIZER:
+SUMMARY:Hopi Hoekstra: Division of Neurobiology and H. Wills Neuroscience I
+ nstitute
+DESCRIPTION:Division of Neurobiology and H. Wills Neuroscience Inst (Neuro)
+  This seminar is partially sponsored by NIH Speaker Institution: Harvard U
+ niversity
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 56
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220314T230000Z
+DTEND:20220315T000000Z
+DTSTAMP:20220106T014505Z
+UID:140128-ucb-events-calendar@berkeley.edu
+LOCATION:106 Stanley Hall
+ORGANIZER:
+SUMMARY:James Berger: Structural and Quantitative Biology Seminar
+DESCRIPTION:Speaker Institution: Johns Hopkins University School of Medicin
+ e
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 28
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220316T223000Z
+DTEND:20220316T233000Z
+DTSTAMP:20220106T014505Z
+UID:140124-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Aviv Regev: Berkeley Stem Cell Center Director's Special Seminar
+DESCRIPTION:Other Speaker Institution: Broad Institute
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 24
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220317T223000Z
+DTEND:20220317T233000Z
+DTSTAMP:20220106T014505Z
+UID:140957-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Marisela Morales: Division of Neurobiology and H. Wills Neuroscienc
+ e Institute
+DESCRIPTION:Division of Neurobiology and H. Wills Neuroscience Inst (Neuro)
+  This seminar is partially sponsored by NIH Speaker Institution: National 
+ Institutes of Health
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 57
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220324T223000Z
+DTEND:20220324T233000Z
+DTSTAMP:20220106T014505Z
+UID:140958-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Jim Surmeier: Division of Neurobiology and H. Wills Neuroscience In
+ stitute
+DESCRIPTION:Division of Neurobiology and H. Wills Neuroscience Inst (Neuro)
+  This seminar is partially sponsored by NIH Speaker Institution: Northwest
+ ern University
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 58
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220328T230000Z
+DTEND:20220329T000000Z
+DTSTAMP:20220106T014505Z
+UID:140129-ucb-events-calendar@berkeley.edu
+LOCATION:106 Stanley Hall
+ORGANIZER:
+SUMMARY:Bil Clemons: Structural and Quantitative Biology Seminar
+DESCRIPTION:Speaker Institution: Caltech
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 29
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220329T223000Z
+DTEND:20220329T233000Z
+DTSTAMP:20220106T014505Z
+UID:140125-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Patricia Bassereau: Chiron Lecture
+DESCRIPTION:Department of Molecular and Cell Biology Chiron Lectures Speake
+ r Institution: Institut Curie
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 25
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220330T223000Z
+DTEND:20220330T233000Z
+DTSTAMP:20220106T014505Z
+UID:140126-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Patricia Bassereau: Chiron Lecture
+DESCRIPTION:Department of Molecular and Cell Biology Chiron Lectures Speake
+ r Institution: Institut Curie
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 26
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220331T223000Z
+DTEND:20220331T233000Z
+DTSTAMP:20220106T014505Z
+UID:140959-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Priya Rajasethupathy: Neuroscience Student Seminar Series
+DESCRIPTION:Neuroscience Student Seminar Series Speaker Institution: Rockef
+ eller University
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 59
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220405T223000Z
+DTEND:20220405T233000Z
+DTSTAMP:20220106T014505Z
+UID:140076-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Carolyn Bertozzi: Alber Memorial Lecture Seminar
+DESCRIPTION:Other
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1400
+ 76
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220407T223000Z
+DTEND:20220407T233000Z
+DTSTAMP:20220106T014505Z
+UID:140960-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Konrad Kording: Neuroscience Student Seminar Series
+DESCRIPTION:Neuroscience Student Seminar Series Speaker Institution: Univer
+ sity of Pennsylvania
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 60
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220411T230000Z
+DTEND:20220412T000000Z
+DTSTAMP:20220106T014505Z
+UID:140131-ucb-events-calendar@berkeley.edu
+LOCATION:106 Stanley Hall
+ORGANIZER:
+SUMMARY:Emily Derbyshire: Structural and Quantitative Biology Seminar
+DESCRIPTION:Speaker Institution: Duke University
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 31
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220413T180000Z
+DTEND:20220413T190000Z
+DTSTAMP:20220106T014505Z
+UID:140616-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Hani Goodarzi: Divisions of Biochemistry\, Biophysics and Structura
+ l Biology\, Cell and Developmental Biology\, and Genetics\, Genomics and D
+ evelopment
+DESCRIPTION:Divisions of BBS\, CDB and GGD Speaker Institution: University 
+ of California\, San Francisco
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1406
+ 16
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220414T223000Z
+DTEND:20220414T233000Z
+DTSTAMP:20220106T014505Z
+UID:140961-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Jason Shepherd: Division of Neurobiology and H. Wills Neuroscience 
+ Institute
+DESCRIPTION:Division of Neurobiology and H. Wills Neuroscience Inst (Neuro)
+  This seminar is partially sponsored by NIH Speaker Institution: Universit
+ y of Utah
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 61
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220425T230000Z
+DTEND:20220426T000000Z
+DTSTAMP:20220106T014505Z
+UID:140133-ucb-events-calendar@berkeley.edu
+LOCATION: Sibley Auditorium\, Bechtel Engineering Center
+ORGANIZER:
+SUMMARY:Michael Rosen: Cynthia A. Chan Memorial Lecture
+DESCRIPTION:Speaker Institution: UT Southwestern Medical Center
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 33
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220427T180000Z
+DTEND:20220427T190000Z
+DTSTAMP:20220106T014505Z
+UID:140127-ucb-events-calendar@berkeley.edu
+LOCATION:100 Genetics and Plant Biology Building
+ORGANIZER:
+SUMMARY:Erika Holzbaur: Divisions of Biochemistry\, Biophysics and Structur
+ al Biology\, Cell and Developmental Biology\, and Genetics\, Genomics and 
+ Development Seminar
+DESCRIPTION:Divisions of BBS\, CDB and GGD Speaker Institution: University 
+ of Pennsylvania
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 27
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220428T223000Z
+DTEND:20220428T233000Z
+DTSTAMP:20220106T014505Z
+UID:140962-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Kate Wassum: Division of Neurobiology and H. Wills Neuroscience Ins
+ titute
+DESCRIPTION:Division of Neurobiology and H. Wills Neuroscience Inst (Neuro)
+  This seminar is partially sponsored by NIH Speaker Institution: Universit
+ y of California\, Los Angeles
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 62
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220502T230000Z
+DTEND:20220503T000000Z
+DTSTAMP:20220106T014505Z
+UID:140132-ucb-events-calendar@berkeley.edu
+LOCATION:106 Stanley Hall
+ORGANIZER:
+SUMMARY:Katya Heldwein: Structural and Quantitative Biology Seminar
+DESCRIPTION:Speaker Institution: Tufts University School of Medicine
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1401
+ 32
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220505T223000Z
+DTEND:20220505T233000Z
+DTSTAMP:20220106T014505Z
+UID:140963-ucb-events-calendar@berkeley.edu
+LOCATION:101 Weill Hall
+ORGANIZER:
+SUMMARY:Aleena Garner: Division of Neurobiology and H. Wills Neuroscience I
+ nstitute
+DESCRIPTION:Division of Neurobiology and H. Wills Neuroscience Inst (Neuro)
+  This seminar is partially sponsored by NIH Speaker Institution: Harvard U
+ niversity
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1409
+ 63
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20220506T220000Z
+DTEND:20220506T230000Z
+DTSTAMP:20220106T014505Z
+UID:141333-ucb-events-calendar@berkeley.edu
+LOCATION:Sibley Auditorium Bechtel Engineering Center
+ORGANIZER:
+SUMMARY:Avital Rodal: Department of Molecular and Cell Biology Annual Alumn
+ i Seminar
+DESCRIPTION:Department of Molecular and Cell Biology Department of Molecula
+ r and Cell Biology Annual Alumni Seminar Speaker Institution: Brandeis Uni
+ versity
+URL:http://events.berkeley.edu/index.php/calendar/sn/mcb.html?event_ID=1413
+ 33
+LAST-MODIFIED:20220106T014501Z
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR
