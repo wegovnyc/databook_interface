@@ -99,8 +99,9 @@ class Notices extends Controller
 					'data' => $data,
 					'dataset' => $model->dataset('City Record Online (CROL)'),
 				])
-				->header('Content-type', 'text/calendar; charset=utf-8')
-				->header('Content-Disposition', 'attachment; filename="cal.ics"')
+				->header('Content-type', 'text/calendar')
+				#->header('Content-type', 'text/calendar; charset=utf-8')
+				#->header('Content-Disposition', 'attachment; filename="cal.ics"')
 			: abort(404);
     }
 }
