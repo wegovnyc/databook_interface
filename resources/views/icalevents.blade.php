@@ -4,9 +4,10 @@ METHOD:PUBLISH
 PRODID:-//Wegov Databook/Upcoming Events//EN
 @foreach($data as $ev)
 BEGIN:VEVENT
-DTSTART:{{ date('Ymd\THis\Z', strtotime($ev['StartDate'])) }}
-DTEND:{{ date('Ymd\THis\Z', strtotime($ev['EndDate'])) }}
-SUMMARY:{!! html_entity_decode($ev['ShortTitle']) !!}|{!! html_entity_decode($ev['wegov-org-name']) !!}|{{ $ev['EventDate'] }}
+DTSTAMP:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
+DTSTART:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'])) }}
+DTEND:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'] . ' +1 hour')) }}
+SUMMARY:{!! html_entity_decode($ev['ShortTitle']) !!}|{!! html_entity_decode($ev['wegov-org-name']) !!}
 UID:{{ $ev['RequestID'] }}
 URL:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
 @if($ev['Email'])ORGANIZER;CN={{ $ev['ContactName'] }}:MAILTO:{{ $ev['Email'] }}

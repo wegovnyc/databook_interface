@@ -95,7 +95,10 @@ class Notices extends Controller
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
 		$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' ORDER BY date("EventDate") DESC');
 		return $data
-			? response()->view('icalevents', ['data' => $data])
+			? response()->view('icalevents', [
+					'data' => $data,
+					'dataset' => $model->dataset('City Record Online (CROL)'),
+				])
 				->header('Content-type', 'text/calendar; charset=utf-8')
 				->header('Content-Disposition', 'attachment; filename="cal.ics"')
 			: abort(404);
