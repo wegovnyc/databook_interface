@@ -7,9 +7,10 @@ BEGIN:VEVENT
 DTSTAMP:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
 DTSTART:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'])) }}
 DTEND:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'] . ' +1 hour')) }}
-SUMMARY:{!! html_entity_decode($ev['ShortTitle']) !!}|{!! html_entity_decode($ev['wegov-org-name']) !!}
+SUMMARY:{!! html_entity_decode($ev['ShortTitle']) !!}@if($ev['wegov-org-name']) | {!! html_entity_decode($ev['wegov-org-name']) !!}@endif
+
 UID:{{ $ev['RequestID'] }}
-URL:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
+DESCRIPTION:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
 @if($ev['Email'])ORGANIZER;CN={{ $ev['ContactName'] }}:MAILTO:{{ $ev['Email'] }}
 @elseif($ev['ContactPhone'])ORGANIZER;CN={{ $ev['ContactName'] }}:TEL:{{ $ev['ContactPhone'] }}
 @endif
