@@ -557,6 +557,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		],
 		'publichearings' => [
 			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
 			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Public Hearings and Meetings\'',
 			'sectionTitle' => 'Public Hearings and Meetings',
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
@@ -590,6 +591,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		],
 		'contractawards' => [
 			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
 			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Contract Award Hearings\'',
 			'sectionTitle' => 'Contract Award Hearings',
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
@@ -628,6 +630,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		],
 		'specialmaterials' => [
 			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
 			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Special Materials\'',
 			'sectionTitle' => 'Special Materials',
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Location'],
@@ -659,6 +662,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		],
 		'agencyrules' => [
 			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
 			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Agency Rules\'',
 			'sectionTitle' => 'Agency Rules',
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
@@ -692,6 +696,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		],
 		'propertydisposition' => [
 			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
 			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Property Disposition\'',
 			'sectionTitle' => 'Property Disposition',
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
@@ -726,6 +731,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		],
 		'courtnotices' => [
 			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
 			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Court Notices\'',
 			'sectionTitle' => 'Court Notices',
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Short Title', 'Date', 'Location'],
@@ -761,6 +767,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		],
 		'procurement' => [
 			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
 			'sql' => 'SELECT "RequestID", "StartDate", "wegov-org-name", "TypeOfNoticeDescription", "CategoryDescription", "ShortTitle", "SelectionMethodDescription", "AdditionalDescription1", "SpecialCaseReasonDescription", "PIN", "DueDate", "EndDate", "AddressToRequest", "ContactName", "ContactPhone", "Email", "ContractAmount", "ContactFax", "OtherInfo1", "VendorName", "VendorAddress", "Printout1", "DocumentLinks", "EventBuildingName", "EventStreetAddress1" FROM crol WHERE "wegov-org-id"=\'%s\' AND "SectionName" = \'Procurement\'',
 			'sectionTitle' => 'Procurement',
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Selection Method Description'],
@@ -826,10 +833,14 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 	public $list = [
 		'about' => 'About',
 		'additionalcostsallocation' => 'Additional Costs Allocation',
+		'agencyrules' => 'Agency Rules',
 		'locallaw251' => 'Assets',
 		'nyccouncildiscretionaryfunding' => 'City Council Discretionary Funding',
 		'civillist' => 'Civil List',
+		'changeofpersonnel' => 'Change of Personnel',
 		'nycgreenbook' => 'Contacts',
+		'contractawards' => 'Contract Awards',
+		'courtnotices' => 'Court Notices',
 		'll18payanddemo' => 'Demographics',
 		'expenseactualsfunding' => 'Expense Actuals By Funding Source',
 		'expensebudgetonnycopendata' => 'Expense Budget',
@@ -843,22 +854,17 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'onenycindicators' => 'OneNYC',
 		#'payrolldata' => 'Payroll',
 		'positionschedule' => 'Positions',
+		'procurement' => 'Procurement',
 		'capitalprojects' => 'Projects',
+		'propertydisposition' => 'Property Disposition',
+		'publichearings' => 'Public Hearings',
 		'govpublist' => 'Publications',
 		'budgetrequestsregister' => 'Requests',
 		'govpubrequired' => 'Required Reports',
 		'benefitsapi' => 'Services',
+		'specialmaterials' => 'Special Materials',
 		'opendatareleasetracker' => 'Tracker',
 
-	/* crol */
-		'changeofpersonnel' => 'Change of Personnel',
-		'publichearings' => 'Public Hearings',
-		'contractawards' => 'Contract Awards',
-		'specialmaterials' => 'Special Materials',
-		'agencyrules' => 'Agency Rules',
-		'propertydisposition' => 'Property Disposition',
-		'courtnotices' => 'Court Notices',
-		'procurement' => 'Procurement',
 	];
 	/*
 		additionalcostsallocation

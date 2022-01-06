@@ -117,7 +117,7 @@ class Organizations extends Controller
 						'icons' => $ds->socicons,
 						'allDS' => $ds->dd,
 						'tableStatUrl' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}'"),
-						'tableStatUrlChangeOfPersonnel' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}' AND \"SectionName\"='Changes in Personnel'"),
+						'tableStatUrlNotices' => $model->url("SELECT count(*) FROM crol WHERE \"wegov-org-id\"='{$id}' AND \"SectionName\"='sectionTitle'"),
 						'finStatUrls' => [
 							'headcount' => $model->url("SELECT sum(\"HEADCOUNT\") FROM headcountactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
 							'as' => $model->url("SELECT sum(\"AMOUNT\" * 1000) FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),

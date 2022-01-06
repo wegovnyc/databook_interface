@@ -14,7 +14,7 @@
 		function details(r) {
 			return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
 			  @foreach ((array)$details['details'] as $h=>$f)
-				'<tr><td>{{ $h }}:</td><td>' + {!! $f !!} + '</td></tr>' +
+				(r["{{ $f }}"] ? ('<tr><td>{{ $h }}:</td><td>' + r["{{ $f }}"] + '</td></tr>') : '') +
 			  @endforeach
 			'</table>';
 		}
@@ -317,18 +317,18 @@
 	<div class="inner_container">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-9 organization_data">
+				<div class="col-md-11 organization_data">
 					<h4>{{ $details['fullname'] }}</h4>
 					<p>{!! nl2br($details['description']) !!}</p>
 				</div>
-				<div class="col-md-3 mt-2" id="org_summary">
-					<table class="table-sm stats-table" width="100%">
-					{{--<thead>
+				<div class="col-md-1 mt-2" id="org_summary">
+					{{--<table class="table-sm stats-table" width="100%">
+					<thead>
 						<tr>
 						<th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Publication Date&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
 						<th scope="col" width="50%" id="pub_date_filter"></th>
 						</tr>
-					</thead>--}}
+					</thead>
 					<tbody>
 						<tr>
 							<td colspan=2 class="text-right px-0 pt-0 pb-3">
@@ -336,7 +336,7 @@
 							</td>
 						</tr>
 					</tbody>
-					</table>
+					</table>--}}
 				</div>
 			</div>
 
@@ -348,11 +348,13 @@
 						  <a href="{{ route('noticesSection', ['section' => 'publichearings']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-left ml-3">Public Hearings</h2>
-									<p class="text-left ml-3 my-1"><u>New:</u></p>
-									<p class="text-left ml-3 my-1">Today:&nbsp;<b><span id="publichearings1">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">7 Days:&nbsp;<b><span id="publichearings7">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">30 Days:&nbsp;<b><span id="publichearings30">&nbsp;</span></b></p>
+									<h2 class="prj_stat text-center">Public Hearings</h2>
+									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<div class="row">
+										<div class="col-3 pr-0">Today:&nbsp;<b><span id="publichearings1">&nbsp;</span></b></div>
+										<div class="col pr-0">7 Days:&nbsp;<b><span id="publichearings7">&nbsp;</span></b></div>
+										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="publichearings30">&nbsp;</span></b></div>
+									</div>
 								</div>
 							</div>
 						  </a>	
@@ -364,11 +366,13 @@
 						  <a href="{{ route('noticesSection', ['section' => 'procurement']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-left ml-3">Procurement</h2>
-									<p class="text-left ml-3 my-1"><u>New:</u></p>
-									<p class="text-left ml-3 my-1">Today:&nbsp;<b><span id="procurement1">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">7 Days:&nbsp;<b><span id="procurement7">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">30 Days:&nbsp;<b><span id="procurement30">&nbsp;</span></b></p>
+									<h2 class="prj_stat text-center">Procurement</h2>
+									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<div class="row">
+										<div class="col-3 pr-0">Today:&nbsp;<b><span id="procurement1">&nbsp;</span></b></div>
+										<div class="col pr-0">7 Days:&nbsp;<b><span id="procurement7">&nbsp;</span></b></div>
+										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="procurement30">&nbsp;</span></b></div>
+									</div>
 								</div>
 							</div>
 						  </a>	
@@ -380,11 +384,13 @@
 						  <a href="{{ route('noticesSection', ['section' => 'contractawards']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-left ml-3">Contract Award</h2>
-									<p class="text-left ml-3 my-1"><u>New:</u></p>
-									<p class="text-left ml-3 my-1">Today:&nbsp;<b><span id="contractawards1">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">7 Days:&nbsp;<b><span id="contractawards7">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">30 Days:&nbsp;<b><span id="contractawards30">&nbsp;</span></b></p>
+									<h2 class="prj_stat text-center">Contract Award</h2>
+									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<div class="row">
+										<div class="col-3 pr-0">Today:&nbsp;<b><span id="contractawards1">&nbsp;</span></b></div>
+										<div class="col pr-0">7 Days:&nbsp;<b><span id="contractawards7">&nbsp;</span></b></div>
+										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="contractawards30">&nbsp;</span></b></div>
+									</div>
 								</div>
 							</div>
 						  </a>	
@@ -396,11 +402,13 @@
 						  <a href="{{ route('noticesSection', ['section' => 'agencyrules']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-left ml-3">Agency Rules</h2>
-									<p class="text-left ml-3 my-1"><u>New:</u></p>
-									<p class="text-left ml-3 my-1">Today:&nbsp;<b><span id="agencyrules1">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">7 Days:&nbsp;<b><span id="agencyrules7">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">30 Days:&nbsp;<b><span id="agencyrules30">&nbsp;</span></b></p>
+									<h2 class="prj_stat text-center">Agency Rules</h2>
+									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<div class="row">
+										<div class="col-3 pr-0">Today:&nbsp;<b><span id="agencyrules1">&nbsp;</span></b></div>
+										<div class="col pr-0">7 Days:&nbsp;<b><span id="agencyrules7">&nbsp;</span></b></div>
+										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="agencyrules30">&nbsp;</span></b></div>
+									</div>
 								</div>
 							</div>
 						  </a>	
@@ -415,11 +423,13 @@
 						  <a href="{{ route('noticesSection', ['section' => 'propertydisposition']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-left ml-3">Property Disposition</h2>
-									<p class="text-left ml-3 my-1"><u>New:</u></p>
-									<p class="text-left ml-3 my-1">Today:&nbsp;<b><span id="propertydisposition1">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">7 Days:&nbsp;<b><span id="propertydisposition7">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">30 Days:&nbsp;<b><span id="propertydisposition30">&nbsp;</span></b></p>
+									<h2 class="prj_stat text-center px-0" style="letter-spacing: -1.5px;">Property Disposition</h2>
+									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<div class="row">
+										<div class="col-3 pr-0">Today:&nbsp;<b><span id="propertydisposition1">&nbsp;</span></b></div>
+										<div class="col pr-0">7 Days:&nbsp;<b><span id="propertydisposition7">&nbsp;</span></b></div>
+										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="propertydisposition30">&nbsp;</span></b></div>
+									</div>
 								</div>
 							</div>
 						  </a>	
@@ -431,11 +441,13 @@
 						  <a href="{{ route('noticesSection', ['section' => 'courtnotices']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-left ml-3">Court Notices</h2>
-									<p class="text-left ml-3 my-1"><u>New:</u></p>
-									<p class="text-left ml-3 my-1">Today:&nbsp;<b><span id="courtnotices1">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">7 Days:&nbsp;<b><span id="courtnotices7">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">30 Days:&nbsp;<b><span id="courtnotices30">&nbsp;</span></b></p>
+									<h2 class="prj_stat text-center">Court Notices</h2>
+									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<div class="row">
+										<div class="col-3 pr-0">Today:&nbsp;<b><span id="courtnotices1">&nbsp;</span></b></div>
+										<div class="col pr-0">7 Days:&nbsp;<b><span id="courtnotices7">&nbsp;</span></b></div>
+										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="courtnotices30">&nbsp;</span></b></div>
+									</div>
 								</div>
 							</div>
 						  </a>	
@@ -447,11 +459,13 @@
 						  <a href="{{ route('noticesSection', ['section' => 'changeofpersonnel']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-left ml-3">Changes in Personnel</h2>
-									<p class="text-left ml-3 my-1"><u>New:</u></p>
-									<p class="text-left ml-3 my-1">Today:&nbsp;<b><span id="changeofpersonnel1">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">7 Days:&nbsp;<b><span id="changeofpersonnel7">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">30 Days:&nbsp;<b><span id="changeofpersonnel30">&nbsp;</span></b></p>
+									<h2 class="prj_stat text-center px-0" style="letter-spacing:-1.25px;font-size:1.85rem;">Changes in Personnel</h2>
+									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<div class="row">
+										<div class="col-3 pr-0">Today:&nbsp;<b><span id="changeofpersonnel1">&nbsp;</span></b></div>
+										<div class="col pr-0">7 Days:&nbsp;<b><span id="changeofpersonnel7">&nbsp;</span></b></div>
+										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="changeofpersonnel30">&nbsp;</span></b></div>
+									</div>
 								</div>
 							</div>
 						  </a>	
@@ -463,11 +477,13 @@
 						  <a href="{{ route('noticesSection', ['section' => 'specialmaterials']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-left ml-3">Special Materials</h2>
-									<p class="text-left ml-3 my-1"><u>New:</u></p>
-									<p class="text-left ml-3 my-1">Today:&nbsp;<b><span id="specialmaterials1">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">7 Days:&nbsp;<b><span id="specialmaterials7">&nbsp;</span></b></p>
-									<p class="text-left ml-3 my-1">30 Days:&nbsp;<b><span id="specialmaterials30">&nbsp;</span></b></p>
+									<h2 class="prj_stat text-center ml-3">Special Materials</h2>
+									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<div class="row">
+										<div class="col-3 pr-0">Today:&nbsp;<b><span id="specialmaterials1">&nbsp;</span></b></div>
+										<div class="col pr-0">7 Days:&nbsp;<b><span id="specialmaterials7">&nbsp;</span></b></div>
+										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="specialmaterials30">&nbsp;</span></b></div>
+									</div>
 								</div>
 							</div>
 						  </a>	
@@ -588,6 +604,13 @@
 					</div>
 				</div>
 			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12 text-center">
+					<a type="button" class="type-label my-4" href="{{ route('noticesSection', ['section' => 'events']) }}">See All Events</a>
+				</div>
+			</div>
+				
+			
 		</div>
 
 		<div class="col-md-12">

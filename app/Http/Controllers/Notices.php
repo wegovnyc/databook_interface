@@ -22,7 +22,7 @@ class Notices extends Controller
         return view('notices', [
 					'breadcrumbs' => Breadcrumbs::notices(),
 					'slist' => $ds->list,
-					'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' ORDER BY date("EventDate") DESC'),
+					'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 days\') ORDER BY date("EventDate") DESC'),
 					'details' => $details,
 					'dataset' => $model->dataset($details['fullname']),
 					'statUrls' => [
@@ -78,7 +78,11 @@ class Notices extends Controller
 					'menu' => $ds->menu,
 					'breadcrumbs' => Breadcrumbs::noticesSect($section, $ds->list[$section]),
 					'url' => $model->url($details['sql']),
-					'dates_req_url' => $model->url("SELECT DISTINCT(SUBSTRING(\"StartDate\" from 7 for 4)) yy FROM crol WHERE \"SectionName\" = '{$details['CROLsection']}' ORDER BY yy DESC"),
+					'dates_req_url' => $model->url(
+						($details['dates_req_sql'] ?? null)
+						? $details['dates_req_sql']
+						: "SELECT DISTINCT(SUBSTRING(\"StartDate\" from 7 for 4)) yy FROM crol WHERE \"SectionName\" = '{$details['CROLsection']}' ORDER BY yy DESC"
+					),
 					'dataset' => $model->dataset($details['fullname']),
 					'details' => $details,
 				])

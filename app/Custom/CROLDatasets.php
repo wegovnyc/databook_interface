@@ -267,30 +267,28 @@ class CROLDatasets
 		],
 		'events' => [
 			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND SUBSTRING("EventDate" from 7 for 4) = \'pubdate\' ORDER BY date("EventDate") DESC',
+			'dates_req_sql' => 'SELECT DISTINCT(SUBSTRING("EventDate" from 7 for 4)) yy FROM crol WHERE NOT "EventDate" = \'\' ORDER BY yy DESC',
 			'table' => 'crol',
-			'hdrs' => ['Request ID', 'Event Date', 'Section Name', 'Type Of Notice Description', 'Agency Name', 'Short Title', 'Location', ],
+			'hdrs' => ['Request ID', 'Event Date', 'Section Name', 'Type Of Notice Description', 'Agency Name', 'Short Title', ],
 			'visible' => [true, true, true, true, true, true, true],
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
 					'function (r) { return usToDashDate(r["EventDate"]); }', 
 					'"SectionName"', '"TypeOfNoticeDescription"', '"wegov-org-name"', '"ShortTitle"',
-					'function (r) { 
-						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
-						while (true) {
-							var i = rr.indexOf("");
-							if (i == -1) {
-							  break;
-							} else {
-							  rr.splice(i, 1);
-							}
-						  }
-						return rr.join(", ")
-					}',
 				],
 			'filters' => [2 => null, 3 => null, 4 => null],
-			'details' => [],
+			'details' => [
+				'Description' => 'AdditionalDescription1',
+				'Building Name' => 'EventBuildingName',
+				'Street Address' => 'EventStreetAddress1',
+				'Street Address 2' => 'EventStreetAddress2',
+				'City' => 'EventCity',
+				'State' => 'EventStateCode',
+				'Zip Code' => 'EventZipCode',
+			],
 			'description' => 'The City Record Online (CROL) is now a fully searchable database of notices published in the City Record newspaper which includes but is not limited to: public hearings and meetings, public auctions and sales, solicitations and awards and official rules proposed and adopted by city agencies.',
-			'script' => 'datatable.order([1, "desc"]).draw();',
+			'script' => '',
 		],
 	];
 
@@ -303,6 +301,7 @@ class CROLDatasets
 		'courtnotices' => 'Court Notices',
 		'procurement' => 'Procurement',
 		'changeofpersonnel' => 'Change in Personnel',
+		'events' => 'Events',
 	];
 	
 	public $menu = [
@@ -314,6 +313,7 @@ class CROLDatasets
 		'courtnotices',
 		'procurement',
 		'changeofpersonnel',
+		'events',
 	];
 	
 	public function menuActiveDD($sect)

@@ -301,7 +301,7 @@
 				@if($i > 0)
 					loadTableStat(
 						"{{ $dsName }}", 
-						"{!! str_replace('tablename', $allDS[$dsName]['table'], $dsName == 'changeofpersonnel' ? $tableStatUrlChangeOfPersonnel : $tableStatUrl) !!}"
+						"{!! $allDS[$dsName]['sectionTitle'] ?? null ? str_replace('sectionTitle', $allDS[$dsName]['sectionTitle'], $tableStatUrlNotices) : str_replace('tablename', $allDS[$dsName]['table'], $tableStatUrl) !!}"
 					);
 				@endif
 			@endforeach
