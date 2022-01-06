@@ -84,4 +84,20 @@ class Notices extends Controller
 				])
 			: abort(404);
     }
+	
+    /**
+     * Show district section.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function ical()
+    {
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+		$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' ORDER BY date("EventDate") DESC');
+		return $data
+			? response()->view('icalevents', ['data' => $data])
+				->header('Content-type', 'text/calendar; charset=utf-8')
+				->header('Content-Disposition', 'attachment; filename="cal.ics"')
+			: abort(404);
+    }
 }

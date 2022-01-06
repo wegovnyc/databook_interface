@@ -150,10 +150,10 @@
 									toggleMap();
 								}, 500
 							);
-							*/
 							setTimeout(function(){
 								initPopovers();
 							}, 1000);
+							*/
 						}
 					@endif
 					
@@ -270,9 +270,10 @@
 					$(sel).text(v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 				})
 			}
+			{{--
 			setTimeout(function(){
 				initPopovers();
-			}, 1000);
+			}, 1000);--}}
 		}
 		{{--/*
 		function drawProjects(pages) {	// 'all',     'current'
@@ -479,8 +480,9 @@
 
 			<div class="row justify-content-center">
 				<div class="col-md-12 organization_data">
-					<h4>Upcoming Events &nbsp;<i class="bi bi-rss"></i></h4>
+					<h4>Upcoming Events &nbsp;<a title="Share direct link" onclick="copyLink();"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="Link copied to clipboard" placement="left" trigger="manual"></i></a></h4>
 					<p>Find the time and location of events such as public meetings and hearings about contracts, reports and more.</p>
+					<textarea id="details-permalink" class="details">{!! route('noticesIcalEvents') !!}</textarea>
 				</div>
 			</div>
 				

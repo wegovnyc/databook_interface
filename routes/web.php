@@ -61,4 +61,7 @@ Route::get('/notices', [Notices::class, 'main'])->name('notices');
 
 Route::get('/notices/{section}', [Notices::class, 'section'])->name('noticesSection');
 
+Route::get('/notices/events/ical', [Notices::class, 'ical'])->name('noticesIcalEvents');
+
+
 
