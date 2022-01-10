@@ -74,7 +74,7 @@
 				<div class="content_area">
 					<h4>Participate</h4>
 					<p>Tell us what you think on our engagement platform.</p>
-					<a class="btn_org_home" href="http://participate.wegov.nyc/" role="button" target="_blank">Go</a>
+					<a class="btn_org_home" href="http://participate.wegov.nyc/" role="button" target="_blank">Join Us</a>
 				</div>
             </div>
 			

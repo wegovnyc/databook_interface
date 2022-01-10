@@ -34,7 +34,7 @@ class CROLDatasets
 				'End Date' => 'EndDate',
 				'Event Building Name' => 'EventBuildingName',
 			],
-			'description' => '',
+			'description' => 'Hearings and meetings open to the public.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'contractawards' => [
@@ -72,7 +72,7 @@ class CROLDatasets
 				'Contact Phone' => 'ContactPhone',
 				'Email' => 'Email',
 			],
-			'description' => '',
+			'description' => 'Any contract over $100,000 is subject to a public hearing unless excepted by the City Charter or Rules of the Procurement Policy Board.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'specialmaterials' => [
@@ -103,7 +103,7 @@ class CROLDatasets
 				'Additional Description' => 'AdditionalDescription1',
 				'End Date' => 'EndDate',
 			],
-			'description' => '',
+			'description' => 'Other category including things like commodity prices and concept papers.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'agencyrules' => [
@@ -136,7 +136,7 @@ class CROLDatasets
 				'End Date' => 'EndDate',
 				'Document Links' => 'DocumentLinks',
 			],
-			'description' => '',
+			'description' => 'Notices related to propose and adopted rules as well as regulatory agendas.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'propertydisposition' => [
@@ -170,7 +170,7 @@ class CROLDatasets
 				'Document Links' => 'DocumentLinks',
 				'End Date' => 'EndDate',
 			],
-			'description' => '',
+			'description' => 'Public auctions and sales of city items ranging including equipment, cars and real estate.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'courtnotices' => [
@@ -205,7 +205,7 @@ class CROLDatasets
 				'Document Links' => 'DocumentLinks',
 				'End Date' => 'EndDate',
 			],
-			'description' => '',
+			'description' => 'New York State Supreme Court motions and acquisition notices.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'procurement' => [
@@ -240,7 +240,7 @@ class CROLDatasets
 				'Building Name' => 'EventBuildingName',
 				'Street Address' => 'EventStreetAddress1',
 			],
-			'description' => '',
+			'description' => 'Over 100 city agencies post solicitations for goods and services as well as award notices.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'changeofpersonnel' => [
@@ -262,7 +262,7 @@ class CROLDatasets
 			'visible' => [true, true, true, true, true, true],
 			'filters' => [3 => null],
 			'details' => [],
-			'description' => '',
+			'description' => 'List of people moving into and out of city government positions.',
 			'script' => 'datatable.order([0, "desc"]).draw();',
 		],
 		'events' => [
@@ -275,7 +275,9 @@ class CROLDatasets
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
 					'function (r) { return usToDashDate(r["EventDate"]); }', 
-					'"SectionName"', '"TypeOfNoticeDescription"', '"wegov-org-name"', '"ShortTitle"',
+					'"SectionName"', '"TypeOfNoticeDescription"', 
+					'function (r) { return `<a href="/organizations/${r["wegov-org-id"]}/events">${r["wegov-org-name"]}</a>` }',
+					'"ShortTitle"',
 				],
 			'filters' => [2 => null, 3 => null, 4 => null],
 			'details' => [
@@ -287,12 +289,13 @@ class CROLDatasets
 				'State' => 'EventStateCode',
 				'Zip Code' => 'EventZipCode',
 			],
-			'description' => 'The City Record Online (CROL) is now a fully searchable database of notices published in the City Record newspaper which includes but is not limited to: public hearings and meetings, public auctions and sales, solicitations and awards and official rules proposed and adopted by city agencies.',
+			'description' => 'All notices with an event date.',
 			'script' => '',
 		],
 	];
 
 	public $list = [
+		'events' => 'Events',
 		'publichearings' => 'Public Hearings',
 		'contractawards' => 'Contract Awards',
 		'specialmaterials' => 'Special Materials',
@@ -301,10 +304,10 @@ class CROLDatasets
 		'courtnotices' => 'Court Notices',
 		'procurement' => 'Procurement',
 		'changeofpersonnel' => 'Change in Personnel',
-		'events' => 'Events',
 	];
 	
 	public $menu = [
+		'events',
 		'publichearings',
 		'contractawards',
 		'specialmaterials',
@@ -313,7 +316,6 @@ class CROLDatasets
 		'courtnotices',
 		'procurement',
 		'changeofpersonnel',
-		'events',
 	];
 	
 	public function menuActiveDD($sect)

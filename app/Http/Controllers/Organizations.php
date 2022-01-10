@@ -116,8 +116,11 @@ class Organizations extends Controller
 						'activeDropDown' => '',
 						'icons' => $ds->socicons,
 						'allDS' => $ds->dd,
-						'tableStatUrl' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}'"),
-						'tableStatUrlNotices' => $model->url("SELECT count(*) FROM crol WHERE \"wegov-org-id\"='{$id}' AND \"SectionName\"='sectionTitle'"),
+						'tableStatUrls' => [
+							'reg' => $model->url("SELECT count(*) FROM tablename WHERE \"wegov-org-id\"='{$id}'"),
+							'notices' => $model->url("SELECT count(*) FROM crol WHERE \"wegov-org-id\"='{$id}' AND \"SectionName\"='sectionTitle'"),
+							'noticesEvents' => $model->url("SELECT count(*) FROM crol WHERE \"wegov-org-id\"='{$id}' AND NOT \"EventDate\" = ''"),
+						],
 						'finStatUrls' => [
 							'headcount' => $model->url("SELECT sum(\"HEADCOUNT\") FROM headcountactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
 							'as' => $model->url("SELECT sum(\"AMOUNT\" * 1000) FROM expenseactualsfunding WHERE \"wegov-org-id\"='{$id}' AND \"FISCAL YEAR\"=fyear"),
@@ -125,7 +128,8 @@ class Organizations extends Controller
 						],
 						'finStatYear' => 2020,
 						'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
-						'crol' => $model->crol($id),
+						'news' => $model->crolNews($id),
+						'events' => $model->crolEvents($id),
 					]);
     }
 
@@ -165,6 +169,20 @@ class Organizations extends Controller
 				])
 			: abort(404);
     }
+
+
+
+    /**
+     * Show organization notice subsection.
+     *
+     * @param  int  	$id
+     * @param  string  	$subsection
+     * @return \Illuminate\View\View
+     */
+    public function orgNoticesSection($id, $subsection)
+	{
+		return $this->orgSection($id, "notices/{$subsection}");
+	}
 
 
     /**

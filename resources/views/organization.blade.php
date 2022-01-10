@@ -77,7 +77,7 @@
 							Notices
 						</h5>
 						<div class="card-text">
-							@foreach($crol as $notice)
+							@foreach($news as $notice)
 								<div class="crol_msg mb-4">
 									<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
 									<p>{{ $notice['SectionName'] }}</p>
@@ -86,7 +86,27 @@
 							@endforeach
 						</div>
 						<div class="text-center col-md-12">
-							<a class="outline_btn" href="{{ route('orgSection', ['id' => $id, 'section' => 'crol']) }}">See More Notices</a>
+							<a class="outline_btn" href="{{ route('orgNoticeSection', ['id' => $id, 'subsection' => 'all']) }}">See More News</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-{{ $w }}" id="org_crol">
+					<div class="notice_org">
+						<h5 class="card-title mb-4">
+							Events
+						</h5>
+						<div class="card-text">
+							@foreach($events as $notice)
+								<div class="crol_msg mb-4">
+									<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
+									<p>{{ $notice['SectionName'] }}</p>
+									<p>{{ $notice['StartDate'] }}</p>
+								</div>
+							@endforeach
+						</div>
+						<div class="text-center col-md-12">
+							<a class="outline_btn" href="{{ route('orgNoticeSection', ['id' => $id, 'subsection' => 'events']) }}">See More Events</a>
 						</div>
 					</div>
 				</div>
@@ -224,7 +244,7 @@
 					</div>
 				@endif
 
-				<div class="col-md-{{ $w }}" id="org_stats">
+				{{--<div class="col-md-{{ $w }}" id="org_stats">
 					<div class="notice_org organization_summary">
 						<h5 class="card-title mb-4">Datasets</h5>
 						<div class="card-text">
@@ -240,7 +260,7 @@
 									@if($dsName <> 'about')
 										<tr>
 											<td scope="row"><a href="{{ route('orgSection', ['id' => $id, 'section' => $dsName]) }}">{{ $dsTitle }}</a></td>
-											<td id="stats_{{ $dsName }}"></td>
+											<td id="stats_{{ str_replace('/', '_', $dsName) }}"></td>
 										</tr>
 									@endif
 								@endforeach
@@ -248,7 +268,7 @@
 							</table>
 						</div>
 					</div>
-				</div>
+				</div>--}}
 			</div>
 		</div>
 	</div>
@@ -300,8 +320,14 @@
 			@foreach(array_keys($slist) as $i=>$dsName)	
 				@if($i > 0)
 					loadTableStat(
-						"{{ $dsName }}", 
-						"{!! $allDS[$dsName]['sectionTitle'] ?? null ? str_replace('sectionTitle', $allDS[$dsName]['sectionTitle'], $tableStatUrlNotices) : str_replace('tablename', $allDS[$dsName]['table'], $tableStatUrl) !!}"
+						"{{ str_replace('/', '_', $dsName) }}", 
+						@if ($dsName == 'notices/events')
+							"{!! $tableStatUrls['noticesEvents'] !!}"
+						@elseif ($allDS[$dsName]['sectionTitle'] ?? null)
+							"{!! str_replace('sectionTitle', $allDS[$dsName]['sectionTitle'], $tableStatUrls['notices']) !!}"
+						@else
+							"{!! str_replace('tablename', $allDS[$dsName]['table'], $tableStatUrls['reg']) !!}"
+						@endif
 					);
 				@endif
 			@endforeach

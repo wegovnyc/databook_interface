@@ -26,10 +26,10 @@ END:STANDARD
 END:VTIMEZONE
 @foreach($data as $ev)
 BEGIN:VEVENT
-LAST-MODIFIED:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
-DTSTAMP:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
-DTSTART:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'])) }}
-DTEND:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'] . ' +1 hour')) }}
+LAST-MODIFIED;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
+DTSTAMP;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
+DTSTART;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'])) }}
+DTEND;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'] . ' +1 hour')) }}
 SUMMARY:{!! html_entity_decode($ev['ShortTitle']) !!}@if($ev['wegov-org-name']) : {!! html_entity_decode($ev['wegov-org-name']) !!}@endif
 
 UID:{{ $ev['RequestID'] }}-event@databook.wegov.nyc

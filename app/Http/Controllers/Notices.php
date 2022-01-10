@@ -22,7 +22,8 @@ class Notices extends Controller
         return view('notices', [
 					'breadcrumbs' => Breadcrumbs::notices(),
 					'slist' => $ds->list,
-					'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 days\') ORDER BY date("EventDate") DESC'),
+					#'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 days\') ORDER BY date("EventDate") DESC'),
+					'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= current_date ORDER BY date("EventDate")'),
 					'details' => $details,
 					'dataset' => $model->dataset($details['fullname']),
 					'statUrls' => [
@@ -97,7 +98,8 @@ class Notices extends Controller
     public function ical()
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
+		#$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
+		$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 week\') ORDER BY date("EventDate") DESC');
 		return $data
 			? response()->view('icalevents', [
 					'data' => $data,

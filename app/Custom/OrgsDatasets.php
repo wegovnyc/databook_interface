@@ -255,6 +255,34 @@ class OrgsDatasets
 			'details' => [],
 			'description' => 'Annual Agency Performance Metrics',
 		],
+		'agencyperformance' => [
+			'fullname' => 'FY2021 MMR Agency Performance Indicators',
+			'table' => 'fy2021mmragencyperformance',
+			'hdrs' => ['Performance Indicator', 'FY17', 'FY18', 'FY19', 'FY20', 'FY21', 'TGT21', 'TGT22', '5yr Trend', 'Desired Direction'],
+			'visible' => [true, true, true, true, true, true, true, true, true, true],
+			'flds' => ['"Performance Indicator"', '"FY17"', '"FY18"', '"FY19"', '"FY20"', '"FY21"', '"TGT21"', '"TGT22"', '"5yr Trend"', '"Desired Direction"'],
+			'filters' => [],
+			'details' => [
+				'MMR Goal' => 'MMR Goal',
+				'Critical' => 'Critical',
+			],
+			'description' => 'NYC agency performance indicators from the FY2021 Mayor\'s Management Report (MMR). This dataset reflects measures of agency performance, organized by goal, including five full years of data for the most recent fiscal years wherever available.',
+		],
+		'agencyresources' => [
+			'fullname' => 'FY2021 MMR Agency Resources',
+			'table' => 'fy2021mmragencyresources',
+			'hdrs' => ['Resource Indicators', 'FY17 Actual', 'FY18 Actual', 'FY19 Actual', 'FY20 Actual', 'FY21 Actual (Not Yet Final)', 'FY21 (Authorized Bugdet Level)', 'FY22 (Authorized Bugdet Level)', '5yr Trend'],
+			'visible' => [false, true, true, true, true, true, true, true, true],
+			'flds' => ['"Resource Indicators"', '"FY17 Actual"', '"FY18 Actual"', '"FY19 Actual"', '"FY20 Actual"', '"FY21 Actual (Not Yet Final)"', '"FY21 (Authorized Bugdet Level)"', '"FY22 (Authorized Bugdet Level)"', '"5yr Trend"'], 
+			'filters' => [],
+			'details' => [
+				'Notes' => 'Notes'
+			],
+			'description' => 'NYC agency resources from the FY21 Mayor\'s Management Report (MMR), including expenditures (includes all funds), personnel, revenue and paid overtime. This data is an overview of the financial and workforce resources used by an agency over the past five fiscal years and the planned resources available to the agency in the current and upcoming fiscal years.<br/>The FY2021 MMR, archived reports, and additional information is available at <a href="https://www1.nyc.gov/site/operations/performance/mmr.page">https://www1.nyc.gov/site/operations/performance/mmr.page</a>.',
+		],
+		
+		
+		
 		'locallaw251' => [
 			'fullname' => 'Local Law 251 of 2017: Published Data Asset Inventory',
 			'table' => 'locallaw251',
@@ -393,47 +421,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'details' => [],
 			'description' => 'Additional agency costs for Pension, Fringe Benefits and Debt Service that are included in the Pensions, Miscellaneous Budget and Debit Service agencies. Dollars are In thousands. This data set is updated annually.',
 		],
-		'crol' => [
-			'fullname' => 'City Record Online (CROL)',
-			'table' => 'crol',
-			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' ORDER BY date("StartDate")',
-			'hdrs' => ['Start Date', 'Request ID', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Section Name', ],
-			'visible' => [true, true, true, true, true, true],
-			'flds' => ['function (r) { return usToDashDate(r["StartDate"]); }', 
-					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
-					'"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SectionName"'
-				],
-			'filters' => [2 => null, 3 => null, 5 => null],
-			//'fltDelim' => [3 => ','],
-			'details' => [
-				'Start Date' => 'StartDate',
-				'End Date' => 'EndDate',
-				'Due Date' => 'DueDate',
-				'PIN' => 'PIN',
-				'Additional Description1' => 'AdditionalDescription1',
-				'Other Info 1' => 'OtherInfo1',
-				'Printout 1' => 'Printout1',
-				'Address To Request' => 'AddressToRequest',
-				'Contact Name' => 'ContactName',
-				'Contact Phone' => 'ContactPhone',
-				'Email' => 'Email',
-				'Contract Amount' => 'ContractAmount',
-				'Special Case Reason Description' => 'SpecialCaseReasonDescription',
-				'Selection Method Description' => 'SelectionMethodDescription',
-				'Contact Fax' => 'ContactFax',
-				'Additional Desctription 2' => 'AdditionalDesctription2',
-				'Other Info 2' => 'OtherInfo2',
-				'Printout 2' => 'Printout2',
-				'Additional Description 3' => 'AdditionalDescription3',
-				'Other Info 3' => 'OtherInfo3',
-				'Printout 3' => 'Printout3',
-				'Vendor Name' => 'VendorName',
-				'Vendor Address' => 'VendorAddress',
-				'Document Links' => 'DocumentLinks',
-			],
-			'description' => 'The City Record Online (CROL) is now a fully searchable database of notices published in the City Record newspaper which includes but is not limited to: public hearings and meetings, public auctions and sales, solicitations and awards and official rules proposed and adopted by city agencies.',
-			'script' => 'datatable.order([1, "desc"]).draw();',
-		],
 		'govpublist' => [
 			'fullname' => 'Government Publications Listing',
 			'table' => 'govpublist',
@@ -532,6 +519,48 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		],
 
 
+
+		'notices/all' => [
+			'fullname' => 'City Record Online (CROL)',
+			'table' => 'crol',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' ORDER BY date("StartDate")',
+			'hdrs' => ['Start Date', 'Request ID', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Section Name', ],
+			'visible' => [true, true, true, true, true, true],
+			'flds' => ['function (r) { return usToDashDate(r["StartDate"]); }', 
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SectionName"'
+				],
+			'filters' => [2 => null, 3 => null, 5 => null],
+			//'fltDelim' => [3 => ','],
+			'details' => [
+				'Start Date' => 'StartDate',
+				'End Date' => 'EndDate',
+				'Due Date' => 'DueDate',
+				'PIN' => 'PIN',
+				'Additional Description1' => 'AdditionalDescription1',
+				'Other Info 1' => 'OtherInfo1',
+				'Printout 1' => 'Printout1',
+				'Address To Request' => 'AddressToRequest',
+				'Contact Name' => 'ContactName',
+				'Contact Phone' => 'ContactPhone',
+				'Email' => 'Email',
+				'Contract Amount' => 'ContractAmount',
+				'Special Case Reason Description' => 'SpecialCaseReasonDescription',
+				'Selection Method Description' => 'SelectionMethodDescription',
+				'Contact Fax' => 'ContactFax',
+				'Additional Desctription 2' => 'AdditionalDesctription2',
+				'Other Info 2' => 'OtherInfo2',
+				'Printout 2' => 'Printout2',
+				'Additional Description 3' => 'AdditionalDescription3',
+				'Other Info 3' => 'OtherInfo3',
+				'Printout 3' => 'Printout3',
+				'Vendor Name' => 'VendorName',
+				'Vendor Address' => 'VendorAddress',
+				'Document Links' => 'DocumentLinks',
+			],
+			'description' => 'The City Record Online (CROL) is now a fully searchable database of notices published in the City Record newspaper which includes but is not limited to: public hearings and meetings, public auctions and sales, solicitations and awards and official rules proposed and adopted by city agencies.',
+			'script' => 'datatable.order([1, "desc"]).draw();',
+		],
 		'changeofpersonnel' => [
 			'fullname' => 'City Record Online (CROL)',
 			'table' => 'crol',
@@ -552,7 +581,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'visible' => [true, true, true, true, true, true],
 			'filters' => [3 => null],
 			'details' => [],
-			'description' => '',
+			'description' => 'List of people moving into and out of city government positions.',
 			'script' => 'datatable.order([0, "desc"]).draw();',
 		],
 		'publichearings' => [
@@ -579,14 +608,14 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					}',
 				],
 			'visible' => [true, true, true, true, true, true, true, true, true, true],
-			'filters' => [1 => null, 2 => null],
+			'filters' => [2 => null],
 			'details' => [
 				'Additional Description' => 'AdditionalDescription1',
 				'Start Date' => 'StartDate',
 				'End Date' => 'EndDate',
 				'Event Building Name' => 'EventBuildingName',
 			],
-			'description' => '',
+			'description' => 'Hearings and meetings open to the public.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'contractawards' => [
@@ -613,7 +642,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					}',
 				],
 			'visible' => [true, true, true, true, true, true, true, true, true, true],
-			'filters' => [1 => null, 2 => null],
+			'filters' => [2 => null],
 			'details' => [
 				'Additional Description' => 'AdditionalDescription1',
 				'Document Links' => 'DocumentLinks',
@@ -625,7 +654,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'Contact Phone' => 'ContactPhone',
 				'Email' => 'Email',
 			],
-			'description' => '',
+			'description' => 'Any contract over $100,000 is subject to a public hearing unless excepted by the City Charter or Rules of the Procurement Policy Board.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'specialmaterials' => [
@@ -652,12 +681,12 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					}',
 			],
 			'visible' => [true, true, true, true, true, true],
-			'filters' => [2 => null, 3 => null],
+			'filters' => [3 => null],
 			'details' => [
 				'Additional Description' => 'AdditionalDescription1',
 				'End Date' => 'EndDate',
 			],
-			'description' => '',
+			'description' => 'Other category including things like commodity prices and concept papers.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'agencyrules' => [
@@ -684,14 +713,14 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					}',
 			],
 			'visible' => [true, true, true, true, true, true, true, true, true, true],
-			'filters' => [1 => null, 2 => null],
+			'filters' => [2 => null],
 			'details' => [
 				'Additional Description' => 'AdditionalDescription1',
 				'Start Date' => 'StartDate',
 				'End Date' => 'EndDate',
 				'Document Links' => 'DocumentLinks',
 			],
-			'description' => '',
+			'description' => 'Notices related to propose and adopted rules as well as regulatory agendas.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'propertydisposition' => [
@@ -719,14 +748,14 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					}',
 			],
 			'visible' => [true, true, true, true, true, true, true, true, true, true, true],
-			'filters' => [2 => null, 3 => null],
+			'filters' => [3 => null],
 			'details' => [
 				'Additional Description' => 'AdditionalDescription1',
 				'Building Name' => 'EventBuildingName',
 				'Document Links' => 'DocumentLinks',
 				'End Date' => 'EndDate',
 			],
-			'description' => '',
+			'description' => 'Public auctions and sales of city items ranging including equipment, cars and real estate.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'courtnotices' => [
@@ -754,7 +783,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					}',
 			],
 			'visible' => [true, true, true, true, true, true, true, true, true, true],
-			'filters' => [2 => null],
+			'filters' => [],
 			'details' => [
 				'Additional Description' => 'AdditionalDescription1',
 				'Additional Description 2' => 'AdditionalDescription2',
@@ -762,7 +791,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'Document Links' => 'DocumentLinks',
 				'End Date' => 'EndDate',
 			],
-			'description' => '',
+			'description' => 'New York State Supreme Court motions and acquisition notices.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
 		],
 		'procurement' => [
@@ -777,7 +806,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SelectionMethodDescription"'
 			],
 			'visible' => [true, true, true, true, true, true, true],
-			'filters' => [2 => null, 3 => null],
+			'filters' => [3 => null],
 			'details' => [
 				'Additional Description' => 'AdditionalDescription1',
 				'Special Case Reason Description' => 'SpecialCaseReasonDescription',
@@ -798,8 +827,35 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'Building Name' => 'EventBuildingName',
 				'Street Address' => 'EventStreetAddress1',
 			],
-			'description' => '',
+			'description' => 'Over 100 city agencies post solicitations for goods and services as well as award notices.',
 			'script' => 'datatable.order([1, "asc"]).draw();',
+		],
+		'notices/events' => [
+			'fullname' => 'City Record Online (CROL)',
+			'sql' => 'SELECT * FROM crol WHERE "wegov-org-id"=\'%s\' AND NOT "EventDate" = \'\' ORDER BY date("EventDate") DESC',
+			'table' => 'crol',
+			'hdrs' => ['Request ID', 'Event Date', 'Section Name', 'Type Of Notice Description', 'Agency Name', 'Short Title', ],
+			'sectionTitle' => 'Events',
+			'visible' => [true, true, true, true, true, true, true],
+			'flds' => [
+					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
+					'function (r) { return usToDashDate(r["EventDate"]); }', 
+					'"SectionName"', '"TypeOfNoticeDescription"', 
+					'function (r) { return `<a href="/organizations/${r["wegov-org-id"]}/events">${r["wegov-org-name"]}</a>` }',
+					'"ShortTitle"',
+				],
+			'filters' => [2 => null, 3 => null],
+			'details' => [
+				'Description' => 'AdditionalDescription1',
+				'Building Name' => 'EventBuildingName',
+				'Street Address' => 'EventStreetAddress1',
+				'Street Address 2' => 'EventStreetAddress2',
+				'City' => 'EventCity',
+				'State' => 'EventStateCode',
+				'Zip Code' => 'EventZipCode',
+			],
+			'description' => 'All notices with an event date.',
+			'script' => '',
 		],
 
 		/*
@@ -833,24 +889,27 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 	public $list = [
 		'about' => 'About',
 		'additionalcostsallocation' => 'Additional Costs Allocation',
+		'agencyperformance' => 'Agency Performance (MMR)',
+		'agencyresources' => 'Agency Resources (MMR)',
 		'agencyrules' => 'Agency Rules',
-		'locallaw251' => 'Assets',
+		'notices/all' => 'All Notices',
+		'locallaw251' => 'Data Assets',
 		'nyccouncildiscretionaryfunding' => 'City Council Discretionary Funding',
 		'civillist' => 'Civil List',
 		'changeofpersonnel' => 'Change of Personnel',
-		'nycgreenbook' => 'Contacts',
+		'nycgreenbook' => 'Public Contacts',
 		'contractawards' => 'Contract Awards',
 		'courtnotices' => 'Court Notices',
 		'll18payanddemo' => 'Demographics',
+		'notices/events' => 'Events',
 		'expenseactualsfunding' => 'Expense Actuals By Funding Source',
 		'expensebudgetonnycopendata' => 'Expense Budget',
 		'expenseplan' => 'Expense Plan',
 		'facilitydb' => 'Facilities',
 		'fteheadcount' => 'Headcount',
 		'headcountactualsfunding' => 'Headcount Actuals By Funding Source',
-		'agencypmi' => 'Indicators',
+		#'agencypmi' => 'Indicators',
 		'nycjobs' => 'Jobs',
-		'crol' => 'Notices',
 		'onenycindicators' => 'OneNYC',
 		#'payrolldata' => 'Payroll',
 		'positionschedule' => 'Positions',
@@ -863,12 +922,13 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'govpubrequired' => 'Required Reports',
 		'benefitsapi' => 'Services',
 		'specialmaterials' => 'Special Materials',
-		'opendatareleasetracker' => 'Tracker',
+		'opendatareleasetracker' => 'Data Tracker',
 
 	];
 	/*
+		--agencypmi
+		#payrolldata
 		additionalcostsallocation
-		agencypmi
 		benefitsapi
 		budgetrequestsregister
 		capitalprojects_cc_idx
@@ -884,7 +944,9 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		expensebudgetonnycopendata
 		expenseplan
 		facilitydb
-		fteheadcount
+		fteheadcount		
+		fy2021mmragencyresources
+		fy2021mmragencyperformance
 		govpublist
 		govpubrequired
 		headcountactualsfunding
@@ -898,13 +960,15 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		opendatareleasetracker
 		positionschedule
 		wegov_orgs
-		#payrolldata
+		
 	*/
 	
 	public $menu = [
 		'about',
 		'Notices' => 
 			[
+				'notices/all',
+				'notices/events',
 				'publichearings',
 				'procurement',
 				'contractawards',
@@ -945,8 +1009,10 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'benefitsapi',
 		'Indicators' => 
 			[
-				'agencypmi',
+				#'agencypmi',
 				'onenycindicators',		//onenycindicators
+				'agencyperformance',
+				'agencyresources',
 			],
 		'budgetrequestsregister',
 		'nycjobs',

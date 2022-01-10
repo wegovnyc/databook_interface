@@ -130,7 +130,8 @@
 								tt = [...new Set(tt)]
 
 								tt.sort().forEach(function (d, j) {
-									select.append('<option value="'+d+'">'+d+'</option>')
+									if (d)
+										select.append('<option value="'+d+'">'+d+'</option>')
 								});
 							});
 							/*
