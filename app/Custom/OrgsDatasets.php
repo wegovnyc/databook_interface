@@ -841,7 +841,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
 					'function (r) { return usToDashDate(r["EventDate"]); }', 
 					'"SectionName"', '"TypeOfNoticeDescription"', 
-					'function (r) { return `<a href="/organizations/${r["wegov-org-id"]}/notices/events">${r["wegov-org-name"]}</a>` }',
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/events">${r["wegov-org-name"]}</a>` }',
 					'"ShortTitle"',
 				],
 			'filters' => [2 => null, 3 => null],
