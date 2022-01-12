@@ -251,15 +251,15 @@
 			
 			<div class="row mb-4">
 				<div id="data_container_accordion" class="col-12 accordion">
-					<h4 class="card-title mb-4 mt-4">
+				{{--<h4 class="card-title mb-4 mt-4">
 						About the Data
-					</h4>
+				</h4>--}}
 				
 					<div class="accordion social_media" id="accordionThree">
 						<div>
 							<div id="headingThree">
 								<button class="social_btn" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-									This agency’s profile has <span id="total_records"></span> records from <span id="total_datasets"></span> datasets. Learn more
+									This agency’s profile has <span id="total_records"></span> records from <span id="total_datasets"></span> datasets. Click here to learn more.
 								</button>
 							</div>
 							<div id="collapseThree" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionThree">
