@@ -247,50 +247,33 @@
 						</div>
 					</div>
 				@endif
-
-				{{--<div class="col-md-{{ $w }}" id="org_stats">
-					<div class="notice_org organization_summary">
-						<h5 class="card-title mb-4">Datasets</h5>
-						<div class="card-text">
-							<table class="table-sm stats-table" style="border:1px solid #000;width:100%">
-								<thead>
-									<tr>
-										<th scope="col">Name</th>
-										<th scope="col" style="width:40%"># of Records</th>
-									</tr>
-								</thead>
-								<tbody>
-								@foreach($slist as $dsName=>$dsTitle)
-									@if($dsName <> 'about')
-										<tr>
-											<td scope="row"><a href="{{ route('orgSection', ['id' => $id, 'section' => $dsName]) }}">{{ $dsTitle }}</a></td>
-											<td id="stats_{{ str_replace('/', '_', $dsName) }}"></td>
-										</tr>
-									@endif
-								@endforeach
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>--}}
 			</div>
 			
 			<div class="row mb-4">
-				<div id="data_container" class="col-12">
-					<div class="table-responsive">
-						<h4 class="card-title mb-4 mt-4">
-							About the Data
-						</h4>
-						<table id="myTable" class="display table-hover table-borderless" style="width:100%;">
-						</table>
+				<div id="data_container_accordion" class="col-12 accordion">
+					<h4 class="card-title mb-4 mt-4">
+						About the Data
+					</h4>
+				
+					<div class="accordion social_media" id="accordionThree">
+						<div>
+							<div id="headingThree">
+								<button class="social_btn" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+									This agency’s profile has <span id="total_records"></span> records from <span id="total_datasets"></span> datasets. Learn more
+								</button>
+							</div>
+							<div id="collapseThree" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionThree">
+								<div class="card-text table-responsive">
+									<table id="myTable" class="display table-hover table-borderless" style="width:100%;">
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	{{--<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>--}}
 	
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/rowgroup/1.1.4/js/dataTables.rowGroup.min.js"></script>
 	<script>
@@ -298,17 +281,13 @@
 		var datatable = null
 
 		function loadTableStat(dsName, url) {
-			//var datatable = $('#myTable').DataTable();
+			var datatable = $('#myTable').DataTable();
 			$.get(url, function (resp) {
-				//console.log(resp)
-				//jj = $.parseJSON(resp)
 				if (resp['rows'][0]['count']) {
 					$('#stats_'+dsName).text(resp['rows'][0]['count'])
-					//datatable.column(5).search(/>[^<]+</g, false, false).draw();
-					//console.log(datatable.column(5))
+					$('#total_records').text(Number($('#total_records').text()) + resp['rows'][0]['count'])
+					$('#total_datasets').text(Number($('#total_datasets').text()) + 1)
 				} else {
-					//$('#stats_'+dsName).parents('tr').hide()
-					
 					datasets.forEach(function (d, i) {
 						if (d[5].indexOf('stats_'+dsName) != -1) {
 							//console.log(i, dsName, d[5].indexOf('stats_'+dsName))
@@ -368,7 +347,7 @@
 						visible: false 
 					},
 					{ title: "Last Updated" },
-					{ title: "Agency Record" }
+					{ title: "Agency Records" }
 				],
 				order: [],
 				rowGroup: { dataSrc: 3 },
@@ -388,11 +367,13 @@
 							);
 						@endif
 					@endforeach
+					/*
 					@if($org['twitter'] ?? null)
 						tw_click();
 					@elseif ($org['facebook'] ?? null)
 						fb_click();
 					@endif
+					*/
 				}
 			});
 

@@ -11,7 +11,8 @@ class CROLDatasets
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
-					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/publichearings">${r["wegov-org-name"]}</a>` }',
+					'"TypeOfNoticeDescription"', '"ShortTitle"', 
 					'function (r) { return usToDashDate(r["EventDate"]) }',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
@@ -44,7 +45,8 @@ class CROLDatasets
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
-					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/contractawards">${r["wegov-org-name"]}</a>` }',
+					'"TypeOfNoticeDescription"', '"ShortTitle"', 
 					'function (r) { return usToDashDate(r["EventDate"]) }',
 				    'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
@@ -83,7 +85,8 @@ class CROLDatasets
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
 					'function (r) { return usToDashDate(r["StartDate"]) }',
-					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"',
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/specialmaterials">${r["wegov-org-name"]}</a>` }',
+					'"TypeOfNoticeDescription"', '"ShortTitle"',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
 						while (true) {
@@ -113,7 +116,8 @@ class CROLDatasets
 			'hdrs' => ['Request ID', 'Agency Name', 'Type Of Notice Description', 'Short Title', 'Date', 'Location'],
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
-					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/agencyrules">${r["wegov-org-name"]}</a>` }',
+					'"TypeOfNoticeDescription"', '"ShortTitle"', 
 					'function (r) { return usToDashDate(r["EventDate"]) }',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
@@ -147,7 +151,8 @@ class CROLDatasets
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
 					'function (r) { return usToDashDate(r["StartDate"]) }',
-					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"ShortTitle"', 
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/propertydisposition">${r["wegov-org-name"]}</a>` }',
+					'"TypeOfNoticeDescription"', '"ShortTitle"', 
 					'function (r) { return usToDashDate(r["EventDate"]) }',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
@@ -181,7 +186,8 @@ class CROLDatasets
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
 					'function (r) { return usToDashDate(r["StartDate"]) }',
-					'"wegov-org-name"', '"ShortTitle"', 
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/courtnotices">${r["wegov-org-name"]}</a>` }',
+					'"ShortTitle"', 
 					'function (r) { return usToDashDate(r["EventDate"]) }',
 					'function (r) { 
 						var rr = [r["EventStreetAddress1"], r["EventStreetAddress2"], r["EventCity"], r["EventStateCode"], r["EventZipCode"]];
@@ -210,13 +216,14 @@ class CROLDatasets
 		],
 		'procurement' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT "RequestID", "StartDate", "wegov-org-name", "TypeOfNoticeDescription", "CategoryDescription", "ShortTitle", "SelectionMethodDescription", "AdditionalDescription1", "SpecialCaseReasonDescription", "PIN", "DueDate", "EndDate", "AddressToRequest", "ContactName", "ContactPhone", "Email", "ContractAmount", "ContactFax", "OtherInfo1", "VendorName", "VendorAddress", "Printout1", "DocumentLinks", "EventBuildingName", "EventStreetAddress1" FROM crol WHERE "SectionName" = \'Procurement\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'sql' => 'SELECT "RequestID", "StartDate", "wegov-org-name", "wegov-org-id", "TypeOfNoticeDescription", "CategoryDescription", "ShortTitle", "SelectionMethodDescription", "AdditionalDescription1", "SpecialCaseReasonDescription", "PIN", "DueDate", "EndDate", "AddressToRequest", "ContactName", "ContactPhone", "Email", "ContractAmount", "ContactFax", "OtherInfo1", "VendorName", "VendorAddress", "Printout1", "DocumentLinks", "EventBuildingName", "EventStreetAddress1" FROM crol WHERE "SectionName" = \'Procurement\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
 			'CROLsection' => 'Procurement',
 			'hdrs' => ['Request ID', 'Start Date', 'Agency Name', 'Type Of Notice Description', 'Category Description', 'Short Title', 'Selection Method Description'],
 			'flds' => [
 					'function (r) { return `<a href="https://a856-cityrecord.nyc.gov/RequestDetail/${r["RequestID"]}" target="_blank">${r["RequestID"]}</a>` }',
 					'function (r) { return usToDashDate(r["StartDate"]) }',
-					'"wegov-org-name"', '"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SelectionMethodDescription"'
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/procurement">${r["wegov-org-name"]}</a>` }',
+					'"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SelectionMethodDescription"'
 			],
 			'visible' => [true, true, true, true, true, true, true],
 			'filters' => [2 => null, 3 => null],
@@ -245,11 +252,12 @@ class CROLDatasets
 		],
 		'changeofpersonnel' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT "AdditionalDescription1", "StartDate" FROM crol WHERE "SectionName" = \'Changes in Personnel\' AND NOT "AdditionalDescription1" = \'\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
+			'sql' => 'SELECT "AdditionalDescription1", "StartDate", "wegov-org-id", "wegov-org-name" FROM crol WHERE "SectionName" = \'Changes in Personnel\' AND NOT "AdditionalDescription1" = \'\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
 			'CROLsection' => 'Changes in Personnel',
-			'hdrs' => ['Effective Date', 'Provisional Status', 'Title Code', 'Reason For Change', 'Salary', 'Employee Name'],
+			'hdrs' => ['Effective Date', 'Agency Name', 'Provisional Status', 'Title Code', 'Reason For Change', 'Salary', 'Employee Name'],
 			'flds' => [
 					'function (r) { return usToDashDate(r["AdditionalDescription1"].split(";")[0].replace("Effective Date: ", "")); }', 
+					'function (r) { return `<a href="/organization/${r["wegov-org-id"]}/notices/changeofpersonnel">${r["wegov-org-name"]}</a>` }',
 					'function (r) { return r["AdditionalDescription1"].split(";")[1].replace("Provisional Status: ", ""); }', 
 					'function (r) { 
 						var code = r["AdditionalDescription1"].split(";")[2].replace("Title Code: ", "").trim();
@@ -259,7 +267,7 @@ class CROLDatasets
 					'function (r) { return toFin(r["AdditionalDescription1"].split(";")[4].replace("Salary: ", "")); }', 
 					'function (r) { return r["AdditionalDescription1"].split(";")[5].replace("Employee Name: ", ""); }', 
 				], 
-			'visible' => [true, true, true, true, true, true],
+			'visible' => [true, true, true, true, true, true, true],
 			'filters' => [3 => null],
 			'details' => [],
 			'description' => 'List of people moving into and out of city government positions.',

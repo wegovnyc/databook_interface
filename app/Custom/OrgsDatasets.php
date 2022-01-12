@@ -258,9 +258,40 @@ class OrgsDatasets
 		'agencyperformance' => [
 			'fullname' => 'FY2021 MMR Agency Performance Indicators',
 			'table' => 'fy2021mmragencyperformance',
-			'hdrs' => ['Performance Indicator', 'FY17', 'FY18', 'FY19', 'FY20', 'FY21', 'TGT21', 'TGT22', '5yr Trend', 'Desired Direction', 'Critical'],
-			'visible' => [true, true, true, true, true, true, true, true, true, true, false],
-			'flds' => ['"Performance Indicator"', '"FY17"', '"FY18"', '"FY19"', '"FY20"', '"FY21"', '"TGT21"', '"TGT22"', '"5yr Trend"', '"Desired Direction"', '"Critical"'],
+			'hdrs' => ['Performance Indicator', 'FY17', 'FY18', 'FY19', 'FY20', 'FY21', 'TGT21', 'TGT22', '5yr Trend', 'Desired Direction', 'Outcome', 'Critical'],
+			'visible' => [true, true, true, true, true, true, true, true, true, true, true, false],
+			'flds' => ['"Performance Indicator"', '"FY17"', '"FY18"', '"FY19"', '"FY20"', '"FY21"', '"TGT21"', '"TGT22"', 
+					'function (r) {
+						var a = r["5yr Trend"]
+						var b = r["Desired Direction"]
+						var status = null
+						if (a == b)
+							status = "Good"
+						else if (b != "*") {
+							if (a == "Neutral")
+								status = "Neutral"
+							else if (a != b)
+								status = "Bad"
+						}
+						return status ? `<span class="${status.toLowerCase()}">${a}</span>` : status
+					}',
+					'"Desired Direction"', 
+					'function (r) { 
+						var a = r["5yr Trend"]
+						var b = r["Desired Direction"]
+						var status = "No Desired Direction"
+						if (a == b)
+							status = "Good"
+						else if (b != "*") {
+							if (a == "Neutral")
+								status = "Neutral"
+							else if (a != b)
+								status = "Bad"
+						}
+						return status
+					}',
+					'"Critical"'
+				],
 			'filters' => [10 => null],
 			'details' => [
 				'MMR Goal' => 'MMR Goal',
