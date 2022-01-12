@@ -174,10 +174,10 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-12 organization_data">
-					<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 					@if(array_search($section, $menu) === false)
 						<h4>{{ $details['sectionTitle'] ?? $dataset['Name'] }}</h4>
 					@endif
+					<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
 					@if ($map ?? null)
 						<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png"></button>
 					@endif

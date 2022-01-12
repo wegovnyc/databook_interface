@@ -90,12 +90,15 @@
 							visible: false,
 							searchable: false
 						}
-					],
+					]
+					/*
+					,
 					createdRow: function(row, data, dataIndex) {
 						if (data.GEO_JSON != '') {
 							$(row).addClass('have_coords');
 						}
 					}
+					*/
 
 					@if ($details['filters'])
 						,
@@ -224,7 +227,7 @@
 							d = d.replace(rg, '');
 						}
 					}
-					d = d.match(/[-\d\.]+/g) ? parseFloat(d) * m : d;
+					d = d.match(/^[-\d\.]+$/g) ? parseFloat(d) * m : d;
 					//console.log(data, d);
 					return d;
 				};

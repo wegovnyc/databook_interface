@@ -130,6 +130,7 @@ class Organizations extends Controller
 						'breadcrumbs' => Breadcrumbs::org($id, $org['name']),
 						'news' => $model->crolNews($id),
 						'events' => $model->crolEvents($id),
+						'datasets' => $ds->data_sources($model->carto->req('SELECT * FROM data_sources'), $id),
 					]);
     }
 

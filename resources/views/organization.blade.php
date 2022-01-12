@@ -76,18 +76,20 @@
 						<h5 class="card-title mb-4">
 							Notices
 						</h5>
-						<div class="card-text">
-							@foreach($news as $notice)
-								<div class="crol_msg mb-4">
-									<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
-									<p>{{ $notice['SectionName'] }}</p>
-									<p>{{ $notice['StartDate'] }}</p>
-								</div>
-							@endforeach
-						</div>
-						<div class="text-center col-md-12">
-							<a class="outline_btn" href="{{ route('orgNoticeSection', ['id' => $id, 'subsection' => 'all']) }}">See More News</a>
-						</div>
+						@if ($news)
+							<div class="card-text">
+								@foreach($news as $notice)
+									<div class="crol_msg mb-4">
+										<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
+										<p>{{ $notice['SectionName'] }}</p>
+										<p>{{ $notice['StartDate'] }}</p>
+									</div>
+								@endforeach
+							</div>
+							<div class="text-center col-md-12">
+								<a class="outline_btn" href="{{ route('orgNoticeSection', ['id' => $id, 'subsection' => 'all']) }}">See More News</a>
+							</div>
+						@endif
 					</div>
 				</div>
 
@@ -96,18 +98,20 @@
 						<h5 class="card-title mb-4">
 							Events
 						</h5>
-						<div class="card-text">
-							@foreach($events as $notice)
-								<div class="crol_msg mb-4">
-									<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
-									<p>{{ $notice['SectionName'] }}</p>
-									<p>{{ $notice['StartDate'] }}</p>
-								</div>
-							@endforeach
-						</div>
-						<div class="text-center col-md-12">
-							<a class="outline_btn" href="{{ route('orgNoticeSection', ['id' => $id, 'subsection' => 'events']) }}">See More Events</a>
-						</div>
+						@if ($events)
+							<div class="card-text">
+								@foreach($events as $notice)
+									<div class="crol_msg mb-4">
+										<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
+										<p>{{ $notice['SectionName'] }}</p>
+										<p>{{ $notice['StartDate'] }}</p>
+									</div>
+								@endforeach
+							</div>
+							<div class="text-center col-md-12">
+								<a class="outline_btn" href="{{ route('orgNoticeSection', ['id' => $id, 'subsection' => 'events']) }}">See More Events</a>
+							</div>
+						@endif
 					</div>
 				</div>
 
@@ -270,14 +274,48 @@
 					</div>
 				</div>--}}
 			</div>
+			
+			<div class="row mb-4">
+				<div id="data_container" class="col-12">
+					<div class="table-responsive">
+						<table id="myTable" class="display table-hover table-borderless" style="width:100%;">
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	{{--<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"/>--}}
+	
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/rowgroup/1.1.4/js/dataTables.rowGroup.min.js"></script>
 	<script>
+		var datasets = {!! json_encode($datasets) !!}
+		var datatable = null
+
 		function loadTableStat(dsName, url) {
+			//var datatable = $('#myTable').DataTable();
 			$.get(url, function (resp) {
-				console.log(resp)
+				//console.log(resp)
 				//jj = $.parseJSON(resp)
-				$('#stats_'+dsName).text(resp['rows'][0]['count'])
+				if (resp['rows'][0]['count']) {
+					$('#stats_'+dsName).text(resp['rows'][0]['count'])
+					//datatable.column(5).search(/>[^<]+</g, false, false).draw();
+					//console.log(datatable.column(5))
+				} else {
+					//$('#stats_'+dsName).parents('tr').hide()
+					
+					datasets.forEach(function (d, i) {
+						if (d[5].indexOf('stats_'+dsName) != -1) {
+							//console.log(i, dsName, d[5].indexOf('stats_'+dsName))
+							datasets.splice(i, 1)
+							datatable.row(i).remove()
+                            datatable.draw();
+						}
+					})
+					
+				}
 			})
 		}
 		
@@ -312,31 +350,74 @@
 		// 	$('#tw_content').hide()
 		// 	$('#fb_content').show()
 		// }
-		
 		$(document).ready(function () {
-			
 			loadFinStat();
 			
-			@foreach(array_keys($slist) as $i=>$dsName)	
-				@if($i > 0)
-					loadTableStat(
-						"{{ str_replace('/', '_', $dsName) }}", 
-						@if ($dsName == 'notices/events')
-							"{!! $tableStatUrls['noticesEvents'] !!}"
-						@elseif ($allDS[$dsName]['sectionTitle'] ?? null)
-							"{!! str_replace('sectionTitle', $allDS[$dsName]['sectionTitle'], $tableStatUrls['notices']) !!}"
-						@else
-							"{!! str_replace('tablename', $allDS[$dsName]['table'], $tableStatUrls['reg']) !!}"
+			datatable = $('#myTable').DataTable({
+				data: datasets,
+				paging: false,
+				columns: [
+					{ title: "Name" },
+					{ title: "Label" },
+					{ title: "Description" },
+					{ 
+						title: "Section", 
+						visible: false 
+					},
+					{ title: "Last Updated" },
+					{ title: "Agency Record" }
+				],
+				order: [],
+				rowGroup: { dataSrc: 3 },
+				dom: 'rtp',
+				initComplete: function () {
+					@foreach(array_keys($slist) as $i=>$dsName)	
+						@if($i > 0)
+							loadTableStat(
+								"{{ str_replace('/', '_', $dsName) }}", 
+								@if ($dsName == 'notices/events')
+									"{!! $tableStatUrls['noticesEvents'] !!}"
+								@elseif ($allDS[$dsName]['sectionTitle'] ?? null)
+									"{!! str_replace('sectionTitle', $allDS[$dsName]['sectionTitle'], $tableStatUrls['notices']) !!}"
+								@else
+									"{!! str_replace('tablename', $allDS[$dsName]['table'], $tableStatUrls['reg']) !!}"
+								@endif
+							);
 						@endif
-					);
-				@endif
-			@endforeach
-			@if($org['twitter'] ?? null)
-				tw_click();
-			@else if ($org['facebook'] ?? null)
-				fb_click();
-			@endif
-			
+					@endforeach
+					@if($org['twitter'] ?? null)
+						tw_click();
+					@elseif ($org['facebook'] ?? null)
+						fb_click();
+					@endif
+				}
+			});
+
+			/*
+			$('a.toggle-vis').on('click', function (e) {
+				e.preventDefault();
+				var column = datatable.column($(this).attr('data-column'));
+				column.visible(!column.visible());
+			});
+
+			$('#myTable tbody').on('click', 'td.details-control', function () {
+				var tr = $(this).closest('tr');
+				var row = datatable.row(tr);
+
+				if (row.child.isShown()) {
+					row.child.hide();
+					tr.removeClass('shown');
+					tr.next('tr').removeClass('child-row');
+				}
+				else {
+					row.child(details(row.data())).show();
+					tr.addClass('shown');
+					tr.next('tr').addClass('child-row');
+				}
+			});
+
+			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
+			*/
 		})
 	</script>
 @endsection

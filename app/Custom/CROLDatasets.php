@@ -267,7 +267,7 @@ class CROLDatasets
 		],
 		'events' => [
 			'fullname' => 'City Record Online (CROL)',
-			'sql' => 'SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND SUBSTRING("EventDate" from 7 for 4) = \'pubdate\' ORDER BY date("EventDate") DESC',
+			'sql' => 'SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND SUBSTRING("EventDate" from 7 for 4) = \'pubdate\'',
 			'dates_req_sql' => 'SELECT DISTINCT(SUBSTRING("EventDate" from 7 for 4)) yy FROM crol WHERE NOT "EventDate" = \'\' ORDER BY yy DESC',
 			'table' => 'crol',
 			'hdrs' => ['Request ID', 'Event Date', 'Section Name', 'Type Of Notice Description', 'Agency Name', 'Short Title', ],
@@ -290,7 +290,7 @@ class CROLDatasets
 				'Zip Code' => 'EventZipCode',
 			],
 			'description' => 'All notices with an event date.',
-			'script' => '',
+			'script' => 'datatable.order([2, "asc"]).draw();',
 		],
 	];
 
