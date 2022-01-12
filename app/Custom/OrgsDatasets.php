@@ -259,7 +259,7 @@ class OrgsDatasets
 			'fullname' => 'FY2021 MMR Agency Performance Indicators',
 			'table' => 'fy2021mmragencyperformance',
 			'hdrs' => ['Performance Indicator', 'FY17', 'FY18', 'FY19', 'FY20', 'FY21', 'TGT21', 'TGT22', '5yr Trend', 'Desired Direction', 'Outcome', 'Critical'],
-			'visible' => [true, true, true, true, true, true, true, true, true, true, true, false],
+			'visible' => [true, true, true, true, true, true, true, true, true, true, false, false],
 			'flds' => ['"Performance Indicator"', '"FY17"', '"FY18"', '"FY19"', '"FY20"', '"FY21"', '"TGT21"', '"TGT22"', 
 					'function (r) {
 						var a = r["5yr Trend"]
@@ -292,7 +292,7 @@ class OrgsDatasets
 					}',
 					'"Critical"'
 				],
-			'filters' => [10 => null],
+			'filters' => [10 => null, 11 => null],
 			'details' => [
 				'MMR Goal' => 'MMR Goal',
 				'Critical' => 'Critical',
