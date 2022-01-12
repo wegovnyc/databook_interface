@@ -278,6 +278,9 @@
 			<div class="row mb-4">
 				<div id="data_container" class="col-12">
 					<div class="table-responsive">
+						<h4 class="card-title mb-4 mt-4">
+							About the Data
+						</h4>
 						<table id="myTable" class="display table-hover table-borderless" style="width:100%;">
 						</table>
 					</div>
