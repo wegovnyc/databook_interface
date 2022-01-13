@@ -108,6 +108,6 @@ class Notices extends Controller
 				->header('Content-type', 'text/calendar')
 				#->header('Content-type', 'text/calendar; charset=utf-8')
 				#->header('Content-Disposition', 'attachment; filename="cal.ics"')
-			: abort(404);
+			: '';
     }
 }

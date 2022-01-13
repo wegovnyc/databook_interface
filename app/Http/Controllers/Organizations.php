@@ -299,5 +299,26 @@ class Organizations extends Controller
 				])
 			: abort(404);
     }
-	
+
+    /**
+     * Show district section.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function ical($id)
+    {
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+		#$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
+		$data = $model->carto->req("SELECT * FROM crol WHERE \"wegov-org-id\"='{$id}' AND NOT \"EventDate\" = '' AND DATE(\"EventDate\") >= DATE(NOW() - INTERVAL '1 week') ORDER BY date(\"EventDate\") DESC");
+		return $data
+			? response()->view('icalevents', [
+					'data' => $data,
+					'agencyName' => $data[0]['wegov-org-name'],
+					'dataset' => $model->dataset('City Record Online (CROL)'),
+				])
+				->header('Content-type', 'text/calendar')
+				#->header('Content-type', 'text/calendar; charset=utf-8')
+				#->header('Content-Disposition', 'attachment; filename="cal.ics"')
+			: '';
+    }	
 }

@@ -3,8 +3,8 @@ VERSION:2.0
 PRODID:-//Wegov Databook//Upcoming Events//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:NYC Events
-X-WR-CALDESC:NYC Events
+X-WR-CALNAME:{{ ($agencyName ?? null) ? $agencyName . ' - ' : '' }}Events from CROL via WeGovNYC
+X-WR-CALDESC:{{ ($agencyName ?? null) ? $agencyName . ' - ' : '' }}Events from CROL via WeGovNYC
 X-WR-TIMEZONE:America/New_York
 BEGIN:VTIMEZONE
 TZID:America/New_York
@@ -26,18 +26,19 @@ END:STANDARD
 END:VTIMEZONE
 @foreach($data as $ev)
 BEGIN:VEVENT
-LAST-MODIFIED;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
-DTSTAMP;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated'])) }}
+LAST-MODIFIED;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($dataset['Last Updated']) + 60) }}
+DTSTAMP;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($ev['StartDate'])) }}
 DTSTART;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'])) }}
 DTEND;TZID=US/Central:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'] . ' +1 hour')) }}
-SUMMARY:{!! html_entity_decode($ev['ShortTitle']) !!}@if($ev['wegov-org-name']) : {!! html_entity_decode($ev['wegov-org-name']) !!}@endif
-
+SUMMARY:{!! $ev['TypeOfNoticeDescription'] !!} : {!! html_entity_decode($ev['ShortTitle']) !!}
 UID:{{ $ev['RequestID'] }}-event@databook.wegov.nyc
-DESCRIPTION:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
+@php 
+	$d = trim(preg_replace(['~<[^>]+>~si', '~[ \s]+~si'], ['', ' '], html_entity_decode($ev['AdditionalDescription1'])));
+	$descr = ($d ? $d . '\n' : '') . ($ev['wegov-org-name'] ? 'Agency: ' . $ev['wegov-org-name'] . '\n' : '') . 'More Info: https://a856-cityrecord.nyc.gov/RequestDetail/' . $ev['RequestID'];
+@endphp
+DESCRIPTION: {!! $descr !!}
 URL:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
-@if($ev['Email'])ORGANIZER;CN={{ $ev['ContactName'] }}:MAILTO:{{ $ev['Email'] }}
-@elseif($ev['ContactPhone'])ORGANIZER;CN={{ $ev['ContactName'] }}:TEL:{{ $ev['ContactPhone'] }}
-@endif
+ORGANIZER:{{ $ev['wegov-org-name'] }}
 @if($ev['EventStreetAddress1'] && ($ev['EventStreetAddress1'] <> 'Address Not Listed In The Dropdown'))@php $rr = [$ev["EventStreetAddress1"], $ev["EventStreetAddress2"], $ev["EventCity"], $ev["EventStateCode"], $ev["EventZipCode"]]; $rr = array_diff($rr, ['']); @endphpLOCATION:{{ implode(', ', $rr) }}
 @endif
 SEQUENCE:0

@@ -23,6 +23,8 @@ Route::get('/organization/{id}', [Organizations::class, 'orgAbout'])->name('orgP
 
 Route::get('/organization/{id}/capitalprojects', [Organizations::class, 'orgProjectSection'])->name('orgProjectSection');
 
+Route::get('/organization/{id}/events.ics', [Organizations::class, 'ical'])->name('orgIcalEvents');
+
 Route::get('/organization/{id}/notices/{subsection}', [Organizations::class, 'orgNoticesSection'])->name('orgNoticeSection');
 
 Route::get('/organization/{id}/{section}', [Organizations::class, 'orgSection'])->name('orgSection');
