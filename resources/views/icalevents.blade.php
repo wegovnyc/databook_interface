@@ -30,11 +30,11 @@ LAST-MODIFIED;TZID=America/New_York:{{ date('Ymd\THis\Z', strtotime($dataset['La
 DTSTAMP;TZID=America/New_York:{{ date('Ymd\THis\Z', strtotime($ev['StartDate'])) }}
 DTSTART;TZID=America/New_York:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'])) }}
 DTEND;TZID=America/New_York:{{ date('Ymd\THis\Z', strtotime($ev['EventDate'] . ' +1 hour')) }}
-SUMMARY:{!! $ev['TypeOfNoticeDescription'] !!} : {!! html_entity_decode($ev['ShortTitle']) !!}
+SUMMARY:{!! $ev['TypeOfNoticeDescription'] !!}: {!! html_entity_decode($ev['ShortTitle']) !!}
 UID:{{ $ev['RequestID'] }}-event@databook.wegov.nyc
 @php 
 	$d = trim(preg_replace(['~<[^>]+>~si', '~[ \s]+~si'], ['', ' '], html_entity_decode($ev['AdditionalDescription1'])));
-	$descr = ($d ? $d . '\n' : '') . ($ev['wegov-org-name'] ? 'Agency: ' . $ev['wegov-org-name'] . '\n' : '') . 'More Info: https://a856-cityrecord.nyc.gov/RequestDetail/' . $ev['RequestID'];
+	$descr = ($d ? $d . '\n' : '') . ($ev['wegov-org-name'] ? "Agency: {$ev['wegov-org-name']}(" . route('orgProfile', ['id' => $ev['wegov-org-id']]) . ')\n' : '') . 'More Info: https://a856-cityrecord.nyc.gov/RequestDetail/' . $ev['RequestID'];
 @endphp
 DESCRIPTION:{!! $descr !!}
 URL:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
