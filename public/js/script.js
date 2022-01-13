@@ -556,6 +556,19 @@ function fitBounds(bounds) {
 
 /** share button ******************************************/
 
+function copyLinkM(a) {
+	var el = document.getElementById("details-permalink");
+	//console.log(a, $(a).find('.share_icon_container'))
+	el.select();
+	el.setSelectionRange(0, 99999);
+	document.execCommand("copy");
+	//console.log(el.value)
+	$(a).find('.share_icon_container').popover('show')
+	setTimeout(function(){
+		$(a).find('.share_icon_container').popover('hide')
+	}, 3000);
+}
+
 function copyLink() {
 	var el = document.getElementById("details-permalink");
 	el.select();

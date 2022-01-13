@@ -500,7 +500,7 @@
 
 			<div class="row justify-content-center">
 				<div class="col-md-12 organization_data">
-					<h4>Upcoming Events &nbsp;<a title="Share direct link" onclick="copyLink();"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="Link copied to clipboard" placement="left" trigger="manual"></i></a></h4>
+					<h4>Upcoming Events &nbsp;<a title="Copy Agencies Notices iCal feed link" onclick="copyLinkM(this);"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Agencies Notices iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a></h4>
 					<p>Find the time and location of events such as public meetings and hearings about contracts, reports and more.</p>
 					<textarea id="details-permalink" class="details">{!! route('noticesIcalEvents') !!}</textarea>
 				</div>

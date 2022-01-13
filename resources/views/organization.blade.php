@@ -96,7 +96,7 @@
 				<div class="col-md-{{ $w }}" id="org_crol">
 					<div class="notice_org">
 						<h5 class="card-title mb-4">
-							Events
+							Events&nbsp;<a title="Copy Agency Notices iCal feed link" onclick="copyLinkM(this);"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Agency Notices iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-2px;"></i></a>
 						</h5>
 						@if ($events)
 							<div class="card-text">

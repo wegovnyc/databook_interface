@@ -8,11 +8,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="https://wegov.nyc/news-events/">News & Events</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://databook.wegov.nyc/">Databook</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://wegov.nyc/tools/">Tools</a>
+                    <a class="nav-link" href="https://wegov.nyc/news-events/">News & Events</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://wegov.nyc/about/">About</a>

@@ -36,7 +36,7 @@ UID:{{ $ev['RequestID'] }}-event@databook.wegov.nyc
 	$d = trim(preg_replace(['~<[^>]+>~si', '~[ \s]+~si'], ['', ' '], html_entity_decode($ev['AdditionalDescription1'])));
 	$descr = ($d ? $d . '\n' : '') . ($ev['wegov-org-name'] ? 'Agency: ' . $ev['wegov-org-name'] . '\n' : '') . 'More Info: https://a856-cityrecord.nyc.gov/RequestDetail/' . $ev['RequestID'];
 @endphp
-DESCRIPTION: {!! $descr !!}
+DESCRIPTION:{!! $descr !!}
 URL:https://a856-cityrecord.nyc.gov/RequestDetail/{{ $ev['RequestID'] }}
 ORGANIZER:{{ $ev['wegov-org-name'] }}
 @if($ev['EventStreetAddress1'] && ($ev['EventStreetAddress1'] <> 'Address Not Listed In The Dropdown'))@php $rr = [$ev["EventStreetAddress1"], $ev["EventStreetAddress2"], $ev["EventCity"], $ev["EventStateCode"], $ev["EventZipCode"]]; $rr = array_diff($rr, ['']); @endphpLOCATION:{{ implode(', ', $rr) }}
