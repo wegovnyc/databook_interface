@@ -7,7 +7,7 @@ class AuctionsDatasets
 		'auctions' => [
 			'fullname' => 'Auctions',
 			'title' => 'Auctions',
-			'sql' => 'SELECT * FROM auctions WHERE date("Auction Ends") > date(now()) ORDER BY "Auction Ends"',
+			'sql' => 'SELECT * FROM auctions WHERE date("Auction Ends") >= date(now()) ORDER BY "Auction Ends"',
 			'hdrs' => ['Title', 'Time Left', 'Auction Ends', 'Current Price', '# of Bids', 'Seller', 'Description'],
 			'flds' => [
 					'function (r) { return `<a href="${r["URL"]}" target="_blank">${r["Title"]}</a>` }',
