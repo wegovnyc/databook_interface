@@ -46,6 +46,11 @@ class Breadcrumbs
 		return array_merge(self::$root, [['/districts', 'Districts']]);
 	}
 
+	static function auctions()
+	{
+		return array_merge(self::$root, [['/auctions', 'Auctions']]);
+	}
+
 	static function projects()
 	{
 		return array_merge(self::$root, [['/capitalprojects', 'Capital Projects']]);

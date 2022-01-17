@@ -498,6 +498,76 @@
 			</div>
 					
 
+			<div class="row justify-content-center py-4">
+				<div class="col-md-6 organization_data">
+					<h4 class="mb-3">News&nbsp;<a title="Copy News RSS feed link" onclick="copyLinkM(this, 'noticesRSSNews');"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="News RSS feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a></h4>
+					<textarea id="noticesRSSNews" class="details">{!! route('noticesRSSNews') !!}</textarea>
+					
+					@foreach (array_slice($news, 0, 6) as $n)
+						<div class="card mb-1">
+						  <div class="card-body py-2">
+							<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
+							<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
+							@if ($n['wegov-org-name'])
+							  <a href="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary" >{{ $n['wegov-org-name'] }}</a>
+							@endif
+							<a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $n['RequestID'] }}" class="badge badge-primary" target="_blank">{{ $n['RequestID'] }}</a>
+						  </div>
+						</div>
+					@endforeach
+					<div class="row justify-content-center">
+						<div class="col-md-12 text-center">
+							<a type="button" class="type-label my-4" href="{{ route('noticesSection', ['section' => 'news']) }}">See All News</a>
+						</div>
+					</div>
+					
+				</div>
+				
+				<div class="col-md-6 organization_data">
+					<h4 class="mb-3">Events&nbsp;<a title="Copy Events iCal feed link" onclick="copyLinkM(this, 'noticesIcalEvents');"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Events iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a></h4>
+					<textarea id="noticesIcalEvents" class="details">{!! route('noticesIcalEvents') !!}</textarea>
+					<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&title=CROL%20Event%20Notices%20via%20WeGovNYC&showTitle=0&mode=AGENDA&showCalendars=0&src=am1kNmNyYWlkOWd0aWllMzZwb2dlb2JqZDVxaGdoMjFAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23D50000" style="border-width:0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+					<div class="row justify-content-center">
+						<div class="col-md-12 text-center">
+							<a type="button" class="type-label my-4" href="{{ route('noticesSection', ['section' => 'events']) }}">See All Events</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+				
+			<h4 class="mb-2">Auctions</h4>
+			<p>Get great deals and help the city raise funds by bidding on items New York City agencies no longer need.</p>
+			<div class="row justify-content-center py-1">
+				@foreach (array_slice($auctions, 0, 3) as $a)
+				  <div class="col-md-4 organization_data">
+					  @php
+						$img = json_decode(str_replace('""', '"', $a['Featured Image']), true);
+					  @endphp
+					<div class="card">
+						<a href="{!! $a['URL'] !!}" target="_blank" class="hoveronly">
+							@if ($img[0]['thumbnails']['large']['url'])
+								<div style="height: 250px; overflow: hidden; display: block; padding: 0; margin: 20px auto 0; text-align: center;">
+									<img src="{{ $img[0]['thumbnails']['large']['url'] }}" class="card-img-top" alt="{{ $a['Title'] }}" style="max-width: 100%; max-height: 100%; margin: 0 auto; width: inherit;">
+								</div>
+							@endif
+						  <div class="card-body">
+							<h6 class="card-title mb-0">{{ $a['Title'] }}</h6>
+							<p class="card-text mb-0">Time Left: {{ $a['Time Left'] }}<br/>Current Price: {{ $a['Current Price'] }}</p>
+						  </div>
+						</a>
+					</div>
+				  </div>
+				@endforeach
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12 text-center">
+					<a type="button" class="type-label my-4" href="{{ route('auctions') }}">See All Auctions</a>
+				</div>
+			</div>
+			
+				
+		{{--	
 			<div class="row justify-content-center">
 				<div class="col-md-12 organization_data">
 					<h4>Upcoming Events &nbsp;<a title="Copy Agencies Notices iCal feed link" onclick="copyLinkM(this);"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Agencies Notices iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a></h4>
@@ -509,7 +579,7 @@
 			<div class="row justify-content-center map_right">
 				@if ($map ?? null)
 					<div id="map_container" class="col-6" style="display:none;">
-					{{--<button id="map_button_alt" class="btn btn-outline map_btn" style="margin:0 20px 20px 10px; z-index: 10; max-width: 40px; float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt=""></button>--}}
+					<button id="map_button_alt" class="btn btn-outline map_btn" style="margin:0 20px 20px 10px; z-index: 10; max-width: 40px; float:right;" onclick="toggleMap();"><img src="/img/map_location.png" alt=""></button>
 						<!-- toggles -->
 						<div class="select_district" id="toggles" style="left:0px;">
 							<img src="/img/eyes.png" alt="">
@@ -613,8 +683,8 @@
 					<a type="button" class="type-label my-4" href="{{ route('noticesSection', ['section' => 'events']) }}">See All Events</a>
 				</div>
 			</div>
+		--}}
 				
-			
 		</div>
 
 		<div class="col-md-12">

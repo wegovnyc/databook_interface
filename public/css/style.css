@@ -340,7 +340,7 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 
 .toolbar .share_icon_container {top: 8px;}
 
-#details-permalink {
+#details-permalink, textarea.details {
     opacity: 0.01;
     display: block;
     position: absolute;

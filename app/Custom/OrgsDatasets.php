@@ -959,6 +959,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 	/*
 		--agencypmi
 		#payrolldata
+		auctions
 		additionalcostsallocation
 		benefitsapi
 		budgetrequestsregister

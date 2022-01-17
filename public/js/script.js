@@ -556,8 +556,8 @@ function fitBounds(bounds) {
 
 /** share button ******************************************/
 
-function copyLinkM(a) {
-	var el = document.getElementById("details-permalink");
+function copyLinkM(a, sel="details-permalink") {
+	var el = document.getElementById(sel);
 	//console.log(a, $(a).find('.share_icon_container'))
 	el.select();
 	el.setSelectionRange(0, 99999);

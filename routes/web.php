@@ -5,6 +5,7 @@ use App\Http\Controllers\Districts;
 use App\Http\Controllers\Projects;
 use App\Http\Controllers\Titles;
 use App\Http\Controllers\Notices;
+use App\Http\Controllers\Auctions;
 
 
 Route::get('/', [Organizations::class, 'root'])->name('root');
@@ -20,16 +21,11 @@ Route::get('/organizations/chart/{id}', [Organizations::class, 'orgsChart'])->na
 Route::get('/organizations/all', [Organizations::class, 'orgsAll'])->name('orgsAll');
 
 Route::get('/organization/{id}', [Organizations::class, 'orgAbout'])->name('orgProfile');
-
 Route::get('/organization/{id}/capitalprojects', [Organizations::class, 'orgProjectSection'])->name('orgProjectSection');
-
 Route::get('/organization/{id}/events.ics', [Organizations::class, 'ical'])->name('orgIcalEvents');
-
+Route::get('/organization/{id}/news.rss', [Organizations::class, 'rss'])->name('orgRSSNews');
 Route::get('/organization/{id}/notices/{subsection}', [Organizations::class, 'orgNoticesSection'])->name('orgNoticeSection');
-
 Route::get('/organization/{id}/{section}', [Organizations::class, 'orgSection'])->name('orgSection');
-
-//Route::get('/organization/{id}/capitalprojects/{prjId}', [Organizations::class, 'orgProject'])->name('orgProject');
 Route::get('/organization/{id}/capitalprojects/{prjId}', function ($id, $prjId) {
     return redirect(route('project', ['prjId' => $prjId]));
 })->name('orgProject');
@@ -38,11 +34,8 @@ Route::get('/capitalprojects/{prjId}', [Organizations::class, 'project'])->name(
 
 
 Route::get('/districts', [Districts::class, 'main'])->name('districts');
-
 Route::get('/districts/{type}/{id}/{section}', [Districts::class, 'main'])->name('districtsPreset');
-
 Route::get('/districtXHR/{type}/{id}/capitalprojects', [Districts::class, 'projectSection'])->name('distProjectSection');
-
 Route::get('/districtXHR/{type}/{id}/{section}', [Districts::class, 'section'])->name('distSection');
 
 
@@ -52,20 +45,16 @@ Route::get('/capitalprojects', [Projects::class, 'main'])->name('projects');
 
 
 Route::get('/titles', [Titles::class, 'main'])->name('titles');
-
 Route::get('/titles/{id}', function ($id) {
     return redirect(route('titleSection', ['id' => $id, 'section' => 'schedule']));
 })->name('title');
-
 Route::get('/titles/{id}/{section}', [Titles::class, 'section'])->name('titleSection');
 
 
-
 Route::get('/notices', [Notices::class, 'main'])->name('notices');
-
 Route::get('/notices/events.ics', [Notices::class, 'ical'])->name('noticesIcalEvents');
-
+Route::get('/notices/news.rss', [Notices::class, 'rss'])->name('noticesRSSNews');
 Route::get('/notices/{section}', [Notices::class, 'section'])->name('noticesSection');
 
 
-
+Route::get('/auctions', [Auctions::class, 'main'])->name('auctions');

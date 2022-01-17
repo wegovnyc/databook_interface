@@ -177,8 +177,12 @@
 					@if(array_search($section, $menu) === false)
 						<h4>{{ $details['sectionTitle'] ?? $dataset['Name'] }}
 							@if ($section == 'notices/events')
-								&nbsp;<a title="Copy Agency Notices iCal feed link" onclick="copyLinkM(this);"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Agency Notices iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a>
-							@endif	
+								&nbsp;<a title="Copy Events iCal feed link" onclick="copyLinkM(this);"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Events iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a>
+							@endif
+							@if ($section == 'notices/all')
+								&nbsp;<a title="Copy News RSS feed link" onclick="copyLinkM(this, 'news-rss-link');"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="News RSS feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a>
+								<textarea id="news-rss-link" class="details">{!! route('orgRSSNews', ['id' => $id]) !!}</textarea>
+							@endif
 						</h4>
 					@endif
 					<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>

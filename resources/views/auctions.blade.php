@@ -9,39 +9,39 @@
 		<div id="pos-header" class="org-header">
 			<div class="row mx-2">
 				<div class="col-md-9 org_detailheader">
-					<h4>{{ $slist[$section] }}
-						@if ($section == 'events')
+					<h4>{{ $details['title'] }}
+						{{--@if ($section == 'events')
 							&nbsp;<a title="Copy Events iCal feed link" onclick="copyLinkM(this, 'events-ical-link');"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Events iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a>
 							<textarea id="events-ical-link" class="details">{!! route('noticesIcalEvents') !!}</textarea>
 						@endif
 						@if ($section == 'news')
 							&nbsp;<a title="Copy News RSS feed link" onclick="copyLinkM(this, 'news-rss-link');"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="News RSS feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a>
 							<textarea id="news-rss-link" class="details">{!! route('noticesRSSNews') !!}</textarea>
-						@endif
+						@endif--}}
 					</h4>
 					<p>{{ $details['description'] }}</p>
 				</div>
 				<div class="col-md-3 mt-2" id="org_summary">
-					<table class="table-sm stats-table" width="100%">
-					<thead>
-						<tr>
-						<th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Year&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
-						<th scope="col" width="50%" id="pub_date_filter"></th>
-						</tr>
-					</thead>
-					{{--<tbody>
-						<tr>
-							<td colspan=2 class="text-right px-0 pt-0 pb-3">
-								<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="true" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
-							</td>
-						</tr>
-					</tbody>--}}
-					</table>
+					{{--<table class="table-sm stats-table" width="100%">
+						<thead>
+							<tr>
+							<th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Year&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
+							<th scope="col" width="50%" id="pub_date_filter"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan=2 class="text-right px-0 pt-0 pb-3">
+									<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="true" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>--}}
 				</div>
 			</div>
 		</div>
 
-		<div class="navbar-expand-lg org_headermenu mt-3 mb-5">
+		{{--<div class="navbar-expand-lg org_headermenu mt-3 mb-5">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#submenu_nav" aria-controls="submenu_nav" aria-expanded="true" aria-label="Toggle navigation">
 				<p class="m-0">Notices Menu</p>
 			</button>
@@ -73,7 +73,7 @@
 					@endforeach
 				</ul>
 			</div>
-		</div>
+		</div>--}}
 	</div>
 
 
@@ -119,140 +119,124 @@
 		var dataurl = '{!! $url !!}'
 		
 		$(document).ready(function() {
-			/* custom pub_date filter on top-right */
-			$.get("{!! $dates_req_url !!}", function (resp) {
-				var select = $('<select class="filter mt-1" style="width:100%;" id="filter-1" name="filter-1" aria-controls="myTable"><option value="" selected>- Publication Date -</option></select>')
-					.appendTo($("#pub_date_filter"))
-					.on('change', function () {
-						var val = $(this).val()
-						$('.loading').show()
-						datatable.ajax.url(dataurl.replace('pubdate', val)).load(function () {
-							$('.loading').hide()
-						});
-					});
-				select.wrap('<div class="drop_dowm_select"></div>');
-				resp['rows'].forEach(function (d, j) {
-					select.append(`<option value="${d['yy']}" ${ j == 0 ? 'selected' : ''}>${d['yy']}</option>`)
-				});
-
-
-				datatable = $('#myTable').DataTable({
-					ajax: {
-						url: dataurl.replace('pubdate', resp['rows'][0]['yy']),
-						dataSrc: 'rows'
-					},
-					buttons: [{
-						extend: 'colvis',
-						className: 'btn_eyeicon',
-						columnText: function ( dt, idx, title ) {
-							return (idx+1)+': '+(title ? title : 'details');
-						}
-					}],
-					deferRender: true,
-					dom: '<"toolbar container-flex"<"row">>Blfrtip',
-					columns: [
-						@if ($details['detFlag'])
-							{
-								"className": 'details-control',
-								"orderable": false,
-								"data":  null,
-								"defaultContent": ''
-							},
-						@endif
-						@foreach ($details['flds'] as $i=>$f)
-							@if ($i > 0)
-								,
-							@endif
-							{
-							data: {!! $f !!},
-							@if ($details['visible'][$i])
-								visible: true
-							@else
-								visible: false
-							@endif
-							}
-						@endforeach
-					],
-
-					@if ($details['filters'])
-						initComplete: function () {
-							this.api().columns([{{ $details['fltsCols'] }}]).every(function (c,a,i) {
-								var delim = {!! json_encode($details['fltDelim']) !!};
-								var column = this;
-								var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
-									//.appendTo($(column.footer()).empty())
-									.appendTo($("div.toolbar .row"))
-									.on('change', function () {
-										/*var val = $.fn.dataTable.util.escapeRegex(
-											$(this).val()
-										);*/
-										var val = $(this).val()
-										column
-											.search(val ? val : '', false, false)
-											.draw();
-									});
-								select.wrap('<div class="drop_dowm_select col"></div>');
-								$('div.toolbar').insertAfter('#myTable_filter');
-
-								var tt = []
-								dd = column.data()
-
-								column.data().each(function (d, j) {
-									d = typeof d == 'string' ? d.replace(/<[^>]+>/gi, '') : d
-									if (c in delim && typeof d == 'string') {
-										d.split(delim[c]).forEach(function (v, k) {
-											tt.push(v)
-										})
-									}
-									else
-										tt.push(d)
-								})
-								tt = [...new Set(tt)]
-
-								tt.sort().forEach(function (d, j) {
-									select.append('<option value="'+d+'">'+d+'</option>')
-								});
-							});
-
-							@foreach ($details['filters'] as $i=>$v)
-								@if ($v)
-									setTimeout(function(){
-										$('#filter-{{ $i }}').find('[value*="{!! $v !!}"]').prop('selected',true).trigger('change')
-									}, 500 + 1000 * {{ $i }});
-								@endif
-							@endforeach
-
-							@if ($details['script'] ?? null)
-								{!! $details['script'] !!}
-							@endif
-						}
+			datatable = $('#myTable').DataTable({
+				ajax: {
+					url: '{!! $url !!}',
+					dataSrc: 'rows'
+				},
+				order: [],
+				buttons: [{
+					extend: 'colvis',
+					className: 'btn_eyeicon',
+					columnText: function ( dt, idx, title ) {
+						return (idx+1)+': '+(title ? title : 'details');
+					}
+				}],
+				deferRender: true,
+				dom: '<"toolbar container-flex"<"row">>Blfrtip',
+				columns: [
+					@if ($details['detFlag'])
+						{
+							"className": 'details-control',
+							"orderable": false,
+							"data":  null,
+							"defaultContent": ''
+						},
 					@endif
-				});
+					@foreach ($details['flds'] as $i=>$f)
+						@if ($i > 0)
+							,
+						@endif
+						{
+						data: {!! $f !!},
+						@if ($details['visible'][$i])
+							visible: true
+						@else
+							visible: false
+						@endif
+						}
+					@endforeach
+				],
 
-				$('a.toggle-vis').on('click', function (e) {
-					e.preventDefault();
-					var column = datatable.column($(this).attr('data-column'));
-					column.visible(!column.visible());
-				});
+				@if ($details['filters'])
+					initComplete: function () {
+						this.api().columns([{{ $details['fltsCols'] }}]).every(function (c,a,i) {
+							var delim = {!! json_encode($details['fltDelim']) !!};
+							var column = this;
+							var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
+								//.appendTo($(column.footer()).empty())
+								.appendTo($("div.toolbar .row"))
+								.on('change', function () {
+									/*var val = $.fn.dataTable.util.escapeRegex(
+										$(this).val()
+									);*/
+									var val = $(this).val()
+									column
+										.search(val ? val : '', false, false)
+										.draw();
+								});
+							select.wrap('<div class="drop_dowm_select col"></div>');
+							$('div.toolbar').insertAfter('#myTable_filter');
 
-				$('#myTable tbody').on('click', 'td.details-control', function () {
-					var tr = $(this).closest('tr');
-					var row = datatable.row(tr);
+							var tt = []
+							dd = column.data()
 
-					if (row.child.isShown()) {
-						row.child.hide();
-						tr.removeClass('shown');
-						tr.next('tr').removeClass('child-row');
+							column.data().each(function (d, j) {
+								d = typeof d == 'string' ? d.replace(/<[^>]+>/gi, '') : d
+								if (c in delim && typeof d == 'string') {
+									d.split(delim[c]).forEach(function (v, k) {
+										tt.push(v)
+									})
+								}
+								else
+									tt.push(d)
+							})
+							tt = [...new Set(tt)]
+
+							tt.sort().forEach(function (d, j) {
+								select.append('<option value="'+d+'">'+d+'</option>')
+							});
+						});
+
+						@foreach ($details['filters'] as $i=>$v)
+							@if ($v)
+								setTimeout(function(){
+									$('#filter-{{ $i }}').find('[value*="{!! $v !!}"]').prop('selected',true).trigger('change')
+								}, 500 + 1000 * {{ $i }});
+							@endif
+						@endforeach
+
+						@if ($details['script'] ?? null)
+							{!! $details['script'] !!}
+						@endif
 					}
-					else {
-						row.child(details(row.data())).show();
-						tr.addClass('shown');
-						tr.next('tr').addClass('child-row');
-					}
-				});
-
-				$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
+				@endif
 			});
+
+			$('a.toggle-vis').on('click', function (e) {
+				e.preventDefault();
+				var column = datatable.column($(this).attr('data-column'));
+				column.visible(!column.visible());
+			});
+
+			$('#myTable tbody').on('click', 'td.details-control', function () {
+				var tr = $(this).closest('tr');
+				var row = datatable.row(tr);
+
+				if (row.child.isShown()) {
+					row.child.hide();
+					tr.removeClass('shown');
+					tr.next('tr').removeClass('child-row');
+				}
+				else {
+					row.child(details(row.data())).show();
+					tr.addClass('shown');
+					tr.next('tr').addClass('child-row');
+				}
+			});
+
+			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
+
 		});
 	</script>
 	<div class="inner_container">
@@ -290,7 +274,7 @@
 				</div>
 			</div>
 		</div>
-
+		{{--
 		@if ($dataset['Public Note'] ?? null)
 			<div class="col-md-12">
 				<h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
@@ -301,6 +285,7 @@
 				<p class="lead"><img src="/img/info.png"> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
 			</div>
 		</div>
+		--}}
 	</div>
 	
 	<script>

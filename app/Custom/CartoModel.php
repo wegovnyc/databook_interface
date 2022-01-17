@@ -40,9 +40,10 @@ class CartoModel
 		return $this->map($dd)[0] ?? [];
 	}
 	
-	function crolNews($id)
+	function crolNews($id=null)
 	{
-		$dd = $this->carto->req("SELECT \"StartDate\", \"EndDate\", \"SectionName\", \"ShortTitle\", \"RequestID\" FROM crol WHERE \"wegov-org-id\" = '{$id}' AND \"EventDate\" = '' order by date(\"StartDate\") DESC LIMIT 9");
+		$where = $id ? "\"wegov-org-id\" = '{$id}' AND " : '';
+		$dd = $this->carto->req("SELECT \"StartDate\", \"EndDate\", \"SectionName\", \"ShortTitle\", \"RequestID\" , \"TypeOfNoticeDescription\", \"wegov-org-name\", \"wegov-org-id\" FROM crol WHERE {$where} \"EventDate\" = '' AND date(\"StartDate\") >= date(NOW() - INTERVAL '1 WEEK') order by date(\"StartDate\") DESC LIMIT 9");
 		return $this->map($dd) ?? [];
 	}
 	

@@ -10,7 +10,7 @@ use App\Custom\Breadcrumbs;
 class Notices extends Controller
 {
     /**
-     * Show districts main view.
+     * Show notices main view.
      *
      * @return \Illuminate\View\View
      */
@@ -26,6 +26,8 @@ class Notices extends Controller
 					'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= current_date ORDER BY date("EventDate")'),
 					'details' => $details,
 					'dataset' => $model->dataset($details['fullname']),
+					'news' => $model->crolNews(),
+					'auctions' => $model->carto->req('SELECT * FROM auctions WHERE date("Auction Ends") > date(now()) ORDER BY "Auction Ends" LIMIT 3'),
 					'statUrls' => [
 						'#publichearings1' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Public Hearings and Meetings\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 days\')'),
 						'#publichearings7' => $model->url('SELECT COUNT(*) RES FROM crol WHERE NOT "StartDate" = \'\' AND "SectionName" = \'Public Hearings and Meetings\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'7 days\')'),
@@ -63,7 +65,7 @@ class Notices extends Controller
     }
 	
     /**
-     * Show district section.
+     * Show notice section.
      *
      * @return \Illuminate\View\View
      */
@@ -91,7 +93,7 @@ class Notices extends Controller
     }
 	
     /**
-     * Show district section.
+     * Return events ical feed.
      *
      * @return \Illuminate\View\View
      */
@@ -108,5 +110,25 @@ class Notices extends Controller
 				#->header('Content-type', 'text/calendar; charset=utf-8')
 				#->header('Content-Disposition', 'attachment; filename="cal.ics"')
 			;
+    }
+	
+    /**
+     * Return news rss feed.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function rss()
+    {
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+		#$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
+		#$data = $model->carto->req('SELECT c.*, o.logo FROM crol c LEFT JOIN wegov_orgs o ON c."wegov-org-id"=CAST(o.id AS text) WHERE "EventDate" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 week\') ORDER BY date("StartDate") DESC LIMIT 25');
+		$data = $model->carto->req('SELECT c.* FROM crol c WHERE "EventDate" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 week\') ORDER BY date("StartDate") DESC');
+		return response()->view('rss', [
+					'data' => $data,
+					'dataset' => $model->dataset('City Record Online (CROL)'),
+				])
+				//->header('Content-type', 'application/rss+xml; charset=utf-8');
+				->header('Content-type', 'text/xml; charset=utf-8')
+				;
     }
 }

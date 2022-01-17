@@ -301,7 +301,7 @@ class Organizations extends Controller
     }
 
     /**
-     * Show district section.
+     * Show events ical feed.
      *
      * @return \Illuminate\View\View
      */
@@ -320,4 +320,27 @@ class Organizations extends Controller
 				#->header('Content-Disposition', 'attachment; filename="cal.ics"')
 			;
     }	
+
+	
+    /**
+     * Return news rss feed.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function rss($id)
+    {
+		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
+		#$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
+		#$data = $model->carto->req('SELECT c.*, o.logo FROM crol c LEFT JOIN wegov_orgs o ON c."wegov-org-id"=CAST(o.id AS text) WHERE "EventDate" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 week\') ORDER BY date("StartDate") DESC LIMIT 25');
+		$data = $model->carto->req("SELECT c.* FROM crol c WHERE \"wegov-org-id\"='{$id}' AND \"EventDate\" = '' AND DATE(\"StartDate\") >= DATE(NOW() - INTERVAL '1 week') ORDER BY date(\"StartDate\") DESC");
+		return response()->view('rss', [
+					'data' => $data,
+					'agencyName' => $data[0]['wegov-org-name'],
+					'dataset' => $model->dataset('City Record Online (CROL)'),
+				])
+				//->header('Content-type', 'application/rss+xml; charset=utf-8');
+				->header('Content-type', 'text/xml; charset=utf-8')
+				;
+    }
+	
 }
