@@ -563,7 +563,7 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-12 text-center">
-					<p>* Bid is updated daily so they current price we display may no longer be accurate.</p>
+					<p>* Bid is updated daily so the current price we display may no longer be accurate.</p>
 					<a type="button" class="type-label my-4" href="{{ route('auctions') }}">See All Auctions</a>
 				</div>
 			</div>
