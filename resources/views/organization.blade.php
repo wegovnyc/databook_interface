@@ -78,12 +78,27 @@
 						</h5>
 						@if ($news)
 							<div class="card-text">
-								@foreach($news as $notice)
+								@foreach($news as $n)
+								{{--@foreach($news as $notice)
 									<div class="crol_msg mb-4">
 										<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
 										<p>{{ $notice['SectionName'] }}</p>
 										<p>{{ $notice['StartDate'] }}</p>
 									</div>
+								--}}
+								  <div class="card mb-1">
+									<a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $n['RequestID'] }}" class="hoveronly" target="_blank">
+									  <div class="card-body py-2">
+										<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
+										<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
+										@if ($n['wegov-org-name'])
+										{{--<span onclick_url="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary clickable" >{{ $n['wegov-org-name'] }}</span>--}}
+										  <span class="badge badge-primary" >{{ $n['SectionName'] }}</span>
+										@endif
+									  </div>
+									</a>
+								  </div>
+								
 								@endforeach
 							</div>
 							<div class="text-center col-md-12">
@@ -101,11 +116,25 @@
 						@if ($events)
 							<div class="card-text">
 								@foreach($events as $notice)
+								{{--@foreach($events as $notice)
 									<div class="crol_msg mb-4">
 										<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
 										<p>{{ $notice['SectionName'] }}</p>
 										<p>{{ $notice['StartDate'] }}</p>
 									</div>
+								--}}
+								  <div class="card mb-1">
+									<a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $n['RequestID'] }}" class="hoveronly" target="_blank">
+									  <div class="card-body py-2">
+										<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
+										<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
+										@if ($n['wegov-org-name'])
+										{{--<span onclick_url="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary clickable" >{{ $n['wegov-org-name'] }}</span>--}}
+										  <span class="badge badge-primary" >{{ $n['SectionName'] }}</span>
+										@endif
+									  </div>
+									</a>
+								  </div>
 								@endforeach
 							</div>
 							<div class="text-center col-md-12">

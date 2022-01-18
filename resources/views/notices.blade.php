@@ -510,7 +510,8 @@
 							<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
 							<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
 							@if ($n['wegov-org-name'])
-							  <span onclick_url="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary clickable" >{{ $n['wegov-org-name'] }}</span>
+							{{--<span onclick_url="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary clickable" >{{ $n['wegov-org-name'] }}</span>--}}
+							  <span class="badge badge-primary" >{{ $n['wegov-org-name'] }}</span>
 							@endif
 						  </div>
 					    </a>
