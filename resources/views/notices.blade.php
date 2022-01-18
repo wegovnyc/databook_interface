@@ -322,8 +322,8 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-11 organization_data">
-					<h4>{{ $details['fullname'] }}</h4>
-					<p>{!! nl2br($details['description']) !!}</p>
+					<h4>The City Record Remix</h4>
+					<p>The City publishes its “<a href="https://en.wikipedia.org/wiki/Government_gazette" target="_blank">official journal</a>” in print, <a href="https://www1.nyc.gov/site/dcas/about/city-record.page" target="_blank">PDF</a>, a <a href="https://a856-cityrecord.nyc.gov/" target="_blank">website</a> and as <a href="https://data.cityofnewyork.us/City-Government/City-Record-Online/dg92-zbpx/data" target="_blank">open data</a>. We’ve integrated it into WeGov datasets and reorganized its contents to make it easier to understand. Please <a href="https://wegov.nyc/contact/" target="_blank">let us know</a> if you have ideas for how we can improve this resource.</p>
 				</div>
 				<div class="col-md-1 mt-2" id="org_summary">
 					{{--<table class="table-sm stats-table" width="100%">
@@ -504,20 +504,21 @@
 					<textarea id="noticesRSSNews" class="details">{!! route('noticesRSSNews') !!}</textarea>
 					
 					@foreach (array_slice($news, 0, 6) as $n)
-						<div class="card mb-1">
+					  <div class="card mb-1">
+					    <a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $n['RequestID'] }}" class="hoveronly" target="_blank">
 						  <div class="card-body py-2">
 							<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
 							<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
 							@if ($n['wegov-org-name'])
-							  <a href="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary" >{{ $n['wegov-org-name'] }}</a>
+							  <span onclick="function () { window.location='/organization/{{ $n["wegov-org-id"] }}/notices/all' }" class="badge badge-primary" >{{ $n['wegov-org-name'] }}</span>
 							@endif
-							<a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $n['RequestID'] }}" class="badge badge-primary" target="_blank">{{ $n['RequestID'] }}</a>
 						  </div>
-						</div>
+					    </a>
+					  </div>
 					@endforeach
 					<div class="row justify-content-center">
 						<div class="col-md-12 text-center">
-							<a type="button" class="type-label my-4" href="{{ route('noticesSection', ['section' => 'news']) }}">See All News</a>
+							<a type="button" class="type-label my-4" href="{{ route('noticesSection', ['section' => 'all']) }}">See All News</a>
 						</div>
 					</div>
 					
@@ -537,7 +538,7 @@
 			
 				
 			<h4 class="mb-2">Auctions</h4>
-			<p>Get great deals and help the city raise funds by bidding on items New York City agencies no longer need.</p>
+			<p>Get great deals and help the city raise funds by bidding on items New York City agencies have put up for sale.</p>
 			<div class="row justify-content-center py-1">
 				@foreach (array_slice($auctions, 0, 3) as $a)
 				  <div class="col-md-4 organization_data">
@@ -548,7 +549,7 @@
 						<a href="{!! $a['URL'] !!}" target="_blank" class="hoveronly">
 							@if ($img[0]['thumbnails']['large']['url'])
 								<div style="height: 250px; overflow: hidden; display: block; padding: 0; margin: 20px auto 0; text-align: center;">
-									<img src="{{ $img[0]['thumbnails']['large']['url'] }}" class="card-img-top" alt="{{ $a['Title'] }}" style="max-width: 100%; max-height: 100%; margin: 0 auto; width: inherit;">
+									<img src="{{ $img[0]['thumbnails']['large']['url'] }}" alt="{{ $a['Title'] }}" style="max-width: 100%; max-height: 100%; margin: 0 auto; width: inherit;">
 								</div>
 							@endif
 						  <div class="card-body">
@@ -562,6 +563,7 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-12 text-center">
+					<p>* Bid is updated daily so they current price we display may no longer be accurate.</p>
 					<a type="button" class="type-label my-4" href="{{ route('auctions') }}">See All Auctions</a>
 				</div>
 			</div>

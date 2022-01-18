@@ -300,7 +300,7 @@ class CROLDatasets
 			'description' => 'All notices with an event date.',
 			'script' => 'datatable.order([2, "asc"]).draw();',
 		],
-		'news' => [
+		'all' => [
 			'fullname' => 'City Record Online (CROL)',
 			'table' => 'crol',
 			'sql' => 'SELECT * FROM crol WHERE "EventDate" = \'\' AND SUBSTRING("StartDate" from 7 for 4) = \'pubdate\'',
@@ -347,7 +347,7 @@ class CROLDatasets
 	];
 
 	public $list = [
-		'news' => 'News',
+		'all' => 'All',
 		'events' => 'Events',
 		'publichearings' => 'Public Hearings',
 		'contractawards' => 'Contract Awards',
@@ -360,7 +360,7 @@ class CROLDatasets
 	];
 	
 	public $menu = [
-		'news',
+		'all',
 		'events',
 		'publichearings',
 		'contractawards',
