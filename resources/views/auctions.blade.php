@@ -7,7 +7,7 @@
 @section('content')
 	<div class="inner_container">
 		<div id="pos-header" class="org-header">
-			<div class="row mx-2">
+			<div class="row m-2">
 				<div class="col-md-9 org_detailheader">
 					<h4>{{ $details['title'] }}
 						{{--@if ($section == 'events')
@@ -19,7 +19,7 @@
 							<textarea id="news-rss-link" class="details">{!! route('noticesRSSNews') !!}</textarea>
 						@endif--}}
 					</h4>
-					<p>{{ $details['description'] }}</p>
+					<p>{!! $details['description'] !!}</p>
 				</div>
 				<div class="col-md-3 mt-2" id="org_summary">
 					{{--<table class="table-sm stats-table" width="100%">

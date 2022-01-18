@@ -323,7 +323,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-11 organization_data">
 					<h4>The City Record Remix</h4>
-					<p>The City publishes its “<a href="https://en.wikipedia.org/wiki/Government_gazette" target="_blank">official journal</a>” in print, <a href="https://www1.nyc.gov/site/dcas/about/city-record.page" target="_blank">PDF</a>, a <a href="https://a856-cityrecord.nyc.gov/" target="_blank">website</a> and as <a href="https://data.cityofnewyork.us/City-Government/City-Record-Online/dg92-zbpx/data" target="_blank">open data</a>. We’ve integrated it into WeGov datasets and reorganized its contents to make it easier to understand. Please <a href="https://wegov.nyc/contact/" target="_blank">let us know</a> if you have ideas for how we can improve this resource.</p>
+					<p>New York City’s “<a href="https://en.wikipedia.org/wiki/Government_gazette" target="_blank">official journal</a>” is called “The City Record.” It’s published in print, and online as a <a href="https://www1.nyc.gov/site/dcas/about/city-record.page" target="_blank">PDF</a>, as a <a href="https://a856-cityrecord.nyc.gov/" target="_blank">website</a> and as <a href="https://data.cityofnewyork.us/City-Government/City-Record-Online/dg92-zbpx/data" target="_blank">open data</a>. We’ve used the open data version, which is updated daily, to integrate The City Record’s contents into the WeGov data system. We also created RSS news and ICS event feeds from the data, and created new ways to search and browse this information. Please <a href="https://wegov.nyc/contact/" target="_blank">let us know</a> if you have ideas for how we can improve this resource.</p>
 				</div>
 				<div class="col-md-1 mt-2" id="org_summary">
 					{{--<table class="table-sm stats-table" width="100%">
@@ -510,7 +510,7 @@
 							<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
 							<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
 							@if ($n['wegov-org-name'])
-							  <span onclick="function () { window.location='/organization/{{ $n["wegov-org-id"] }}/notices/all' }" class="badge badge-primary" >{{ $n['wegov-org-name'] }}</span>
+							  <span onclick_url="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary clickable" >{{ $n['wegov-org-name'] }}</span>
 							@endif
 						  </div>
 					    </a>
@@ -538,7 +538,7 @@
 			
 				
 			<h4 class="mb-2">Auctions</h4>
-			<p>Get great deals and help the city raise funds by bidding on items New York City agencies have put up for sale.</p>
+			<p>Get great deals and help the city raise funds by bidding on items New York City agencies put up for sale.</p>
 			<div class="row justify-content-center py-1">
 				@foreach (array_slice($auctions, 0, 3) as $a)
 				  <div class="col-md-4 organization_data">
@@ -701,6 +701,14 @@
 			console.log($(e.target).next("label")[0].innerHTML)
 			$('#change_district').html($(e.target).next("label")[0].innerHTML);
 		}
+		
+		$('.clickable').click(function(e) {
+			var url = $(this).attr('onclick_url');
+			console.log(e, url)
+			window.location.href = url;
+			e.stopPropagation();
+		})
+		
 		$('#toggle_boundries').click( function (e) {
 			$(this).next('.dropdown-menu').toggleClass('show');
 		})
@@ -714,6 +722,7 @@
 			}
 			$(".toolbar").toggle();
 		});
+		
 	</script>
 
 @endsection

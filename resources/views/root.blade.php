@@ -29,6 +29,16 @@
             </div>
             <div class="col-md-6">
 				<div class="circle_img">
+					<img src="/img/request.png">
+				</div>
+				<div class="content_area">
+					<h4>Notices</h4>
+					<p>Agency news from the City Record.</p>
+					<a class="btn_org_home" href="{{ route('notices') }}" role="button">View Notices</a>
+				</div>
+            </div>
+            <div class="col-md-6">
+				<div class="circle_img">
 					<img src="/img/projects.png">
 				</div>
 				<div class="content_area">
@@ -59,22 +69,22 @@
             </div>
             <div class="col-md-6">
 				<div class="circle_img">
-					<img src="/img/request.png">
+					<img src="/img/jobs.png">
 				</div>
 				<div class="content_area">
-					<h4>Notices</h4>
-					<p>Agency news from the City Record.</p>
-					<a class="btn_org_home" href="{{ route('notices') }}" role="button">View Notices</a>
+					<h4>Auctions</h4>
+					<p>A list of items being sold by the city.</p>
+					<a class="btn_org_home" href="{{ route('auctions') }}" role="button" target="_blank">View Auctions</a>
 				</div>
             </div>
             <div class="col-md-6">
 				<div class="circle_img">
-					<img src="/img/jobs.png">
+					<img src="/img/profile.png">
 				</div>
 				<div class="content_area">
 					<h4>Participate</h4>
 					<p>Tell us what you think on our engagement platform.</p>
-					<a class="btn_org_home" href="http://participate.wegov.nyc/" role="button" target="_blank">Join Us</a>
+					<a class="btn_org_home" href="https://participate.wegov.nyc/assemblies/wegovga" role="button" target="_blank">Join Us</a>
 				</div>
             </div>
 			

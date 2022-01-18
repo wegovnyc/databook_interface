@@ -20,7 +20,7 @@ class AuctionsDatasets
 			'visible' => [true, true, true, true, true, true, true],
 			'filters' => [5 => null],
 			'details' => [],
-			'description' => '',
+			'description' => 'We’re consolidating city auctions into a single location online. If you know of other places that auction city property, please <a href="http://wegov.nyc/contact" target="_black">let us know</a>.',
 			'script' => '',
 		],
 	];

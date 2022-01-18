@@ -341,7 +341,7 @@ class CROLDatasets
 				'Vendor Address' => 'VendorAddress',
 				'Document Links' => 'DocumentLinks',
 			],
-			'description' => 'The City Record Online (CROL) is now a fully searchable database of notices published in the City Record newspaper which includes but is not limited to: public hearings and meetings, public auctions and sales, solicitations and awards and official rules proposed and adopted by city agencies.',
+			'description' => 'New York City’s <a href="https://en.wikipedia.org/wiki/Government_gazette" target="_blank">official journal</a> is called “The City Record.” It’s published in print, and online as a <a href="https://www1.nyc.gov/site/dcas/about/city-record.page" target="_blank">PDF</a>, as a <a href="https://a856-cityrecord.nyc.gov/" target="_blank">website</a> and as <a href="https://data.cityofnewyork.us/City-Government/City-Record-Online/dg92-zbpx/data" target="_blank">open data</a>. We’ve used the open data version, which is updated daily, to integrate The City Record’s contents into the WeGov data system. We also created RSS news and ICS event feeds from the data, and created new ways to search and browse this information. Please <a href="https://wegov.nyc/contact/" target="_blank">let us know</a> if you have ideas for how we can improve this resource.',
 			'script' => 'datatable.order([1, "desc"]).draw();',
 		],
 	];

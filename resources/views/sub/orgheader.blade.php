@@ -49,7 +49,21 @@
 						</div>
 						<div class="icon_orgsocial">
 							@foreach ($icons as $f=>$pp)
-								@if ($f <> 'ical')	
+								@if ($f == 'ical')
+									<div class="icon">
+										<a onclick="copyLinkM(this);">
+											<i class="bi-{{ $pp[0] }} share_icon_container pl-0" data-toggle="popover" data-content="Agency Notices iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer;"></i>
+										</a>
+										<textarea id="details-permalink" class="details">{!! route('orgIcalEvents', ['id' => $id]) !!}</textarea>
+									</div>
+								@elseif ($f == 'rss')
+									<div class="icon">
+										<a onclick="copyLinkM(this, 'orgRSSNews');">
+											<i class="bi-{{ $pp[0] }} share_icon_container pl-0" data-toggle="popover" data-content="News RSS feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer;"></i>
+										</a>
+										<textarea id="orgRSSNews" class="details">{!! route('orgRSSNews', ['id' => $id]) !!}</textarea>
+									</div>
+								@else
 									<div class="icon">
 										@if ($org[$f] ?? null)
 											<a href="{{ $pp[1] }}{{ $org[$f] }}" target="_blank">
@@ -58,13 +72,6 @@
 										@else
 											<i class="bi-{{ $pp[0] }}"></i>
 										@endif
-									</div>
-								@else
-									<div class="icon">
-										<a onclick="copyLinkM(this);">
-											<i class="bi-{{ $pp[0] }} share_icon_container pl-0" data-toggle="popover" data-content="Agency Notices iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer;"></i>
-										</a>
-										<textarea id="details-permalink" class="details">{!! route('orgIcalEvents', ['id' => $id]) !!}</textarea>
 									</div>
 								@endif
 							@endforeach
