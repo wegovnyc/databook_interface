@@ -11,22 +11,6 @@
 		$w = $org['twitter'] || $org['facebook'] ? 4 : 6;
 		$dw = 12 - $w;
 	@endphp
-	<div class="modal" tabindex="-1" id="calendar_modal">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title">Modal title</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		  </div>
-		  <div class="modal-body">
-			<p>Modal body text goes here.</p>
-		  </div>
-		</div>
-	  </div>
-	</div>
-
 	<div class="inner_container">	
 		<div class="container py-2">
 			<div class="row mb-5">
@@ -34,6 +18,7 @@
 					@if ($org['description'] == '')
 						<h1 class="display-4">...</h1>
 					@else
+					{{--<h1 class="display-4">About</h1>--}}
 						<p class="lead mt-4">
 							{!! nl2br($org['description']) !!}
 						</p>
@@ -86,7 +71,7 @@
 				</div>
 			</div>
 			<div class="row mb-4">
-				<div class="col-md-{{ $w }}" id="org_news">
+				<div class="col-md-{{ $w }}" id="org_crol">
 					<div class="notice_org">
 						<h5 class="card-title mb-4">
 							Notices&nbsp;<a title="Copy Agency News RSS feed link" onclick="copyLinkM(this, 'orgRSSNews');"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="Agency News RSS feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-2px;"></i></a>
@@ -94,12 +79,20 @@
 						@if ($news)
 							<div class="card-text">
 								@foreach($news as $n)
+								{{--@foreach($news as $notice)
+									<div class="crol_msg mb-4">
+										<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
+										<p>{{ $notice['SectionName'] }}</p>
+										<p>{{ $notice['StartDate'] }}</p>
+									</div>
+								--}}
 								  <div class="card mb-1">
 									<a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $n['RequestID'] }}" class="hoveronly" target="_blank">
 									  <div class="card-body py-2">
 										<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
 										<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
 										@if ($n['wegov-org-name'])
+										{{--<span onclick_url="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary clickable" >{{ $n['wegov-org-name'] }}</span>--}}
 										  <span class="badge badge-primary" >{{ $n['SectionName'] }}</span>
 										@endif
 									  </div>
@@ -115,30 +108,34 @@
 					</div>
 				</div>
 
-				<div class="col-md-{{ $w }}" id="org_events">
+				<div class="col-md-{{ $w }}" id="org_crol">
 					<div class="notice_org">
 						<h5 class="card-title mb-4">
 							Events&nbsp;<a title="Copy Agency Events iCal feed link" onclick="copyLinkM(this);"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Agency Events iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-2px;"></i></a>
 						</h5>
 						@if ($events)
 							<div class="card-text">
-							{{--@foreach($events as $notice)
+								@foreach($events as $notice)
+								{{--@foreach($events as $notice)
+									<div class="crol_msg mb-4">
+										<p><a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $notice['RequestID'] }}" target="_blank">{{ $notice['ShortTitle'] }}</a></p>
+										<p>{{ $notice['SectionName'] }}</p>
+										<p>{{ $notice['StartDate'] }}</p>
+									</div>
+								--}}
 								  <div class="card mb-1">
 									<a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $n['RequestID'] }}" class="hoveronly" target="_blank">
 									  <div class="card-body py-2">
 										<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
 										<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
 										@if ($n['wegov-org-name'])
+										{{--<span onclick_url="/organization/{{ $n["wegov-org-id"] }}/notices/all" class="badge badge-primary clickable" >{{ $n['wegov-org-name'] }}</span>--}}
 										  <span class="badge badge-primary" >{{ $n['SectionName'] }}</span>
 										@endif
 									  </div>
 									</a>
 								  </div>
 								@endforeach
-							--}}
-								<div id="calendar">				
-								</div>
-								<img id="loading-calendar" src="/ical/images/ajax-loader.gif"/>				
 							</div>
 							<div class="text-center col-md-12">
 								<a class="outline_btn" href="{{ route('orgNoticeSection', ['id' => $id, 'subsection' => 'events']) }}">See More Events</a>
@@ -183,6 +180,9 @@
 												.widget--facebook--container {
 													padding: 0px;
 												}
+												/* .widget-facebook {
+													height: 600px;
+												} */
 												.widget-facebook .facebook_iframe {
 													border: none;
 												}
@@ -267,6 +267,9 @@
 										</div>
 									</div>
 								</div>
+								<style>
+									/* .twitter-timeline {height:600px !important} */
+								</style>
 							@endif
 							</div>
 							
@@ -277,6 +280,9 @@
 			
 			<div class="row mb-4">
 				<div id="data_container_accordion" class="col-12 accordion">
+				{{--<h4 class="card-title mb-4 mt-4">
+						About the Data
+				</h4>--}}
 				
 					<div class="accordion social_media" id="accordionThree">
 						<div>
@@ -299,35 +305,6 @@
 	</div>
 	
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/rowgroup/1.1.4/js/dataTables.rowGroup.min.js"></script>
-	
-	<!-- calendar -->
-	
-	<!-- Moment -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
-	<script src="/ical/js/moment-timezone-with-data.min.js"></script>
-	<!-- Fullcalendar -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/locale-all.js"></script>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.css" rel="stylesheet" type="text/css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.print.min.css" rel="stylesheet" type="text/css" media="print">
-	<!-- qtip2 -->
-	<script src="//cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
-	<link href="//cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css" rel="stylesheet" type="text/css">
-	<!-- PNotify & Animate-->
-	<script src="/ical/js/pnotify.min.js"></script>
-	<link href="/ical/css/pnotify.min.css" rel="stylesheet" type="text/css">
-	<link href="/ical/css/animate.css" rel="stylesheet" type="text/css">
-	<!-- Mozilla-comm/ical -->
-	<script src="/ical/js/ical.js"></script>
-	<!-- icalendar2fullcalendar -->
-	<script src="/ical/js/ical_events.js"></script>
-	<script src="/ical/js/ical_fullcalendar.js"></script>
-	<!-- app  -->
-	<script src="/ical/js/app.js"></script>
-	<link href="/ical/css/app.css" rel="stylesheet" type="text/css">
-	<link rel="canonical" href="https://getbootstrap.com/docs/4.6/components/modal/">
-	<!-- /calendar -->
-	
 	<script>
 		var datasets = {!! json_encode($datasets) !!}
 		var datatable = null
@@ -342,6 +319,7 @@
 				} else {
 					datasets.forEach(function (d, i) {
 						if (d[5].indexOf('stats_'+dsName) != -1) {
+							//console.log(i, dsName, d[5].indexOf('stats_'+dsName))
 							datasets.splice(i, 1)
 							datatable.row(i).remove()
                             datatable.draw();
@@ -368,6 +346,21 @@
 			}
 		}
 		
+		// function tw_click() {
+		// 	console.log('tw_click');
+		// 	$('#fb_button').removeClass('active')
+		// 	$('#tw_button').addClass('active')
+		// 	$('#fb_content').hide()
+		// 	$('#tw_content').show()
+		// }
+		
+		// function fb_click() {
+		// 	console.log('fb_click');
+		// 	$('#tw_button').removeClass('active')
+		// 	$('#fb_button').addClass('active')
+		// 	$('#tw_content').hide()
+		// 	$('#fb_content').show()
+		// }
 		$(document).ready(function () {
 			loadFinStat();
 			
@@ -403,11 +396,41 @@
 							);
 						@endif
 					@endforeach
+					/*
+					@if($org['twitter'] ?? null)
+						tw_click();
+					@elseif ($org['facebook'] ?? null)
+						fb_click();
+					@endif
+					*/
 				}
 			});
-			
-			set_calendar("{!! route('orgIcalEvents', ['id' => $id]) !!}");
 
+			/*
+			$('a.toggle-vis').on('click', function (e) {
+				e.preventDefault();
+				var column = datatable.column($(this).attr('data-column'));
+				column.visible(!column.visible());
+			});
+
+			$('#myTable tbody').on('click', 'td.details-control', function () {
+				var tr = $(this).closest('tr');
+				var row = datatable.row(tr);
+
+				if (row.child.isShown()) {
+					row.child.hide();
+					tr.removeClass('shown');
+					tr.next('tr').removeClass('child-row');
+				}
+				else {
+					row.child(details(row.data())).show();
+					tr.addClass('shown');
+					tr.next('tr').addClass('child-row');
+				}
+			});
+
+			$('#myTable_length label').html($('#myTable_length label').html().replace(' entries', ''));
+			*/
 		})
 	</script>
 @endsection

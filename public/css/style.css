@@ -354,7 +354,7 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 
 
 /*================== organization About page ================*/
-#org_stats > .notice_org > .card-text, #org_socials > .notice_org > .card-text , #org_crol > .notice_org > .card-text {height: 750px;overflow: auto;}
+#org_stats > .notice_org > .card-text, #org_socials > .notice_org > .card-text, #org_news > .notice_org > .card-text, #org_events > .notice_org > .card-text {height: 750px;overflow: auto;}
 /*#org_crol .card-text {overflow: auto;height: 670px;}*/
 #org_stats th, #org_stats td {padding: 8px 20px;}
 #tw_button, #fb_button {cursor: pointer; color:#212533;}

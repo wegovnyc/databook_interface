@@ -1,0 +1,33 @@
+/* Loading images */
+
+#loading-calendar {position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin: 15% auto; display:none;}
+#loading-users {position: absolute; left: 0; top: 64px; right: 0; bottom: 0; margin: auto; display: none; z-index: 1000;}
+
+/* Calendar container */
+.fc-view-container {opacity: 0.3;}
+
+/* qTip2 */
+.qtip-bootstrap {max-width: 550px}
+
+/* Translucent notice CSS */
+.translucent {opacity: 0.8;}
+
+/* Bootstrap-select btn style */
+.btn-static,
+.btn-static.focus,
+.btn-static:hover,
+.btn-static.active {color: #333; background-color: #fff; border-color: #ccc; font-weight: bold;}
+.btn-static .caret {display: none;}
+
+
+
+/* tuned */
+.fc-ltr .fc-list-item-time {padding-right: 0;}
+.fc-list-table td {border-width: 1px 0 0; padding: 6px 12px;}
+.fc button, .fc table, body .fc {font-size: .9em;}
+.fc-center h2 {font-size: 20px; margin: 16px 5px 0;}
+.fc-scroller {height: 660px!important;}
+.qtip-content .qtip-time, #calendar_modal .qtip-time {display:inline-block; margin: 5px 0px; border: 1px #337ab7 solid; border-radius: 3px; padding: 0 8px; font-size:.9em;}
+.qtip-title, #calendar_modal .modal-title {font-weight: 600;}
+.modal-title {display:inline;}
+.modal-dialog {max-width: 750px;}
