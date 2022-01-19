@@ -355,10 +355,10 @@
 		function loadFinStat() {
 			var uu = {!! json_encode($finStatUrls) !!}
 			var year = $('#fin_stat_select option:selected').val()
-			console.log(year)
+			//console.log(year)
 			for (let k in uu) {
 				$.get(uu[k].replace('fyear', year), function (resp) {
-					console.log(resp)
+					//console.log(resp)
 					//jj = $.parseJSON(resp)
 					var v = resp['rows'][0]['sum'] ?? '-'
 					currency = k == 'headcount' ? '' : '$'

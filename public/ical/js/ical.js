@@ -94,7 +94,7 @@ ICAL.helpers = {
         vcal.addSubcomponent(ICAL.TimezoneService.get(i).component);
       }
     }
-
+	//console.log(vcal)
     return vcal;
   },
 

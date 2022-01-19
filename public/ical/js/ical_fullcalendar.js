@@ -33,6 +33,7 @@ function fc_events(ics, event_properties) {
             fc_event(event, function(event){
                 events.push(merge_events(event_properties, event))
             })
+			//console.log(merge_events(event_properties, event))
         },
         function(event){
             event.event_properties = event_properties
@@ -80,7 +81,8 @@ function fc_event(event, event_callback) {
             
             // Create date-time moment with timezone
             var dt = event.getFirstPropertyValue('dtstart') // i.e. 2018-07-27T12:30:00
-            var tzdate = moment.tz(dt+tzoffset, tzid)
+            var tzdate = moment.tz((dt+tzoffset).replace('Z', ''), tzid)
+			//console.log(dt, tzoffset, (dt+tzoffset).replace('Z', ''), tzdate)
             
             // Apply user timezone
             var tzdate_user = tzdate.tz(moment.tz.guess())
@@ -108,7 +110,7 @@ function fc_event(event, event_callback) {
             
             // Create date-time moment with timezone
             var dt = event.getFirstPropertyValue('dtend')
-            var tzdate = moment.tz(dt+tzoffset, tzid)
+            var tzdate = moment.tz((dt+tzoffset).replace('Z', ''), tzid)
             
             // Apply user timezone
             var tzdate_user = tzdate.tz(moment.tz.guess())

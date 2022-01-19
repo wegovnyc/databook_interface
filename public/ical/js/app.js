@@ -85,7 +85,7 @@ function load_calendar(ics){
             recur_events = [];
                              
             if (data && data.replace(/^\n+|\n+$/g, '').length > 0) {
-                $('#calendar').fullCalendar('addEventSource', fc_events(data, ics.event_properties))                    	
+                $('#calendar').fullCalendar('addEventSource', fc_events(data, ics.event_properties))
 			    $('#calendar').fullCalendar('addEventSource', expand_recur_events)
 			}
             else {
@@ -244,7 +244,7 @@ function set_calendar(icalurl) {
 			}); 
         },
         eventClick:  function(event, jsEvent, view) {
-			console.log($('#calendar_modal').modal('show'))
+			//console.log($('#calendar_modal').modal('show'))
 			$('div.qtip:visible').qtip('hide');
 			
 			$('#calendar_modal .modal-title').text(event.title)
