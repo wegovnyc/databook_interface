@@ -11,7 +11,8 @@
 		$w = $org['twitter'] || $org['facebook'] ? 4 : 6;
 		$dw = 12 - $w;
 	@endphp
-	<div class="modal" tabindex="-1" id="calendar_modal">
+	
+	{{--<div class="modal" tabindex="-1" id="calendar_modal">
 	  <div class="modal-dialog">
 		<div class="modal-content">
 		  <div class="modal-header">
@@ -26,6 +27,7 @@
 		</div>
 	  </div>
 	</div>
+	--}}
 
 	<div class="inner_container">	
 		<div class="container py-2">
@@ -122,26 +124,16 @@
 						</h5>
 						@if ($events)
 							<div class="card-text">
-							{{--@foreach($events as $notice)
-								  <div class="card mb-1">
-									<a href="https://a856-cityrecord.nyc.gov/RequestDetail/{{ $n['RequestID'] }}" class="hoveronly" target="_blank">
-									  <div class="card-body py-2">
-										<h5 class="card-title mb-0">{{ $n['TypeOfNoticeDescription'] }} <small>{{ $n['StartDate'] }}</small></h5>
-										<p class="card-text mb-0">{{ $n['ShortTitle'] }}</p>
-										@if ($n['wegov-org-name'])
-										  <span class="badge badge-primary" >{{ $n['SectionName'] }}</span>
-										@endif
-									  </div>
-									</a>
-								  </div>
-								@endforeach
-							--}}
 								<div id="calendar">				
 								</div>
 								<img id="loading-calendar" src="/ical/images/ajax-loader.gif"/>				
 							</div>
 							<div class="text-center col-md-12">
 								<a class="outline_btn" href="{{ route('orgNoticeSection', ['id' => $id, 'subsection' => 'events']) }}">See More Events</a>
+							</div>
+						@else
+							<div class="text-center col-md-12">
+								No upcoming events
 							</div>
 						@endif
 					</div>

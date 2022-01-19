@@ -166,12 +166,12 @@ function set_calendar(icalurl) {
             left: 'prev,next today',
             center: 'title',
             //right: 'month,agendaWeek,agendaDay,listWeek update'
-            right: 'month,agendaWeek,agendaDay,listWeek'
+            right: 'month,agendaWeek,agendaDay,listMonth'
         },
         buttonText:{list:"planning"},
         locale: 'en',
         scrollTime: '07:00:00',
-        defaultView: 'listWeek',
+        defaultView: 'listMonth',
         eventRender: function(event, element) {
 			//console.log(event, element)
 			if (event.class === "PRIVATE") {
@@ -247,6 +247,7 @@ function set_calendar(icalurl) {
 			//console.log($('#calendar_modal').modal('show'))
 			$('div.qtip:visible').qtip('hide');
 			
+			/*
 			$('#calendar_modal .modal-title').text(event.title)
 
 			var tiptext = '<span class="qtip-time">';
@@ -277,6 +278,10 @@ function set_calendar(icalurl) {
 
 			$('#calendar_modal .modal-body').html(tiptext);
 			$('#calendar_modal').modal('show');
+			*/
+			var url = event.description.match(/More Info: (https?:\/\/[^\s]+)/i)[1];
+			//console.log(url)
+			window.location.href = url;
         },
         eventAfterAllRender: function(view){
 			if('agendaDay'===view.name){
