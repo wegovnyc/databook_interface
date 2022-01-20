@@ -26,7 +26,8 @@
 .fc-list-table td {border-width: 1px 0 0; padding: 6px 12px;}
 .fc button, .fc table, body .fc {font-size: .9em;}
 .fc-center h2 {font-size: 20px; margin: 16px 5px 0;}
-.fc-scroller {height: 660px!important;}
+/*.fc-scroller {height: 660px!important;}*/
+.fc-scroller {height: 510px!important;}
 .qtip-content .qtip-time, #calendar_modal .qtip-time {display:inline-block; margin: 5px 0px; border: 1px #337ab7 solid; border-radius: 3px; padding: 0 8px; font-size:.9em;}
 .qtip-title, #calendar_modal .modal-title {font-weight: 600;}
 .modal-title {display:inline;}

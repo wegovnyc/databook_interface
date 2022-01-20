@@ -145,13 +145,13 @@
 							<h5 class="card-title mb-4">Social Media</h5>
 							@if(($org['twitter'] ?? null) && ($org['facebook'] ?? null))
 								<style>
-									#org_socials .card-text  {overflow: auto;height: 630px;}
-									#org_socials .card-text iframe  {overflow: auto;height: 620px !important;border: 1px solid #e1e0e0 !important;}
+									#org_socials .card-text  {overflow: auto;height: 545px; margin-bottom: 10px;}
+									#org_socials .card-text iframe  {overflow: auto;height: 535px !important;border: 1px solid #e1e0e0 !important;}
 								</style>
 							@else
 								<style>
-									#org_socials .card-text  {overflow: auto;height: 700px;}
-									#org_socials .card-text iframe  {overflow: auto;height: 690px !important;border: 1px solid #e1e0e0 !important;}
+									#org_socials .card-text  {overflow: auto;height: 600px;}
+									#org_socials .card-text iframe  {overflow: auto;height: 590px !important;border: 1px solid #e1e0e0 !important;}
 								</style>
 							@endif
 
