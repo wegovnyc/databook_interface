@@ -22,7 +22,9 @@ Some description
 	composer update
 
 
+
 Databook is based on **Laravel 8.x**. In case of troubles during installation please refer to [Laravel 8 Installation Guide](https://laravel.com/docs/8.x/installation#installation-via-composer) 
+
 
 
 
@@ -36,9 +38,14 @@ Edit ``/target/folder/config/apis.php.default``, rename to ``apis.php``:
 - ``airtable_key`` - Optional. Functionality is currently disabled
 
 
+
 Set Apache DocumentRoot to ``/target/folder/public``
 
-Set Apache option <Directory "/target/folder/public"> AllowOverride All 
+
+
+Set Apache AllowOverride option for section ``<Directory "/target/folder/public">``
+
+	AllowOverride All 
 
 
 
