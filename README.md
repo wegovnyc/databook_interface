@@ -10,8 +10,7 @@ But before we can build apps that use this data to its full potential, we need t
 
 That's why we've put together a data transformation pipeline. Here's how it works.
 
-![What is WeGov.NYC_ (Public).jpg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5a4adc3a-54c4-4efb-811e-9441427c68e7/What_is_WeGov.NYC__(Public).jpg)
-
+![image](https://user-images.githubusercontent.com/444311/150594795-539fca66-3124-4d80-8619-867e776176ba.png)
 [Check out the full Databook Slideshow](https://www.notion.so/WeGovNYC-eec7e04a5cfb4cf6b801a927d148c9cb)
 
 ### 1. Index
