@@ -314,7 +314,6 @@ class CROLDatasets
 					'"ShortTitle"', '"SectionName"'
 				],
 			'filters' => [2 => null, 3 => null, 5 => null, 6 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [
 				'Start Date' => 'StartDate',
 				'End Date' => 'EndDate',

@@ -19,7 +19,6 @@ class Districts extends Controller
 		$ds = new DistDatasets();
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
         return view('districts', [
-					//'type' => $type ?? 'cc',
 					'type' => $type ?? null,
 					'id' => $id ?? null,
 					'section' => $section ?? 'nyccouncildiscretionaryfunding',
@@ -105,5 +104,4 @@ class Districts extends Controller
 				])
 			: abort(404);
     }
-
 }

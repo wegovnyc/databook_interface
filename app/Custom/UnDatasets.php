@@ -24,17 +24,14 @@ class UnDatasets
 			],
 			'filters' => [],
 			'details' => [],
-			#'order' => [[0, 'desc']],
 		],
 	];
 
 	public $list = [
-		#'about' => 'About',
 		'civil-service-titles' => 'Civil Service Titles',
 	];
 	
 	public $menu = [
-		#'about',
 		'civil-service-titles'
 	];
 	

@@ -9,7 +9,7 @@ class DistDatasets
 			'table' => 'budgetrequestsregister',
 			'hdrs' => ['Publication Date', 'Borough', 'C Board', 'Priority', 'Tracking Code', 'Request', 'Council District', 'NTA'],
 			'visible' => [true, true, true, true, true, true, false, false],
-			'flds' => [ //'"Publication"', 
+			'flds' => [ 
 						'function (r) { return toDashDate(r["Publication"]) }', 
 						'"Borough"', '"Community Board"', '"Priority"', '"Tracking  Code"', '"Request"', '"wegov-cd-id"', '"wegov-nta-code"'], 
 			'sort' => ['"Publication"', '"Borough"',],
@@ -74,7 +74,6 @@ class DistDatasets
 				], 
 			'sort' => ['"Fiscal Year"', '"Source"'],
 			'filters' => [0 => null, 1 => null, 2 => null, 6 => null, 7 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [
 				'EIN' => 'EIN',
 				'MOCS ID' => 'MOCS ID',
@@ -105,7 +104,7 @@ class DistDatasets
 			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
 			'hdrs' => ['Publication Date', 'Project ID', 'Name', 'Scope', 'Category', 'Borough', 'Planned Cost', 'Budget Increase', 'Timeline Change'],
 			'visible' => [false, true, true, true, true, true, true, true, true],
-			'hide_on_map_open' => '0, 4, 6, 7, 8',		// +1 for details fld is already added
+			'hide_on_map_open' => '0, 4, 6, 7, 8',
 			'flds' => [
 					'function (r) { return toDashDate(r["PUB_DATE"]) }',
 					'function (r) { return `<a href="/capitalprojects/${r.PROJECT_ID}">${r.PROJECT_ID}</a>` }', 
@@ -129,7 +128,7 @@ class DistDatasets
 						return v > 0 ? `<span class="good">${v} years early</span>` : `<span class="good">on time</span>`;
 					}'
 				],
-			'filters' => [/*2 => null, */4 => null],
+			'filters' => [4 => null],
 			'details' => [
 					'Original Budget' => '`<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>`',
 					'Prior Spending' =>  '`<span data-content="${toFin(r["CITY_PRIOR_ACTUAL"], 1000)}">${toFinShortK(r["CITY_PRIOR_ACTUAL"], 1000)}</span>`', 
@@ -139,13 +138,12 @@ class DistDatasets
 					'Site Description' => 'r["SITE_DESCR"]',
 					'Explanation for Delay' => 'r["DELAY_DESC"]',
 			],
-			'order' => [[8, 'asc']],					#7 - wo details col inrement
+			'order' => [[8, 'asc']],
 			'map' => ['cd' => 'wegov-comd-id', 'cc' => 'Council District', 'nta' => 'wegov-nta-code'],
 		],
 		
 	];
 
-	// single level list 'dataset name' => 'dataset title'
 	public $list = [
 		'nyccouncildiscretionaryfunding' => 'City Council Discretionary',
 		'capitalprojects' => 'Projects',
@@ -153,7 +151,6 @@ class DistDatasets
 		'facilities' => 'Facilities',
 	];
 	
-	// multi level list 'menu dropdown title (or zero if single level item)' => ['dataset name', ...]
 	public $menu = [
 		'nyccouncildiscretionaryfunding',
 		'capitalprojects',
@@ -161,7 +158,6 @@ class DistDatasets
 		'facilities',
 	];
 	
-	// altnmes for Community Dsitricts
 	public $cdAltName = ['101' => 'MN01', '102' => 'MN02', '103' => 'MN03', '104' => 'MN04', '105' => 'MN05', '106' => 'MN06', '107' => 'MN07', '108' => 'MN08', '109' => 'MN09', '110' => 'MN10', '111' => 'MN11', '112' => 'MN12', '201' => 'BX01', '202' => 'BX02', '203' => 'BX03', '204' => 'BX04', '205' => 'BX05', '206' => 'BX06', '207' => 'BX07', '208' => 'BX08', '209' => 'BX09', '210' => 'BX10', '211' => 'BX11', '212' => 'BX12', '301' => 'BK01', '302' => 'BK02', '303' => 'BK03', '304' => 'BK04', '305' => 'BK05', '306' => 'BK06', '307' => 'BK07', '308' => 'BK08', '309' => 'BK09', '310' => 'BK10', '311' => 'BK11', '312' => 'BK12', '313' => 'BK13', '314' => 'BK14', '315' => 'BK15', '316' => 'BK16', '317' => 'BK17', '318' => 'BK18', '401' => 'QN01', '402' => 'QN02', '403' => 'QN03', '404' => 'QN04', '405' => 'QN05', '406' => 'QN06', '407' => 'QN07', '408' => 'QN08', '409' => 'QN09', '410' => 'QN10', '411' => 'QN11', '412' => 'QN12', '413' => 'QN13', '414' => 'QN14', '501' => 'SI01', '502' => 'SI02', '503' => 'SI03'];
 	
 	

@@ -22,7 +22,6 @@ class Notices extends Controller
         return view('notices', [
 					'breadcrumbs' => Breadcrumbs::notices(),
 					'slist' => $ds->list,
-					#'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 days\') ORDER BY date("EventDate") DESC'),
 					'url' => $model->url('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= current_date ORDER BY date("EventDate")'),
 					'details' => $details,
 					'dataset' => $model->dataset($details['fullname']),
@@ -100,15 +99,12 @@ class Notices extends Controller
     public function ical()
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		#$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
 		$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 week\') ORDER BY date("EventDate") DESC');
 		return response()->view('icalevents', [
 					'data' => $data,
 					'dataset' => $model->dataset('City Record Online (CROL)'),
 				])
 				->header('Content-type', 'text/calendar')
-				#->header('Content-type', 'text/calendar; charset=utf-8')
-				#->header('Content-Disposition', 'attachment; filename="cal.ics"')
 			;
     }
 	
@@ -120,14 +116,11 @@ class Notices extends Controller
     public function rss()
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		#$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
-		#$data = $model->carto->req('SELECT c.*, o.logo FROM crol c LEFT JOIN wegov_orgs o ON c."wegov-org-id"=CAST(o.id AS text) WHERE "EventDate" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 week\') ORDER BY date("StartDate") DESC LIMIT 25');
 		$data = $model->carto->req('SELECT c.* FROM crol c WHERE "EventDate" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 week\') ORDER BY date("StartDate") DESC');
 		return response()->view('rss', [
 					'data' => $data,
 					'dataset' => $model->dataset('City Record Online (CROL)'),
 				])
-				//->header('Content-type', 'application/rss+xml; charset=utf-8');
 				->header('Content-type', 'text/xml; charset=utf-8')
 				;
     }

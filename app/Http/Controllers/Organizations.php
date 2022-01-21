@@ -146,7 +146,6 @@ class Organizations extends Controller
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
 		$org = $model->org($id);
-		#$ds = new OrgsDatasets();
 		$ds = preg_match('~Union|Bargaining Unit~si', $org['type'])
 				? new UnDatasets()
 				: new OrgsDatasets();
@@ -166,7 +165,7 @@ class Organizations extends Controller
 					'dataset' => $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgSect($org['id'], $org['name'], $section, $ds->list[$section]),
 					'details' => $details,
-					'map' => $details['map'] ?? null, //['cc' => 8, 'nta' => 7],
+					'map' => $details['map'] ?? null,
 				])
 			: abort(404);
     }
@@ -229,13 +228,11 @@ class Organizations extends Controller
 
 
     /**
-		----- deprecated
      * Show organization capital project.
      *
      * @param  int  	$id
      * @param  string  	$prjId
      * @return \Illuminate\View\View
-     */
     public function orgProject($id, $prjId)
     {
 		$section = 'capitalprojects';
@@ -254,15 +251,14 @@ class Organizations extends Controller
 					'menu' => $ds->menu,
 					'activeDropDown' => $ds->menuActiveDD($section),
 					'icons' => $ds->socicons,
-					//'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" . ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')),
 					'dataset' => $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgPrj($org['id'], $org['name'], $section, $ds->list[$section], $prjId, $data['name']),
-					//'details' => $details,
 					'data' => $data,
 					'map' => true,
 				])
 			: abort(404);
     }
+     */
 	
     /**
      * Show capital project.
@@ -290,10 +286,8 @@ class Organizations extends Controller
 					'menu' => $ds->menu,
 					'activeDropDown' => $ds->menuActiveDD($section),
 					'icons' => $ds->socicons,
-					//'url' => $model->url("SELECT * FROM {$details['table']} WHERE \"wegov-org-id\"='{$id}'" . ($section == 'crol' ? ' ORDER BY date("StartDate")' : '')),
 					'dataset' => $model->dataset($details['fullname']),
 					'breadcrumbs' => Breadcrumbs::orgPrj($org['id'], $org['name'], $section, $ds->list[$section], $prjId, $data['name']),
-					//'details' => $details,
 					'data' => $data,
 					'map' => true,
 				])
@@ -308,7 +302,6 @@ class Organizations extends Controller
     public function ical($id)
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		#$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
 		$data = $model->carto->req("SELECT * FROM crol WHERE \"wegov-org-id\"='{$id}' AND NOT \"EventDate\" = '' AND DATE(\"EventDate\") >= DATE(NOW() - INTERVAL '1 week') ORDER BY date(\"EventDate\") DESC");
 		return response()->view('icalevents', [
 					'data' => $data,
@@ -316,8 +309,6 @@ class Organizations extends Controller
 					'dataset' => $model->dataset('City Record Online (CROL)'),
 				])
 				->header('Content-type', 'text/calendar')
-				#->header('Content-type', 'text/calendar; charset=utf-8')
-				#->header('Content-Disposition', 'attachment; filename="cal.ics"')
 			;
     }	
 
@@ -330,15 +321,12 @@ class Organizations extends Controller
     public function rss($id)
     {
 		$model = new CartoModel(config('apis.carto_entry'), config('apis.carto_key'));
-		#$data = $model->carto->req('SELECT * FROM crol WHERE NOT "EventDate" = \'\' AND DATE("EventDate") >= DATE(NOW() - INTERVAL \'1 month\') ORDER BY date("EventDate") DESC');
-		#$data = $model->carto->req('SELECT c.*, o.logo FROM crol c LEFT JOIN wegov_orgs o ON c."wegov-org-id"=CAST(o.id AS text) WHERE "EventDate" = \'\' AND DATE("StartDate") >= DATE(NOW() - INTERVAL \'1 week\') ORDER BY date("StartDate") DESC LIMIT 25');
 		$data = $model->carto->req("SELECT c.* FROM crol c WHERE \"wegov-org-id\"='{$id}' AND \"EventDate\" = '' AND DATE(\"StartDate\") >= DATE(NOW() - INTERVAL '1 week') ORDER BY date(\"StartDate\") DESC");
 		return response()->view('rss', [
 					'data' => $data,
 					'agencyName' => $data[0]['wegov-org-name'],
 					'dataset' => $model->dataset('City Record Online (CROL)'),
 				])
-				//->header('Content-type', 'application/rss+xml; charset=utf-8');
 				->header('Content-type', 'text/xml; charset=utf-8')
 				;
     }

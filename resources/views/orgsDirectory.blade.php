@@ -31,7 +31,6 @@
 		.tag-label {color:#777777; font-weight:600; padding-left: .1em;}
 		.tag-label:hover {color:#171717;}
 		.tag-label+.tag-label::before {
-			/*float: left;*/
 			padding-right: .2rem;
 			color: #6c757d;
 			content: ", ";
@@ -134,7 +133,6 @@
 									.draw();
 							});
 						column.data().unique().sort().each(function (d, j) {
-							//select.append('<option value="'+d+(d == 'City Agency' ? '" selected>' : '">')+d+'</option>')
 							select.append('<option value="'+d+'">'+d+'</option>')
 						});
 
@@ -150,9 +148,6 @@
 						var select = $('<select class="filter-top" id="filter-tags"><option value="">- Select organizations by tag -</option></select>')
 							.appendTo($('div.toolbar'))
 							.on('change', function () {
-								/*var val = $.fn.dataTable.util.escapeRegex(
-									$(this).val()
-								);*/
 								var val = $(this).val()
 
 								column
@@ -264,10 +259,6 @@
 				<div class="text-center bottom_text col-md-12 mb-5">
 					The agencies listed on this page have all appear in official New York City open data, and have been cross referenced with the city’s <a href="https://www1.nyc.gov/nyc-resources/agencies.page">official agency directory</a>.<br/>If you have ideas for further improvements or notice inaccuracies, please <a href="https://wegovnyc.notion.site/Contact-Us-54b075fa86ec47ebae48dae1595afc2c">let us know</a>.
 				</div>
-				{{--<div class="text-center bottom_text col-md-12">
-					<h3>We’re adding data all the time.</h3>
-					<a href="#" class="learn_more">Learn More</a>
-				</div>--}}
 			</div>
 		</div>
     </div>

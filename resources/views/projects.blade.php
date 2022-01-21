@@ -24,7 +24,6 @@
 		
 		$(document).ready(function() {
 			
-			/* custom pub_date filter on top-right */
 			$.get("{!! $dates_req_url !!}", function (resp) {
 				var select = $('<select class="filter mt-1" style="width:100%;" id="filter-1" name="filter-1" aria-controls="myTable"><option value="" selected>- Publication Date -</option></select>')
 					.appendTo($("#pub_date_filter"))
@@ -219,7 +218,6 @@
 						}
 					}
 					d = d.match(/[-\d\.]+/g) ? parseFloat(d) * m : d;
-					//console.log(data, d);
 					return d;
 				};
 				

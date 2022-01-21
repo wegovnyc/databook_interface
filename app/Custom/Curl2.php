@@ -75,8 +75,6 @@ class Curl2
 			}
 		}
 		curl_setopt_array($ch, $options);
-		//if (VERBOSE_CURL_PARAM === true)
-		//	print_r($options);
 		return $ch;
 	}
 }

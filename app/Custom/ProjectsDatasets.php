@@ -8,7 +8,7 @@ class ProjectsDatasets
 			'name' => 'Capital Projects',
 			'fullname' => 'Capital Project Detail Data - Dollars',
 			'description' => 'This dataset contains capital commitment plan data by project type, budget line and source of funds. The dollar values are in thousands. The dataset is updated three times a year during the Preliminary, Executive and Adopted Capital Commitment Plans.',
-			'table' => 'capitalprojectsdollarscomp',					// Carto table
+			'table' => 'capitalprojectsdollarscomp',
 			'hdrs' => ['Publication Date', 'Project ID', 'Agency', 'Name', 'Category', 'Borough', 'Current Budget', 'Budget Change (%)', 'Timeline Change'],
 			'visible' => [false, true, true, true, true, true, true, true, true],
 			'hide_on_map_open' => '0, 5, 6, 7, 8',
@@ -50,7 +50,7 @@ class ProjectsDatasets
 					'Site Description' => 'r["SITE_DESCR"]',
 					'Explanation for Delay' => 'r["DELAY_DESC"]',
 			],
-			'order' => [[8, 'desc']],					#7 - wo details col inrement
+			'order' => [[8, 'desc']],
 		],
 	];
 	

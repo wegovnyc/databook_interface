@@ -31,7 +31,6 @@
 		.tag-label {color:#777777; font-weight:600; padding-left: .1em;}
 		.tag-label:hover {color:#171717;}
 		.tag-label+.tag-label::before {
-			/*float: left;*/
 			padding-right: .2rem;
 			color: #6c757d;
 			content: ", ";
@@ -41,7 +40,6 @@
 		var table = null
 		
 		function tagFlt(e, tag) {
-			//console.log(tag)
 			$('#filter-tags').val(tag)
 			$('#filter-tags').trigger('change')
 			e.preventDefault()
@@ -87,7 +85,6 @@
 				pageLength: 20,
 				deferRender: true,
 				order: [[4, 'desc']],
-				//ordering: false,
 				dom: '<"toolbar"<"row">>frtip',
 				ajax: {
 					url: '{!! $url !!}',
@@ -199,49 +196,6 @@
 					loadShareLink()
 				}
 			});
-/*
-			table.on('preDraw', function () {
-                $('#orgsTable tbody').hide();
-                return true
-            });
-
-			table.on('draw', function () {
-                var api = $('#orgsTable').dataTable().api();
-                var modifier = {
-                    order:  'current',  // 'current', 'applied', 'index',  'original'
-                    page:   'current',      // 'all',     'current'
-                    search: 'applied',     // 'none',    'applied', 'removed'
-                }
-                var td = $('<td></td>')
-                var div = $('<div></div>')
-
-                api.cells('.record', modifier).data().each(function (r, i) {
-
-                    div = $('<div class="card-body"></div>')
-
-                    if (r['logo'])
-                        div.append(`<div class="inner_logoimg"><div class="inside_org_logo"><img src="${JSON.parse(unescape(r['logo']))[0]['url']}"></div></div>`)
-
-                    if (r['name'])
-                        div.append(`<h6>${r['name']}</h6>`)
-
-                    var descr = r['description'].substr(0,100)+(r['description'].length > 100 ? '...' : '')
-                    div.append(`<p class="card-text">${descr}</p>`)
-
-                    if (r['tags']) {
-                        var tags = ''
-                        JSON.parse(unescape(r['tags'])).forEach(function (d, j) {
-                            tags = tags+'<span class="tag-label" onclick="tagFlt(event, \''+d+'\');">'+d+'</span>'
-                        })
-                        div.append(`<a title="Tags"><i class="bi-tags" style="color:black;"></i></a> ${tags}`)
-                    }
-
-                    td.append($(`<div class="col-md-3"><a href="/agency/${r['id']}"><div class="card  w-33"><div class="card-body">${div.html()}</div></div></a></div>`))
-                });
-                $('#orgsTable tbody').html('<tr><td colspan="7" class="p-0"><div class="row">'+td.html()+'</div></td></tr>')
-                $('#orgsTable tbody').show();
-            });
-*/
 		});
 	</script>
 <div class="inner_container">
@@ -271,10 +225,6 @@
 			<div class="text-center bottom_text col-md-12 mb-5">
 				The organizations in this table have been documented as part of our research into New York City government. They include government agencies as well as organizations that contract with the city, engage in its political processes or simply seemed relevant. If you have ideas for further improvements or notice inaccuracies, please <a href="https://wegovnyc.notion.site/Contact-Us-54b075fa86ec47ebae48dae1595afc2c">let us know</a>.
 			</div>
-            {{--<div class="text-center bottom_text col-md-12">
-                <h3>We’re adding data all the time.</h3>
-                <a href="#" class="learn_more">Learn More</a>
-            </div>--}}
         </div>
     </div>
 </div>

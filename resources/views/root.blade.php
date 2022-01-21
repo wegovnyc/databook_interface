@@ -100,62 +100,7 @@
 					<p>We create information products and experience for elected officials, journalists, educators, city agencies and others. <a href="https://wegovnyc.notion.site/Contact-Us-54b075fa86ec47ebae48dae1595afc2c" target="_blank">Contacts Us</a></p>
 				</div>
             </div>
-			
-			{{--
-            <div class="col-md-6">
-				<div class="circle_img">
-					<img src="/img/budget.png">
-				</div>
-				<div class="content_area">
-					<h4>Budgets</h4>
-					<p>Line items budgets for each agency and how they change over time.</p>
-				</div>
-            </div>
-            <div class="col-md-4">
-				<div class="circle_img">
-					<img src="/img/facilities.png">
-				</div>
-				<div class="content_area">
-					<h4>Facilities</h4>
-					<p>Buildings and real estate controlled by city agencies.</p>
-				</div>
-            </div>
-            <div class="col-md-4">
-				<div class="circle_img">
-					<img src="/img/jobs.png">
-				</div>
-				<div class="content_area">
-					<h4>Jobs</h4>
-					<p>Job opportunities currently offered by city agencies.</p>
-				</div>
-            </div>
-            <div class="col-md-4">
-				<div class="circle_img">
-					<img src="/img/people.png">
-					<img src="/img/profile.png">
-				</div>
-				<div class="content_area">
-					<h4>People</h4>
-					<p>Names, titles and contact info of key staff within agencies.</p>
-				</div>
-            </div>
-            <div class="col-md-4">
-				<div class="circle_img">
-					<img src="/img/request.png">
-				</div>
-				<div class="content_area">
-					<h4>Requests</h4>
-					<p>Formal requests from community boards of city agencies.</p>
-				</div>
-            </div>
-			--}}
         </div>
-		{{--
-        <div class="text-center bottom_text col-md-12">
-            <h3>We’re adding data and organizing collaborations all the time.</h3>
-            <a href="https://www.notion.so/wegovnyc/DataBook-c44e74c262a84b67b7aabb14885e1ec6" class="learn_more" target="_blank">Learn More</a>
-        </div>
-		--}}
     </div>
 </div>
 @endsection

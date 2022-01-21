@@ -21,7 +21,6 @@ class CapProjectsBuilder
 				$dd[$m['PUB_DATE']]['CURR_START'] = min($dd[$m['PUB_DATE']]['CURR_START'] ?? '20500101', self::ds($m['TASK_START_DATE']));
 				$dd[$m['PUB_DATE']]['CURR_END'] = max($dd[$m['PUB_DATE']]['CURR_END'] ?? '20000101', self::ds($m['TASK_END_DATE']));
 				$dd[$m['PUB_DATE']]['milestones'][strtotime($m['ORIG_END_DATE']) + $i] = [
-					//'PUB_DATE_F' => self::df($m['PUB_DATE']),
 					'ORIG_DATE_F' => str_replace(' 12:00:00 AM', '', $m['ORIG_END_DATE']),
 					'CURR_DATE_F' => str_replace(' 12:00:00 AM', '', $m['TASK_END_DATE']),
 					'DATE_DIFF' => self::dateDiff(self::ds($m['ORIG_END_DATE']), self::ds($m['TASK_END_DATE'])),
@@ -89,11 +88,6 @@ class CapProjectsBuilder
 			}
 			$inext = $i;
 		}
-		/*
-		?><pre><?
-		print_r($cLog);
-		?></pre><?
-		*/
 		return ['name' => $name, 'items' => $rr, 'geo_feature' => str_replace('""', '"', $geo_json), 'id' => $id, 'cLog' => $cLog];
 	}
 	
@@ -126,7 +120,6 @@ class CapProjectsBuilder
 						'CURR_DATE_F' => 'Current',
 					] as $f=>$t)
 					if (($m[$f] ?? null) <> ($pmm[$m['TASK_DESCRIPTION']][$f] ?? null))
-						#$rr[] = ($pmm[$m['TASK_DESCRIPTION']][$f] ?? null) ? "{$m['TASK_DESCRIPTION']} {$t} changed from {$pmm[$m['TASK_DESCRIPTION']][$f]} to {$m[$f]}" : "{$t} stated to {$m[$f]}";
 						$rr[] = self::genLogItem("{$m['TASK_DESCRIPTION']} {$t}", $pmm[$m['TASK_DESCRIPTION']][$f] ?? null, $m[$f] ?? null);
 		}
 		return $rr;
@@ -170,8 +163,6 @@ class CapProjectsBuilder
 		return date('Ymd', strtotime($d));
 	}
 	
-	# $dP - date planned, $dA - date actual; format - 20211031
-	# if $format == true --> $dP > $dA - good
 	static function dateDiff($dP, $dA, $format=true)
 	{
 		$r = self::date2float($dP) - self::date2float($dA);

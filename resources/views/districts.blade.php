@@ -115,11 +115,6 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div id="section_content" class="col-12 mb-4 p-0 district_section">
-				{{--
-				<div class="text-center bottom_text my-3">
-					<h3>Click a District to View Data.</h3>
-				</div>				
-				--}}
 			</div>
 		</div>
 	</div>
@@ -156,8 +151,6 @@
 				}
 			globfilter = filter
 			
-			//console.log(filter, type, sect)
-			
 			$.get(`/districtXHR/${type}/${filter[2]}/${sect}`, function (html) {
 				$('#section_content').html(html)
 
@@ -169,7 +162,6 @@
 					if (features.length) {
 						var title = features[0].properties['nameCol']
 						var center = getBounds(features[0].geometry.coordinates).getCenter()
-						//console.log(title, center)
 						tt = {'cc': 'City Council District ', 'cd': 'Community District ', 'nta': ''}
 						$('#section_content h1').html(tt[type]+title)
 						$('.loading').hide()
@@ -215,7 +207,6 @@
 					}
 					r = dd.results[0].response
 					var addr = `${r.houseNumber} ${r.firstStreetNameNormalized}, ${r.uspsPreferredCityName}`.replace('  ', ' ').replace(' ,', '')
-					/*<h4 style="font-size:18px;">${dd.input.toUpperCase()}</h4>*/
 					var description = `
 						<h4 style="font-size:18px;">${addr}</h4>
 						<table><tbody>
@@ -269,7 +260,6 @@
 					})
 					$.get('{!! $ccAgencyUrl !!}'.replace('%40%40%40', r.cityCouncilDistrict.replace(/^0+/g, '')), function (cc) {
 						$('#cc-agency').attr('href', '/agency/' + cc['rows'][0]['id'])
-						//$('#cc-agency').show()
 						if (cc['rows'][0]['url']) {
 							$('#cc-url').attr('href', cc['rows'][0]['url'])
 							$('#cc-url').show()
@@ -300,12 +290,9 @@
 		})
 
 		function changeToggle (e) {
-			//console.log($(e.target).next("label")[0].innerHTML)
 			$('#change_district').html($(e.target).next("label")[0].innerHTML);
-			//console.log($(e.target))
 			
 			var type = $(e.target).attr('id').replace('-filter-switch', '')
-			//var id = defId ? defId : {!! json_encode(['cc' => '1', 'cd' => '101', 'nta' => 'BK09']) !!}[type]
 			var id = defId
 			defId = null
 			
@@ -313,7 +300,6 @@
 			defSection = null
 
 			if (id) {
-				//console.log(type, id, section)
 				var tmpfilter = ['in', filtFields[type], id]
 				mapAction(tmpfilter, type, section);
 				map.setFilter(type+'FH', tmpfilter);
@@ -328,7 +314,6 @@
 		var autocomplete = new Bloodhound({
 		  datumTokenizer: Bloodhound.tokenizers.whitespace,
 		  queryTokenizer: Bloodhound.tokenizers.whitespace,
-		  //prefetch: './resources/namesearchAutocomplete.json'
 		  remote: {
 			url: 'https://geosearch.planninglabs.nyc/v1/autocomplete?text=%QUERY',
 			wildcard: '%QUERY',

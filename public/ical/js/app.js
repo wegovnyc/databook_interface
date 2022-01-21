@@ -22,58 +22,16 @@ var agenda_name;
 var xhr;
 var start, end;
 
-function get_users(){
-	/*
-    var xhr = $.ajax({
-        timeout: 8000,
-        url: "api/get_users.php",
-        type: "GET",
-        dataType: 'json',
-        success: function(data) {
-			$.each(data, function(k, v){					
-				$('<option>').val(v).text(k).appendTo('#userlist');
-			});
-			$('#userlist').selectpicker("refresh");
-            $('#loading-users').fadeOut();
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-			new PNotify({
-					title: 'Erreur',
-					text: 'Impossible d\'obtenir la liste des agendas',
-					styling: 'fontawesome',
-					type: 'error',
-                    hide: false,
-                    addclass: 'translucent',
-                    buttons: {
-                        closer_hover: false,
-                        sticker: false,
-                    },
-					animate: {
-						animate: true,
-						in_class: 'bounceInLeft',
-						out_class: 'bounceOutRight'
-					}						
-				});
-            $('#loading-users').fadeOut();
-		}
-    });
-	*/
-}
+function get_users(){}
 
 function load_calendar(ics){
     //if (!agenda_mail || !agenda_name) return;		
 	
-	//console.log('load_calendar')
 	if(xhr && xhr.readyState != 4){
         xhr.abort();
     }
         
     PNotify.removeAll();	    
-    /*
-    var deb = moment(start).format('YYYYMMDD') + "T" +moment(start).format('HHmmss') + "Z";
-	var fin = moment(end).format('YYYYMMDD') + "T" +moment(end).format('HHmmss') + "Z";
-	ics.url += '&start='+deb+'&end='+fin;
-	*/
     $('#loading-calendar').fadeIn("slow");
     $(".fc-view-container").fadeTo("slow", 0.3);	
 
@@ -158,14 +116,10 @@ function load_calendar(ics){
 
 function set_calendar(icalurl) {
 	
-    //$('#loading-users').fadeIn();
-	//get_users();
-
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
-            //right: 'month,agendaWeek,agendaDay,listWeek update'
             right: 'month,agendaWeek,agendaDay,listMonth'
         },
         buttonText:{list:"planning"},
@@ -173,7 +127,6 @@ function set_calendar(icalurl) {
         scrollTime: '07:00:00',
         defaultView: 'listMonth',
         eventRender: function(event, element) {
-			//console.log(event, element)
 			if (event.class === "PRIVATE") {
 				// since fullcalendar 3.5.0 the title div must be manually added when event.title is empty
 				if (!element.find('.fc-title').length)
@@ -244,43 +197,8 @@ function set_calendar(icalurl) {
 			}); 
         },
         eventClick:  function(event, jsEvent, view) {
-			//console.log($('#calendar_modal').modal('show'))
 			$('div.qtip:visible').qtip('hide');
-			
-			/*
-			$('#calendar_modal .modal-title').text(event.title)
-
-			var tiptext = '<span class="qtip-time">';
-			tiptext += (moment(event.start).format('ddd Do MMM YYYY HH:mm'));
-			if (event.end) {  
-				var end_adjust = event.end;
-				if (event.allDay) 
-					end_adjust = moment(event.end).subtract('hours', 24);
-				
-				var diff = moment(end_adjust).diff(moment(event.start),'hours');
-				
-				if (!event.allDay && moment(event.start).format('ddd Do MMM YYYY')==moment(event.end).format('ddd Do MMM YYYY'))
-					tiptext += ' - ' + (moment(event.end).format('HH:mm'));
-				else if (!event.allDay) 
-					tiptext += ' - ' + (moment(event.end).format('ddd Do MMM YYYY HH:mm'));
-				else if (event.allDay && diff > 0) 
-					tiptext += ' - ' + (moment(end_adjust).format('ddd Do MMM YYYY'));
-			}
-			tiptext += '</span>';
-			if (event.location  && event.location.trim().length) 
-				tiptext += '<p class="location"><u>Location</u>: ' + event.location + '</p>';
-			if (event.description && event.description.trim().length) {
-				var d = event.description.replace('More Info:', '<br/><u>More Info</u>:').replace('Agency:', '<br/><u>Agency</u>:').replace(/^<br.>/g, '')
-				//d = d.replace(/(https?:\/\/[^\)\s]+)/g, '')
-				d = d.replace(/\(?(https?:\/\/[^\)\s]+)\)?/g, function (m) { return `<a href="${m}">${m}</a>`;})
-				tiptext += '<p class="description">' + d + '</p>';
-			}
-
-			$('#calendar_modal .modal-body').html(tiptext);
-			$('#calendar_modal').modal('show');
-			*/
 			var url = event.description.match(/More Info: (https?:\/\/[^\s]+)/i)[1];
-			//console.log(url)
 			window.location.href = url;
         },
         eventAfterAllRender: function(view){
@@ -310,67 +228,4 @@ function set_calendar(icalurl) {
             }
         })()
     })
-    
-	/*
-    $(".fc-view-container").fadeTo("slow", 0.3);    
-	// Custom selectpicker (".selectpicker" = "#userlist")
-	$('#userlist').selectpicker({
-	    style: 'btn-static',
-	    language: 'FR',
-	});
-
-    // keep list open on agenda click
-    $('#userlist').on('hidden.bs.select', function (e) {		
-        $('[data-id=userlist]').trigger('click');
-	});
-
-	// keep list open on keydown 'esc' or 'tab'
-	document.addEventListener("keydown",function(e){
-        var charCode = e.charCode || e.keyCode || e.which;
-        if (charCode == 27 || charCode == 9 ){    
-            $('[data-id=userlist]').trigger('click');
-        }        
-    });        
-    
-    // search has a permanent focus
-	$(document).on("click", function () {
-	   $('[data-id=userlist]').trigger('click');
-	});	
-    
-	// userlist auto open on start
-	$('[data-id=userlist]').trigger('click');
-	
-    // load the list of available timezones, build the <select> options
-    $.getJSON('https://fullcalendar.io/demo-timezones.json', function(timezones) {
-      $.each(timezones, function(i, timezone) {
-        if (timezone != 'UTC') { // UTC is already in the list
-          $('#timezone-selector').append(
-            $("<option/>").text(timezone).attr('value', timezone)
-          );
-          //$('<option>').val(timezone).text(i).appendTo('#timezone-selector');          
-        }
-      });
-      $('#timezone-selector').selectpicker('val', moment.tz.guess());
-      $('#timezone-selector').selectpicker("refresh");
-    });
-
-    // when the timezone selector changes, dynamically change the calendar option
-    $('#timezone-selector').on('change', function() {
-      $('#calendar').fullCalendar('option', 'timezone', this.value || false);
-    });
-    
-    // when agenda selection changes    
-	$("#userlist").on("changed.bs.select", function(e, clickedIndex, newValue, oldValue) {
-		agenda_mail = $(this).find('option').eq(clickedIndex).val();
-		agenda_name = $(this).find('option').eq(clickedIndex).text();
-
-		start = $('#calendar').fullCalendar('getView').start;
-        end = $('#calendar').fullCalendar('getView').end;	        
-        
-        // Source change so clear events now
-        $('#calendar').fullCalendar('removeEventSources'); 
-        recur_events = [];
-        load_calendar({url:'ical/api/get_calendar.php?q='+agenda_mail, text:agenda_name});
-	});
-	*/
 }

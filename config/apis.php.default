@@ -1,0 +1,26 @@
+<?php
+
+return [
+
+    /*
+	 |	Carto API key and entry point
+    */
+	'carto_key' => 'ilfUkeo88DuXt7M5y1c1Vg',		// public API key for readonly access
+	'geoclient_key' => '',
+	
+	'carto_entry' => 'https://carto.wegov.nyc/user/wegov/api/v2/sql',
+	
+    /*
+	 |	Airtable API key and Doc IDs
+    */
+	'airtable_key' => '',
+	'newsletter_doc_id' => '',
+	'orgs_doc_id' => '',
+	'orgs_doc_tbl' => 'orgs',
+	'orgs_doc_view' => 'Org+Chart',
+
+    /*
+	 |	App api key
+    */
+	'app_key' => 'as9s8d6d78as6f9sdf876',
+];

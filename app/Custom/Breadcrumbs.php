@@ -4,15 +4,12 @@ Namespace App\Custom;
 class Breadcrumbs
 {
 	static public $root = [
-			//['https://wegov.nyc', 'Home'],
-			//['https://wegov.nyc/tools', 'Tools'],
 			['/', 'DataBook']
 		];
 
 	static function root()
 	{
 		$rr = self::$root;
-		//$rr[2] = ['', 'DataBook'];
 		return $rr;
 	}
 

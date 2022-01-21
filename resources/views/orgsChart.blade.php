@@ -47,7 +47,6 @@
 	</div>
 	<script>
 			var oc = $('#chart-container').orgchart({
-			  //'data' : dd,
 			  'data' : '/data/orgChart.json',
 			  nodeContent: 'title',
 			  pan: true,
@@ -74,15 +73,10 @@
 					$(this).css('cursor', 'grabbing');
                     setTimeout(function () {
                         var element = document.querySelector('.orgchart');
-                        // var scaleX = element.getBoundingClientRect().width / element.offsetWidth;
-                        // console.log(scaleX,element,element.getBoundingClientRect().width,element.offsetWidth)
-
-                        // returns matrix(1,0,0,1,0,0)
                         var matrix = window.getComputedStyle(element).transform;
                         var matrixArray = matrix.replace("matrix(", "").split(",");
                         var scaleX = parseFloat(matrixArray[0]); // convert from string to number
                         var scaleY = parseFloat(matrixArray[3]);
-                        // bonus round - gets translate values
                         var translateX = parseFloat(matrixArray[4]);
                         var translateY = parseFloat(matrixArray[5])
                         var node_width = $('ul .nodes').width();

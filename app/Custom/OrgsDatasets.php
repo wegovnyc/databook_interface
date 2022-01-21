@@ -10,14 +10,10 @@ class OrgsDatasets
 			'hdrs' => ['Publication Date', 'Fiscal Year', 'Budget Code Name', 'Object Class Name', 'Object Code Name', 'Adopted Budget Amount', 'Current Modified Budget Amount', 'Financial Plan Amount'],										// datatables header
 			'visible' => [true, true, true, true, true, true, true, true],	// column visibility
 			'flds' => [
-					//'"Publication Date"', 
 					'function (r) { return toDashDate(r["Publication Date"]) }', 
 					'"Fiscal Year"', '"Budget Code Name"', '"Object Class Name"', '"Object Code Name"', 
-					//'"Adopted Budget Amount"', 
 					'function (r) { return toFin(r["Adopted Budget Amount"]) }',
-					//'"Current Modified Budget Amount"', 
 					'function (r) { return toFin(r["Current Modified Budget Amount"]) }',
-					//'"Financial Plan Amount"'
 					'function (r) { return toFin(r["Financial Plan Amount"]) }',
 			],
 																		// datatables data source/js fetch function
@@ -64,7 +60,7 @@ class OrgsDatasets
 						return v > 0 ? `<span class="good">${v} years early</span>` : `<span class="good">on time</span>`;
 					}'
 				],
-			'filters' => [/*2 => null, */4 => null],
+			'filters' => [4 => null],
 			'details' => [
 					'Planned Cost' => '`<span data-content="${toFin(r["BUDG_ORIG"], 1000)}">${toFinShortK(r["BUDG_ORIG"], 1000)}</span>`', 
 					'Budget Increase' => '(!r["ORIG_BUD_AMT"] 
@@ -85,7 +81,7 @@ class OrgsDatasets
 					'Site Description' => 'r["SITE_DESCR"]',
 					'Explanation for Delay' => 'r["DELAY_DESC"]',
 			],
-			'order' => [[8, 'desc']],					#7 - wo details col inrement
+			'order' => [[8, 'desc']],
 		],
 		'benefitsapi' => [
 			'fullname' => 'Benefits and Programs API on NYC Open Data',
@@ -156,7 +152,7 @@ class OrgsDatasets
 			'table' => 'budgetrequestsregister',
 			'hdrs' => ['Publication Date', 'Borough', 'C Board', 'Priority', 'Tracking Code', 'Request', 'Council District', 'NTA'],
 			'visible' => [true, true, true, true, true, true, false, false],
-			'flds' => [ //'"Publication"', 
+			'flds' => [ 
 						'function (r) { return toDashDate(r["Publication"]) }', 
 						'"Borough"', '"Community Board"', '"Priority"', '"Tracking  Code"', '"Request"', '"wegov-cd-id"', '"wegov-nta-code"'], 
 			'filters' => [0 => '2020-07-01', 1 => null, 2 => null, 3 => null],
@@ -176,7 +172,7 @@ class OrgsDatasets
 						'BBL' => 'BBL',
 						'NTA' => 'NTA'			
 			],
-			'map' => ['cc' => 7, 'nta' => 8],		// +1 if details
+			'map' => ['cc' => 7, 'nta' => 8],
 		],
 		'nycjobs' => [
 			'fullname' => 'NYC Jobs',
@@ -184,14 +180,10 @@ class OrgsDatasets
 			'hdrs' => ['Job ID', 'Title', 'Job Category', 'Salary From', 'Salary To', 'Last Updated'],
 			'flds' => [
 					'function (r) { return `<a href="https://a127-jobs.nyc.gov/index_new.html?keyword=${r["Job ID"]}">${r["Job ID"]}</a>` }', 
-					//'"Job ID"', 
 					'"Business Title"', 
 					'"Job Category"', 
-					//'"Salary Range From"', 
 					'function (r) { return toFin(r["Salary Range From"]) }',
-					//'"Salary Range To"', 
 					'function (r) { return toFin(r["Salary Range To"]) }',
-					//'"Posting Updated"', 
 					'function (r) { return usToDashDate(r["Posting Updated"]) }', 
 				], 
 			'visible' => [true, true, true, true, true, true],
@@ -240,7 +232,7 @@ class OrgsDatasets
 					'Property Type' => 'proptype'			
 			],
 			'description' => 'The Facilities Database (FacDB) captures the locations and descriptions of public and private facilities ranging from the provision of social services, recreation, education, to solid waste management.',
-			'map' => ['cc' => 7, 'nta' => 8],			// +1 if details
+			'map' => ['cc' => 7, 'nta' => 8],
 		],
 
 
@@ -251,7 +243,6 @@ class OrgsDatasets
 			'visible' => [false, true, true, true, true, true, true, true, true],
 			'flds' => ['"Vision"', '"Goal"', '"Indicator"', '"Report Year"', '"Indicator Value"', '"Measurement Type"', '"Target Value"', '"Target Year"'], 
 			'filters' => [],
-			//'fltDelim' => [3 => ','],
 			'details' => [],
 			'description' => 'Annual Agency Performance Metrics',
 		],
@@ -324,7 +315,6 @@ class OrgsDatasets
 					'"Type"', '"Category"', '"Legislative Compliance: Dataset from the Open Data Plan?"', '"Last Data Updated Date (UTC)"', '"Visits"', '"Row Count"', '"Column Count"', '"URL"'
 			],
 			'filters' => [1 => null, 2 => null, 3 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [
 				'Description' => 'Description',
 				'Update: Date Made Public' => 'Update: Date Made Public',
@@ -361,7 +351,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					'"Status"', '"Amount ($)"', '"Borough"', '"Council District"', '"wegov-nta-code"'
 				], 
 			'filters' => [0 => null, 1 => null, 2 => null, 6 => null, 7 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [
 				'EIN' => 'EIN',
 				'MOCS ID' => 'MOCS ID',
@@ -383,7 +372,7 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'NTA' => 'NTA',
 			],
 			'description' => 'The dataset reflects applications for discretionary funding to be allocated by the New York City Council.',
-			'map' => ['cc' => 8, 'nta' => 9],		// +1 if details
+			'map' => ['cc' => 8, 'nta' => 9],
 		],
 		'opendatareleasetracker' => [
 			'fullname' => 'NYC Open Data Release Tracker',
@@ -392,14 +381,13 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'visible' => [true, true, true, true, true, true, false, false],
 			'flds' => [
 					'function (r) { return `<a href="${r["URL"]}" target="_blank">${r["Dataset Name"]}</a>` }',
-					'function (r) { return usToDashDate(r["Original Plan Date"]) }', //'"Original Plan Date"', 
-					'function (r) { return usToDashDate(r["Latest Plan Date"]) }', //'"Latest Plan Date"', 
+					'function (r) { return usToDashDate(r["Original Plan Date"]) }',
+					'function (r) { return usToDashDate(r["Latest Plan Date"]) }',
 					'"Release Status"', 
-					'function (r) { return usToDashDate(r["Release Date"]) }', //'"Release Date"',
+					'function (r) { return usToDashDate(r["Release Date"]) }',
 					'"From the 2021 Open Data Plan?"', '"URL"', '"Update Frequency"'
 			], 
 			'filters' => [3 => null, 5 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [
 				'Description' => 'Dataset Description',
 				'UID' => 'U ID',
@@ -415,7 +403,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'visible' => [true, true, true, true, true, true, true, true, true, true, true],
 			'flds' => ['"Publication Date"', '"Line Number Description"', '"Fiscal Year 1"', '"Prior Year Actual"', '"Year 1 Executive Bud"', '"Year 1 Actual"', '"Year 1 Forecast"', '"Year 2 Estimate"', '"Year 3 Estimate"', '"Year 4 Estimate"', '"Year 5 Estimate"'],
 			'filters' => [0 => null, 2 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [],
 			'description' => 'This dataset contains agency summary level data for PS, OTPS and Total by type of funds. The dollar amount fields are rounded to the thousands. The Executive Budget report, published in April or May, contains previous fiscal year actuals, the current fiscal year Executive budget, eight month actuals and forecast plus four out years of data which coincide with the release of the published financial plan.',
 		],
@@ -426,7 +413,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'visible' => [true, true, true, true],
 			'flds' => ['"PUBLICATION DATE"', '"FISCAL YEAR"', '"FUNDING"', '"HEADCOUNT"'],
 			'filters' => [0 => null, 1 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [],
 			'description' => 'Funding of the actual Full-Time and Full-Time equivalent headcount that appears in the Mayor\'s Message Agency Financial tables. This dataset is updated annually.',
 		],
@@ -437,7 +423,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'visible' => [true, true, true, true],
 			'flds' => ['"PUBLICATION DATE"', '"FISCAL YEAR"', '"FUNDING"', '"AMOUNT"'],
 			'filters' => [0 => null, 1 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [],
 			'description' => 'Funding of actual spending that appears in the Mayor\'s Message Agency Financial tables. Dollars are in Thousands. This dataset is updated annually.',
 		],
@@ -448,7 +433,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'visible' => [true, true, true, true, true, true, true],
 			'flds' => ['"PUBLICATION DATE"', '"COST CATEGORY"', '"ACTUAL\\\PLAN"', '"FISCAL YEAR"', '"TOTAL AMOUNT"', '"CITY AMOUNT"', '"INTRA-CITY AMOUNT"'],
 			'filters' => [0 => null, 1 => null, 3 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [],
 			'description' => 'Additional agency costs for Pension, Fringe Benefits and Debt Service that are included in the Pensions, Miscellaneous Budget and Debit Service agencies. Dollars are In thousands. This data set is updated annually.',
 		],
@@ -459,7 +443,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'visible' => [true, true, true, true, true, true, true, true],
 			'flds' => ['"Title"', '"Sub-Title"', '"Subject"', '"Description"', '"Date Published"', '"Report Type"', '"Associated Year - Calendar"', '"Last Modified"'],
 			'filters' => [2 => null, 5 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [
 				'Required Report Name' => 'Required Report Name',
 				'Additional Creators' => 'Additional Creators',
@@ -483,7 +466,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					'"Description"', '"Frequency"', '"Local Law"', '"Charter Code"', '"Last Published Date"'
 				],
 			'filters' => [],
-			//'fltDelim' => [3 => ','],
 			'details' => [],
 			'description' => 'Metadata for documents submitted to the Department of Records and Information services which are required by legislation.',
 		],
@@ -562,7 +544,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 					'"TypeOfNoticeDescription"', '"CategoryDescription"', '"ShortTitle"', '"SectionName"'
 				],
 			'filters' => [2 => null, 3 => null, 5 => null],
-			//'fltDelim' => [3 => ','],
 			'details' => [
 				'Start Date' => 'StartDate',
 				'End Date' => 'EndDate',
@@ -889,32 +870,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			'script' => '',
 		],
 
-		/*
-		'payrolldata' => [
-			'fullname' => 'Citywide Payroll Data (Fiscal Year)',
-			'table' => 'payrolldata',
-			'hdrs' => ['Fiscal Year', 'Name', 'Title Description', 'Leave Status as of June 30', 'Base Salary', 'Pay Basis', 'OT Hours', 'Total OT Paid', 'Total Other Pay'],
-			'flds' => ['"Fiscal Year"', 
-					'function (r) { 
-						return (r["First Name"] ? r["First Name"] : "") + 
-								(r["Mid Init"] ? " " + r["Mid Init"] : "") +  
-								(r["Last Name"] ? " " + r["Last Name"] : "");
-					}', 
-					'"Title Description"', '"Leave Status as of June 30"', '"Base Salary"', '"Pay Basis"', '"OT Hours"', '"Total OT Paid"', '"Total Other Pay"'],
-			
-			'visible' => [true, true, true, true, true, true, true, true, true, true, true],
-			'filters' => [],
-			'details' => [
-				'Payroll Number' => 'Payroll Number', 
-				'Agency Start Date' => 'Agency Start Date', 
-				'Work Location Borough' => 'Work Location Borough', 
-				'Regular Hours' => 'Regular Hours', 
-				'Regular Gross Paid' => 'Regular Gross Paid', 
-			],
-			'description' => 'Data is collected because of public interest in how the City’s budget is being spent on salary and overtime pay for all municipal employees. Data is input into the City’s Personnel Management System (“PMS”) by the respective user Agencies. Each record represents the following statistics for every city employee: Agency, Last Name, First Name, Middle Initial, Agency Start Date, Work Location Borough, Job Title Description, Leave Status as of the close of the FY (June 30th), Base Salary, Pay Basis, Regular Hours Paid, Regular Gross Paid, Overtime Hours worked, Total Overtime Paid, and Total Other Compensation (i.e. lump sum and/or retro payments). This data can be used to analyze how the City’s financial resources are allocated and how much of the City’s budget is being devoted to overtime. The reader of this data should be aware that increments of salary increases received over the course of any one fiscal year will not be reflected. All that is captured, is the employee’s final base and gross salary at the end of the fiscal year.',
-			'script' => '',
-		],
-		*/
 	];
 
 	public $list = [
@@ -939,10 +894,8 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'facilitydb' => 'Facilities',
 		'fteheadcount' => 'Headcount',
 		'headcountactualsfunding' => 'Headcount Actuals By Funding Source',
-		#'agencypmi' => 'Indicators',
 		'nycjobs' => 'Jobs',
 		'onenycindicators' => 'OneNYC',
-		#'payrolldata' => 'Payroll',
 		'positionschedule' => 'Positions',
 		'notices/procurement' => 'Procurement',
 		'capitalprojects' => 'Projects',
@@ -956,44 +909,6 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 		'opendatareleasetracker' => 'Data Tracker',
 
 	];
-	/*
-		--agencypmi
-		#payrolldata
-		auctions
-		additionalcostsallocation
-		benefitsapi
-		budgetrequestsregister
-		capitalprojects_cc_idx
-		capitalprojects_cd_idx
-		capitalprojects_nta_idx
-		capitalprojectsdollarscomp
-		capitalprojectsmilestones
-		ccmembers
-		civillist
-		crol
-		data_sources
-		expenseactualsfunding
-		expensebudgetonnycopendata
-		expenseplan
-		facilitydb
-		fteheadcount		
-		fy2021mmragencyresources
-		fy2021mmragencyperformance
-		govpublist
-		govpubrequired
-		headcountactualsfunding
-		ll18payanddemo
-		locallaw251
-		nyccivilservicetitles
-		nyccouncildiscretionaryfunding
-		nycgreenbook
-		nycjobs
-		onenycindicators
-		opendatareleasetracker
-		positionschedule
-		wegov_orgs
-		
-	*/
 	
 	public $menu = [
 		'about',
@@ -1015,13 +930,12 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'govpublist',
 				'govpubrequired',
 				'opendatareleasetracker',		//Tracker	
-				'locallaw251',		//Assets
-				//'crol',
+				'locallaw251',					//Assets
 			],
 		'Finances' => 
 			[
 				'expensebudgetonnycopendata',
-				'nyccouncildiscretionaryfunding',	//nyccouncildiscretionaryfunding
+				'nyccouncildiscretionaryfunding',
 				'expenseplan',	
 				'headcountactualsfunding',
 				'expenseactualsfunding',
@@ -1033,16 +947,13 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 				'fteheadcount',
 				'positionschedule',
 				'll18payanddemo',
-				#'payrolldata',
-				#'changeofpersonnel',
 				'civillist',
 			],
 		'capitalprojects',
 		'benefitsapi',
 		'Indicators' => 
 			[
-				#'agencypmi',
-				'onenycindicators',		//onenycindicators
+				'onenycindicators',
 				'agencyperformance',
 				'agencyresources',
 			],
@@ -1108,14 +1019,13 @@ For a list of all datasets that were included on all the NYC Open Data plans (20
 			foreach ($mm as $m)
 			{
 				$s = strstr($m, 'notices/') ? 'crol' : $this->dd[$m]['table'];
-				//echo "{$m}<br/>";
 				$rr[] = [
-					"<a href=\"{$ii[$s]['Citation URL']}\" target=\"_blank\">{$ii[$s]['Name']}</a>",	// name
-					'<a href="' . route('orgSection', ['id' => $id, 'section' => $m]) . "\">{$this->list[$m]}</a>",	// label
-					$this->dd[$m]['description'] ?? $ii[$s]['Descripton'],	// description
-					$k,					// section
-					$ii[$s]['Last Updated'], // last updated
-					'<span id="stats_' . str_replace('/', '_', $m) . '"></span>',	// rec no
+					"<a href=\"{$ii[$s]['Citation URL']}\" target=\"_blank\">{$ii[$s]['Name']}</a>",
+					'<a href="' . route('orgSection', ['id' => $id, 'section' => $m]) . "\">{$this->list[$m]}</a>",
+					$this->dd[$m]['description'] ?? $ii[$s]['Descripton'],
+					$k,
+					$ii[$s]['Last Updated'],
+					'<span id="stats_' . str_replace('/', '_', $m) . '"></span>',
 				];
 			}
 		}

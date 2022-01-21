@@ -64,8 +64,6 @@ table.gsc-search-box td.gsib_b{display: none !important;}
 .home_bgcontent {background: #162E51; padding: 30px;}
 .home_bgcontent h1{font-weight: bold;font-size: 40px;color: #FFFFFF;margin-bottom: 20px;}
 .home_bgcontent p{color: #FFFFFF;font-weight: 300;font-size: 20px;line-height: 36px;}
-/*.home_bgcontent .btn_org_home{background: #005EA2; border-radius: 4px;font-weight: bold;font-size: 16px;color: #fff;padding: 12px 24px;display: inline-block; text-decoration: none;}
-.homeround_content .btn_org_home{background: #005EA2; border-radius: 4px;font-weight: bold;font-size: 16px;color: #fff;padding: 12px 24px;display: inline-block; text-decoration: none; margin-top: 20px;}*/
 .home_bgcontent .btn_org_home{background: #162E51; border-radius: 4px;font-weight: bold;font-size: 16px;color: #fff;padding: 12px 24px;display: inline-block; text-decoration: none;}
 .homeround_content .btn_org_home{background: #162E51; border-radius: 4px;font-weight: bold;font-size: 16px;color: #fff;padding: 12px 24px;display: inline-block; text-decoration: none; margin-top: 20px;}
 .homeround_content .btn_org_home_sm{background: #005EA2; border-radius: 3px;font-weight: bold;font-size: 14px;color: #fff;padding: 8px 15px;display: inline-block; text-decoration: none;}
@@ -74,7 +72,6 @@ table.gsc-search-box td.gsib_b{display: none !important;}
 .homeround_content .circle_img{float: left;margin-right: 25px;}
 .homeround_content a{text-decoration: none;}
 .homeround_content .content_area h4{font-weight: bold;font-size: 22px;color: #171717;margin-bottom: 15px;}
-/* .homeround_content .col-md-4:hover .content_area h4{color: #005EA2;} */
 .homeround_content .content_area p{font-weight: normal;font-size: 16px;line-height: 26px;color: #171717;margin-bottom: 0px;}
 .homeround_content .col-md-4, .homeround_content .col-md-6 {margin-bottom: 60px;}
 
@@ -222,7 +219,6 @@ i.edge {display:none;}
 .submenu_org .nav-item.dropdown.show{
     background: #112F4E;
     color: #fff;
-    /*border: 3px solid#007bff;*/
     border-bottom: none;
 }
 .submenu_org .nav-item.dropdown.show .nav-link{color: #fff;}
@@ -335,7 +331,6 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 
 .share_icon_container {
     position:relative;
-	/* right: 20px; */
 	cursor: pointer;
 	padding-left: 10px;
 }
@@ -355,7 +350,6 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 
 /*================== organization About page ================*/
 #org_stats > .notice_org > .card-text, #org_socials > .notice_org > .card-text, #org_news > .notice_org > .card-text, #org_events > .notice_org > .card-text {height: 600px;overflow: auto;}
-/*#org_crol .card-text {overflow: auto;height: 670px;}*/
 #org_stats th, #org_stats td {padding: 8px 20px;}
 #tw_button, #fb_button {cursor: pointer; color:#212533;}
 #tw_button.active, #fb_button.active {cursor: default; color:#212533;}
@@ -452,7 +446,6 @@ table.dataTable tbody tr.child-row td table tbody tr td{padding: 13px 15px 13px 
 }
 #data_container.col.col-6 #myTable_wrapper .toolbar{display: none ;}
 #data_container.col #myTable_wrapper .toolbar{display: inline-block ;}
-/* #data_container.col-6 .filter_icon.position_change{top: 60px;} */
 
 .custom-control-input~.custom-control-label.radio_toggle::before,
 .custom-control-input~.custom-control-label.radio_toggle::after { display: none;}
@@ -572,7 +565,6 @@ span.neutral {color: orange;}
 .search_twitter .twitter-typeahead .tt-hint {width: 100%; height: 40px;}
 
 
-/* links: hoveronly, clickable */
 a.hoveronly {color: #005ea2;}
 a.hoveronly:hover {color: #005ea2; text-decoration: none; background-color: #E7F6F8;}
 

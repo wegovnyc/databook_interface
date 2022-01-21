@@ -22,7 +22,6 @@
 
 		var datatable = null
 		$(document).ready(function() {
-			//$('th[data-toggle="tooltip"]').tooltip()
 			
 			datatable = $('#myTable').DataTable({
 				ajax: {
@@ -139,7 +138,6 @@
 									loadFinStat();
 								});
 							select.wrap('<div class="drop_dowm_select"></div>');
-							//$('div.toolbar').insertAfter('#myTable_filter');
 
 							var tt = []
 							dd = column.data()
@@ -248,7 +246,6 @@
 			var isActive = !$('#map_container').attr('style')
 			var cc = [{{ $details['hide_on_map_open'] }}];
 			if (isActive) {
-				//$('#map_button').attr('class', 'btn map_btn')
 				$('#map_button').show()
 				$('#data_container').attr('class', 'col')
 				$('.toolbar ').show()
@@ -257,7 +254,6 @@
 					this.visible(true);
 				});
 			} else {
-				//$('#map_button').attr('class', 'btn btn-outline map_btn')
 				$('#map_button').hide()
 				$('#data_container').attr('class', 'col col-6')
 				$('#map_container').show()
@@ -266,7 +262,6 @@
 					this.visible(false);
 				});
 				setTimeout(function() {
-						//datatable.draw();	// initiate projectsMapDrawFeatures
 						drawProjects('all');
 					}, 3000
 				);
@@ -280,7 +275,6 @@
 			for (let sel in uu) {
 				$.get(uu[sel].replace('pubdate', pubdate), function (resp) {
 					var v = resp['rows'][0]['res'] ?? '-'
-					//console.log(['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel))
 					if ((['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel)) && (v != '-')) {
 						$(sel).text(toFinShortK(v, 1000))
 						$(sel).attr('data-content', toFin(v, 1000))
@@ -306,7 +300,6 @@
 				search: 'applied',     // 'none',    'applied', 'removed'
 			}
 			var features = [];
-			//api.cells('.record', modifier).data().each(function (r, i) {
 			api.rows('', modifier).data().each(function (r, i) {
 				if (r['GEO_JSON']) {
 					try {
@@ -318,7 +311,6 @@
 					}
 				}
 			});
-			//console.log(features.length)
 			projectsMapDrawFeatures(features);
 		}
 		
@@ -560,14 +552,12 @@
 		<div class="col-md-12">
 			<div class="bottom_lastupdate">
 				<p class="lead"><img src="/img/info.png" alt=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
-				<!--<p>{!! nl2br($org['description']) !!}</p>-->
 			</div>
 		</div>
 	</div>
 	
 	<script>
 		function changeToggle (e) {
-			//console.log($(e.target).next("label")[0].innerHTML)
 			$('#change_district').html($(e.target).next("label")[0].innerHTML);
 		}
 		$('#toggle_boundries').click( function (e) {
@@ -575,7 +565,6 @@
 		})
 
 		$(".filter_icon").click(function() {
-			//console.log($('.toolbar').is(':visible'))
 			if(!$('.toolbar').is(':visible')) {
 				$('.filter_icon').addClass('position_change');
 			}else {

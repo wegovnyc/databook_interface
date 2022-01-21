@@ -19,8 +19,6 @@ class Carto
 		if ($this->filelog)
 			file_put_contents(ROOTDIR . '/carto.log', "======================================\n{$sql}\n", FILE_APPEND);
 		$resp = Curl2::exec($url, 'post', [], '', ['q' => $sql]);
-		//echo '<hr/>' . $sql . "\n\n";
-		//echo $resp . "\n";
 		if ($raw)
 			return $resp;
 		$respJ = json_decode($resp, true);
@@ -28,7 +26,6 @@ class Carto
 			return $respJ['rows'];
 		if ($respJ['error'] ?? null)
 		{
-			//if ($this->verbose)
 				echo sprintf("Carto model error... \nreq: %s\nerror: %s\n", substr($sql, 0, 2500), print_r($respJ['error'], true));
 			return false;
 		}
@@ -41,12 +38,12 @@ class Carto
 	
 	function create($tbl, $dd, $schema=null, $idxFlds=[])
 	{
-		if (!$this->req(self::createSql($tbl, $dd, $schema)))	// CREATE
+		if (!$this->req(self::createSql($tbl, $dd, $schema)))
 			return false;
 		
 		$v = $this->verbose;
 		$this->verbose = false;
-		foreach ($idxFlds as $f)						// CREATE INDEX
+		foreach ($idxFlds as $f)
 			$this->req(sprintf('CREATE INDEX "%s-%s" ON %s ("%s")', $tbl, strtolower($f), $tbl, $f));
 		$this->verbose = $v;
 				
@@ -107,11 +104,9 @@ class Carto
 		
 		if (0)
 		{
-			//print_r($trgSch);
 			echo "---------------\n";
 			foreach ($trgSch as $k=>$d)
 				echo "{$k};{$d['type']}\n";
-			//print_r($sch);
 			echo "---------------\n";
 			foreach ($sch as $k=>$d)
 				echo "{$k};{$d['pgtype']}\n";
@@ -189,7 +184,6 @@ class Carto
 							$t = preg_match('~^[-+]?\s*\d+\.?\d*$~si', trim($v)) ? 'numeric' : 'string';
 						break;
 					default:
-						//echo $v . ' ' . gettype($v) . "\n";
 						$t = 'string';
 				}
 				if ($t && ($rr[$k]['type'] == 'string'))

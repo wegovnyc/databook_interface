@@ -6,7 +6,6 @@ class CartoModel
 	function __construct($entry, $key)
 	{
 		$this->carto = new Carto($entry, $key);
-		//print_r([$entry, $key]);
 	}
 
 	function orgs($where='ORDER BY name')
@@ -17,7 +16,6 @@ class CartoModel
 
 	function org($id)
 	{
-		#$dd = $this->carto->req("SELECT * FROM wegov_orgs WHERE id = '{$id}'");
 		$dd = $this->carto->req("SELECT org.*, p.id AS parent_id, p.name AS parent_name, p.type AS parent_type FROM wegov_orgs org LEFT JOIN wegov_orgs p ON p.airtable_id = regexp_replace(org.child_of, '[\[\]\"]', '', 'g') WHERE org.id = '{$id}'");
 		return $this->map($dd)[0] ?? [];
 	}

@@ -254,7 +254,6 @@
 		<div class="col-md-12">
 			<div class="bottom_lastupdate">
 				<p class="lead"><img src="/img/info.png" alt=""> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
-				<!--<p>{!! nl2br($org['description']) !!}</p>-->
 			</div>
 		</div>
 	</div>
@@ -277,7 +276,6 @@
 		}
 
 		$(document).ready(function () {
-			//$('h5[data-toggle="tooltip"]').tooltip()
 			
 			showPrj();
 
@@ -324,7 +322,6 @@
 							'line-cap': 'round'
 						},
 						'paint': {
-							//'line-color': '#ff7c7c',
 							'line-color': '#53777a',
 							'line-width': 6
 						},
@@ -337,7 +334,6 @@
 						'source': 'route',
 						'paint': {
 							'circle-radius': 6,
-							//'circle-color': '#ff7c7c'
 							'circle-color': '#53777a'
 						},
 						'filter': ['==', '$type', 'Point']

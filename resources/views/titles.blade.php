@@ -14,7 +14,6 @@
 		.tag-label {color:#777777; font-weight:600; padding-left: .1em;}
 		.tag-label:hover {color:#171717;}
 		.tag-label+.tag-label::before {
-			/*float: left;*/
 			padding-right: .2rem;
 			color: #6c757d;
 			content: ", ";
@@ -24,7 +23,6 @@
 		var table = null
 		
 		function tagFlt(e, tag) {
-			//console.log(tag)
 			$('#filter-tags').val(tag)
 			$('#filter-tags').trigger('change')
 			e.preventDefault()
@@ -70,7 +68,6 @@
 				pageLength: 20,
 				deferRender: true,
 				order: [[4, 'desc']],
-				//ordering: false,
 				dom: '<"toolbar"<"row">>frtip',
 				ajax: {
 					url: '{!! $url !!}',
@@ -81,8 +78,6 @@
 					{data: 'Title Description'},
 					{data: 'Standard Hours'},
 					{data: 'Assignment Level'},
-					/*{data: 'Union Code'},*/
-					/*{data: 'Bargaining Unit Short Name'},*/
 					{data: function (r) { return r["wegov-org-id"] 
 									? `<a href="/organization/${r["wegov-org-id"]}">${r["wegov-org-name"]}</a>` 
 									: `<a disabled>${r["Bargaining Unit Description"]}</a>` 
@@ -98,16 +93,12 @@
 				@endif	
 
 				initComplete: function () {
-					this.api().columns([4]).every(function () {						// Bargaining Unit
+					this.api().columns([4]).every(function () {
 						var column = this;
 						var select = $('<select class="filter-top" id="filter-' + column[0][0] + '"><option value="">- Select positions by Bargaining Unit -</option></select>')
 							.appendTo($('div.toolbar'))
 							.on('change', function () {
-								/*var val = $.fn.dataTable.util.escapeRegex(
-									$(this).val()
-								);*/
 								var val = $(this).val()
-								//console.log(val)
 								column
 									.search(val ? val : '', false, false)
 									.draw();
@@ -119,9 +110,6 @@
 							while ((t = rg.exec(d)) !== null) {
 								tt.push(t[1])
 							}
-							/*
-							tt.push(d)
-							*/
 						})
 						tt = [...new Set(tt)]
 
@@ -134,48 +122,6 @@
 							select.trigger('change')
 						}, 700);
 					});
-
-			{{--
-					this.api().columns([2]).every(function () {						// tags
-						var column = this;
-						var select = $('<select class="filter-top" id="filter-tags"><option value="">- Select organizations by tag -</option></select>')
-							.appendTo($('div.toolbar'))
-							.on('change', function () {
-								var val = $.fn.dataTable.util.escapeRegex(
-									$(this).val()
-								);
-								column
-									.search(val ? val : '', false, false)
-									.draw();
-							});
-
-						var tt = []
-
-						rg = />([^<]+)</g;
-						column.data().each(function (d, j) {
-							while ((t = rg.exec(d)) !== null) {
-								tt.push(t[1])
-							}
-						})
-						tt = [...new Set(tt)]
-
-						tt.sort().forEach(function (d, j) {
-							select.append( '<option value="'+d+'">'+d+'</option>' )
-						});
-						@if ($defTag)
-						  setTimeout(function(){
-							select.val('{!! $defTag !!}')
-							select.trigger('change')
-						  }, 1000);
-						@endif
-					});
-					
-			
-					// share button
-					$('<span class="share_icon_container" data-toggle="popover" data-content="Link copied to clipboard" placement="left" trigger="manual" style="top: 0;font-size: 22px;"><textarea id="details-permalink" class="details">{!! preg_replace('~\?.*~', '', route("orgs")) !!}</textarea><span id="details-addr"></span><a title="Share direct link" onclick="copyShareLink();"><i class="bi bi-share"></i></a></span>').appendTo($('div.toolbar'));
-					
-					loadShareLink()
-			--}}
 				}
 			});
 		});
@@ -196,8 +142,6 @@
 								<th>Title Description</th>
 								<th>Standard Hours</th>
 								<th>Assignment Level</th>
-								{{--<th>Union Code</th>
-								<th>Bargaining Unit Short Name</th>--}}
 								<th>Bargaining Unit</th>
 								<th>Union Description</th>
 								<th>Minimum Salary</th>

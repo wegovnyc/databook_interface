@@ -29,14 +29,10 @@ class TitlesDatasets
 			'hdrs' => ['Job ID', 'Title', 'Job Category', 'Salary From', 'Salary To', 'Last Updated'],
 			'flds' => [
 					'function (r) { return `<a href="https://a127-jobs.nyc.gov/index_new.html?keyword=${r["Job ID"]}">${r["Job ID"]}</a>` }', 
-					//'"Job ID"', 
 					'"Business Title"', 
 					'"Job Category"', 
-					//'"Salary Range From"', 
 					'function (r) { return toFin(r["Salary Range From"]) }',
-					//'"Salary Range To"', 
 					'function (r) { return toFin(r["Salary Range To"]) }',
-					//'"Posting Updated"', 
 					'function (r) { return usToDashDate(r["Posting Updated"]) }', 
 				], 
 			'visible' => [true, true, true, true, true, true],
@@ -76,14 +72,12 @@ class TitlesDatasets
 
 	];
 
-	// single level list 'dataset name' => 'dataset title'
 	public $list = [
 		'schedule' => 'Positions',
 		'jobs' => 'Job Postings',
 		'civillist' => 'Civil List',
 	];
 	
-	// multi level list 'menu dropdown title (or zero if single level item)' => ['dataset name', ...]
 	public $menu = [
 		'schedule',
 		'jobs',

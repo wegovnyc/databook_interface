@@ -91,22 +91,15 @@
 					initComplete: function () {
 						this.api().columns([{{ $details['fltsCols'] }}]).every(function (c,a,i) {
 							var delim = {!! json_encode($details['fltDelim']) !!};
-							//console.log(c,a,i)
-							//console.log(delim)
 							var column = this;
 							var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
-								//.appendTo($(column.footer()).empty())
 								.appendTo($("div.toolbar .row"))
 								.on('change', function () {
-									//var val = $.fn.dataTable.util.escapeRegex(
-										//$(this).val()
-									//);
 									var val = $(this).val()
 									column
 										.search(val ? val : '', false, false)
 										.draw();
 								});
-							//select.wrap('<div class="drop_dowm_select' + (i == 0 ? '' : ' ml-4') + '" style="width:{{ 100.00 / count($details["filters"]) - (count($details["filters"]) >= 4 ? 3 : 2.5) }}%;"></div>');
 							select.wrap('<div class="drop_dowm_select col"></div>');
 
 							var tt = []
@@ -151,7 +144,6 @@
 									loadFinStat();
 								});
 							select.wrap('<div class="drop_dowm_select"></div>');
-							//$('div.toolbar').insertAfter('#myTable_filter');
 
 							var tt = []
 							dd = column.data()
@@ -229,7 +221,6 @@
 					}
 				}
 				d = d.match(/[-\d\.]+/g) ? parseFloat(d) * m : d;
-				//console.log(data, d);
 				return d;
 			};
 		
@@ -238,12 +229,9 @@
 		function loadFinStat() {
 			var uu = {!! json_encode($finStatUrls) !!}
 			var pubdate = $('#filter-1 option:selected').val() ? $('#filter-1 option:selected').val().replaceAll('-', '') : '20210805';
-			//if (!pubdate)
-			//	pubdate = 
 			for (let sel in uu) {
 				$.get(uu[sel].replace('pubdate', pubdate), function (resp) {
 					var v = resp['rows'][0]['res'] ?? '-'
-					//console.log(['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel))
 					if ((['#orig_cost', '#curr_cost', '#over_budg_am'].includes(sel)) && (v != '-')) {
 						$(sel).text(toFinShortK(v, 1000))
 						$(sel).attr('data-content', toFin(v, 1000))

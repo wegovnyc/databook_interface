@@ -38,7 +38,6 @@ class Airtable
 						($sort ? '&sort%5B0%5D%5Bfield%5D=' . rawurlencode($sort) : ''),
 						($view ? '&view=' . rawurlencode($view) : '')
 					);
-		//echo $url . "\n";
 		$resp = Curl::exec($url, 'get', [CURLOPT_HTTPHEADER => $hh]);
 		return json_decode($resp, true);
 	}
@@ -53,9 +52,7 @@ class Airtable
 						rawurlencode($tbl)
 					);
 		$dd = ['records' => [['id' => $id, 'fields' => $data]]];
-		//print_r(json_encode($dd));
 		$resp = Curl::exec($url, 'patch', [CURLOPT_HTTPHEADER => $hh], $dd);
-		//return json_decode($resp, true)['records'][0]['id'];
 		return json_decode($resp, true);
 	}
 
@@ -88,7 +85,6 @@ class Airtable
 						$this->id,
 						rawurlencode($tbl)
 					);
-		//print_r($dd);
 		$resp = Curl::exec($url, 'json', [CURLOPT_HTTPHEADER => $hh], '', ['records' => $dd]);
 		$rr = json_decode($resp, true);
 		return $rr;

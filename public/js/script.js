@@ -7,7 +7,6 @@ function toDashDate(d)
 {
 	if (!d)
 		return ''
-	//console.log(s)
 	y  = d.toString().substr(0, 4)
 	m  = d.toString().substr(4, 2)
 	d  = d.toString().substr(6, 2)
@@ -22,7 +21,6 @@ function usToDashDate(d)
 	dd  = d.toString().substr(3, 2)
 	y  = d.toString().substr(8, 2)
 	tt = d.toString().substr(10, 20)
-	//console.log(y,m,d)
 	return '<span class="text-nowrap">20'+y+'-'+m+'-'+dd+tt+'</span>';
 }
 
@@ -51,9 +49,8 @@ function toFinShortK(d, m=1)
 	}
 }
 
-function toPerc(p, a)		//planned, actual
+function toPerc(p, a)
 {
-	//console.log(p, a)
 	if (!parseFloat(p))
 		return '-'
 	return ((parseFloat(a) / parseFloat(p) - 1) * 100).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '%'
@@ -125,13 +122,10 @@ function newMap() {
 	var center = (typeof center == 'undefined') ? [-73.957, 40.727] : center;
 	var zoom = (typeof zoom == 'undefined') ? 11 : zoom;
 	
-	//console.log(center, zoom);
-	// initial basemap
 	map = new mapboxgl.Map({
 		container: 'map',
 		style: 'mapbox://styles/mapbox/light-v10',
 		center: center,
-		//pitch: 60,
 		zoom: zoom
 	});
 
@@ -148,11 +142,7 @@ function applyFilterOnClick(e) {
 	var col = chckbox.attr('param')
 	var filtField = filtFields[code]
 
-	//console.log('script', code, col)
-	// set bbox as 5px reactangle area around clicked point
 	var bbox = [
-		//[e.point.x - 5, e.point.y - 5],
-		//[e.point.x + 5, e.point.y + 5]
 		[e.point.x, e.point.y],
 		[e.point.x, e.point.y]
 	];
@@ -160,9 +150,6 @@ function applyFilterOnClick(e) {
 		layers: [code + 'FHH']
 	});
 	 
-	// Run through the selected features and set a filter
-	// to match features with unique FIPS codes to activate
-	// the `counties-highlighted` layer.
 	var filter = features.reduce(
 		function(memo, feature) {
 			memo.push(feature.properties[filtField]);
@@ -171,14 +158,13 @@ function applyFilterOnClick(e) {
 		['in', filtField]
 	);
 
-	mapAction(filter, code, col);		// maps are used in orgsection.blade and districts.blade, each map has its own mapAction
+	mapAction(filter, code, col);
 	
 	map.setFilter(code + 'FH', filter);
 }
 
 
 function orgSectionMapInit(filters, filterType) {
-	//console.log(filters, filterType)
 	newMap();
 	
 	$('select, option').click(function(e) {
@@ -201,7 +187,6 @@ function orgSectionMapInit(filters, filterType) {
 		
 		if (typeof filterType == 'undefined')
 			window.setTimeout(function (){
-				//	enable 1st filter
 				if (!$('#map-controls div:nth-child(2) input:checked').length)
 						$('#map-controls div:nth-child(2) input')[0].click();
 				}, 500
@@ -213,9 +198,6 @@ function orgSectionMapInit(filters, filterType) {
 				}, 500
 			)
 		
-		//map.on('click', 'ccFHH', function(e) { applyFilterOnClick(e); })
-		//map.on('click', 'cdFHH', function(e) { applyFilterOnClick(e); })
-		//map.on('click', 'ntaFHH', function(e) { applyFilterOnClick(e); })
 		map.on('click', function(e) { applyFilterOnClick(e); })
 		
 	});
@@ -316,7 +298,6 @@ function setFilter(code, col) {
 				},
 				['in', filtField]
 			);
-			//console.log(filter);
 		});
 	}
 	
@@ -377,11 +358,9 @@ function setFilter(code, col) {
 	);
 		
 	$(`#${code}-filter-switch`).change(function() {
-		//console.log($(this))
 		if ($(this).is(':checked')) {
 			map.setLayoutProperty(code + 'FL', 'visibility', 'visible');
 			map.setLayoutProperty(code + 'FS', 'visibility', 'visible');
-			//map.setLayoutProperty(code + 'FF', 'visibility', 'visible');
 			map.setLayoutProperty(code + 'FH', 'visibility', 'visible');
 			map.setLayoutProperty(code + 'FHH', 'visibility', 'visible');
 			
@@ -389,7 +368,6 @@ function setFilter(code, col) {
 				if ((i != code) && ($(`#${i}-filter-switch`).length)) {
 					map.setLayoutProperty(i + 'FL', 'visibility', 'none');
 					map.setLayoutProperty(i + 'FS', 'visibility', 'none');
-					//map.setLayoutProperty(i + 'FF', 'visibility', 'none');
 					map.setLayoutProperty(i + 'FH', 'visibility', 'none');
 					map.setLayoutProperty(i + 'FHH', 'visibility', 'none');
 				}
@@ -415,10 +393,9 @@ function projectsMapPopup(e) {
 	<tr><th scope="row">Start</th><td>${pr.START_CURR}</td></tr>
 	<tr><th scope="row">End</th><td>${pr.END_CURR}</td></tr>
 </tbody></table>`;
-	//console.log(pr.PLANNEDCOST, toFinShortK(pr.PLANNEDCOST.replace(',', ''), 1000));
 	map.fitBounds([
-		[pr.W,pr.S], // southwestern corner of the bounds
-		[pr.E,pr.N] // northeastern corner of the bounds
+		[pr.W,pr.S],
+		[pr.E,pr.N]
 	]);
 	
 	if (popup)
@@ -452,7 +429,6 @@ function projectsMapInit(as_addon=false) {
 				'circle-radius': 5,
 				'circle-color': ['get', 'custom_color']
 			},
-			//'filter': ["all", ['==', '$type', 'Point'], ['!has', 'point_count']]
 			'filter': ['==', '$type', 'Point']
 		});		
 		
@@ -468,7 +444,6 @@ function projectsMapInit(as_addon=false) {
                 'line-color': ['get', 'custom_color'],
                 'line-width': 5
             },
-			//'filter': ["all", ['==', '$type', 'LineString'], ['!has', 'point_count']]
 			'filter': ['==', '$type', 'LineString']
         });
 		
@@ -485,7 +460,6 @@ function projectsMapInit(as_addon=false) {
 		map.on('zoom', () => {
 			var z = map.getZoom();
 			const zz = {12:6, 11:5, 10:4, 9:3, 8:2}
-			//console.log(z);
 			for (const [l, r] of Object.entries(zz)) {
 				if (z > l) {
 					map.setPaintProperty('markers', 'circle-radius', r);
@@ -518,9 +492,7 @@ function projectsMapInit(as_addon=false) {
 
 
 function projectsMapDrawFeatures(dd, do_fitbounds=true) {
-	// calculate bounds
 	var bounds = [[360, 180], [-360, -180]];
-	// https://javier.xyz/cohesive-colors/
 	var colors = ['#ecd078', '#d95b43', '#c02942', '#542437', '#53777a', '#f5ae33', '#99ac40', '#ff7c7c', '#78c0a8', '#7a6a53', '#6c5b7b', '#c06c84', '#d2ff0f', '#f2c45a', '#3b2d38', '#b8af03', '#d1e751', '#ff3a31', '#99b59a', '#676970', '#ecd078', '#618eff', '#7dffff', '#f07241', '#bcbcbc'];
 	dd.forEach(function (el, i) {
 		bounds[0][0] = Math.min(bounds[0][0], el.properties.W - 0.03);
@@ -558,11 +530,9 @@ function fitBounds(bounds) {
 
 function copyLinkM(a, sel="details-permalink") {
 	var el = document.getElementById(sel);
-	//console.log(a, $(a).find('.share_icon_container'))
 	el.select();
 	el.setSelectionRange(0, 99999);
 	document.execCommand("copy");
-	//console.log(el.value)
 	$(a).find('.share_icon_container').popover('show')
 	setTimeout(function(){
 		$(a).find('.share_icon_container').popover('hide')
@@ -574,7 +544,6 @@ function copyLink() {
 	el.select();
 	el.setSelectionRange(0, 99999);
 	document.execCommand("copy");
-	//console.log(el.value)
 	$('.share_icon_container').popover('show')
 	setTimeout(function(){
 		$('.share_icon_container').popover('hide')

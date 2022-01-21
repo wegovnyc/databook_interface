@@ -29,13 +29,6 @@
 						<th scope="col" width="50%" id="pub_date_filter"></th>
 						</tr>
 					</thead>
-					{{--<tbody>
-						<tr>
-							<td colspan=2 class="text-right px-0 pt-0 pb-3">
-								<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="true" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
-							</td>
-						</tr>
-					</tbody>--}}
 					</table>
 				</div>
 			</div>
@@ -90,31 +83,6 @@
 			  @endforeach
 			'</table>';
 		}
-		/*
-		function toggleMap() {
-			var isActive = $('#map_button').attr('class') == 'btn btn-outline map_btn'
-			if (isActive) {
-				$('#map_button').attr('class', 'btn map_btn')
-				$('#data_container').attr('class', 'col')
-				$('.toolbar ').css('display', 'inline-block')
-				$('#map_container').hide()
-			} else {
-				$('#data_container').attr('class', 'col col-6')
-                const divHeight = $('#data_container').height()
-                console.log(divHeight, '3' , $('#map_container').attr('style'));
-                $('#map_container').css("min-height", divHeight+'px')
-				$('#map_button').attr('class', 'btn btn-outline map_btn')
-				$('#map_container').show()
-			}
-		}
-
-		function mapAction(filter, code, col) {
-			if (filter.length == 2)
-				datatable.columns([col]).search('').draw()
-			else
-				datatable.columns([col]).search(filter[2]).draw()
-		}
-		*/
 		var datatable = null
 		var dataurl = '{!! $url !!}'
 		
@@ -180,12 +148,8 @@
 								var delim = {!! json_encode($details['fltDelim']) !!};
 								var column = this;
 								var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
-									//.appendTo($(column.footer()).empty())
 									.appendTo($("div.toolbar .row"))
 									.on('change', function () {
-										/*var val = $.fn.dataTable.util.escapeRegex(
-											$(this).val()
-										);*/
 										var val = $(this).val()
 										column
 											.search(val ? val : '', false, false)
@@ -257,17 +221,6 @@
 	</script>
 	<div class="inner_container">
 		<div class="container">
-		{{--<div class="row justify-content-center">
-				<div class="col-md-12 organization_data">
-					<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
-					@if(array_search($section, $menu) === false)
-						<h4>{{ $dataset['Name'] }}</h4>
-					@endif
-					@if ($map ?? null)
-						<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png"></button>
-					@endif
-				</div>
-			</div>--}}
 			<div class="row justify-content-center map_right">
 				<div id="data_container" class="col-12">
 					<div class="table-responsive">

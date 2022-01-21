@@ -9,71 +9,13 @@
 		<div id="pos-header" class="org-header">
 			<div class="row m-2">
 				<div class="col-md-9 org_detailheader">
-					<h4>{{ $details['title'] }}
-						{{--@if ($section == 'events')
-							&nbsp;<a title="Copy Events iCal feed link" onclick="copyLinkM(this, 'events-ical-link');"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Events iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a>
-							<textarea id="events-ical-link" class="details">{!! route('noticesIcalEvents') !!}</textarea>
-						@endif
-						@if ($section == 'news')
-							&nbsp;<a title="Copy News RSS feed link" onclick="copyLinkM(this, 'news-rss-link');"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="News RSS feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a>
-							<textarea id="news-rss-link" class="details">{!! route('noticesRSSNews') !!}</textarea>
-						@endif--}}
-					</h4>
+					<h4>{{ $details['title'] }}</h4>
 					<p>{!! $details['description'] !!}</p>
 				</div>
 				<div class="col-md-3 mt-2" id="org_summary">
-					{{--<table class="table-sm stats-table" width="100%">
-						<thead>
-							<tr>
-							<th scope="col" width="50%" class="text-center px-0" data-content="See the project info published on specific dates.">Year&nbsp;<small><i class="bi bi-question-circle-fill ml-1" style="top:-1px;position:relative;"></i></small></th>
-							<th scope="col" width="50%" id="pub_date_filter"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan=2 class="text-right px-0 pt-0 pb-3">
-									<button class="type-label my-2 dropdown-toggle" data-toggle="collapse" data-target="#stats_collapse" aria-expanded="true" aria-controls="stats_collapse"><small>Show/Hide Stats</small></button>
-								</td>
-							</tr>
-						</tbody>
-					</table>--}}
 				</div>
 			</div>
 		</div>
-
-		{{--<div class="navbar-expand-lg org_headermenu mt-3 mb-5">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#submenu_nav" aria-controls="submenu_nav" aria-expanded="true" aria-label="Toggle navigation">
-				<p class="m-0">Notices Menu</p>
-			</button>
-			<div class="collapse navbar-collapse" id="submenu_nav">
-				<ul class="nav navbar navbar-expand-lg navbar-light submenu_org">
-					@foreach ($menu as $h=>$sect)
-						@if (is_string($sect))
-							@if ($section == $sect)
-								<li class="nav-item active">
-							@else
-								<li class="nav-item">
-							@endif
-								<a class="nav-link active" href="{{ route('noticesSection', ['section' => $sect]) }}">{{ $slist[$sect] }}</a>
-							</li>
-						@else
-							@if ($activeDropDown == $h)
-								<li class="nav-item dropdown active">
-							@else
-								<li class="nav-item dropdown">
-							@endif
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ $h }}</a>
-								<div class="dropdown-menu">
-									@foreach ($sect as $subsect)
-										<a class="dropdown-item" href="{{ route('titleSection', ['section' => $subsect]) }}">{{ $slist[$subsect] }}</a>
-									@endforeach
-								</div>
-							</li>
-						@endif
-					@endforeach
-				</ul>
-			</div>
-		</div>--}}
 	</div>
 
 
@@ -90,31 +32,6 @@
 			  @endforeach
 			'</table>';
 		}
-		/*
-		function toggleMap() {
-			var isActive = $('#map_button').attr('class') == 'btn btn-outline map_btn'
-			if (isActive) {
-				$('#map_button').attr('class', 'btn map_btn')
-				$('#data_container').attr('class', 'col')
-				$('.toolbar ').css('display', 'inline-block')
-				$('#map_container').hide()
-			} else {
-				$('#data_container').attr('class', 'col col-6')
-                const divHeight = $('#data_container').height()
-                console.log(divHeight, '3' , $('#map_container').attr('style'));
-                $('#map_container').css("min-height", divHeight+'px')
-				$('#map_button').attr('class', 'btn btn-outline map_btn')
-				$('#map_container').show()
-			}
-		}
-
-		function mapAction(filter, code, col) {
-			if (filter.length == 2)
-				datatable.columns([col]).search('').draw()
-			else
-				datatable.columns([col]).search(filter[2]).draw()
-		}
-		*/
 		var datatable = null
 		var dataurl = '{!! $url !!}'
 		
@@ -164,12 +81,8 @@
 							var delim = {!! json_encode($details['fltDelim']) !!};
 							var column = this;
 							var select = $('<select class="filter" id="filter-' + column[0][0] + '" name="filter-' + column[0][0] + '" aria-controls="myTable"><option value="" selected>- ' + $(column.header()).text() + ' -</option></select>')
-								//.appendTo($(column.footer()).empty())
 								.appendTo($("div.toolbar .row"))
 								.on('change', function () {
-									/*var val = $.fn.dataTable.util.escapeRegex(
-										$(this).val()
-									);*/
 									var val = $(this).val()
 									column
 										.search(val ? val : '', false, false)
@@ -241,17 +154,6 @@
 	</script>
 	<div class="inner_container">
 		<div class="container">
-		{{--<div class="row justify-content-center">
-				<div class="col-md-12 organization_data">
-					<p>{!! nl2br($details['description'] ?? $dataset['Descripton']) !!}</p>
-					@if(array_search($section, $menu) === false)
-						<h4>{{ $dataset['Name'] }}</h4>
-					@endif
-					@if ($map ?? null)
-						<button id="map_button" class="btn map_btn" style="float:right;" onclick="toggleMap();"><img src="/img/map_location.png"></button>
-					@endif
-				</div>
-			</div>--}}
 			<div class="row justify-content-center map_right">
 				<div id="data_container" class="col-12">
 					<div class="table-responsive">
@@ -274,18 +176,7 @@
 				</div>
 			</div>
 		</div>
-		{{--
-		@if ($dataset['Public Note'] ?? null)
-			<div class="col-md-12">
-				<h4 class="note_bottom">{{ nl2br($dataset['Public Note']) }}</h4>
-			</div>
-		@endif
-		<div class="col-md-12">
-			<div class="bottom_lastupdate">
-				<p class="lead"><img src="/img/info.png"> This data comes from <a href="{{ $dataset['Citation URL'] }}" target="_blank">{{ $dataset['Name'] }}</a><span class="float-right" style="font-weight: 300;"><i>Last updated {{ explode(' ', $dataset['Last Updated'])[0] }}</i></span></p>
-			</div>
-		</div>
-		--}}
+		
 	</div>
 	
 	<script>

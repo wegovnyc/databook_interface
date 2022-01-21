@@ -11,23 +11,6 @@
 		$w = $org['twitter'] || $org['facebook'] ? 4 : 6;
 		$dw = 12 - $w;
 	@endphp
-	
-	{{--<div class="modal" tabindex="-1" id="calendar_modal">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title">Modal title</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		  </div>
-		  <div class="modal-body">
-			<p>Modal body text goes here.</p>
-		  </div>
-		</div>
-	  </div>
-	</div>
-	--}}
 
 	<div class="inner_container">	
 		<div class="container py-2">
@@ -347,11 +330,8 @@
 		function loadFinStat() {
 			var uu = {!! json_encode($finStatUrls) !!}
 			var year = $('#fin_stat_select option:selected').val()
-			//console.log(year)
 			for (let k in uu) {
 				$.get(uu[k].replace('fyear', year), function (resp) {
-					//console.log(resp)
-					//jj = $.parseJSON(resp)
 					var v = resp['rows'][0]['sum'] ?? '-'
 					currency = k == 'headcount' ? '' : '$'
 					v = v != '-' ? currency + intWithCommas(v) : v
