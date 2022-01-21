@@ -45,7 +45,7 @@ Set Apache DocumentRoot to ``/target/folder/public``
 
 Set Apache AllowOverride option for section ``<Directory "/target/folder/public">``
 
-	AllowOverride All 
+``AllowOverride All``
 
 
 
