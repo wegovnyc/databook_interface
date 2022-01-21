@@ -11,7 +11,7 @@ Some description
 *	mod_rewrite
 *	composer
 
-Databook is based on [Laravel 8.x] (https://laravel.com/docs/8.x/installation#installation-via-composer) 
+Databook is based on [Laravel 8.x](https://laravel.com/docs/8.x/installation#installation-via-composer) 
 
 
 ## Quick Start
@@ -29,7 +29,7 @@ Edit ``/target/folder/.env.default``, set APP_URL to actual domain name, rename 
 
 Edit ``/target/folder/config/apis.php.default``, rename to ``apis.php``:
 
-- ``geoclient_key`` - Optional. Used for Address search in Districts section. API key can be obtained at [NYC API Portal](https://api-portal.nyc.gov/developer) after
+- ``geoclient_key`` - Optional. Used for address search in Districts section. API key can be obtained at [NYC API Portal](https://api-portal.nyc.gov/developer) after
 
 - ``airtable_key`` - Optional. Functionality is currently disabled
 
@@ -50,4 +50,4 @@ Thank you for considering contributing to the Databook! The contribution guide c
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license???](https://opensource.org/licenses/MIT).
