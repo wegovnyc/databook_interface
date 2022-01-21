@@ -18,7 +18,7 @@
                     <a class="nav-link" href="https://wegov.nyc/about/">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.notion.so/wegovnyc/Get-Involved-d31cee2e3ea04051b600e0a5b902daab">Get Involved</a>
+                    <a class="nav-link" href="https://wegovnyc.notion.site/Work-With-Us-d31cee2e3ea04051b600e0a5b902daab">Get Involved</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://opencollective.com/wegovnyc">Donate</a>
