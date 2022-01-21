@@ -74,7 +74,7 @@ We've built the [Databook Interface](http://databook.wegov.nyc) to experiment wi
 
 	cd /target/folder
 
-	git clone https://github.com/wegovnyc/research_wegov.git .
+	git clone https://github.com/wegovnyc/research_interface.git .
 
 	composer update
 
