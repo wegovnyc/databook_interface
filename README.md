@@ -6,12 +6,11 @@ Some description
 ## Environment
 
 **LAMP stack**
-*	php >=7.3
+*	php >=7.2.5
 *	Apache >=2.2
 *	mod_rewrite
 *	composer
-
-Databook is based on [Laravel 8.x](https://laravel.com/docs/8.x/installation#installation-via-composer) 
+*	git
 
 
 ## Quick Start
@@ -21,6 +20,9 @@ Databook is based on [Laravel 8.x](https://laravel.com/docs/8.x/installation#ins
 	git clone https://github.com/wegovnyc/research_wegov.git .
 
 	composer update
+
+
+Databook is based on **Laravel 8.x**. In case of troubles during installation please refer to [Laravel 8 Installation Guide](https://laravel.com/docs/8.x/installation#installation-via-composer) 
 
 
 
@@ -34,7 +36,9 @@ Edit ``/target/folder/config/apis.php.default``, rename to ``apis.php``:
 - ``airtable_key`` - Optional. Functionality is currently disabled
 
 
-Set web server root folder to ``/target/folder/public``
+Set Apache DocumentRoot to ``/target/folder/public``
+
+Set Apache option <Directory "/target/folder/public"> AllowOverride All 
 
 
 
