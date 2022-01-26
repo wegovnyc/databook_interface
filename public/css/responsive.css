@@ -45,9 +45,9 @@
     .organization_data {padding: 20px 0px 20px;}
     #myTable_wrapper .toolbar { width: 48%;}
     #myTable_wrapper .toolbar .drop_dowm_select {width: 29%;}
-    .bottom_lastupdate{padding: 18px 15px; margin: 0px;margin-bottom: 60px;display: inline-block;}
+    .bottom_lastupdate{padding: 18px 15px; margin: 0px;margin-bottom: 60px;display: inline-block;width: 100%;}
     .bottom_lastupdate p{font-size: 18px;}
-    #stats_collapse .row{margin: 0px;}
+    /* #stats_collapse .row{margin: 0px;} */
     .submenu_org .nav-item .nav-link {
         padding: 15px 12px;
         font-weight: 500;
@@ -57,6 +57,7 @@
     .org_detailtitle p {
         white-space: normal;
     }
+    .responsive_card { flex: 0 0 50%;max-width: 50%;}
 }
 @media (max-width: 980px)
 {
@@ -125,10 +126,15 @@
     #data_container.col-6 .filter_icon{top:40px}
     .share_icon_container {padding: 0;}
     #stats_collapse .col-md-3{flex: 0 0 50%;max-width: 50%;margin-bottom: 30px;}
-    .container {padding: 0px;}
+    /* .container {padding: 0px;} */
+    .inner_container {
+        max-width: 100%;
+    }
+    #app.container{padding: 0px;}
     .org_detailheader {
         padding: 14px 15px 0 15px;
     }
+    .responsive_card { flex: 0 0 33.330%;max-width: 33.330%;}
 }
 @media (max-width: 767px)
 {
