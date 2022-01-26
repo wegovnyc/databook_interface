@@ -5,7 +5,7 @@ return [
     /*
 	 |	Carto API key and entry point
     */
-	'carto_key' => 'ilfUkeo88DuXt7M5y1c1Vg',		// public API key for readonly access
+	'carto_key' => 'gwKOtAvCQ7j90FVJg9QUIA',		// public API key for readonly access
 	'geoclient_key' => '',
 	
 	'carto_entry' => 'https://carto.wegov.nyc/user/wegov/api/v2/sql',
