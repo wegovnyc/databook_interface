@@ -218,12 +218,27 @@
 						  <a href="{{ route('noticesSection', ['section' => 'publichearings']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-center">Public Hearings</h2>
-									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<h5 class="prj_stat">Public Hearings</h5>
+									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
 									<div class="row">
-										<div class="col-3 pr-0">Today:&nbsp;<b><span id="publichearings1">&nbsp;</span></b></div>
-										<div class="col pr-0">7 Days:&nbsp;<b><span id="publichearings7">&nbsp;</span></b></div>
-										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="publichearings30">&nbsp;</span></b></div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>Today</h4>
+												<p><span id="publichearings1">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>7 Days</h4>
+												<p><span id="publichearings7">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>30 Days</h4>
+												<p><span id="publichearings30">&nbsp;</span></p>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -236,12 +251,27 @@
 						  <a href="{{ route('noticesSection', ['section' => 'procurement']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-center">Procurement</h2>
-									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<h5 class="prj_stat">Procurement</h5>
+									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
 									<div class="row">
-										<div class="col-3 pr-0">Today:&nbsp;<b><span id="procurement1">&nbsp;</span></b></div>
-										<div class="col pr-0">7 Days:&nbsp;<b><span id="procurement7">&nbsp;</span></b></div>
-										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="procurement30">&nbsp;</span></b></div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>Today</h4>
+												<p><span id="procurement1">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>7 Days</h4>
+												<p><span id="procurement7">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>30 Days</h4>
+												<p><span id="procurement30">&nbsp;</span></p>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -254,12 +284,27 @@
 						  <a href="{{ route('noticesSection', ['section' => 'contractawards']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-center">Contract Award</h2>
-									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<h5 class="prj_stat">Contract Award</h5>
+									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
 									<div class="row">
-										<div class="col-3 pr-0">Today:&nbsp;<b><span id="contractawards1">&nbsp;</span></b></div>
-										<div class="col pr-0">7 Days:&nbsp;<b><span id="contractawards7">&nbsp;</span></b></div>
-										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="contractawards30">&nbsp;</span></b></div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>Today</h4>
+												<p><span id="contractawards1">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>7 Days</h4>
+												<p><span id="contractawards7">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>30 Days</h4>
+												<p><span id="contractawards30">&nbsp;</span></p>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -272,12 +317,27 @@
 						  <a href="{{ route('noticesSection', ['section' => 'agencyrules']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-center">Agency Rules</h2>
-									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<h5 class="prj_stat">Agency Rules</h5>
+									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
 									<div class="row">
-										<div class="col-3 pr-0">Today:&nbsp;<b><span id="agencyrules1">&nbsp;</span></b></div>
-										<div class="col pr-0">7 Days:&nbsp;<b><span id="agencyrules7">&nbsp;</span></b></div>
-										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="agencyrules30">&nbsp;</span></b></div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>Today</h4>
+												<p><span id="agencyrules1">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>7 Days</h4>
+												<p><span id="agencyrules7">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>30 Days</h4>
+												<p><span id="agencyrules30">&nbsp;</span></p>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -293,12 +353,27 @@
 						  <a href="{{ route('noticesSection', ['section' => 'propertydisposition']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-center px-0" style="letter-spacing: -1.5px;">Property Disposition</h2>
-									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<h5 class="prj_stat">Property Disposition</h5>
+									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
 									<div class="row">
-										<div class="col-3 pr-0">Today:&nbsp;<b><span id="propertydisposition1">&nbsp;</span></b></div>
-										<div class="col pr-0">7 Days:&nbsp;<b><span id="propertydisposition7">&nbsp;</span></b></div>
-										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="propertydisposition30">&nbsp;</span></b></div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>Today</h4>
+												<p><span id="propertydisposition1">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>7 Days</h4>
+												<p><span id="propertydisposition7">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>30 Days</h4>
+												<p><span id="propertydisposition30">&nbsp;</span></p>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -311,12 +386,27 @@
 						  <a href="{{ route('noticesSection', ['section' => 'courtnotices']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-center">Court Notices</h2>
-									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<h5 class="prj_stat">Court Notices</h5>
+									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
 									<div class="row">
-										<div class="col-3 pr-0">Today:&nbsp;<b><span id="courtnotices1">&nbsp;</span></b></div>
-										<div class="col pr-0">7 Days:&nbsp;<b><span id="courtnotices7">&nbsp;</span></b></div>
-										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="courtnotices30">&nbsp;</span></b></div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>Today</h4>
+												<p><span id="courtnotices1">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>7 Days</h4>
+												<p><span id="courtnotices7">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>30 Days</h4>
+												<p><span id="courtnotices30">&nbsp;</span></p>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -329,12 +419,27 @@
 						  <a href="{{ route('noticesSection', ['section' => 'changeofpersonnel']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-center px-0" style="letter-spacing:-1.25px;font-size:1.85rem;">Changes in Personnel</h2>
-									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<h5 class="prj_stat">Changes in Personnel</h5>
+									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
 									<div class="row">
-										<div class="col-3 pr-0">Today:&nbsp;<b><span id="changeofpersonnel1">&nbsp;</span></b></div>
-										<div class="col pr-0">7 Days:&nbsp;<b><span id="changeofpersonnel7">&nbsp;</span></b></div>
-										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="changeofpersonnel30">&nbsp;</span></b></div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>Today</h4>
+												<p><span id="changeofpersonnel1">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>7 Days</h4>
+												<p><span id="changeofpersonnel7">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>30 Days</h4>
+												<p><span id="changeofpersonnel30">&nbsp;</span></p>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -347,12 +452,27 @@
 						  <a href="{{ route('noticesSection', ['section' => 'specialmaterials']) }}" class="hoveronly">
 							<div class="card-body">
 								<div class="card-text">
-									<h2 class="prj_stat text-center ml-3">Special Materials</h2>
-									<p class="text-center ml-3 my-1"><u>New:</u></p>
+									<h5 class="prj_stat">Special Materials</h5>
+									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
 									<div class="row">
-										<div class="col-3 pr-0">Today:&nbsp;<b><span id="specialmaterials1">&nbsp;</span></b></div>
-										<div class="col pr-0">7 Days:&nbsp;<b><span id="specialmaterials7">&nbsp;</span></b></div>
-										<div class="col-5 pr-0">30 Days:&nbsp;<b><span id="specialmaterials30">&nbsp;</span></b></div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>Today</h4>
+												<p><span id="specialmaterials1">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>7 Days</h4>
+												<p><span id="specialmaterials7">&nbsp;</span></p>
+											</div>	
+										</div>
+										<div class="col-md-4 responsive_card p-1">
+											<div class="inner_card text-center">
+												<h4>30 Days</h4>
+												<p><span id="specialmaterials30">&nbsp;</span></p>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>
@@ -364,9 +484,9 @@
 			</div>
 					
 
-			<div class="row justify-content-center py-4">
+			<div class="row justify-content-center">
 				<div class="col-md-6 organization_data">
-					<h4 class="mb-3">News&nbsp;<a title="Copy News RSS feed link" onclick="copyLinkM(this, 'noticesRSSNews');"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="News RSS feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a></h4>
+					<h4 class="mb-3  p-0">News&nbsp;<a title="Copy News RSS feed link" onclick="copyLinkM(this, 'noticesRSSNews');"><i class="bi bi-rss share_icon_container" data-toggle="popover" data-content="News RSS feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a></h4>
 					<textarea id="noticesRSSNews" class="details">{!! route('noticesRSSNews') !!}</textarea>
 					
 					@foreach (array_slice($news, 0, 6) as $n)
@@ -384,28 +504,30 @@
 					@endforeach
 					<div class="row justify-content-center">
 						<div class="col-md-12 text-center">
-							<a type="button" class="type-label my-4" href="{{ route('noticesSection', ['section' => 'all']) }}">See All News</a>
+							<a type="button" class="outline_btn" href="{{ route('noticesSection', ['section' => 'all']) }}">See All News</a>
 						</div>
 					</div>
 					
 				</div>
 				
 				<div class="col-md-6 organization_data">
-					<h4 class="mb-3">Events&nbsp;<a title="Copy Events iCal feed link" onclick="copyLinkM(this, 'noticesIcalEvents');"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Events iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a></h4>
+					<h4 class="mb-3  p-0">Events&nbsp;<a title="Copy Events iCal feed link" onclick="copyLinkM(this, 'noticesIcalEvents');"><i class="bi bi-calendar-event share_icon_container" data-toggle="popover" data-content="Events iCal feed link copied to clipboard" placement="left" trigger="manual" style="cursor: pointer; top:-3px;"></i></a></h4>
 					<textarea id="noticesIcalEvents" class="details">{!! route('noticesIcalEvents') !!}</textarea>
-					<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&title=CROL%20Event%20Notices%20via%20WeGovNYC&showTitle=0&mode=AGENDA&showCalendars=0&src=am1kNmNyYWlkOWd0aWllMzZwb2dlb2JqZDVxaGdoMjFAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23D50000" style="border-width:0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+					<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&title=CROL%20Event%20Notices%20via%20WeGovNYC&showTitle=0&mode=AGENDA&showCalendars=0&src=am1kNmNyYWlkOWd0aWllMzZwb2dlb2JqZDVxaGdoMjFAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23D50000" style="border-width:0" width="100%" height="580" frameborder="0" scrolling="no"></iframe>
 					<div class="row justify-content-center">
 						<div class="col-md-12 text-center">
-							<a type="button" class="type-label my-4" href="{{ route('noticesSection', ['section' => 'events']) }}">See All Events</a>
+							<a type="button" class="outline_btn" href="{{ route('noticesSection', ['section' => 'events']) }}">See All Events</a>
 						</div>
 					</div>
 				</div>
 			</div>
 			
 				
-			<h4 class="mb-2">Auctions</h4>
-			<p>Get great deals and help the city raise funds by bidding on items New York City agencies put up for sale.</p>
 			<div class="row justify-content-center py-1">
+				<div class="col-md-12 organization_data">
+					<h4 class="mb-2 p-0">Auctions</h4>
+					<p class="p-0">Get great deals and help the city raise funds by bidding on items New York City agencies put up for sale.</p>
+				</div>
 				@foreach (array_slice($auctions, 0, 3) as $a)
 				  <div class="col-md-4 organization_data">
 					  @php
@@ -414,14 +536,14 @@
 					<div class="card">
 						<a href="{!! $a['URL'] !!}" target="_blank" class="hoveronly">
 							@if ($img[0]['thumbnails']['large']['url'])
-								<div style="height: 250px; overflow: hidden; display: block; padding: 0; margin: 20px auto 0; text-align: center;">
-									<img src="{{ $img[0]['thumbnails']['large']['url'] }}" alt="{{ $a['Title'] }}" style="max-width: 100%; max-height: 100%; margin: 0 auto; width: inherit;">
+								<div style="height: 250px; overflow: hidden; display: block; margin: 20px; text-align: center;    background: #f0f0f0;">
+									<img src="{{ $img[0]['thumbnails']['large']['url'] }}" alt="{{ $a['Title'] }}" style="max-width: 100%; max-height: 100%;width:auto; margin: 0 auto;">
 								</div>
 							@endif
-						  <div class="card-body">
-							<h6 class="card-title mb-0">{{ $a['Title'] }}</h6>
-							<p class="card-text mb-0">Time Left: {{ $a['Time Left'] }}<br/>Current Price: {{ $a['Current Price'] }}</p>
-						  </div>
+							<div class="card-body pt-0 text-center">
+								<h6 class="card-title mb-2" style="color:#000;font-weight:bold">{{ $a['Title'] }}</h6>
+								<p class="card-text mb-0" style="color:#000;">Time Left: {{ $a['Time Left'] }}<br/>Current Price: {{ $a['Current Price'] }}</p>
+							</div>
 						</a>
 					</div>
 				  </div>
@@ -430,7 +552,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-12 text-center">
 					<p>* Bid is updated daily so the current price we display may no longer be accurate.</p>
-					<a type="button" class="type-label my-4" href="{{ route('auctions') }}">See All Auctions</a>
+					<a type="button" class="outline_btn mb-3" href="{{ route('auctions') }}">See All Auctions</a>
 				</div>
 			</div>
 		</div>

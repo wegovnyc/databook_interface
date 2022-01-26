@@ -566,7 +566,20 @@ span.neutral {color: orange;}
 
 
 a.hoveronly {color: #005ea2;}
-a.hoveronly:hover {color: #005ea2; text-decoration: none; background-color: #E7F6F8;}
+a.hoveronly:hover {color: #005ea2; text-decoration: none; background-color: #f0f0f0;}
 
 .clickable {cursor: pointer;}
 .clickable:hover {text-decoration: underline;}
+
+.inner_card {
+  background: #f0f0f0;
+  padding: 10px 5px;
+  border-radius: 5px;
+}
+a.hoveronly:hover .inner_card{background: #d8d8d8;}
+.inner_card h4{font-size: 16px;color: #000;}
+.inner_card p {font-size: 14px; font-weight: bold; color: #000;margin: 0px;}
+.badge-primary {
+  color: #fff;
+  background-color: #162e51;
+}
