@@ -535,9 +535,9 @@
 					  @endphp
 					<div class="card">
 						<a href="{!! $a['URL'] !!}" target="_blank" class="hoveronly">
-							@if ($img[0]['thumbnails']['large']['url'] ?? null)
+							@if ($img[0]['thumbnails']['large']['url'] ?? $img[0]['url'] ?? null)
 								<div style="height: 250px; overflow: hidden; display: block; margin: 20px; text-align: center;    background: #f0f0f0;">
-									<img src="{{ $img[0]['thumbnails']['large']['url'] }}" alt="{{ $a['Title'] }}" style="max-width: 100%; max-height: 100%;width:auto; margin: 0 auto;">
+									<img src="{{ $img[0]['thumbnails']['large']['url'] ?? $img[0]['url'] }}" alt="{{ $a['Title'] }}" style="max-width: 100%; max-height: 100%;width:auto; margin: 0 auto;">
 								</div>
 							@endif
 							<div class="card-body pt-0 text-center">
