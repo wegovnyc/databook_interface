@@ -219,7 +219,7 @@
 							<div class="card-body">
 								<div class="card-text">
 									<h5 class="prj_stat">Public Hearings</h5>
-									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
+									{{--<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>--}}
 									<div class="row">
 										<div class="col-md-4 responsive_card p-1">
 											<div class="inner_card text-center">
@@ -252,7 +252,7 @@
 							<div class="card-body">
 								<div class="card-text">
 									<h5 class="prj_stat">Procurement</h5>
-									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
+									{{--<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>--}}
 									<div class="row">
 										<div class="col-md-4 responsive_card p-1">
 											<div class="inner_card text-center">
@@ -285,7 +285,7 @@
 							<div class="card-body">
 								<div class="card-text">
 									<h5 class="prj_stat">Contract Award</h5>
-									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
+									{{--<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>--}}
 									<div class="row">
 										<div class="col-md-4 responsive_card p-1">
 											<div class="inner_card text-center">
@@ -318,7 +318,7 @@
 							<div class="card-body">
 								<div class="card-text">
 									<h5 class="prj_stat">Agency Rules</h5>
-									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
+									{{--<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>--}}
 									<div class="row">
 										<div class="col-md-4 responsive_card p-1">
 											<div class="inner_card text-center">
@@ -354,7 +354,7 @@
 							<div class="card-body">
 								<div class="card-text">
 									<h5 class="prj_stat">Property Disposition</h5>
-									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
+									{{--<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>--}}
 									<div class="row">
 										<div class="col-md-4 responsive_card p-1">
 											<div class="inner_card text-center">
@@ -387,7 +387,7 @@
 							<div class="card-body">
 								<div class="card-text">
 									<h5 class="prj_stat">Court Notices</h5>
-									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
+									{{--<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>--}}
 									<div class="row">
 										<div class="col-md-4 responsive_card p-1">
 											<div class="inner_card text-center">
@@ -420,7 +420,7 @@
 							<div class="card-body">
 								<div class="card-text">
 									<h5 class="prj_stat">Changes in Personnel</h5>
-									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
+									{{--<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>--}}
 									<div class="row">
 										<div class="col-md-4 responsive_card p-1">
 											<div class="inner_card text-center">
@@ -453,7 +453,7 @@
 							<div class="card-body">
 								<div class="card-text">
 									<h5 class="prj_stat">Special Materials</h5>
-									<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>
+									{{--<p style="color:#000; font-weight:bold; margin-bottom:5px">New:</p>--}}
 									<div class="row">
 										<div class="col-md-4 responsive_card p-1">
 											<div class="inner_card text-center">
